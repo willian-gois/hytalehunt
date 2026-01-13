@@ -1,23 +1,23 @@
-# Open-Launch
+# HytaleHunt
 
-[![License: Open Launch](https://img.shields.io/badge/License-Open_Launch-yellow.svg)](LICENSE)
+[![License: HytaleHunt](https://img.shields.io/badge/License-HytaleHunt-yellow.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-15.3.1-black?logo=next.js)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19.1.0-blue?logo=react)](https://reactjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue?logo=typescript)](https://www.typescriptlang.org)
-[![Contributors](https://img.shields.io/github/contributors/drdruide/open-launch)](https://github.com/drdruide/open-launch/graphs/contributors)
-[![GitHub Issues](https://img.shields.io/github/issues/drdruide/open-launch)](https://github.com/drdruide/open-launch/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/drdruide/open-launch)](https://github.com/drdruide/open-launch/pulls)
+[![Contributors](https://img.shields.io/github/contributors/drdruide/hytalehunt)](https://github.com/drdruide/hytalehunt/graphs/contributors)
+[![GitHub Issues](https://img.shields.io/github/issues/drdruide/hytalehunt)](https://github.com/drdruide/hytalehunt/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/drdruide/hytalehunt)](https://github.com/drdruide/hytalehunt/pulls)
 
 **The first complete open source alternative to Product Hunt. Built with modern web technologies.**
 
 <div align="center">
-  <a href="https://open-launch.com" target="_blank">
+  <a href="https://hytalehunt.com" target="_blank">
     <img src="https://img.shields.io/badge/Launch_Your_Project_NOW-2563EB?style=for-the-badge&logo=&logoColor=white" alt="Launch Your Project NOW" />
   </a>
 </div>
 
 <div align="center">
-  <img src="https://open-launch.com/og.png" alt="Open Launch Screenshot" width="800px" />
+  <img src="https://hytalehunt.com/og.png" alt="HytaleHunt Screenshot" width="800px" />
 </div>
 
 ## 📋 Table of Contents
@@ -32,7 +32,6 @@
 - [Support](#support)
 - [Sponsoring](#sponsoring)
 
-
 ## Sponsors
 
 Huge thanks to our sponsors:
@@ -41,35 +40,35 @@ Huge thanks to our sponsors:
   <tbody>
     <tr>
       <td width="30%" align="center">
-        <a href="https://seomode.co?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=open-launch" target="_blank">
+        <a href="https://seomode.co?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=hytalehunt" target="_blank">
           <img width="300" src="https://yxucdfr9f5.ufs.sh/f/M3RHr0TmpHk5JYmzEAfGFHOhU9NIgjKvnuLr0q5bBoP1Am7D" alt="seo_mode_logo"/>
         </a>
       </td>
-      <td><a href="https://seomode.co?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=open-launch">SEO Mode</a> is getting your product listed in 100+ directories automatically.</td>
+      <td><a href="https://seomode.co?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=hytalehunt">SEO Mode</a> is getting your product listed in 100+ directories automatically.</td>
     </tr>
     <tr>
       <td width="30%" align="center">
-        <a href="https://ace.me?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=open-launch" target="_blank">
+        <a href="https://ace.me?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=hytalehunt" target="_blank">
           <img width="300" src="https://yxucdfr9f5.ufs.sh/f/M3RHr0TmpHk5y3kDX8muIfDO5ZWlciEYks7rxLGJVpFUM4N2" alt="ace_me_logo"/>
         </a>
       </td>
-      <td><a href="https://ace.me?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=open-launch">Ace.me</a> is your new website, email address & cloud storage. Simple, Fast, and Secure.</td>
+      <td><a href="https://ace.me?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=hytalehunt">Ace.me</a> is your new website, email address & cloud storage. Simple, Fast, and Secure.</td>
     </tr>
     <tr>
       <td width="30%" align="center">
-        <a href="https://www.flyingstart.co?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=open-launch" target="_blank">
-          <img width="300" src="https://assets.open-launch.com/sponsors/flyingstart-min.png" alt="flyinstart_logo"/>
+        <a href="https://www.flyingstart.co?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=hytalehunt" target="_blank">
+          <img width="300" src="https://assets.hytalehunt.com/sponsors/flyingstart-min.png" alt="flyinstart_logo"/>
         </a>
       </td>
-      <td><a href="https://www.flyingstart.co?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=open-launch">Flying Start</a> offers affordable, brandable domain names for indie makers and startups ready to launch their next big idea.</td>
+      <td><a href="https://www.flyingstart.co?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Sponsor&&utm_term=hytalehunt">Flying Start</a> offers affordable, brandable domain names for indie makers and startups ready to launch their next big idea.</td>
     </tr>
     <tr>
       <td width="30%" align="center">
-        <a href="https://kardow.com?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&&utm_term=open-launch" target="_blank">
-          <img width="200" src="https://assets.open-launch.com/sponsors/kardow_logo_linkedin.png" alt="kardow_logo"/>
+        <a href="https://kardow.com?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&&utm_term=hytalehunt" target="_blank">
+          <img width="200" src="https://assets.hytalehunt.com/sponsors/kardow_logo_linkedin.png" alt="kardow_logo"/>
         </a>
       </td>
-      <td><a href="https://kardow.com?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&&utm_term=open-launch">Kardow</a> is a no-code platform for creating and monetizing job boards.</td>
+      <td><a href="https://kardow.com?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&&utm_term=hytalehunt">Kardow</a> is a no-code platform for creating and monetizing job boards.</td>
     </tr>
   </tbody>
 </table>
@@ -105,8 +104,8 @@ Huge thanks to our sponsors:
 
 ```bash
 # Clone the repository
-git clone https://github.com/drdruide/open-launch.git
-cd open-launch
+git clone https://github.com/drdruide/hytalehunt.git
+cd hytalehunt
 
 # Install dependencies
 bun install
@@ -162,7 +161,7 @@ Visit `http://localhost:3000` to see your app running.
 
 ## Deployment
 
-Open Launch is optimized for deployment on Vercel but can be deployed on any platform that supports Next.js.
+HytaleHunt is optimized for deployment on Vercel but can be deployed on any platform that supports Next.js.
 
 ```bash
 # Build the application
@@ -174,11 +173,11 @@ bun run start
 
 ## Project Stats
 
-[![Star History Chart](https://api.star-history.com/svg?repos=drdruide/open-launch&type=Date)](https://star-history.com/#drdruide/open-launch&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=drdruide/hytalehunt&type=Date)](https://star-history.com/#drdruide/hytalehunt&Date)
 
 ## Contributing
 
-We welcome contributions to Open Launch! Here's how you can help:
+We welcome contributions to HytaleHunt! Here's how you can help:
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -190,7 +189,7 @@ Please read our [Contributing Guide](CONTRIBUTING.md) for more details.
 
 ## License
 
-This project is licensed under the Open-Launch License - see the [LICENSE](LICENSE) file for details. **Attribution with dofollow link required for all uses.**
+This project is licensed under the HytaleHunt License - see the [LICENSE](LICENSE) file for details. **Attribution with dofollow link required for all uses.**
 
 ## Acknowledgments
 
@@ -200,16 +199,16 @@ This project is licensed under the Open-Launch License - see the [LICENSE](LICEN
 ## Support
 
 - [X/Twitter](https://x.com/ericbn09)
-- [GitHub Issues](https://github.com/drdruide/open-launch/issues)
+- [GitHub Issues](https://github.com/drdruide/hytalehunt/issues)
 
 ## Sponsoring
 
-Open Launch is an open source project that relies on community support to continue its development. If you find this project useful, please consider supporting it:
+HytaleHunt is an open source project that relies on community support to continue its development. If you find this project useful, please consider supporting it:
 
 - [Buy Me a Coffee](https://buymeacoffee.com/drdruide)
 
 <div align="center">
-  <a href="https://open-launch.com" target="_blank">
+  <a href="https://hytalehunt.com" target="_blank">
     <img src="https://img.shields.io/badge/Launch_Your_Project_NOW-2563EB?style=for-the-badge&logo=&logoColor=white" alt="Launch Your Project NOW" />
   </a>
 </div>

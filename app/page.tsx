@@ -49,18 +49,18 @@ export default async function Home() {
                   </Link>
                   <div>
                     <a
-                      href="https://frogdr.com/open-launch.com?utm_source=open-launch.com"
+                      href="https://frogdr.com/hytalehunt.com?utm_source=hytalehunt.com"
                       target="_blank"
                     >
                       {/* Light mode badge */}
                       <img
-                        src="https://frogdr.com/open-launch.com/badge-white-sm.svg?round=1"
+                        src="https://frogdr.com/hytalehunt.com/badge-white-sm.svg?round=1"
                         alt="Monitor your Domain Rating with FrogDR"
                         className="h-6 w-auto dark:hidden"
                       />
                       {/* Dark mode badge */}
                       <img
-                        src="https://frogdr.com/open-launch.com/badge-dark-sm.svg?round=1"
+                        src="https://frogdr.com/hytalehunt.com/badge-dark-sm.svg?round=1"
                         alt="Monitor your Domain Rating with FrogDR"
                         className="hidden h-6 w-auto dark:block"
                       />
@@ -75,7 +75,7 @@ export default async function Home() {
                   <div className="flex-shrink-0">
                     <img
                       src="/oppieG.png"
-                      alt="Open Launch Character"
+                      alt="HytaleHunt Character"
                       className="h-24 w-24 object-contain"
                     />
                   </div>
@@ -91,18 +91,18 @@ export default async function Home() {
                     </Link>
                     <div>
                       <a
-                        href="https://frogdr.com/open-launch.com?utm_source=open-launch.com"
+                        href="https://frogdr.com/hytalehunt.com?utm_source=hytalehunt.com"
                         target="_blank"
                       >
                         {/* Light mode badge */}
                         <img
-                          src="https://frogdr.com/open-launch.com/badge-white-sm.svg?round=1"
+                          src="https://frogdr.com/hytalehunt.com/badge-white-sm.svg?round=1"
                           alt="Monitor your Domain Rating with FrogDR"
                           className="h-7 w-auto dark:hidden"
                         />
                         {/* Dark mode badge */}
                         <img
-                          src="https://frogdr.com/open-launch.com/badge-dark-sm.svg?round=1"
+                          src="https://frogdr.com/hytalehunt.com/badge-dark-sm.svg?round=1"
                           alt="Monitor your Domain Rating with FrogDR"
                           className="hidden h-7 w-auto dark:block"
                         />
@@ -114,7 +114,7 @@ export default async function Home() {
                   <div className="flex-shrink-0">
                     <img
                       src="/oppieD.png"
-                      alt="Open Launch Character"
+                      alt="HytaleHunt Character"
                       className="h-24 w-24 object-contain"
                     />
                   </div>

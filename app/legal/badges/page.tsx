@@ -6,24 +6,24 @@ import Link from "next/link"
 import { CopyButton } from "@/components/badges/copy-button"
 
 export const metadata = {
-  title: "Attribution Badges - Open-Launch",
-  description: "Official attribution badges for Open-Launch License compliance",
+  title: "Attribution Badges - HytaleHunt",
+  description: "Official attribution badges for HytaleHunt License compliance",
 }
 
 export default function AttributionBadgesPage() {
-  const lightBadgeCode = `<a href="https://open-launch.com" target="_blank" title="Powered by Open-Launch">
+  const lightBadgeCode = `<a href="https://hytalehunt.com" target="_blank" title="Powered by HytaleHunt">
   <img 
-    src="https://open-launch.com/images/badges/powered-by-light.svg" 
-    alt="Powered by Open-Launch" 
+    src="https://hytalehunt.com/images/badges/powered-by-light.svg" 
+    alt="Powered by HytaleHunt" 
     width="150" 
     height="44"
   />
 </a>`
 
-  const darkBadgeCode = `<a href="https://open-launch.com" target="_blank" title="Powered by Open-Launch">
+  const darkBadgeCode = `<a href="https://hytalehunt.com" target="_blank" title="Powered by HytaleHunt">
   <img 
-    src="https://open-launch.com/images/badges/powered-by-dark.svg" 
-    alt="Powered by Open-Launch" 
+    src="https://hytalehunt.com/images/badges/powered-by-dark.svg" 
+    alt="Powered by HytaleHunt" 
     width="150" 
     height="44"
   />
@@ -35,7 +35,7 @@ export default function AttributionBadgesPage() {
         <div className="bg-background rounded-xl border p-6 shadow-sm sm:p-8 dark:border-zinc-800">
           <h1 className="mb-6 text-2xl font-bold sm:text-3xl">Attribution Badges</h1>
           <p className="text-muted-foreground mb-6">
-            Official badges for Open-Launch License attribution requirements
+            Official badges for HytaleHunt License attribution requirements
           </p>
 
           <div className="space-y-8">
@@ -46,7 +46,7 @@ export default function AttributionBadgesPage() {
                   ⚠️ MANDATORY REQUIREMENT
                 </p>
                 <p className="text-sm text-red-700 dark:text-red-300">
-                  If you use Open-Launch, you MUST display a visual badge on ALL pages of your
+                  If you use HytaleHunt, you MUST display a visual badge on ALL pages of your
                   website (preferably in the footer). Text-only attribution is NOT sufficient.
                 </p>
               </div>
@@ -61,7 +61,7 @@ export default function AttributionBadgesPage() {
                   <div className="mb-4 flex items-center gap-4">
                     <img
                       src="/images/badges/powered-by-light.svg"
-                      alt="Powered by Open-Launch - Light Theme"
+                      alt="Powered by HytaleHunt - Light Theme"
                       className="h-11 w-auto rounded"
                     />
                   </div>
@@ -81,7 +81,7 @@ export default function AttributionBadgesPage() {
                   <div className="mb-4 flex items-center gap-4">
                     <img
                       src="/images/badges/powered-by-dark.svg"
-                      alt="Powered by Open-Launch - Dark Theme"
+                      alt="Powered by HytaleHunt - Dark Theme"
                       className="h-11 w-auto rounded"
                     />
                   </div>
@@ -106,7 +106,7 @@ export default function AttributionBadgesPage() {
                   (recommended: footer)
                 </li>
                 <li>
-                  <strong>Link:</strong> Must link to "https://open-launch.com"
+                  <strong>Link:</strong> Must link to "https://hytalehunt.com"
                 </li>
                 <li>
                   <strong>Link type:</strong> Must be a dofollow link (do NOT add rel="nofollow"

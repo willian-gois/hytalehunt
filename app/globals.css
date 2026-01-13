@@ -172,7 +172,7 @@ div[role="dialog"],
   }
 }
 
-/* Styles personnalisés pour Open Launch */
+/* Styles personnalisés pour HytaleHunt */
 .yt-card {
   @apply bg-card border-border overflow-hidden rounded-lg border transition-all duration-200 hover:shadow-md;
 }

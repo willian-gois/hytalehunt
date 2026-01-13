@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release of Open Launch
+- Initial release of HytaleHunt
 - Core platform features:
   - Product discovery and listing
   - User authentication system
@@ -50,5 +50,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - N/A
 
-[Unreleased]: https://github.com/drdruide/open-launch/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/drdruide/open-launch/releases/tag/v0.1.0
+[Unreleased]: https://github.com/drdruide/hytalehunt/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/drdruide/hytalehunt/releases/tag/v0.1.0

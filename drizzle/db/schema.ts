@@ -262,7 +262,7 @@ export const blogArticle = pgTable(
     content: text("content").notNull(), // Contenu MDX complet
     image: text("image"), // URL de l'image principale
     tags: text("tags").array(), // Array des tags
-    author: text("author").notNull().default("Open Launch Team"),
+    author: text("author").notNull().default("HytaleHunt Team"),
     metaTitle: text("meta_title"),
     metaDescription: text("meta_description"),
     publishedAt: timestamp("published_at").notNull(),

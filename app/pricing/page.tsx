@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/dialog"
 
 export const metadata = {
-  title: "Pricing - Open-Launch",
+  title: "Pricing - HytaleHunt",
   description: "Choose the perfect plan for your project launch",
 }
 
@@ -94,10 +94,10 @@ export default async function PricingPage() {
     <div className="container mx-auto max-w-3xl px-4 py-8 md:py-12">
       {/* Domain Rating Badge */}
       <div className="mb-4 flex justify-center">
-        <a href="https://frogdr.com/open-launch.com?utm_source=open-launch.com" target="_blank">
+        <a href="https://frogdr.com/hytalehunt.com?utm_source=hytalehunt.com" target="_blank">
           {/* Light mode badge */}
           <img
-            src="https://frogdr.com/open-launch.com/badge-white-sm.svg?round=1"
+            src="https://frogdr.com/hytalehunt.com/badge-white-sm.svg?round=1"
             alt="Monitor your Domain Rating with FrogDR"
             width="249"
             height="36"
@@ -105,7 +105,7 @@ export default async function PricingPage() {
           />
           {/* Dark mode badge */}
           <img
-            src="https://frogdr.com/open-launch.com/badge-dark-sm.svg?round=1"
+            src="https://frogdr.com/hytalehunt.com/badge-dark-sm.svg?round=1"
             alt="Monitor your Domain Rating with FrogDR"
             width="249"
             height="36"

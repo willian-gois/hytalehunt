@@ -69,9 +69,7 @@ export const auth = betterAuth({
     },
   },
   trustedOrigins: [
-    process.env.NODE_ENV !== "development"
-      ? "https://www.open-launch.com"
-      : "http://localhost:3000",
+    process.env.NODE_ENV !== "development" ? "https://www.hytalehunt.com" : "http://localhost:3000",
   ],
   plugins: [
     stripe({

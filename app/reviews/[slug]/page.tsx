@@ -41,7 +41,7 @@ export async function generateMetadata({
 
   if (!article[0]) {
     return {
-      title: "Review not found | Open Launch",
+      title: "Review not found | HytaleHunt",
       description: "The review you're looking for doesn't exist or has been removed.",
     }
   }
@@ -49,25 +49,25 @@ export async function generateMetadata({
   const { title, description, metaTitle, metaDescription } = article[0]
 
   return {
-    title: metaTitle || `${title} | Open Launch`,
+    title: metaTitle || `${title} | HytaleHunt`,
     description: metaDescription || description,
     keywords: "review, product review, analysis, evaluation",
-    authors: [{ name: "Open Launch Team" }],
+    authors: [{ name: "HytaleHunt Team" }],
     category: "Technology",
     openGraph: {
-      title: metaTitle || `${title} | Open Launch`,
+      title: metaTitle || `${title} | HytaleHunt`,
       description: metaDescription || description,
       type: "article",
       publishedTime: article[0].publishedAt.toISOString(),
-      siteName: "Open Launch",
+      siteName: "HytaleHunt",
       locale: "en_US",
     },
     twitter: {
       card: "summary_large_image",
-      title: metaTitle || `${title} | Open Launch`,
+      title: metaTitle || `${title} | HytaleHunt`,
       description: metaDescription || description,
-      creator: "@openlaunch",
-      site: "@openlaunch",
+      creator: "@hytalehunt",
+      site: "@hytalehunt",
     },
     alternates: {
       canonical: `/reviews/${slug}`,

@@ -25,7 +25,7 @@ const legalLinks = [
 // Liens pour la nouvelle colonne "Connect"
 const connectLinkItems = [
   {
-    href: "https://github.com/drdruide/open-launch",
+    href: "https://github.com/drdruide/hytalehunt",
     icon: RiGithubFill,
     label: "GitHub",
   },
@@ -46,11 +46,11 @@ export default function FooterSection() {
             <Link href="/" className="font-heading mb-3 flex items-center">
               <span className="font-heading flex items-center text-lg font-bold">
                 <img src="/logo.svg" alt="logo" className="mr-1 h-6 w-6" />
-                Open-Launch
+                HytaleHunt
               </span>
             </Link>
             <p className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} Open-Launch. All rights reserved.
+              © {new Date().getFullYear()} HytaleHunt. All rights reserved.
             </p>
             <p className="text-muted-foreground mb-4 text-sm">
               Open source project by{" "}
@@ -167,7 +167,7 @@ export default function FooterSection() {
             </h3>
             {/* Featured on findly.tools */}
             <div className="mb-4 flex flex-wrap items-center justify-center">
-              <a href="https://findly.tools/open-launch?utm_source=open-launch" target="_blank">
+              <a href="https://findly.tools/hytalehunt?utm_source=hytalehunt" target="_blank">
                 <img
                   src="https://findly.tools/badges/findly-tools-badge-light.svg"
                   alt="Featured on findly.tools"
@@ -177,7 +177,7 @@ export default function FooterSection() {
                 />
               </a>
 
-              <a href="https://findly.tools/open-launch?utm_source=open-launch" target="_blank">
+              <a href="https://findly.tools/hytalehunt?utm_source=hytalehunt" target="_blank">
                 <img
                   src="https://findly.tools/badges/findly-tools-badge-dark.svg"
                   alt="Featured on findly.tools"
@@ -238,35 +238,35 @@ export default function FooterSection() {
                 />
               </a>
               <a
-                href="https://aiwith.me/tools/open-launch-com/?utm_source=badge-featured&utm_medium=badge&ref=embed"
+                href="https://aiwith.me/tools/hytalehunt-com/?utm_source=badge-featured&utm_medium=badge&ref=embed"
                 target="_blank"
                 rel="noopener"
                 className="hidden dark:block"
-                title="Open Launch - Featured on AI With Me"
+                title="HytaleHunt - Featured on AI With Me"
               >
                 <img
                   src="https://aiwith.me/ai_with_me_dark_badge.svg"
-                  alt="Open Launch - Featured on AI With Me"
+                  alt="HytaleHunt - Featured on AI With Me"
                   className="h-8"
                 />
               </a>
               <a
-                href="https://aiwith.me/tools/open-launch-com/?utm_source=badge-featured&utm_medium=badge&ref=embed"
+                href="https://aiwith.me/tools/hytalehunt-com/?utm_source=badge-featured&utm_medium=badge&ref=embed"
                 target="_blank"
                 rel="noopener"
                 className="block dark:hidden"
-                title="Open Launch - Featured on AI With Me"
+                title="HytaleHunt - Featured on AI With Me"
               >
                 <img
                   src="https://aiwith.me/ai_with_me_light_badge.svg"
-                  alt="Open Launch - Featured on AI With Me"
+                  alt="HytaleHunt - Featured on AI With Me"
                   className="h-8"
                 />
               </a>
 
               {/* Featured on Startup Fame */}
               <a
-                href="https://startupfa.me/s/open-launch?utm_source=open-launch.com"
+                href="https://startupfa.me/s/hytalehunt?utm_source=hytalehunt.com"
                 target="_blank"
                 rel="noopener"
               >
@@ -277,26 +277,26 @@ export default function FooterSection() {
                 />
               </a>
               <a
-                href="https://www.producthunt.com/products/open-launch?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-open-launch"
+                href="https://www.producthunt.com/products/hytalehunt?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-hytalehunt"
                 target="_blank"
                 rel="noopener"
                 className="hidden dark:block"
               >
                 <img
                   src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=972224&theme=neutral&t=1748776168767"
-                  alt="Open Launch - The first complete open source alternative to Product Hunt. | Product Hunt"
+                  alt="HytaleHunt - The first complete open source alternative to Product Hunt. | Product Hunt"
                   className="h-8"
                 />
               </a>
               <a
-                href="https://www.producthunt.com/products/open-launch?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-open-launch"
+                href="https://www.producthunt.com/products/hytalehunt?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-hytalehunt"
                 target="_blank"
                 rel="noopener"
                 className="block dark:hidden"
               >
                 <img
                   src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=972224&theme=light&t=1748776063921"
-                  alt="Open Launch - The first complete open source alternative to Product Hunt. | Product Hunt"
+                  alt="HytaleHunt - The first complete open source alternative to Product Hunt. | Product Hunt"
                   className="h-8"
                 />
               </a>

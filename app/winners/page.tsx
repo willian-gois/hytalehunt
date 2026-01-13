@@ -11,8 +11,8 @@ import { getWinnersByDate } from "@/app/actions/home"
 import { getTopCategories } from "@/app/actions/projects"
 
 export const metadata = {
-  title: "Daily Winners - Open-Launch",
-  description: "Check out the daily winners on Open-Launch",
+  title: "Daily Winners - HytaleHunt",
+  description: "Check out the daily winners on HytaleHunt",
 }
 
 // Composant pour afficher le message quand il n'y a pas de gagnants
@@ -122,8 +122,8 @@ export default async function WinnersPage({
               <h3 className="flex items-center gap-2 font-semibold">About Daily Winners</h3>
               <div className="dark:bg-secondary/10 rounded-md border border-zinc-100 bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] dark:border-zinc-800/50">
                 <p className="text-muted-foreground text-sm">
-                  Each day, Open Launch automatically ranks the top 3 most upvoted projects that
-                  were launched.
+                  Each day, HytaleHunt automatically ranks the top 3 most upvoted projects that were
+                  launched.
                 </p>
               </div>
             </div>

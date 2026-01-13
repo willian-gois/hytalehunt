@@ -6,7 +6,7 @@ CREATE TABLE "blog_article" (
 	"content" text NOT NULL,
 	"image" text,
 	"tags" text[],
-	"author" text DEFAULT 'Open Launch Team' NOT NULL,
+	"author" text DEFAULT 'HytaleHunt Team' NOT NULL,
 	"meta_title" text,
 	"meta_description" text,
 	"published_at" timestamp NOT NULL,

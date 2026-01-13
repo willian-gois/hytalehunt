@@ -3,8 +3,8 @@ import Link from "next/link"
 import { RiFilePaper2Line, RiMedalLine, RiShieldUserLine } from "@remixicon/react"
 
 export const metadata = {
-  title: "Legal Information - Open-Launch",
-  description: "Legal information and policies for Open-Launch platform",
+  title: "Legal Information - HytaleHunt",
+  description: "Legal information and policies for HytaleHunt platform",
 }
 
 export default function LegalPage() {
@@ -14,7 +14,7 @@ export default function LegalPage() {
         <div className="bg-background rounded-xl border p-6 shadow-sm sm:p-8 dark:border-zinc-800">
           <h1 className="mb-6 text-2xl font-bold sm:text-3xl">Legal Information</h1>
           <p className="text-muted-foreground mb-8">
-            At Open Launch, we are committed to transparency and protecting your rights. As an open
+            At HytaleHunt, we are committed to transparency and protecting your rights. As an open
             source project, we believe in openness and community collaboration. Please review our
             legal documents to understand how we operate and protect your information.
           </p>
@@ -49,7 +49,7 @@ export default function LegalPage() {
               <RiMedalLine className="text-primary mb-4 h-12 w-12" />
               <h2 className="mb-2 text-lg font-semibold">Attribution Badges</h2>
               <p className="text-muted-foreground text-sm">
-                Official badges for Open-Launch License attribution requirements.
+                Official badges for HytaleHunt License attribution requirements.
               </p>
             </Link>
           </div>

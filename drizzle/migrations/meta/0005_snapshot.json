@@ -156,7 +156,7 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true,
-          "default": "'Open Launch Team'"
+          "default": "'HytaleHunt Team'"
         },
         "meta_title": {
           "name": "meta_title",

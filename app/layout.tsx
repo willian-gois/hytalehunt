@@ -22,21 +22,21 @@ const fontHeading = FontHeading({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
-  title: "Open Launch - Discover the Best Tech Products",
+  title: "HytaleHunt - Discover the Best Tech Products",
   description:
-    "Open Launch is a platform to discover and upvote the best tech products. Find top products launching daily.",
+    "HytaleHunt is a platform to discover and upvote the best tech products. Find top products launching daily.",
   openGraph: {
-    title: "Open Launch - Discover the Best Tech Products",
+    title: "HytaleHunt - Discover the Best Tech Products",
     description:
-      "Open Launch is a platform to discover and upvote the best tech products. Find top products launching daily.",
+      "HytaleHunt is a platform to discover and upvote the best tech products. Find top products launching daily.",
     url: process.env.NEXT_PUBLIC_URL,
-    siteName: "Open Launch",
+    siteName: "HytaleHunt",
     images: [
       {
         url: "og.png",
         width: 1200,
         height: 630,
-        alt: "Open Launch - Discover the Best Tech Products",
+        alt: "HytaleHunt - Discover the Best Tech Products",
       },
     ],
     locale: "en_US",
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Open Launch - Discover the Best Tech Products",
+    title: "HytaleHunt - Discover the Best Tech Products",
     description:
-      "Open Launch is a platform to discover and upvote the best tech products. Find top products launching daily.",
+      "HytaleHunt is a platform to discover and upvote the best tech products. Find top products launching daily.",
     images: ["og.png"],
   },
 }
@@ -60,7 +60,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <PlausibleProvider
-          domain="open-launch.com"
+          domain="hytalehunt.com"
           customDomain="https://plausible.dailypings.com"
           selfHosted={true}
           trackOutboundLinks={true}

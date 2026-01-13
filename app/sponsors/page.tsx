@@ -13,8 +13,8 @@ import { Button } from "@/components/ui/button"
 import { getLast30DaysPageviews, getLast30DaysVisitors } from "@/app/actions/plausible"
 
 export const metadata = {
-  title: "Sponsors - Open-Launch",
-  description: "Support Open-Launch and gain visibility for your product or service.",
+  title: "Sponsors - HytaleHunt",
+  description: "Support HytaleHunt and gain visibility for your product or service.",
 }
 
 export default async function SponsorsPage() {
@@ -60,7 +60,7 @@ export default async function SponsorsPage() {
       <div className="mb-8 text-center">
         <h1 className="mb-3 text-2xl font-bold sm:text-3xl">Become a Sponsor</h1>
         <p className="text-muted-foreground mx-auto max-w-xl text-sm">
-          Support Open-Launch and gain visibility. Limited sponsorship slots for maximum impact.
+          Support HytaleHunt and gain visibility. Limited sponsorship slots for maximum impact.
         </p>
         <p className="text-primary text-center text-sm font-medium">
           Currently, <span className="font-bold">{remainingSlots}</span> slot
@@ -131,7 +131,7 @@ export default async function SponsorsPage() {
             </div>
             <div className="mt-auto pt-3">
               <Button variant="outline" size="lg" className="w-full" asChild>
-                <Link href="mailto:contact@open-launch.com?subject=Weekly%20Sponsorship%20Inquiry">
+                <Link href="mailto:contact@hytalehunt.com?subject=Weekly%20Sponsorship%20Inquiry">
                   Sponsor for a Week
                 </Link>
               </Button>
@@ -179,7 +179,7 @@ export default async function SponsorsPage() {
             </div>
             <div className="mt-auto pt-3">
               <Button size="lg" className="w-full" asChild>
-                <Link href="mailto:contact@open-launch.com?subject=Monthly%20Sponsorship%20Inquiry">
+                <Link href="mailto:contact@hytalehunt.com?subject=Monthly%20Sponsorship%20Inquiry">
                   Sponsor for a Month
                 </Link>
               </Button>
