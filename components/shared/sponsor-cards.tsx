@@ -1,26 +1,39 @@
+import type { ComponentProps } from "react"
+
+import { SPONSORSHIP_SLOTS } from "@/lib/constants"
 import { SponsorCard } from "@/components/home/sponsor-card"
 
+// TODO: Replace with dynamic data when sponsorship integration is ready.
+const FEATURED_SPONSORS: Array<ComponentProps<typeof SponsorCard>> = []
+
 export function SponsorCards() {
+  const slotsAvailable = Math.max(SPONSORSHIP_SLOTS.TOTAL - SPONSORSHIP_SLOTS.USED, 0)
+
+  const slotMessage =
+    slotsAvailable > 0
+      ? `${slotsAvailable} slot${slotsAvailable === 1 ? " is" : "s are"} available.`
+      : "All slots are currently filled."
+
+  const minimumCards = 3
+  const displayCards = [...FEATURED_SPONSORS]
+  const placeholdersNeeded = Math.max(minimumCards - displayCards.length, 0)
+
+  if (placeholdersNeeded > 0) {
+    const placeholderCard: ComponentProps<typeof SponsorCard> = {
+      className: "border-dashed border-primary/40",
+      variant: "announce",
+      description: `Promote your brand to thousands of Hytale fans. ${slotMessage}`,
+      url: "/sponsors",
+    }
+
+    displayCards.push(...Array.from({ length: placeholdersNeeded }, () => placeholderCard))
+  }
+
   return (
-    <>
-      <SponsorCard
-        name="Nexty.dev"
-        url="https://nexty.dev?ref=hytalehunt"
-        imageUrl="https://nexty.dev/logo.png"
-        description="Launch Your SaaS Fast & Earn Money Fast."
-      />
-      <SponsorCard
-        name="Findly.tools"
-        url="https://findly.tools?ref=hytalehunt"
-        imageUrl="https://yxucdfr9f5.ufs.sh/f/M3RHr0TmpHk58YQSMZbg1XPzV7Kxo25HAvNtwa6hLcRpjB0T"
-        description="The best tools, all in one place."
-      />
-      <SponsorCard
-        name="Image Translate AI"
-        url="https://imagetranslate.ai?ref=hytalehunt"
-        imageUrl="https://yxucdfr9f5.ufs.sh/f/M3RHr0TmpHk5QfdPFFNjGs3nmiJ1bxOqZfoYRvFaCt7VPMDU"
-        description="Translate image text instantly."
-      />
-    </>
+    <div className="space-y-2">
+      {displayCards.map((sponsor, index) => (
+        <SponsorCard key={sponsor.url ?? sponsor.name ?? `placeholder-${index}`} {...sponsor} />
+      ))}
+    </div>
   )
 }

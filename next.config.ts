@@ -16,19 +16,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "yt3.ggpht.com",
-      },
-      {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
-      },
-      {
-        protocol: "https",
         hostname: "lh3.googleusercontent.com",
-      },
-      {
-        protocol: "https",
-        hostname: "designmodo.com",
       },
       ...(process.env.NEXT_PUBLIC_UPLOADTHING_URL
         ? [
@@ -38,14 +26,6 @@ const nextConfig: NextConfig = {
             },
           ]
         : []),
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "nexty.dev",
-      },
       {
         protocol: "https",
         hostname: "placehold.co",
