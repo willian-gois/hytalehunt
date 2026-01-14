@@ -152,7 +152,7 @@ export default function Settings() {
 function EditProfileDialog() {
   const { data: session } = useSession()
   const router = useRouter()
-  const [name, setName] = useState<string>("")
+  const [username, setUsername] = useState<string>("")
   const [image, setImage] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -194,14 +194,14 @@ function EditProfileDialog() {
         </DialogHeader>
         <div className="grid gap-4 py-2">
           <div className="grid gap-2">
-            <Label htmlFor="name" className="font-medium">
-              Name
+            <Label htmlFor="username" className="font-medium">
+              Username
             </Label>
             <Input
-              id="name"
+              id="username"
               placeholder={session?.user.name}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="border dark:border-zinc-700"
             />
           </div>
@@ -243,7 +243,7 @@ function EditProfileDialog() {
               setIsLoading(true)
               try {
                 await updateUser({
-                  name: name || undefined,
+                  name: username || undefined,
                   image: image ? await convertImageToBase64(image) : undefined,
                 })
                 toast.success("Profile updated successfully")
@@ -253,7 +253,7 @@ function EditProfileDialog() {
                 toast.error("Failed to update profile")
               }
               setIsLoading(false)
-              setName("")
+              setUsername("")
               setImage(null)
               setImagePreview(null)
             }}
