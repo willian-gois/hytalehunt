@@ -31,21 +31,6 @@ export const launchType = {
 
 export type LaunchType = (typeof launchType)[keyof typeof launchType]
 
-// Ajouter de nouveaux enums pour les projets tech
-export const pricingType = {
-  FREE: "free",
-  FREEMIUM: "freemium",
-  PAID: "paid",
-} as const
-
-export const platformType = {
-  WEB: "web",
-  MOBILE: "mobile",
-  DESKTOP: "desktop",
-  API: "api",
-  OTHER: "other",
-} as const
-
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
@@ -113,11 +98,9 @@ export const server = pgTable(
     logoUrl: text("logo_url").notNull(),
     coverImageUrl: text("cover_image_url"),
     productImage: text("product_image"),
-    githubUrl: text("github_url"),
+    discordUrl: text("discord_url"),
     twitterUrl: text("twitter_url"),
-    techStack: text("tech_stack").array(), // Array des technologies
-    pricing: text("pricing").notNull().default(pricingType.FREE),
-    platforms: text("platforms").array(), // Array des plateformes supportées
+    mods: text("mods").array(),
     launchStatus: text("launch_status").notNull().default(launchStatus.SCHEDULED),
     scheduledLaunchDate: timestamp("scheduled_launch_date"),
     launchType: text("launch_type").default(launchType.FREE),

@@ -93,9 +93,9 @@ export default async function PricingPage() {
   return (
     <div className="container mx-auto max-w-3xl px-4 py-8 md:py-12">
       {/* Domain Rating Badge */}
-      <div className="mb-4 flex justify-center">
+      {/* <div className="mb-4 flex justify-center">
         <a href="https://frogdr.com/hytalehunt.com?utm_source=hytalehunt.com" target="_blank">
-          {/* Light mode badge */}
+          Light mode badge
           <img
             src="https://frogdr.com/hytalehunt.com/badge-white-sm.svg?round=1"
             alt="Monitor your Domain Rating with FrogDR"
@@ -103,7 +103,7 @@ export default async function PricingPage() {
             height="36"
             className="h-8 w-auto dark:hidden"
           />
-          {/* Dark mode badge */}
+          /Dark mode badge
           <img
             src="https://frogdr.com/hytalehunt.com/badge-dark-sm.svg?round=1"
             alt="Monitor your Domain Rating with FrogDR"
@@ -112,7 +112,7 @@ export default async function PricingPage() {
             className="hidden h-8 w-auto dark:block"
           />
         </a>
-      </div>
+      </div> */}
 
       <div className="mb-4 text-center">
         <h1 className="mb-3 text-2xl font-bold sm:text-3xl">Choose Your Launch Plan</h1>

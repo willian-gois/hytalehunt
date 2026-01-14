@@ -58,7 +58,7 @@ export function SignUpForm() {
     }
 
     const options = {
-      name: data.name,
+      name: data.username,
       email: data.email,
       password: data.password,
       callbackURL: "/verify-email/success",
@@ -132,9 +132,16 @@ export function SignUpForm() {
             </div>
             <div className="grid gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input id="name" {...register("name")} placeholder="John Doe" className="w-full" />
-                {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  id="username"
+                  {...register("username")}
+                  placeholder="John Doe"
+                  className="w-full"
+                />
+                {errors.username && (
+                  <p className="text-sm text-red-500">{errors.username.message}</p>
+                )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>

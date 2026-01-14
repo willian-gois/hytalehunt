@@ -5,7 +5,6 @@ import { useCallback, useEffect, useId, useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
-import { platformType, pricingType } from "@/drizzle/db/schema"
 import {
   RiArrowLeftLine,
   RiArrowRightLine,
@@ -59,15 +58,16 @@ import {
 import type { LaunchAvailability } from "@/app/actions/launch"
 import { getAllCategories, submitServer } from "@/app/actions/servers"
 
+const MAXIMUM_CATEGORY_COUNT = 5
+
 interface ServerFormData {
   name: string
+  ipAddress: string
   websiteUrl: string
   description: string
   categories: string[]
-  techStack: string[]
-  platforms: string[]
-  pricing: string
-  githubUrl?: string
+  mods: string[]
+  discordUrl?: string
   twitterUrl?: string
   scheduledDate: string | null
   launchType: (typeof LAUNCH_TYPES)[keyof typeof LAUNCH_TYPES]
@@ -89,13 +89,12 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState<ServerFormData>({
     name: "",
+    ipAddress: "",
     websiteUrl: "",
     description: "",
     categories: [],
-    techStack: [],
-    platforms: [],
-    pricing: "",
-    githubUrl: "",
+    mods: [],
+    discordUrl: "",
     twitterUrl: "",
     scheduledDate: null,
     launchType: LAUNCH_TYPES.FREE,
@@ -120,7 +119,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 
   const tagInputId = useId()
 
-  const [techStackTags, setTechStackTags] = useState<Tag[]>([])
+  const [modsTags, setModsTags] = useState<Tag[]>([])
   const [activeTechTagIndex, setActiveTechTagIndex] = useState<number | null>(null)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -177,21 +176,21 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
   }, [currentStep, loadAvailableDates])
 
   useEffect(() => {
-    const tagsFromFormData = formData.techStack.map((tech, index) => ({
+    const tagsFromFormData = formData.mods.map((tech, index) => ({
       id: `${index}-${tech}`,
       text: tech,
     }))
-    if (JSON.stringify(tagsFromFormData) !== JSON.stringify(techStackTags)) {
-      setTechStackTags(tagsFromFormData)
+    if (JSON.stringify(tagsFromFormData) !== JSON.stringify(modsTags)) {
+      setModsTags(tagsFromFormData)
     }
-  }, [formData.techStack])
+  }, [formData.mods])
 
   useEffect(() => {
-    const techStringArray = techStackTags.map((tag) => tag.text)
-    if (JSON.stringify(techStringArray) !== JSON.stringify(formData.techStack)) {
-      setFormData((prev) => ({ ...prev, techStack: techStringArray }))
+    const techStringArray = modsTags.map((tag) => tag.text)
+    if (JSON.stringify(techStringArray) !== JSON.stringify(formData.mods)) {
+      setFormData((prev) => ({ ...prev, mods: techStringArray }))
     }
-  }, [techStackTags])
+  }, [modsTags])
 
   async function fetchCategories() {
     setIsLoadingCategories(true)
@@ -288,13 +287,8 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     setError(null)
     setLaunchDateLimitError(null)
     if (currentStep === 1) {
-      if (
-        !formData.name ||
-        !formData.websiteUrl ||
-        !formData.description ||
-        (process.env.NODE_ENV !== "development" && !uploadedLogoUrl)
-      ) {
-        setError("Please fill in all required server information and upload the logo.")
+      if (!formData.name || !formData.websiteUrl || !formData.description) {
+        setError("Please fill in all required server information.")
         return
       }
       try {
@@ -306,22 +300,17 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     }
 
     if (currentStep === 2) {
-      if (
-        formData.categories.length === 0 ||
-        formData.techStack.length === 0 ||
-        formData.platforms.length === 0 ||
-        !formData.pricing
-      ) {
+      if (formData.categories.length === 0) {
         setError("Please complete the technical details and categorization.")
         return
       }
 
-      if (formData.categories.length > 3) {
-        setError("You can select a maximum of 3 categories.")
+      if (formData.categories.length > MAXIMUM_CATEGORY_COUNT) {
+        setError(`You can select a maximum of ${MAXIMUM_CATEGORY_COUNT} categories.`)
         return
       }
 
-      if (formData.techStack.length > 5) {
+      if (formData.mods.length > 5) {
         setError("You can add a maximum of 5 technologies.")
         return
       }
@@ -359,14 +348,9 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
       !formData.name ||
       !formData.websiteUrl ||
       !formData.description ||
-      (process.env.NODE_ENV !== "development" && !uploadedLogoUrl) ||
-      formData.categories.length === 0 ||
-      formData.platforms.length === 0 ||
-      !formData.pricing
+      formData.categories.length === 0
     ) {
-      setError(
-        "Some required information or the logo is missing. Please go back and complete all fields.",
-      )
+      setError("Some required information is missing. Please go back and complete all fields.")
       setIsPending(false)
       return
     }
@@ -390,29 +374,22 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     setError(null)
     setLaunchDateLimitError(null)
 
-    if (formData.techStack.length === 0) {
-      setError("Please enter at least one technology in the Tech Stack.")
+    if (formData.categories.length > MAXIMUM_CATEGORY_COUNT) {
+      setError(`You can select a maximum of ${MAXIMUM_CATEGORY_COUNT} categories.`)
       setIsPending(false)
       return
     }
 
-    if (formData.categories.length > 3) {
-      setError("You can select a maximum of 3 categories.")
-      setIsPending(false)
-      return
-    }
-
-    if (formData.techStack.length > 5) {
-      setError("You can add a maximum of 5 technologies.")
+    if (formData.mods.length > 5) {
+      setError("You can add a maximum of 5 mods.")
       setIsPending(false)
       return
     }
 
     try {
-      const finalLogoUrl =
-        process.env.NODE_ENV === "development" && !uploadedLogoUrl
-          ? "https://placehold.co/128x128/E2E8F0/718096?text=Logo"
-          : uploadedLogoUrl!
+      const finalLogoUrl = !uploadedLogoUrl
+        ? "https://placehold.co/128x128/E2E8F0/718096?text=Logo"
+        : uploadedLogoUrl!
 
       const serverData = {
         name: formData.name,
@@ -421,10 +398,8 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
         logoUrl: finalLogoUrl,
         productImage: formData.productImage,
         categories: formData.categories,
-        techStack: formData.techStack,
-        platforms: formData.platforms,
-        pricing: formData.pricing,
-        githubUrl: formData.githubUrl || null,
+        mods: formData.mods,
+        discordUrl: formData.discordUrl || null,
         twitterUrl: formData.twitterUrl || null,
       }
 
@@ -575,11 +550,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     </div>
   )
 
-  const handleCheckboxChange = (
-    field: "categories" | "platforms",
-    value: string,
-    checked: boolean,
-  ) => {
+  const handleCheckboxChange = (field: "categories", value: string, checked: boolean) => {
     setFormData((prev) => {
       const currentValues = prev[field] || []
       if (checked) {
@@ -593,19 +564,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     })
   }
 
-  const handleRadioChange = (field: "pricing", value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
-
   const getCategoryName = (id: string) => categories.find((cat) => cat.id === id)?.name || id
-  const getPlatformLabel = (value: string) =>
-    Object.entries(platformType)
-      .find(([, v]) => v === value)?.[0]
-      ?.toLowerCase() || value
-  const getPricingLabel = (value: string) =>
-    Object.entries(pricingType)
-      .find(([, v]) => v === value)?.[0]
-      ?.toLowerCase() || value
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -622,6 +581,19 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                 value={formData.name}
                 onChange={handleInputChange}
                 placeholder="My Awesome Server"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="ipAddress">
+                IP Address <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="ipAddress"
+                name="ipAddress"
+                value={formData.ipAddress}
+                onChange={handleInputChange}
+                placeholder="play.server.com"
                 required
               />
             </div>
@@ -651,9 +623,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="logoUrl">
-                Logo (Max 1MB) <span className="text-red-500">*</span>
-              </Label>
+              <Label htmlFor="logoUrl">Logo (Max 1MB) (Optional)</Label>
               <p className="text-muted-foreground text-xs">
                 Recommended: 1:1 square image (e.g., 256x256px).
               </p>
@@ -727,10 +697,10 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="productImage">
-                Product Image <span>(Optional)</span>
+                Server Banner <span>(Optional)</span>
               </Label>
               <p className="text-muted-foreground text-xs">
-                Add a product image. Recommended: 16:9 aspect ratio (e.g., 800x450px).
+                Add a server banner. Required 480x280px.
               </p>
               {formData.productImage ? (
                 <div className="bg-muted/30 relative w-fit rounded-md border p-3">
@@ -790,7 +760,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                         if (ready)
                           return (
                             <>
-                              <RiImageAddLine className="h-4 w-4" /> Add Product Image
+                              <RiImageAddLine className="h-4 w-4" /> Add Server Banner
                             </>
                           )
                         return "Getting ready..."
@@ -812,7 +782,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
               <Label className="mb-2 block">
                 Categories <span className="text-red-500">*</span>
                 <span className="text-muted-foreground ml-2 text-xs">
-                  ({formData.categories.length}/3 selected)
+                  ({formData.categories.length}/{MAXIMUM_CATEGORY_COUNT} selected)
                 </span>
               </Label>
               {isLoadingCategories ? (
@@ -827,8 +797,10 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                         id={`cat-${cat.id}`}
                         checked={formData.categories.includes(cat.id)}
                         onCheckedChange={(checked) => {
-                          if (checked && formData.categories.length >= 3) {
-                            setError("You can select a maximum of 3 categories.")
+                          if (checked && formData.categories.length >= MAXIMUM_CATEGORY_COUNT) {
+                            setError(
+                              `You can select a maximum of ${MAXIMUM_CATEGORY_COUNT} categories.`,
+                            )
                             return
                           }
                           handleCheckboxChange("categories", cat.id, !!checked)
@@ -850,22 +822,22 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 
             <div>
               <Label htmlFor={tagInputId}>
-                Tech Stack <span className="text-red-500">*</span>
+                Mods (Optional)
                 <span className="text-muted-foreground ml-2 text-xs">
-                  ({formData.techStack.length}/5 technologies)
+                  ({formData.mods.length}/5 mods)
                 </span>
               </Label>
               <TagInput
                 id={tagInputId}
-                tags={techStackTags}
+                tags={modsTags}
                 setTags={(newTags) => {
                   if (newTags.length > 5) {
-                    setError("You can add a maximum of 5 technologies.")
+                    setError("You can add a maximum of 5 mods.")
                     return
                   }
-                  setTechStackTags(newTags)
+                  setModsTags(newTags)
                 }}
-                placeholder="Type a technology and press Enter..."
+                placeholder="Type a mod and press Enter..."
                 styleClasses={{
                   inlineTagsContainer:
                     "border-input rounded-md bg-background shadow-xs transition-[color,box-shadow] focus-within:border-ring outline-none focus-within:ring-[3px] focus-within:ring-ring/50 p-1 gap-1 mt-1",
@@ -880,71 +852,20 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                 setActiveTagIndex={setActiveTechTagIndex}
               />
               <p className="text-muted-foreground mt-1 text-xs">
-                Enter up to 5 technologies used, press Enter or comma to add a tag.
+                Enter up to 5 mods used, press Enter or comma to add a tag.
               </p>
-            </div>
-
-            <div>
-              <Label className="mb-2 block">
-                Platforms <span className="text-red-500">*</span>
-              </Label>
-              <div className="space-y-3 rounded-md border p-4">
-                {Object.entries(platformType).map(([key, value]) => (
-                  <div key={value} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`platform-${value}`}
-                      checked={formData.platforms.includes(value)}
-                      onCheckedChange={(checked) =>
-                        handleCheckboxChange("platforms", value, !!checked)
-                      }
-                    />
-                    <Label
-                      htmlFor={`platform-${value}`}
-                      className="cursor-pointer font-normal capitalize"
-                    >
-                      {key.toLowerCase()}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-              <p className="text-muted-foreground mt-1 text-xs">
-                Select all platforms your server supports.
-              </p>
-            </div>
-
-            <div>
-              <Label className="mb-2 block">
-                Pricing Model <span className="text-red-500">*</span>
-              </Label>
-              <RadioGroup
-                value={formData.pricing}
-                onValueChange={(value) => handleRadioChange("pricing", value)}
-                className="flex flex-col gap-4 sm:flex-row"
-              >
-                {Object.entries(pricingType).map(([key, value]) => (
-                  <div key={value} className="flex-1">
-                    <Label
-                      htmlFor={`pricing-${value}`}
-                      className="hover:bg-muted/50 flex h-full cursor-pointer items-center space-x-2 rounded-md border p-3 transition-colors"
-                    >
-                      <RadioGroupItem value={value} id={`pricing-${value}`} />
-                      <span className="font-normal capitalize">{key.toLowerCase()}</span>
-                    </Label>
-                  </div>
-                ))}
-              </RadioGroup>
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div>
-                <Label htmlFor="githubUrl">GitHub URL (Optional)</Label>
+                <Label htmlFor="discordUrl">Discord URL (Optional)</Label>
                 <Input
-                  id="githubUrl"
-                  name="githubUrl"
+                  id="discordUrl"
+                  name="discordUrl"
                   type="url"
-                  value={formData.githubUrl}
+                  value={formData.discordUrl}
                   onChange={handleInputChange}
-                  placeholder="https://github.com/user/repo"
+                  placeholder="https://discord.gg/invite"
                 />
               </div>
               <div>
@@ -1379,41 +1300,25 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                       </div>
                     </div>
                     <div>
-                      <strong>Tech Stack:</strong>
+                      <strong>Mods:</strong>
                       <div className="mt-1 flex flex-wrap gap-2">
-                        {formData.techStack.map((tech) => (
+                        {formData.mods.map((tech) => (
                           <Badge key={tech} variant="outline">
                             {tech}
                           </Badge>
                         ))}
                       </div>
                     </div>
-                    <div>
-                      <strong>Platforms:</strong>
-                      <div className="mt-1 flex flex-wrap gap-2">
-                        {formData.platforms.map((plat) => (
-                          <Badge key={plat} variant="secondary" className="capitalize">
-                            {getPlatformLabel(plat)}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    <p>
-                      <strong>Pricing:</strong>{" "}
-                      <span className="capitalize">
-                        <Badge variant="outline">{getPricingLabel(formData.pricing)}</Badge>
-                      </span>
-                    </p>
-                    {formData.githubUrl && (
+                    {formData.discordUrl && (
                       <p>
-                        <strong>GitHub:</strong>{" "}
+                        <strong>Discord:</strong>{" "}
                         <a
-                          href={formData.githubUrl}
+                          href={formData.discordUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-primary hover:underline"
                         >
-                          {formData.githubUrl}
+                          {formData.discordUrl}
                         </a>
                       </p>
                     )}

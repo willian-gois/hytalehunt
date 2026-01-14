@@ -197,10 +197,8 @@ interface ServerSubmissionData {
   logoUrl: string
   productImage: string | null
   categories: string[]
-  techStack: string[]
-  platforms: string[]
-  pricing: string
-  githubUrl?: string | null
+  mods: string[]
+  discordUrl?: string | null
   twitterUrl?: string | null
 }
 
@@ -221,24 +219,13 @@ export async function submitServer(serverData: ServerSubmissionData) {
       logoUrl,
       productImage,
       categories,
-      techStack,
-      platforms,
-      pricing,
-      githubUrl,
+      mods,
+      discordUrl,
       twitterUrl,
     } = serverData
 
     // Validation
-    if (
-      !name ||
-      !description ||
-      !websiteUrl ||
-      !logoUrl ||
-      categories.length === 0 ||
-      techStack.length === 0 ||
-      platforms.length === 0 ||
-      !pricing
-    ) {
+    if (!name || !description || !websiteUrl || categories.length === 0) {
       return { success: false, error: "Missing required fields" }
     }
 
@@ -257,10 +244,8 @@ export async function submitServer(serverData: ServerSubmissionData) {
         websiteUrl,
         logoUrl,
         productImage: productImage ?? undefined,
-        techStack,
-        platforms,
-        pricing,
-        githubUrl: githubUrl ?? undefined,
+        mods,
+        discordUrl: discordUrl ?? undefined,
         twitterUrl: twitterUrl ?? undefined,
         createdBy: session.user.id,
         createdAt: new Date(),

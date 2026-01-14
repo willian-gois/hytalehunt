@@ -46,6 +46,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "nexty.dev",
       },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
     ],
   },
 }

@@ -47,25 +47,25 @@ export default async function Home() {
                       </p>
                     </div>
                   </Link>
-                  <div>
+                  {/* <div>
                     <a
                       href="https://frogdr.com/hytalehunt.com?utm_source=hytalehunt.com"
                       target="_blank"
                     >
-                      {/* Light mode badge */}
+                      Light mode badge
                       <img
                         src="https://frogdr.com/hytalehunt.com/badge-white-sm.svg?round=1"
                         alt="Monitor your Domain Rating with FrogDR"
                         className="h-6 w-auto dark:hidden"
                       />
-                      {/* Dark mode badge */}
+                      Dark mode badge
                       <img
                         src="https://frogdr.com/hytalehunt.com/badge-dark-sm.svg?round=1"
                         alt="Monitor your Domain Rating with FrogDR"
                         className="hidden h-6 w-auto dark:block"
                       />
                     </a>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Desktop Layout - Text left, Image right */}
@@ -89,25 +89,25 @@ export default async function Home() {
                         <span>Submit, get a badge & backlink</span>
                       </p>
                     </Link>
-                    <div>
+                    {/* <div>
                       <a
                         href="https://frogdr.com/hytalehunt.com?utm_source=hytalehunt.com"
                         target="_blank"
                       >
-                        {/* Light mode badge */}
+                        Light mode badge
                         <img
                           src="https://frogdr.com/hytalehunt.com/badge-white-sm.svg?round=1"
                           alt="Monitor your Domain Rating with FrogDR"
                           className="h-7 w-auto dark:hidden"
                         />
-                        {/* Dark mode badge */}
+                        Dark mode badge
                         <img
                           src="https://frogdr.com/hytalehunt.com/badge-dark-sm.svg?round=1"
                           alt="Monitor your Domain Rating with FrogDR"
                           className="hidden h-7 w-auto dark:block"
                         />
                       </a>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* image 2 */}
