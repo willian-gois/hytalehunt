@@ -15,7 +15,7 @@ interface BadgesDisplayProps {
 }
 
 export function BadgesDisplay({ dailyRanking, slug }: BadgesDisplayProps) {
-  const lightBadgeCode = `<a href=\"https://hytalehunt.com/projects/${slug}\" target=\"_blank\" title=\"HytaleHunt Top ${dailyRanking} Daily Winner\">
+  const lightBadgeCode = `<a href=\"https://hytalehunt.com/servers/${slug}\" target=\"_blank\" title=\"HytaleHunt Top ${dailyRanking} Daily Winner\">
   <img 
     src=\"https://hytalehunt.com/images/badges/top${dailyRanking}-light.svg\" 
     alt=\"HytaleHunt Top ${dailyRanking} Daily Winner\" 
@@ -23,7 +23,7 @@ export function BadgesDisplay({ dailyRanking, slug }: BadgesDisplayProps) {
   />
 </a>`
 
-  const darkBadgeCode = `<a href=\"https://hytalehunt.com/projects/${slug}\" target=\"_blank\" title=\"HytaleHunt Top ${dailyRanking} Daily Winner\">
+  const darkBadgeCode = `<a href=\"https://hytalehunt.com/servers/${slug}\" target=\"_blank\" title=\"HytaleHunt Top ${dailyRanking} Daily Winner\">
   <img 
     src=\"https://hytalehunt.com/images/badges/top${dailyRanking}-dark.svg\" 
     alt=\"HytaleHunt Top ${dailyRanking} Daily Winner\" 

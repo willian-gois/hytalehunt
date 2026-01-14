@@ -3,14 +3,14 @@ import { headers } from "next/headers"
 import Link from "next/link"
 
 import { auth } from "@/lib/auth"
-import { PROJECT_LIMITS_VARIABLES } from "@/lib/constants"
+import { SERVER_LIMITS_VARIABLES } from "@/lib/constants"
 import { Button } from "@/components/ui/button"
 // import { RiFilterLine, RiArrowDownSLine } from "@remixicon/react";
-import { ProjectCard } from "@/components/home/project-card"
-import { getMonthBestProjects, getTodayProjects, getYesterdayProjects } from "@/app/actions/home"
-import { getTopCategories } from "@/app/actions/projects"
+import { ServerCard } from "@/components/home/server-card"
+import { getMonthBestServers, getTodayServers, getYesterdayServers } from "@/app/actions/home"
+import { getTopCategories } from "@/app/actions/servers"
 
-interface ProjectSummary {
+interface ServerSummary {
   id: string
   slug: string
   name: string
@@ -76,19 +76,17 @@ async function TrendingData({
   filter: string
   isAuthenticated: boolean
 }) {
-  let projects: ProjectSummary[] = [] // Utiliser le type défini
+  let servers: ServerSummary[] = [] // Utiliser le type défini
   let title
 
   if (filter === "today") {
-    projects = await getTodayProjects(PROJECT_LIMITS_VARIABLES.VIEW_ALL_PAGE_TODAY_YESTERDAY_LIMIT)
+    servers = await getTodayServers(SERVER_LIMITS_VARIABLES.VIEW_ALL_PAGE_TODAY_YESTERDAY_LIMIT)
     title = "Today's Launches"
   } else if (filter === "yesterday") {
-    projects = await getYesterdayProjects(
-      PROJECT_LIMITS_VARIABLES.VIEW_ALL_PAGE_TODAY_YESTERDAY_LIMIT,
-    )
+    servers = await getYesterdayServers(SERVER_LIMITS_VARIABLES.VIEW_ALL_PAGE_TODAY_YESTERDAY_LIMIT)
     title = "Yesterday's Launches"
   } else {
-    projects = await getMonthBestProjects(PROJECT_LIMITS_VARIABLES.VIEW_ALL_PAGE_MONTH_LIMIT)
+    servers = await getMonthBestServers(SERVER_LIMITS_VARIABLES.VIEW_ALL_PAGE_MONTH_LIMIT)
     title = "Best of the Month"
   }
 
@@ -98,22 +96,22 @@ async function TrendingData({
         <h2 className="text-xl font-bold sm:text-2xl">{title}</h2>
       </div>
 
-      {projects.length === 0 ? (
+      {servers.length === 0 ? (
         <div className="text-muted-foreground border-border bg-card rounded-lg border border-dashed py-8 text-center text-sm">
-          No projects found for this period.
+          No servers found for this period.
         </div>
       ) : (
         <div className="-mx-3 flex flex-col sm:-mx-4">
-          {projects.map((project: ProjectSummary, index: number) => (
-            <ProjectCard
-              key={project.id}
-              {...project}
-              description={project.description || ""}
-              websiteUrl={project.websiteUrl ?? undefined}
-              commentCount={project.commentCount ?? 0}
+          {servers.map((server: ServerSummary, index: number) => (
+            <ServerCard
+              key={server.id}
+              {...server}
+              description={server.description || ""}
+              websiteUrl={server.websiteUrl ?? undefined}
+              commentCount={server.commentCount ?? 0}
               index={index}
-              userHasUpvoted={project.userHasUpvoted ?? false}
-              categories={project.categories || []}
+              userHasUpvoted={server.userHasUpvoted ?? false}
+              categories={server.categories || []}
               isAuthenticated={isAuthenticated}
             />
           ))}
@@ -137,10 +135,8 @@ export default async function TrendingPage({
   })
   const isAuthenticated = !!session?.user
 
-  const todayProjects = await getTodayProjects()
-  const ongoingLaunches = todayProjects.filter(
-    (project) => project.launchStatus === "ongoing",
-  ).length
+  const todayServers = await getTodayServers()
+  const ongoingLaunches = todayServers.filter((server) => server.launchStatus === "ongoing").length
 
   return (
     <main className="bg-secondary/20">
@@ -238,7 +234,7 @@ export default async function TrendingPage({
                   >
                     <span className="text-sm">{category.name}</span>
                     <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
-                      {category.count} projects
+                      {category.count} servers
                     </span>
                   </Link>
                 ))}

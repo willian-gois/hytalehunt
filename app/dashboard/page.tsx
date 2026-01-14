@@ -22,11 +22,11 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { DashboardProjectCard } from "@/components/dashboard/dashboard-project-card"
-import { getUserCreatedProjects, getUserUpvotedProjects } from "@/app/actions/projects"
+import { DashboardServerCard } from "@/components/dashboard/dashboard-server-card"
+import { getUserCreatedServers, getUserUpvotedServers } from "@/app/actions/servers"
 
-// Base project type that matches the actual structure from the database
-interface BaseProject {
+// Base server type that matches the actual structure from the database
+interface BaseServer {
   id: string
   name: string
   slug: string
@@ -53,24 +53,24 @@ export default async function Dashboard() {
   }
 
   // Get data from actions
-  const upvotedProjectsData = await getUserUpvotedProjects()
-  const createdProjectsData = await getUserCreatedProjects()
+  const upvotedServersData = await getUserUpvotedServers()
+  const createdServersData = await getUserCreatedServers()
 
   // Process the data to match our expected formats
-  const upvotedProjects = upvotedProjectsData.map((item) => item.project) as BaseProject[]
-  const createdProjects = createdProjectsData as BaseProject[]
+  const upvotedServers = upvotedServersData.map((item) => item.server) as BaseServer[]
+  const createdServers = createdServersData as BaseServer[]
 
-  // projects with badge (launched + top 3)
-  const badgeProjects = createdProjects.filter(
-    (project) =>
-      project.launchStatus === "launched" && project.dailyRanking && project.dailyRanking <= 3,
+  // servers with badge (launched + top 3)
+  const badgeServers = createdServers.filter(
+    (server) =>
+      server.launchStatus === "launched" && server.dailyRanking && server.dailyRanking <= 3,
   )
 
-  const upcomingLaunches = createdProjects.filter((project) => project.launchStatus === "scheduled")
+  const upcomingLaunches = createdServers.filter((server) => server.launchStatus === "scheduled")
 
-  const activeLaunches = createdProjects.filter((project) => project.launchStatus === "ongoing")
+  const activeLaunches = createdServers.filter((server) => server.launchStatus === "ongoing")
 
-  const previousLaunches = createdProjects.filter((project) => project.launchStatus === "launched")
+  const previousLaunches = createdServers.filter((server) => server.launchStatus === "launched")
 
   return (
     <div className="min-h-[calc(100vh-64px)] py-6 sm:py-8">
@@ -88,11 +88,11 @@ export default async function Dashboard() {
               </Button>
               <Button asChild>
                 <Link
-                  href="/projects/submit"
+                  href="/servers/submit"
                   className="flex w-full items-center justify-center gap-2 sm:w-auto"
                 >
                   <RiAddLine className="h-4 w-4" />
-                  Submit a Project
+                  Submit a Server
                 </Link>
               </Button>
             </div>
@@ -101,14 +101,14 @@ export default async function Dashboard() {
 
         {/* Main Dashboard Content */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {/* Left Column - My Projects */}
+          {/* Left Column - My Servers */}
           <div className="space-y-6 lg:col-span-2">
             <Card className="border dark:border-zinc-800">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="font-heading text-xl font-semibold">My Projects</CardTitle>
+                  <CardTitle className="font-heading text-xl font-semibold">My Servers</CardTitle>
                 </div>
-                <CardDescription>Manage your submitted tech projects</CardDescription>
+                <CardDescription>Manage your submitted tech servers</CardDescription>
               </CardHeader>
               <CardContent className="pb-1">
                 <Tabs defaultValue="active">
@@ -136,8 +136,8 @@ export default async function Dashboard() {
                   <TabsContent value="upcoming" className="mt-0">
                     {upcomingLaunches.length > 0 ? (
                       <div className="space-y-3">
-                        {upcomingLaunches.map((project) => (
-                          <DashboardProjectCard key={project.id} {...project} />
+                        {upcomingLaunches.map((server) => (
+                          <DashboardServerCard key={server.id} {...server} />
                         ))}
                       </div>
                     ) : (
@@ -147,10 +147,10 @@ export default async function Dashboard() {
                         </div>
                         <h3 className="mb-1 font-medium">No upcoming launches</h3>
                         <p className="text-muted-foreground mb-4 text-sm">
-                          You don&apos;t have any scheduled project launches yet
+                          You don&apos;t have any scheduled server launches yet
                         </p>
                         <Button size="sm" asChild>
-                          <Link href="/projects/submit">Submit a Project</Link>
+                          <Link href="/servers/submit">Submit a Server</Link>
                         </Button>
                       </div>
                     )}
@@ -159,8 +159,8 @@ export default async function Dashboard() {
                   <TabsContent value="active" className="mt-0">
                     {activeLaunches.length > 0 ? (
                       <div className="space-y-3">
-                        {activeLaunches.map((project) => (
-                          <DashboardProjectCard key={project.id} {...project} />
+                        {activeLaunches.map((server) => (
+                          <DashboardServerCard key={server.id} {...server} />
                         ))}
                       </div>
                     ) : (
@@ -170,10 +170,10 @@ export default async function Dashboard() {
                         </div>
                         <h3 className="mb-1 font-medium">No active launches</h3>
                         <p className="text-muted-foreground mb-4 text-sm">
-                          You don&apos;t have any active project launches at the moment
+                          You don&apos;t have any active server launches at the moment
                         </p>
                         <Button size="sm" asChild>
-                          <Link href="/projects/submit">Submit a Project</Link>
+                          <Link href="/servers/submit">Submit a Server</Link>
                         </Button>
                       </div>
                     )}
@@ -182,8 +182,8 @@ export default async function Dashboard() {
                   <TabsContent value="past" className="mt-0">
                     {previousLaunches.length > 0 ? (
                       <div className="space-y-3">
-                        {previousLaunches.map((project) => (
-                          <DashboardProjectCard key={project.id} {...project} />
+                        {previousLaunches.map((server) => (
+                          <DashboardServerCard key={server.id} {...server} />
                         ))}
                       </div>
                     ) : (
@@ -193,10 +193,10 @@ export default async function Dashboard() {
                         </div>
                         <h3 className="mb-1 font-medium">No past launches</h3>
                         <p className="text-muted-foreground mb-4 text-sm">
-                          You haven&apos;t launched any projects yet
+                          You haven&apos;t launched any servers yet
                         </p>
                         <Button size="sm" asChild>
-                          <Link href="/projects/submit">Submit a Project</Link>
+                          <Link href="/servers/submit">Submit a Server</Link>
                         </Button>
                       </div>
                     )}
@@ -206,19 +206,19 @@ export default async function Dashboard() {
             </Card>
 
             {/* Section Badges */}
-            {badgeProjects.length > 0 && (
+            {badgeServers.length > 0 && (
               <Card className="border dark:border-zinc-800">
                 <CardHeader className="pb-3">
                   <CardTitle className="font-heading text-xl font-semibold">Your Badges</CardTitle>
                   <CardDescription className="text-muted-foreground">
-                    Projects you&apos;ve recently launched and ranked in the top 3
+                    Servers you&apos;ve recently launched and ranked in the top 3
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3 pt-0">
-                  {badgeProjects.map((project) => (
-                    <DashboardProjectCard
-                      key={project.id}
-                      {...project}
+                  {badgeServers.map((server) => (
+                    <DashboardServerCard
+                      key={server.id}
+                      {...server}
                       actionButton={
                         <Button
                           asChild
@@ -227,7 +227,7 @@ export default async function Dashboard() {
                           className="h-8 w-full px-4 text-sm font-semibold sm:w-auto"
                           title="Voir le badge"
                         >
-                          <Link href={`/projects/${project.slug}/badges`}>Badges</Link>
+                          <Link href={`/servers/${server.slug}/badges`}>Badges</Link>
                         </Button>
                       }
                     />
@@ -244,14 +244,14 @@ export default async function Dashboard() {
                     Recent Upvotes
                   </CardTitle>
                 </div>
-                <CardDescription>Projects you&apos;ve recently upvoted</CardDescription>
+                <CardDescription>Servers you&apos;ve recently upvoted</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {upvotedProjects.length > 0 ? (
-                    upvotedProjects
+                  {upvotedServers.length > 0 ? (
+                    upvotedServers
                       .slice(0, 4)
-                      .map((project) => <DashboardProjectCard key={project.id} {...project} />)
+                      .map((server) => <DashboardServerCard key={server.id} {...server} />)
                   ) : (
                     <div className="py-6 text-center">
                       <div className="bg-secondary/50 mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full">
@@ -259,10 +259,10 @@ export default async function Dashboard() {
                       </div>
                       <h3 className="mb-1 font-medium">No upvotes yet</h3>
                       <p className="text-muted-foreground mb-4 text-sm">
-                        You haven&apos;t upvoted any projects yet
+                        You haven&apos;t upvoted any servers yet
                       </p>
                       <Button size="sm" asChild>
-                        <Link href="/trending">Explore Projects</Link>
+                        <Link href="/trending">Explore Servers</Link>
                       </Button>
                     </div>
                   )}
@@ -318,9 +318,9 @@ export default async function Dashboard() {
               </CardHeader>
               <CardContent className="grid gap-2">
                 <Button variant="outline" asChild className="justify-start">
-                  <Link href="/projects/submit" className="flex items-center gap-2">
+                  <Link href="/servers/submit" className="flex items-center gap-2">
                     <RiAddLine className="h-4 w-4" />
-                    Submit a Project
+                    Submit a Server
                   </Link>
                 </Button>
                 <Button variant="outline" asChild className="justify-start">
@@ -338,7 +338,7 @@ export default async function Dashboard() {
                 <Button variant="outline" asChild className="justify-start">
                   <Link href="/trending" className="flex items-center gap-2">
                     <RiFireLine className="h-4 w-4" />
-                    Trending Projects
+                    Trending Servers
                   </Link>
                 </Button>
                 <Button variant="outline" asChild className="justify-start">

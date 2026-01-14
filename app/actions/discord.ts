@@ -13,22 +13,22 @@ const LaunchTypeZodEnum = z.enum(Object.values(LaunchTypeEnum) as [string, ...st
 })
 
 const DiscordNotificationSchema = z.object({
-  projectName: z
+  serverName: z
     .string()
-    .min(1, "Project name cannot be empty.")
-    .max(100, "Project name cannot exceed 100 characters."),
+    .min(1, "Server name cannot be empty.")
+    .max(100, "Server name cannot exceed 100 characters."),
   launchDate: z.string().min(1, "Launch date cannot be empty."),
   launchType: LaunchTypeZodEnum,
   websiteUrl: z.string().url("Invalid website URL format.").min(1, "Website URL cannot be empty."),
-  projectUrl: z.string().url("Invalid project URL format.").min(1, "Project URL cannot be empty."),
+  serverUrl: z.string().url("Invalid server URL format.").min(1, "Server URL cannot be empty."),
 })
 
 export async function notifyDiscordLaunch(
-  projectName: string,
+  serverName: string,
   launchDate: string,
   launchType: string,
   websiteUrl: string,
-  projectUrl: string,
+  serverUrl: string,
 ) {
   const requestHeaders = await headers()
   const session = await auth.api.getSession({ headers: requestHeaders })
@@ -41,11 +41,11 @@ export async function notifyDiscordLaunch(
   const authenticatedUserId = session.user.id
 
   const validation = DiscordNotificationSchema.safeParse({
-    projectName,
+    serverName,
     launchDate,
     launchType,
     websiteUrl,
-    projectUrl,
+    serverUrl,
   })
 
   if (!validation.success) {
@@ -64,30 +64,30 @@ export async function notifyDiscordLaunch(
 
   try {
     console.log(
-      `[DiscordNotify] Sending notification for project: ${validatedData.projectName}, Type: ${validatedData.launchType}, Initiated by User ID: ${authenticatedUserId}`,
+      `[DiscordNotify] Sending notification for server: ${validatedData.serverName}, Type: ${validatedData.launchType}, Initiated by User ID: ${authenticatedUserId}`,
     )
     const result = await sendRealDiscordLaunchNotification(
-      validatedData.projectName,
+      validatedData.serverName,
       validatedData.launchDate,
       validatedData.launchType,
       validatedData.websiteUrl,
-      validatedData.projectUrl,
+      validatedData.serverUrl,
       authenticatedUserId,
     )
     if (result) {
       console.log(
-        `[DiscordNotify] Successfully sent notification for project: ${validatedData.projectName}`,
+        `[DiscordNotify] Successfully sent notification for server: ${validatedData.serverName}`,
       )
       return { success: true }
     } else {
       console.warn(
-        `[DiscordNotify] sendRealDiscordLaunchNotification returned false for project: ${validatedData.projectName}`,
+        `[DiscordNotify] sendRealDiscordLaunchNotification returned false for server: ${validatedData.serverName}`,
       )
       return { success: false, error: "Notification sending function indicated failure." }
     }
   } catch (error) {
     console.error(
-      `[DiscordNotify] Error sending Discord launch notification for project: ${validatedData.projectName}, User ID: ${authenticatedUserId}:`,
+      `[DiscordNotify] Error sending Discord launch notification for server: ${validatedData.serverName}, User ID: ${authenticatedUserId}:`,
       error,
     )
     return {

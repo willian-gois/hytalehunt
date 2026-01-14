@@ -43,7 +43,7 @@ export function WinnerCard({
   const getRankingText = () => {
     switch (dailyRanking) {
       case 1:
-        return "#1 Project of the day"
+        return "#1 Server of the day"
       case 2:
         return "#2 Second place"
       case 3:
@@ -95,7 +95,7 @@ export function WinnerCard({
             </div>
           </div>
           <Button asChild size="sm" variant="outline">
-            <Link href={`/projects/${slug}`}>Visit Project</Link>
+            <Link href={`/servers/${slug}`}>Visit Server</Link>
           </Button>
         </div>
       </div>

@@ -102,8 +102,8 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at"),
 })
 
-export const project = pgTable(
-  "project",
+export const server = pgTable(
+  "server",
   {
     id: text("id").primaryKey(),
     name: text("name").notNull(),
@@ -131,7 +131,7 @@ export const project = pgTable(
   },
   (table) => {
     return {
-      nameIdx: index("project_name_idx").on(table.name),
+      nameIdx: index("server_name_idx").on(table.name),
     }
   },
 )
@@ -151,20 +151,20 @@ export const category = pgTable(
   },
 )
 
-// Junction table for many-to-many relationship between projects and categories
-export const projectToCategory = pgTable(
-  "project_to_category",
+// Junction table for many-to-many relationship between servers and categories
+export const serverToCategory = pgTable(
+  "server_to_category",
   {
-    projectId: text("project_id")
+    serverId: text("server_id")
       .notNull()
-      .references(() => project.id, { onDelete: "cascade" }),
+      .references(() => server.id, { onDelete: "cascade" }),
     categoryId: text("category_id")
       .notNull()
       .references(() => category.id, { onDelete: "cascade" }),
   },
   (table) => {
     return {
-      pk: primaryKey(table.projectId, table.categoryId),
+      pk: primaryKey(table.serverId, table.categoryId),
     }
   },
 )
@@ -175,9 +175,9 @@ export const upvote = pgTable("upvote", {
   userId: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
-  projectId: text("project_id")
+  serverId: text("server_id")
     .notNull()
-    .references(() => project.id, { onDelete: "cascade" }),
+    .references(() => server.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
@@ -221,10 +221,10 @@ export const launchQuota = pgTable("launch_quota", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
 
-// New table for tracking project submissions during coming soon phase
+// New table for tracking server submissions during coming soon phase
 export const waitlistSubmission = pgTable("waitlist_submission", {
   id: text("id").primaryKey(),
-  projectUrl: text("project_url").notNull(),
+  serverUrl: text("server_url").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),

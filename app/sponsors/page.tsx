@@ -26,7 +26,7 @@ export default async function SponsorsPage() {
 
   const generalSponsorshipBenefits = [
     "Featured on our homepage sidebar.",
-    "Visible on every project page.",
+    "Visible on every server page.",
     "Reach a dedicated audience of developers and tech enthusiasts.",
     "Direct link to your website.",
   ]
@@ -125,7 +125,7 @@ export default async function SponsorsPage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <RiCheckboxCircleFill className="text-muted-foreground h-4 w-4" />
-                  <span>Homepage & Project Page display</span>
+                  <span>Homepage & Server Page display</span>
                 </li>
               </ul>
             </div>
@@ -165,7 +165,7 @@ export default async function SponsorsPage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <RiCheckboxCircleFill className="text-primary h-4 w-4" />
-                  <span className="font-medium">Homepage & Project Page display</span>
+                  <span className="font-medium">Homepage & Server Page display</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <RiCheckboxCircleFill className="text-primary h-4 w-4" />

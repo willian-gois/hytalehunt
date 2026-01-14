@@ -34,7 +34,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                   >
                     <div className="mb-1 font-medium">Trending Now</div>
                     <p className="text-muted-foreground text-xs leading-tight">
-                      Discover the most popular projects
+                      Discover the most popular servers
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -47,7 +47,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                   >
                     <div className="mb-1 font-medium">Daily Winners</div>
                     <p className="text-muted-foreground text-xs leading-tight">
-                      See the best projects of the day
+                      See the best servers of the day
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -60,7 +60,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                   >
                     <div className="mb-1 font-medium">Best of Month</div>
                     <p className="text-muted-foreground text-xs leading-tight">
-                      See the best projects of the month
+                      See the best servers of the month
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -73,7 +73,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                   >
                     <div className="mb-1 font-medium">Categories</div>
                     <p className="text-muted-foreground text-xs leading-tight">
-                      Browse projects by category
+                      Browse servers by category
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -98,10 +98,10 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <Link
-              href="/projects/submit"
+              href="/servers/submit"
               className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}
             >
-              Submit Project
+              Submit Server
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>

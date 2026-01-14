@@ -5,17 +5,17 @@ import Link from "next/link"
 import { auth } from "@/lib/auth"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { ProjectSection } from "@/components/home/project-section"
+import { ServerSection } from "@/components/home/server-section"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
-import { getMonthBestProjects, getTodayProjects, getYesterdayProjects } from "@/app/actions/home"
+import { getMonthBestServers, getTodayServers, getYesterdayServers } from "@/app/actions/home"
 import { getLast30DaysPageviews, getLast30DaysVisitors } from "@/app/actions/plausible"
-import { getTopCategories } from "@/app/actions/projects"
+import { getTopCategories } from "@/app/actions/servers"
 
 export default async function Home() {
   // Récupérer les données réelles
-  const todayProjects = await getTodayProjects()
-  const yesterdayProjects = await getYesterdayProjects()
-  const monthProjects = await getMonthBestProjects()
+  const todayServers = await getTodayServers()
+  const yesterdayServers = await getYesterdayServers()
+  const monthServers = await getMonthBestServers()
   const topCategories = await getTopCategories(5)
 
   const last30DaysVisitors = await getLast30DaysVisitors()
@@ -122,24 +122,24 @@ export default async function Home() {
               </div>
             </div>
 
-            <ProjectSection
-              title="Top Projects Launching Today"
-              projects={todayProjects}
+            <ServerSection
+              title="Top Servers Launching Today"
+              servers={todayServers}
               sortByUpvotes={true}
               isAuthenticated={!!session?.user}
             />
 
-            <ProjectSection
+            <ServerSection
               title="Yesterday's Launches"
-              projects={yesterdayProjects}
+              servers={yesterdayServers}
               moreHref="/trending?filter=yesterday"
               sortByUpvotes={true}
               isAuthenticated={!!session?.user}
             />
 
-            <ProjectSection
+            <ServerSection
               title="This Month's Best"
-              projects={monthProjects}
+              servers={monthServers}
               moreHref="/trending?filter=month"
               sortByUpvotes={true}
               isAuthenticated={!!session?.user}
@@ -198,19 +198,19 @@ export default async function Home() {
                   >
                     <span className="text-sm">{category.name}</span>
                     <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
-                      {category.count} projects
+                      {category.count} servers
                     </span>
                   </Link>
                 ))}
               </div>
             </div>
             {/* Podium
-            {yesterdayProjects.length > 0 && (
+            {yesterdayServers.length > 0 && (
               <div className="p-5 pt-0 space-y-3">
                 <h3 className="font-semibold flex items-center gap-2">
                   Yesterday&apos;s Top Launches
                 </h3>
-                <TopLaunchesPodium topProjects={yesterdayProjects} />
+                <TopLaunchesPodium topServers={yesterdayServers} />
               </div>
             )} */}
 

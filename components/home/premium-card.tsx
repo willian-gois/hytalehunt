@@ -5,7 +5,7 @@ import Link from "next/link"
 
 import { RiStarSFill } from "@remixicon/react"
 
-interface Project {
+interface Server {
   id: string
   slug: string
   name: string
@@ -15,12 +15,12 @@ interface Project {
 }
 
 interface PremiumCardProps {
-  projects: Project[]
+  servers: Server[]
 }
 
-export function PremiumCard({ projects }: PremiumCardProps) {
-  const displayItems = [...projects]
-  const placeholdersNeeded = Math.max(0, 3 - projects.length)
+export function PremiumCard({ servers }: PremiumCardProps) {
+  const displayItems = [...servers]
+  const placeholdersNeeded = Math.max(0, 3 - servers.length)
 
   for (let i = 0; i < placeholdersNeeded; i++) {
     displayItems.push({
@@ -61,7 +61,7 @@ export function PremiumCard({ projects }: PremiumCardProps) {
           ) : (
             <Link
               key={item.id}
-              href={`/projects/${item.slug}`}
+              href={`/servers/${item.slug}`}
               className="group hover:bg-muted/50 flex flex-col items-center gap-3 rounded-lg p-2 text-center transition-colors sm:items-center sm:text-left"
             >
               <div className="bg-muted relative h-12 w-12 flex-shrink-0 rounded-lg sm:h-14 sm:w-14">

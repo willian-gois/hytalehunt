@@ -17,10 +17,10 @@ export function WelcomeBanner() {
             <h2 className="text-foreground mb-1 text-lg font-semibold">Welcome to HytaleHunt!</h2>
             <p className="text-muted-foreground mb-3 max-w-xl text-sm">
               Discover and support the best new tech products. Explore daily launches and upvote
-              your favorite projects.
+              your favorite servers.
             </p>
-            <Button onClick={() => router.push("/projects/submit")} variant="outline">
-              Submit a Project
+            <Button onClick={() => router.push("/servers/submit")} variant="outline">
+              Submit a Server
               <RiAddCircleFill className="ml-1 h-4 w-4" />
             </Button>
           </div>

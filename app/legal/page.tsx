@@ -15,7 +15,7 @@ export default function LegalPage() {
           <h1 className="mb-6 text-2xl font-bold sm:text-3xl">Legal Information</h1>
           <p className="text-muted-foreground mb-8">
             At HytaleHunt, we are committed to transparency and protecting your rights. As an open
-            source project, we believe in openness and community collaboration. Please review our
+            source server, we believe in openness and community collaboration. Please review our
             legal documents to understand how we operate and protect your information.
           </p>
 

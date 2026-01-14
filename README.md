@@ -12,7 +12,7 @@
 
 <div align="center">
   <a href="https://hytalehunt.com" target="_blank">
-    <img src="https://img.shields.io/badge/Launch_Your_Project_NOW-2563EB?style=for-the-badge&logo=&logoColor=white" alt="Launch Your Project NOW" />
+    <img src="https://img.shields.io/badge/Launch_Your_Server_NOW-2563EB?style=for-the-badge&logo=&logoColor=white" alt="Launch Your Server NOW" />
   </a>
 </div>
 
@@ -209,7 +209,7 @@ HytaleHunt is an open source project that relies on community support to continu
 
 <div align="center">
   <a href="https://hytalehunt.com" target="_blank">
-    <img src="https://img.shields.io/badge/Launch_Your_Project_NOW-2563EB?style=for-the-badge&logo=&logoColor=white" alt="Launch Your Project NOW" />
+    <img src="https://img.shields.io/badge/Launch_Your_Server_NOW-2563EB?style=for-the-badge&logo=&logoColor=white" alt="Launch Your Server NOW" />
   </a>
 </div>
 

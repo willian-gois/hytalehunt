@@ -14,7 +14,7 @@ function PaymentSuccessContent() {
   const searchParams = useSearchParams()
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [projectSlug, setProjectSlug] = useState<string | null>(null)
+  const [serverSlug, setServerSlug] = useState<string | null>(null)
   const [countdown, setCountdown] = useState(5)
 
   // Délai de redirection à 5 secondes
@@ -24,7 +24,7 @@ function PaymentSuccessContent() {
   useEffect(() => {
     let timer: NodeJS.Timeout
 
-    if (projectSlug && countdown > 0) {
+    if (serverSlug && countdown > 0) {
       timer = setInterval(() => {
         setCountdown((prev) => prev - 1)
       }, 1000)
@@ -33,7 +33,7 @@ function PaymentSuccessContent() {
     return () => {
       if (timer) clearInterval(timer)
     }
-  }, [projectSlug, countdown])
+  }, [serverSlug, countdown])
 
   useEffect(() => {
     const checkPaymentStatus = async () => {
@@ -58,13 +58,13 @@ function PaymentSuccessContent() {
         }
 
         if (data.status === "complete") {
-          // Payment successful, store the project slug for redirection
+          // Payment successful, store the server slug for redirection
           setIsLoading(false)
-          setProjectSlug(data.projectSlug)
+          setServerSlug(data.serverSlug)
 
           // Redirect after a delay to show success message
           setTimeout(() => {
-            router.push(`/projects/${data.projectSlug}`)
+            router.push(`/servers/${data.serverSlug}`)
           }, redirectDelay)
         } else if (data.status === "pending") {
           setError("Votre paiement est en cours de traitement. Veuillez patienter un moment...")
@@ -115,7 +115,7 @@ function PaymentSuccessContent() {
                 />
               </div>
             </motion.div>
-          ) : projectSlug ? (
+          ) : serverSlug ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -130,7 +130,7 @@ function PaymentSuccessContent() {
               <h1 className="mb-3 text-2xl font-bold">Payment Successful</h1>
 
               <p className="text-muted-foreground mb-8">
-                Your premium project launch has been successfully scheduled and will be featured on
+                Your premium server launch has been successfully scheduled and will be featured on
                 our platform on the selected date.
               </p>
 
@@ -138,7 +138,7 @@ function PaymentSuccessContent() {
                 <div className="border-muted mb-3 flex h-8 w-8 items-center justify-center rounded-full border">
                   <span className="text-sm font-medium">{countdown}</span>
                 </div>
-                <p className="text-muted-foreground text-sm">Redirecting to your project page...</p>
+                <p className="text-muted-foreground text-sm">Redirecting to your server page...</p>
               </div>
             </motion.div>
           ) : error ? (

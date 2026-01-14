@@ -141,14 +141,14 @@ export function SearchCommand() {
               onClick={() => {
                 runCommand(() => {
                   const url =
-                    result.type === "project"
-                      ? `/projects/${result.slug || result.id}`
+                    result.type === "server"
+                      ? `/servers/${result.slug || result.id}`
                       : `/categories?category=${result.id}`
                   router.push(url)
                 })
               }}
             >
-              {result.type === "project" && result.logoUrl ? (
+              {result.type === "server" && result.logoUrl ? (
                 <div className="border-border mr-2 h-8 w-8 flex-shrink-0 overflow-hidden rounded-full border">
                   <img
                     src={result.logoUrl}
@@ -214,7 +214,7 @@ export function SearchCommand() {
       <CommandDialog open={open} onOpenChange={handleOpenChange}>
         <DialogTitle className="sr-only">Search</DialogTitle>
         <CommandInput
-          placeholder="Search projects, categories..."
+          placeholder="Search servers, categories..."
           value={query}
           onValueChange={setQuery}
           className="border-none focus:ring-0"
@@ -265,7 +265,7 @@ export function SearchCommand() {
                     onClick={() => runCommand(() => router.push("/trending"))}
                   >
                     <RiFireLine className="mr-2 h-4 w-4 text-orange-500" />
-                    <span>Trending projects</span>
+                    <span>Trending servers</span>
                   </div>
                   <div
                     data-index="1"
@@ -313,10 +313,10 @@ export function SearchCommand() {
                     className={`flex cursor-pointer items-center rounded-md p-2 transition-colors ${
                       activeIndex === 4 ? "bg-muted text-foreground" : "hover:bg-muted/50"
                     }`}
-                    onClick={() => runCommand(() => router.push("/projects/submit"))}
+                    onClick={() => runCommand(() => router.push("/servers/submit"))}
                   >
                     <RiAddCircleLine className="mr-2 h-4 w-4 text-sky-500" />
-                    <span>Submit Project</span>
+                    <span>Submit Server</span>
                   </div>
                 </div>
               </div>

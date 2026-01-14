@@ -1,5 +1,5 @@
 {
-  "id": "43ba5e5c-a733-4502-9b3b-33007c8e429e",
+  "id": "55b90c46-014b-481b-b52d-37e4909e9687",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -101,6 +101,137 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.blog_article": {
+      "name": "blog_article",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tags": {
+          "name": "tags",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "author": {
+          "name": "author",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'HytaleHunt Team'"
+        },
+        "meta_title": {
+          "name": "meta_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "meta_description": {
+          "name": "meta_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "published_at": {
+          "name": "published_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "blog_article_slug_idx": {
+          "name": "blog_article_slug_idx",
+          "columns": [
+            {
+              "expression": "slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "blog_article_published_at_idx": {
+          "name": "blog_article_published_at_idx",
+          "columns": [
+            {
+              "expression": "published_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "blog_article_slug_unique": {
+          "name": "blog_article_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": ["slug"]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -365,8 +496,111 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.project": {
-      "name": "project",
+    "public.seo_article": {
+      "name": "seo_article",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "meta_title": {
+          "name": "meta_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "meta_description": {
+          "name": "meta_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "published_at": {
+          "name": "published_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "seo_article_slug_idx": {
+          "name": "seo_article_slug_idx",
+          "columns": [
+            {
+              "expression": "slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "seo_article_slug_unique": {
+          "name": "seo_article_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": ["slug"]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.server": {
+      "name": "server",
       "schema": "",
       "columns": {
         "id": {
@@ -409,7 +643,13 @@
           "name": "cover_image_url",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "product_image": {
+          "name": "product_image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "github_url": {
           "name": "github_url",
@@ -497,8 +737,8 @@
         }
       },
       "indexes": {
-        "project_name_idx": {
-          "name": "project_name_idx",
+        "server_name_idx": {
+          "name": "server_name_idx",
           "columns": [
             {
               "expression": "name",
@@ -514,9 +754,9 @@
         }
       },
       "foreignKeys": {
-        "project_created_by_user_id_fk": {
-          "name": "project_created_by_user_id_fk",
-          "tableFrom": "project",
+        "server_created_by_user_id_fk": {
+          "name": "server_created_by_user_id_fk",
+          "tableFrom": "server",
           "tableTo": "user",
           "columnsFrom": ["created_by"],
           "columnsTo": ["id"],
@@ -526,8 +766,8 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "project_slug_unique": {
-          "name": "project_slug_unique",
+        "server_slug_unique": {
+          "name": "server_slug_unique",
           "nullsNotDistinct": false,
           "columns": ["slug"]
         }
@@ -536,12 +776,12 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.project_to_category": {
-      "name": "project_to_category",
+    "public.server_to_category": {
+      "name": "server_to_category",
       "schema": "",
       "columns": {
-        "project_id": {
-          "name": "project_id",
+        "server_id": {
+          "name": "server_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -555,18 +795,18 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "project_to_category_project_id_project_id_fk": {
-          "name": "project_to_category_project_id_project_id_fk",
-          "tableFrom": "project_to_category",
-          "tableTo": "project",
-          "columnsFrom": ["project_id"],
+        "server_to_category_server_id_server_id_fk": {
+          "name": "server_to_category_server_id_server_id_fk",
+          "tableFrom": "server_to_category",
+          "tableTo": "server",
+          "columnsFrom": ["server_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "project_to_category_category_id_category_id_fk": {
-          "name": "project_to_category_category_id_category_id_fk",
-          "tableFrom": "project_to_category",
+        "server_to_category_category_id_category_id_fk": {
+          "name": "server_to_category_category_id_category_id_fk",
+          "tableFrom": "server_to_category",
           "tableTo": "category",
           "columnsFrom": ["category_id"],
           "columnsTo": ["id"],
@@ -575,9 +815,9 @@
         }
       },
       "compositePrimaryKeys": {
-        "project_to_category_project_id_category_id_pk": {
-          "name": "project_to_category_project_id_category_id_pk",
-          "columns": ["project_id", "category_id"]
+        "server_to_category_server_id_category_id_pk": {
+          "name": "server_to_category_server_id_category_id_pk",
+          "columns": ["server_id", "category_id"]
         }
       },
       "uniqueConstraints": {},
@@ -684,8 +924,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "project_id": {
-          "name": "project_id",
+        "server_id": {
+          "name": "server_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -709,11 +949,11 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "upvote_project_id_project_id_fk": {
-          "name": "upvote_project_id_project_id_fk",
+        "upvote_server_id_server_id_fk": {
+          "name": "upvote_server_id_server_id_fk",
           "tableFrom": "upvote",
-          "tableTo": "project",
-          "columnsFrom": ["project_id"],
+          "tableTo": "server",
+          "columnsFrom": ["server_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -875,8 +1115,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "project_url": {
-          "name": "project_url",
+        "server_url": {
+          "name": "server_url",
           "type": "text",
           "primaryKey": false,
           "notNull": true

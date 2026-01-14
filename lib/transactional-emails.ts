@@ -21,16 +21,16 @@ function getBadgeName(ranking: number): string {
 }
 
 export async function sendWinnerBadgeEmail({
-  projectName,
-  projectSlug,
+  serverName,
+  serverSlug,
   ranking,
   user,
   launchType,
 }: {
   user: BasicUser
   ranking: number
-  projectName: string
-  projectSlug: string
+  serverName: string
+  serverSlug: string
   launchType: string | null
 }) {
   const badgeName = getBadgeName(ranking)
@@ -38,22 +38,22 @@ export async function sendWinnerBadgeEmail({
   const effectiveUserEmail = user.email
   const isPremium = launchType === "premium" || launchType === "premium_plus"
 
-  const projectBadgesPageUrl = `${APP_URL}/projects/${projectSlug}/badges`
+  const serverBadgesPageUrl = `${APP_URL}/servers/${serverSlug}/badges`
 
-  const subject = `🏆 ${projectName} is a Top ${ranking} Winner!`
+  const subject = `🏆 ${serverName} is a Top ${ranking} Winner!`
 
   // Message différent selon le type de lancement
   const doFollowMessage = isPremium
     ? `<p><strong>🎉 Dofollow Backlink:</strong> Congrats! You automatically earned a dofollow backlink as a premium winner.</p>`
-    : `<p><strong>🔗 Dofollow Backlink:</strong> Add your badge to your website and <a href="mailto:contact@hytalehunt.com?subject=Dofollow Request - ${projectName}&body=Hi, I placed the badge on my website. Here's the URL: [YOUR_WEBSITE_URL]">email us your site URL</a> to activate your dofollow link!</p>`
+    : `<p><strong>🔗 Dofollow Backlink:</strong> Add your badge to your website and <a href="mailto:contact@hytalehunt.com?subject=Dofollow Request - ${serverName}&body=Hi, I placed the badge on my website. Here's the URL: [YOUR_WEBSITE_URL]">email us your site URL</a> to activate your dofollow link!</p>`
 
   const htmlBody = `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
       <h1 style="font-size: 24px; color: #1a1a1a;">Hi ${effectiveUserName} 👋</h1>
-      <p><strong>${projectName}</strong> is a <strong>${badgeName}</strong> on HytaleHunt!</p>
+      <p><strong>${serverName}</strong> is a <strong>${badgeName}</strong> on HytaleHunt!</p>
 
       <p style="text-align: center; margin: 25px 0;">
-        <a href="${projectBadgesPageUrl}" style="background-color: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">
+        <a href="${serverBadgesPageUrl}" style="background-color: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">
           🏆 Get Your Badge
         </a>
       </p>
@@ -72,26 +72,26 @@ export async function sendWinnerBadgeEmail({
 }
 
 export async function sendLaunchReminderEmail({
-  projectName,
-  projectSlug,
+  serverName,
+  serverSlug,
   user,
 }: {
   user: BasicUser
-  projectName: string
-  projectSlug: string
+  serverName: string
+  serverSlug: string
 }) {
   const effectiveUserName = user.name || "Creator"
   const effectiveUserEmail = user.email
 
-  const subject = `🚀 ${projectName} is Live on HytaleHunt!`
-  const projectUrl = `${APP_URL}/projects/${projectSlug}`
+  const subject = `🚀 ${serverName} is Live on HytaleHunt!`
+  const serverUrl = `${APP_URL}/servers/${serverSlug}`
 
   const htmlBody = `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
       <h1 style="font-size: 22px; color: #1a1a1a;">Hi ${effectiveUserName},</h1>
-      <p>Just a quick heads-up: your project, <strong>${projectName}</strong>, is launching today on HytaleHunt!</p>
+      <p>Just a quick heads-up: your server, <strong>${serverName}</strong>, is launching today on HytaleHunt!</p>
       <p>We hope you had a great launch day!</p>
-      <p>You can view your project live here: <a href="${projectUrl}">${projectUrl}</a></p> 
+      <p>You can view your server live here: <a href="${serverUrl}">${serverUrl}</a></p> 
       <p style="margin-top: 25px;">Best of luck!</p>
       <p>The HytaleHunt Team</p>
     </div>

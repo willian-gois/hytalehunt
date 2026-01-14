@@ -11,13 +11,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { MobileCategorySelector } from "@/components/categories/mobile-category-selector"
-import { ProjectCard } from "@/components/home/project-card"
+import { ServerCard } from "@/components/home/server-card"
 import {
   getAllCategories,
   getCategoryById,
-  getProjectsByCategory,
+  getServersByCategory,
   getTopCategories,
-} from "@/app/actions/projects"
+} from "@/app/actions/servers"
 
 export const metadata = {
   title: "Categories - HytaleHunt",
@@ -25,7 +25,7 @@ export const metadata = {
 }
 
 // Composant Skeleton pour le chargement des chaînes
-function ProjectCardSkeleton() {
+function ServerCardSkeleton() {
   return (
     <div className="mx-3 animate-pulse rounded-xl border border-zinc-100 bg-white/70 p-3 shadow-sm sm:mx-4 sm:p-4 dark:border-zinc-800/50 dark:bg-zinc-900/30">
       <div className="flex items-start gap-3 sm:gap-4">
@@ -65,7 +65,7 @@ function CategoryDataSkeleton() {
         {Array(5)
           .fill(0)
           .map((_, index) => (
-            <ProjectCardSkeleton key={index} />
+            <ServerCardSkeleton key={index} />
           ))}
       </div>
     </div>
@@ -84,7 +84,7 @@ async function CategoryData({
   const ITEMS_PER_PAGE = 10
   const currentPage = Math.max(1, page)
 
-  const { projects: paginatedProjects, totalCount } = await getProjectsByCategory(
+  const { servers: paginatedServers, totalCount } = await getServersByCategory(
     categoryId,
     currentPage,
     ITEMS_PER_PAGE,
@@ -92,7 +92,7 @@ async function CategoryData({
   )
 
   const isAuthenticated =
-    paginatedProjects.length > 0 ? typeof paginatedProjects[0].userHasUpvoted === "boolean" : false
+    paginatedServers.length > 0 ? typeof paginatedServers[0].userHasUpvoted === "boolean" : false
 
   const categoryData = await getCategoryById(categoryId)
   if (!categoryData) {
@@ -160,29 +160,29 @@ async function CategoryData({
 
       {totalCount === 0 ? (
         <div className="text-muted-foreground border-border bg-card rounded-lg border border-dashed py-8 text-center text-sm">
-          No projects in this category yet.
+          No servers in this category yet.
           <p className="mt-2">Check other categories or come back later.</p>
         </div>
       ) : (
         <div className="-mx-3 flex flex-col sm:-mx-4">
-          {paginatedProjects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              id={project.id}
-              slug={project.slug}
-              name={project.name}
-              description={project.description || ""}
-              logoUrl={project.logoUrl || ""}
-              websiteUrl={project.websiteUrl ?? undefined}
-              upvoteCount={project.upvoteCount ?? 0}
-              commentCount={project.commentCount ?? 0}
-              launchStatus={project.launchStatus}
-              launchType={project.launchType}
-              dailyRanking={project.dailyRanking}
+          {paginatedServers.map((server, index) => (
+            <ServerCard
+              key={server.id}
+              id={server.id}
+              slug={server.slug}
+              name={server.name}
+              description={server.description || ""}
+              logoUrl={server.logoUrl || ""}
+              websiteUrl={server.websiteUrl ?? undefined}
+              upvoteCount={server.upvoteCount ?? 0}
+              commentCount={server.commentCount ?? 0}
+              launchStatus={server.launchStatus}
+              launchType={server.launchType}
+              dailyRanking={server.dailyRanking}
               index={index}
               isAuthenticated={isAuthenticated}
-              userHasUpvoted={project.userHasUpvoted ?? false}
-              categories={project.categories ?? []}
+              userHasUpvoted={server.userHasUpvoted ?? false}
+              categories={server.categories ?? []}
             />
           ))}
         </div>
@@ -287,7 +287,7 @@ export default async function CategoriesPage({
                   >
                     <span className="text-sm">{category.name}</span>
                     <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
-                      {countMap.get(category.id) || 0} projects
+                      {countMap.get(category.id) || 0} servers
                     </span>
                   </Link>
                 ))}

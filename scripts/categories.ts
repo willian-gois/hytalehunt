@@ -1,7 +1,7 @@
 import { db } from "@/drizzle/db"
 import { category } from "@/drizzle/db/schema"
 
-const TECH_PROJECT_CATEGORIES = [
+const TECH_SERVER_CATEGORIES = [
   // Development & IT
   { id: "developer-tools", name: "Developer Tools" },
   { id: "api", name: "APIs & Integrations" },
@@ -58,7 +58,7 @@ const initializeCategories = async () => {
   const data = await db
   const categories = await data.query.category.findMany()
   if (categories.length === 0) {
-    await data.insert(category).values(TECH_PROJECT_CATEGORIES)
+    await data.insert(category).values(TECH_SERVER_CATEGORIES)
   }
 }
 

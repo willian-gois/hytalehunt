@@ -33,19 +33,19 @@ import {
 
 export const metadata = {
   title: "Pricing - HytaleHunt",
-  description: "Choose the perfect plan for your project launch",
+  description: "Choose the perfect plan for your server launch",
 }
 
 const faqItems = [
   {
     id: "1",
     title: "When do launches happen?",
-    content: `All launches happen at 8:00 AM UTC. We launch a limited number of projects each day to ensure quality visibility.`,
+    content: `All launches happen at 8:00 AM UTC. We launch a limited number of servers each day to ensure quality visibility.`,
   },
   {
     id: "2",
-    title: "How many projects are launched each day?",
-    content: `We launch up to ${LAUNCH_LIMITS.FREE_DAILY_LIMIT} free projects and ${LAUNCH_LIMITS.PREMIUM_DAILY_LIMIT} premium projects daily.`,
+    title: "How many servers are launched each day?",
+    content: `We launch up to ${LAUNCH_LIMITS.FREE_DAILY_LIMIT} free servers and ${LAUNCH_LIMITS.PREMIUM_DAILY_LIMIT} premium servers daily.`,
   },
   {
     id: "3",
@@ -117,7 +117,7 @@ export default async function PricingPage() {
       <div className="mb-4 text-center">
         <h1 className="mb-3 text-2xl font-bold sm:text-3xl">Choose Your Launch Plan</h1>
         <p className="text-muted-foreground mx-auto max-w-2xl text-sm">
-          Get the visibility your project deserves with our flexible launch options. All launches
+          Get the visibility your server deserves with our flexible launch options. All launches
           happen at 8:00 AM UTC.
         </p>
       </div>
@@ -164,7 +164,7 @@ export default async function PricingPage() {
 
             <div className="mt-auto pt-3">
               <Button variant="outline" size="sm" className="w-full" asChild>
-                <Link href="/projects/submit">Launch for Free</Link>
+                <Link href="/servers/submit">Launch for Free</Link>
               </Button>
             </div>
           </div>
@@ -210,7 +210,7 @@ export default async function PricingPage() {
 
               <div className="mt-auto pt-3">
                 <Button size="sm" className="w-full" asChild>
-                  <Link href="/projects/submit">Get Premium</Link>
+                  <Link href="/servers/submit">Get Premium</Link>
                 </Button>
               </div>
             </div>

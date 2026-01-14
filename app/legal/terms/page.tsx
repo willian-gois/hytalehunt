@@ -27,7 +27,7 @@ export default function TermsOfServicePage() {
               <h2 className="mb-3 text-xl font-semibold">1. Introduction</h2>
               <p className="mb-3">
                 Welcome to HytaleHunt. These Terms of Service govern your use of our platform, which
-                focuses on discovering and supporting projects.
+                focuses on discovering and supporting servers.
               </p>
               <p className="mb-3">
                 By using HytaleHunt, you agree to these terms. If you don't agree, please don't use
@@ -60,7 +60,7 @@ export default function TermsOfServicePage() {
             <section>
               <h2 className="mb-3 text-xl font-semibold">3. Content</h2>
               <p className="mb-3">
-                <strong>Your Content:</strong> When you submit projects, comments, or other content
+                <strong>Your Content:</strong> When you submit servers, comments, or other content
                 on HytaleHunt, you retain ownership, but grant us permission to display and use that
                 content on our platform.
               </p>
@@ -78,7 +78,7 @@ export default function TermsOfServicePage() {
             <section>
               <h2 className="mb-3 text-xl font-semibold">4. Intellectual Property</h2>
               <p className="mb-3">
-                HytaleHunt is an open source project licensed under the HytaleHunt License. The
+                HytaleHunt is an open source server licensed under the HytaleHunt License. The
                 source code is available on{" "}
                 <a
                   href="https://github.com/drdruide/hytalehunt"
@@ -142,9 +142,9 @@ export default function TermsOfServicePage() {
             <section>
               <h2 className="mb-3 text-xl font-semibold">5. Third-Party Content</h2>
               <p className="mb-3">
-                HytaleHunt may contain links to third-party websites or services, including
-                projects. We're not responsible for the content, policies, or practices of these
-                third parties.
+                HytaleHunt may contain links to third-party websites or services, including servers.
+                We're not responsible for the content, policies, or practices of these third
+                parties.
               </p>
               <p className="mb-3">
                 Your interactions with third-party services are between you and that third party.

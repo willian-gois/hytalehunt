@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
 import { db } from "@/drizzle/db"
-import { launchStatus, project, user } from "@/drizzle/db/schema"
+import { launchStatus, server, user } from "@/drizzle/db/schema"
 import { endOfDay, startOfDay, subDays } from "date-fns"
 import { and, eq, gte, inArray, lt } from "drizzle-orm"
 
@@ -29,20 +29,20 @@ export async function GET(request: NextRequest) {
 
     const winners = await db
       .select({
-        projectId: project.id,
-        projectName: project.name,
-        projectSlug: project.slug,
-        projectRanking: project.dailyRanking,
-        projectCreatorId: project.createdBy,
-        projectLaunchType: project.launchType,
+        serverId: server.id,
+        serverName: server.name,
+        serverSlug: server.slug,
+        serverRanking: server.dailyRanking,
+        serverCreatorId: server.createdBy,
+        serverLaunchType: server.launchType,
       })
-      .from(project)
+      .from(server)
       .where(
         and(
-          eq(project.launchStatus, launchStatus.LAUNCHED),
-          inArray(project.dailyRanking, [1, 2, 3]),
-          gte(project.scheduledLaunchDate, yesterday),
-          lt(project.scheduledLaunchDate, startOfDay(now)),
+          eq(server.launchStatus, launchStatus.LAUNCHED),
+          inArray(server.dailyRanking, [1, 2, 3]),
+          gte(server.scheduledLaunchDate, yesterday),
+          lt(server.scheduledLaunchDate, startOfDay(now)),
         ),
       )
       .execute()
@@ -52,29 +52,29 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ message: "No new winners to notify." })
     }
 
-    console.log(`Found ${winners.length} winning projects to notify.`)
+    console.log(`Found ${winners.length} winning servers to notify.`)
     let emailsSentCount = 0
     let emailsFailedCount = 0
 
     for (const winner of winners) {
-      if (!winner.projectCreatorId || !winner.projectRanking) {
-        console.warn(`Skipping project ${winner.projectName} due to missing creator ID or ranking.`)
+      if (!winner.serverCreatorId || !winner.serverRanking) {
+        console.warn(`Skipping server ${winner.serverName} due to missing creator ID or ranking.`)
         continue
       }
 
-      const projectCreator = await db
+      const serverCreator = await db
         .select({
           email: user.email,
           name: user.name,
         })
         .from(user)
-        .where(eq(user.id, winner.projectCreatorId))
+        .where(eq(user.id, winner.serverCreatorId))
         .limit(1)
         .then((res) => res[0])
 
-      if (!projectCreator || !projectCreator.email) {
+      if (!serverCreator || !serverCreator.email) {
         console.warn(
-          `User not found or email missing for creator ID ${winner.projectCreatorId} of project ${winner.projectName}.`,
+          `User not found or email missing for creator ID ${winner.serverCreatorId} of server ${winner.serverName}.`,
         )
         emailsFailedCount++
         continue
@@ -82,21 +82,21 @@ export async function GET(request: NextRequest) {
 
       try {
         console.log(
-          `Sending winner email to ${projectCreator.email} for project ${winner.projectName}`,
+          `Sending winner email to ${serverCreator.email} for server ${winner.serverName}`,
         )
 
         await sendWinnerBadgeEmail({
-          user: { email: projectCreator.email, name: projectCreator.name },
-          projectName: winner.projectName,
-          projectSlug: winner.projectSlug,
-          ranking: winner.projectRanking,
-          launchType: winner.projectLaunchType,
+          user: { email: serverCreator.email, name: serverCreator.name },
+          serverName: winner.serverName,
+          serverSlug: winner.serverSlug,
+          ranking: winner.serverRanking,
+          launchType: winner.serverLaunchType,
         })
         emailsSentCount++
       } catch (error) {
         emailsFailedCount++
         console.error(
-          `Failed to send winner email for project ${winner.projectName} to ${projectCreator.email}:`,
+          `Failed to send winner email for server ${winner.serverName} to ${serverCreator.email}:`,
           error,
         )
       }

@@ -51,7 +51,7 @@ type User = {
   banned?: boolean | null
   createdAt?: string
   hasLaunched?: boolean
-  projectCount?: number
+  serverCount?: number
 }
 
 export default function AdminDashboard() {
@@ -222,7 +222,7 @@ export default function AdminDashboard() {
         </div>
         <div className="bg-card rounded-lg border p-3">
           <div className="flex items-center justify-between">
-            <span className="text-muted-foreground text-xs">Projects</span>
+            <span className="text-muted-foreground text-xs">Servers</span>
             <Folder className="text-muted-foreground h-4 w-4" />
           </div>
           <div className="flex items-baseline gap-2">
@@ -418,7 +418,7 @@ export default function AdminDashboard() {
                               variant="outline"
                               className="border-green-200 bg-green-50 text-xs text-green-600"
                             >
-                              Yes ({user.projectCount || 0})
+                              Yes ({user.serverCount || 0})
                             </Badge>
                           ) : (
                             <Badge
@@ -476,7 +476,7 @@ export default function AdminDashboard() {
                           variant="outline"
                           className="border-green-200 bg-green-50 text-xs text-green-600"
                         >
-                          Launched ({user.projectCount || 0})
+                          Launched ({user.serverCount || 0})
                         </Badge>
                       ) : (
                         <Badge

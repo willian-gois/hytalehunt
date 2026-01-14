@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { DatePicker } from "@/components/date-picker"
 import { WinnerCard } from "@/components/winners/winner-card"
 import { getWinnersByDate } from "@/app/actions/home"
-import { getTopCategories } from "@/app/actions/projects"
+import { getTopCategories } from "@/app/actions/servers"
 
 export const metadata = {
   title: "Daily Winners - HytaleHunt",
@@ -84,7 +84,7 @@ export default async function WinnersPage({
                   <div>
                     <h2 className="mb-1 text-lg font-medium">Winners for {formattedDate}</h2>
                     <p className="text-muted-foreground text-sm">
-                      These projects were selected as the top performers of the day.
+                      These servers were selected as the top performers of the day.
                     </p>
                   </div>
                   <div className="self-start sm:self-center">
@@ -122,7 +122,7 @@ export default async function WinnersPage({
               <h3 className="flex items-center gap-2 font-semibold">About Daily Winners</h3>
               <div className="dark:bg-secondary/10 rounded-md border border-zinc-100 bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] dark:border-zinc-800/50">
                 <p className="text-muted-foreground text-sm">
-                  Each day, HytaleHunt automatically ranks the top 3 most upvoted projects that were
+                  Each day, HytaleHunt automatically ranks the top 3 most upvoted servers that were
                   launched.
                 </p>
               </div>
@@ -190,7 +190,7 @@ export default async function WinnersPage({
                   >
                     <span className="text-sm hover:underline">{category.name}</span>
                     <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
-                      {category.count} projects
+                      {category.count} servers
                     </span>
                   </Link>
                 ))}

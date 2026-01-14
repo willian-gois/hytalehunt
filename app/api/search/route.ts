@@ -3,7 +3,7 @@ import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 
 import { db } from "@/drizzle/db"
-import { category, project } from "@/drizzle/db/schema"
+import { category, server } from "@/drizzle/db/schema"
 import { ilike, sql } from "drizzle-orm"
 
 import { API_RATE_LIMITS } from "@/lib/constants"
@@ -16,7 +16,7 @@ export interface SearchResult {
   slug: string | null
   description: string | null
   logoUrl: string | null
-  type: "project" | "category"
+  type: "server" | "category"
 }
 
 // Fonction de recherche avec mise en cache
@@ -31,17 +31,17 @@ const getSearchResults = unstable_cache(
 
     try {
       // Rechercher dans les projets
-      const projects = await db
+      const servers = await db
         .select({
-          id: project.id,
-          name: project.name,
-          slug: project.slug,
-          description: project.description,
-          logoUrl: project.logoUrl,
-          type: sql<"project">`'project'`.as("type"),
+          id: server.id,
+          name: server.name,
+          slug: server.slug,
+          description: server.description,
+          logoUrl: server.logoUrl,
+          type: sql<"server">`'server'`.as("type"),
         })
-        .from(project)
-        .where(ilike(project.name, `%${query}%`))
+        .from(server)
+        .where(ilike(server.name, `%${query}%`))
         .limit(limit)
 
       // Rechercher dans les catégories
@@ -59,13 +59,13 @@ const getSearchResults = unstable_cache(
         .limit(limit)
 
       // Formater les résultats
-      const formattedProjects: SearchResult[] = projects.map((proj) => ({
+      const formattedServers: SearchResult[] = servers.map((proj) => ({
         id: proj.id,
         name: proj.name,
         slug: proj.slug,
         description: proj.description,
         logoUrl: proj.logoUrl,
-        type: "project" as const,
+        type: "server" as const,
       }))
 
       const formattedCategories: SearchResult[] = categories.map((category) => ({
@@ -78,7 +78,7 @@ const getSearchResults = unstable_cache(
       }))
 
       // Combiner et limiter les résultats
-      const combinedResults = [...formattedProjects, ...formattedCategories].slice(0, limit)
+      const combinedResults = [...formattedServers, ...formattedCategories].slice(0, limit)
 
       console.log(`[Search API] Found ${combinedResults.length} results`)
       return combinedResults

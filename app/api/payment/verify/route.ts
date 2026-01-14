@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
 import { db } from "@/drizzle/db"
-import { project } from "@/drizzle/db/schema"
+import { server } from "@/drizzle/db/schema"
 import { eq } from "drizzle-orm"
 import Stripe from "stripe"
 
@@ -26,33 +26,33 @@ export async function GET(request: Request) {
     }
 
     // Récupérer l'ID du projet depuis la session
-    const projectId = session.client_reference_id
+    const serverId = session.client_reference_id
 
-    if (!projectId) {
-      return NextResponse.json({ error: "No project ID found in session" }, { status: 400 })
+    if (!serverId) {
+      return NextResponse.json({ error: "No server ID found in session" }, { status: 400 })
     }
 
     // Vérifier le statut du paiement
     if (session.payment_status === "paid") {
       // Récupérer les informations du projet
-      const [projectData] = await db
+      const [serverData] = await db
         .select({
-          id: project.id,
-          slug: project.slug,
-          launchStatus: project.launchStatus,
+          id: server.id,
+          slug: server.slug,
+          launchStatus: server.launchStatus,
         })
-        .from(project)
-        .where(eq(project.id, projectId))
+        .from(server)
+        .where(eq(server.id, serverId))
 
-      if (!projectData) {
-        return NextResponse.json({ error: "Project not found" }, { status: 404 })
+      if (!serverData) {
+        return NextResponse.json({ error: "Server not found" }, { status: 404 })
       }
 
       return NextResponse.json({
         status: "complete",
-        projectId: projectData.id,
-        projectSlug: projectData.slug,
-        launchStatus: projectData.launchStatus,
+        serverId: serverData.id,
+        serverSlug: serverData.slug,
+        launchStatus: serverData.launchStatus,
       })
     } else if (session.payment_status === "unpaid") {
       return NextResponse.json({ status: "pending" })

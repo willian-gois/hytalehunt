@@ -3,7 +3,7 @@
  */
 
 import { db } from "@/drizzle/db"
-import { launchType as LaunchTypeEnum, project, user } from "@/drizzle/db/schema"
+import { launchType as LaunchTypeEnum, server, user } from "@/drizzle/db/schema"
 import { eq } from "drizzle-orm"
 
 interface DiscordEmbed {
@@ -28,12 +28,12 @@ interface DiscordMessage {
 
 /**
  * Send a Discord notification for a new comment
- * @param projectId ID of the project where the comment was posted
+ * @param serverId ID of the server where the comment was posted
  * @param userId ID of the user who posted the comment
  * @param commentText Text of the comment
  */
 export async function sendDiscordCommentNotification(
-  projectId: string,
+  serverId: string,
   userId: string,
   commentText: string,
 ): Promise<boolean> {
@@ -61,24 +61,24 @@ export async function sendDiscordCommentNotification(
       console.error("Error retrieving user information:", error)
     }
 
-    // Retrieve project information
-    let projectInfo = { slug: projectId, name: "Unknown Project" }
+    // Retrieve server information
+    let serverInfo = { slug: serverId, name: "Unknown Server" }
     try {
-      const projectResult = await db
-        .select({ slug: project.slug, name: project.name })
-        .from(project)
-        .where(eq(project.id, projectId))
+      const serverResult = await db
+        .select({ slug: server.slug, name: server.name })
+        .from(server)
+        .where(eq(server.id, serverId))
         .limit(1)
 
-      if (projectResult.length > 0) {
-        projectInfo = projectResult[0]
+      if (serverResult.length > 0) {
+        serverInfo = serverResult[0]
       }
     } catch (error) {
-      console.error("Error retrieving project information:", error)
+      console.error("Error retrieving server information:", error)
     }
 
-    // Build project URL
-    const projectUrl = `${process.env.NEXT_PUBLIC_URL || ""}/projects/${projectInfo.slug}`
+    // Build server URL
+    const serverUrl = `${process.env.NEXT_PUBLIC_URL || ""}/servers/${serverInfo.slug}`
 
     // Truncate comment text if it's too long
     const truncatedText =
@@ -91,11 +91,11 @@ export async function sendDiscordCommentNotification(
           title: "New Comment",
           color: 0x00ff00, // Green for HytaleHunt
           description: truncatedText,
-          url: projectUrl,
+          url: serverUrl,
           fields: [
             {
-              name: "Project",
-              value: `[${projectInfo.name}](${projectUrl})`,
+              name: "Server",
+              value: `[${serverInfo.name}](${serverUrl})`,
               inline: true,
             },
             {
@@ -135,19 +135,19 @@ export async function sendDiscordCommentNotification(
 
 /**
  * Send a Discord notification for a scheduled launch
- * @param projectName Name of the project being launched
+ * @param serverName Name of the server being launched
  * @param launchDate Date of the launch
  * @param launchType Type of launch (free, premium, premium plus)
- * @param websiteUrl URL of the project website
- * @param projectUrl URL of the project page on HytaleHunt
+ * @param websiteUrl URL of the server website
+ * @param serverUrl URL of the server page on HytaleHunt
  * @param userId ID of the user who submitted the launch notification
  */
 export async function notifyDiscordLaunch(
-  projectName: string,
+  serverName: string,
   launchDate: string,
   launchType: string,
   websiteUrl: string,
-  projectUrl: string,
+  serverUrl: string,
   userId?: string,
 ): Promise<boolean> {
   try {
@@ -206,14 +206,14 @@ export async function notifyDiscordLaunch(
     const message = {
       embeds: [
         {
-          title: "New Project Launch Scheduled",
+          title: "New Server Launch Scheduled",
           color: color,
-          url: projectUrl,
-          description: `New project submitted: ${projectName}`,
+          url: serverUrl,
+          description: `New server submitted: ${serverName}`,
           fields: [
             {
-              name: "Project URL",
-              value: `[Visit Project](${projectUrl})`,
+              name: "Server URL",
+              value: `[Visit Server](${serverUrl})`,
               inline: true,
             },
             {

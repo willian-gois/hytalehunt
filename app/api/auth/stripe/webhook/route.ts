@@ -2,7 +2,7 @@ import { revalidatePath } from "next/cache"
 import { NextResponse } from "next/server"
 
 import { db } from "@/drizzle/db"
-import { launchQuota, launchStatus, launchType, project } from "@/drizzle/db/schema"
+import { launchQuota, launchStatus, launchType, server } from "@/drizzle/db/schema"
 import { eq, sql } from "drizzle-orm"
 import Stripe from "stripe"
 
@@ -28,12 +28,12 @@ export async function POST(request: Request) {
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as Stripe.Checkout.Session
 
-      // Find the project using client_reference_id (which we set as projectId)
-      const projectId = session.client_reference_id
-      if (!projectId) {
-        console.error("No project ID found in session metadata")
+      // Find the server using client_reference_id (which we set as serverId)
+      const serverId = session.client_reference_id
+      if (!serverId) {
+        console.error("No server ID found in session metadata")
         return NextResponse.json(
-          { error: "No project ID found in session metadata" },
+          { error: "No server ID found in session metadata" },
           { status: 400 },
         )
       }
@@ -41,38 +41,38 @@ export async function POST(request: Request) {
       // Vérifier si le paiement a réussi
       if (session.payment_status === "paid") {
         // Récupérer les informations de la chaîne
-        const [projectData] = await db
+        const [serverData] = await db
           .select({
-            id: project.id,
-            launchType: project.launchType,
-            scheduledLaunchDate: project.scheduledLaunchDate,
+            id: server.id,
+            launchType: server.launchType,
+            scheduledLaunchDate: server.scheduledLaunchDate,
           })
-          .from(project)
-          .where(eq(project.id, projectId))
+          .from(server)
+          .where(eq(server.id, serverId))
 
-        if (!projectData) {
-          console.error("Project not found:", projectId)
-          return NextResponse.json({ error: "Project not found" }, { status: 404 })
+        if (!serverData) {
+          console.error("Server not found:", serverId)
+          return NextResponse.json({ error: "Server not found" }, { status: 404 })
         }
 
-        if (!projectData.scheduledLaunchDate) {
-          console.error("Project data incomplete:", projectId)
-          return NextResponse.json({ error: "Project data incomplete" }, { status: 400 })
+        if (!serverData.scheduledLaunchDate) {
+          console.error("Server data incomplete:", serverId)
+          return NextResponse.json({ error: "Server data incomplete" }, { status: 400 })
         }
 
-        // Update the project status to 'scheduled'
+        // Update the server status to 'scheduled'
         await db
-          .update(project)
+          .update(server)
           .set({
             launchStatus: launchStatus.SCHEDULED,
             // Pour Premium Plus, activer la mise en avant sur la page d'accueil
-            featuredOnHomepage: projectData.launchType === launchType.PREMIUM_PLUS,
+            featuredOnHomepage: serverData.launchType === launchType.PREMIUM_PLUS,
             updatedAt: new Date(),
           })
-          .where(eq(project.id, projectId))
+          .where(eq(server.id, serverId))
 
         // Mettre à jour le quota pour cette date
-        const launchDate = projectData.scheduledLaunchDate
+        const launchDate = serverData.scheduledLaunchDate
         const quotaResult = await db
           .select()
           .from(launchQuota)
@@ -85,8 +85,8 @@ export async function POST(request: Request) {
             id: crypto.randomUUID(),
             date: launchDate,
             freeCount: 0,
-            premiumCount: projectData.launchType === launchType.PREMIUM ? 1 : 0,
-            premiumPlusCount: projectData.launchType === launchType.PREMIUM_PLUS ? 1 : 0,
+            premiumCount: serverData.launchType === launchType.PREMIUM ? 1 : 0,
+            premiumPlusCount: serverData.launchType === launchType.PREMIUM_PLUS ? 1 : 0,
             createdAt: new Date(),
             updatedAt: new Date(),
           })
@@ -96,11 +96,11 @@ export async function POST(request: Request) {
             .update(launchQuota)
             .set({
               premiumCount:
-                projectData.launchType === launchType.PREMIUM
+                serverData.launchType === launchType.PREMIUM
                   ? sql`${launchQuota.premiumCount} + 1`
                   : launchQuota.premiumCount,
               premiumPlusCount:
-                projectData.launchType === launchType.PREMIUM_PLUS
+                serverData.launchType === launchType.PREMIUM_PLUS
                   ? sql`${launchQuota.premiumPlusCount} + 1`
                   : launchQuota.premiumPlusCount,
               updatedAt: new Date(),
@@ -108,10 +108,10 @@ export async function POST(request: Request) {
             .where(eq(launchQuota.id, quotaResult[0].id))
         }
 
-        // Revalidate the project page path using the project ID
+        // Revalidate the server page path using the server ID
         try {
-          revalidatePath(`/projects`) // Revalidation plus large pour l'instant
-          console.log(`Revalidated path for project: ${projectId}`)
+          revalidatePath(`/servers`) // Revalidation plus large pour l'instant
+          console.log(`Revalidated path for server: ${serverId}`)
         } catch (revalidateError) {
           console.error("Error revalidating path:", revalidateError)
         }
@@ -120,28 +120,28 @@ export async function POST(request: Request) {
       } else {
         // Si le paiement n'a pas réussi, mettre à jour le statut à PAYMENT_FAILED
         await db
-          .update(project)
+          .update(server)
           .set({
             launchStatus: launchStatus.PAYMENT_FAILED,
             updatedAt: new Date(),
           })
-          .where(eq(project.id, projectId))
+          .where(eq(server.id, serverId))
 
         return NextResponse.json({ success: true })
       }
     } else if (event.type === "checkout.session.expired") {
       const session = event.data.object as Stripe.Checkout.Session
-      const projectId = session.client_reference_id
+      const serverId = session.client_reference_id
 
-      if (projectId) {
+      if (serverId) {
         // Mettre à jour le statut de la chaîne à PAYMENT_FAILED
         await db
-          .update(project)
+          .update(server)
           .set({
             launchStatus: launchStatus.PAYMENT_FAILED,
             updatedAt: new Date(),
           })
-          .where(eq(project.id, projectId))
+          .where(eq(server.id, serverId))
       }
 
       return NextResponse.json({ success: true })

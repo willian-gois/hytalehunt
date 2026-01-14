@@ -88,7 +88,7 @@ export async function POST(req: NextRequest, context: any) {
     const commentParams = params.comment || []
     const session = await commentAuth.getSession(req as any)
 
-    // Check if it's a new comment (only 1 segment = projectId)
+    // Check if it's a new comment (only 1 segment = serverId)
     const isNewComment = commentParams.length === 1
 
     // Only for new comments with authenticated users
@@ -109,8 +109,8 @@ export async function POST(req: NextRequest, context: any) {
         )
       }
 
-      // The project ID is the first segment in commentParams
-      const projectId = commentParams[0]
+      // The server ID is the first segment in commentParams
+      const serverId = commentParams[0]
 
       try {
         // Lire le body de la requête
@@ -124,7 +124,7 @@ export async function POST(req: NextRequest, context: any) {
           const commentText = extractTextFromContent(body.content)
 
           // Send Discord notification asynchronously
-          void sendDiscordCommentNotification(projectId, session.id || "", commentText)
+          void sendDiscordCommentNotification(serverId, session.id || "", commentText)
         }
 
         // Créer une nouvelle requête avec le contenu modifié

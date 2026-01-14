@@ -7,7 +7,7 @@ import { RiGithubFill, RiTwitterXFill } from "@remixicon/react"
 const discoverLinks = [
   { title: "Trending", href: "/trending" },
   { title: "Categories", href: "/categories" },
-  { title: "Submit Project", href: "/projects/submit" },
+  { title: "Submit Server", href: "/servers/submit" },
 ]
 
 const resourcesLinks = [
@@ -53,7 +53,7 @@ export default function FooterSection() {
               © {new Date().getFullYear()} HytaleHunt. All rights reserved.
             </p>
             <p className="text-muted-foreground mb-4 text-sm">
-              Open source project by{" "}
+              Open source server by{" "}
               <Link
                 href="https://x.com/Ericbn09"
                 target="_blank"

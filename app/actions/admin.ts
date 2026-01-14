@@ -3,7 +3,7 @@
 import { headers } from "next/headers"
 
 import { db } from "@/drizzle/db"
-import { category, project, user } from "@/drizzle/db/schema"
+import { category, server, user } from "@/drizzle/db/schema"
 import { addDays, format } from "date-fns"
 import { and, desc, eq, gte, sql } from "drizzle-orm"
 
@@ -29,24 +29,24 @@ export async function getAdminStatsAndUsers() {
   // Get all users, sorted by registration date descending
   const usersData = await db.select().from(user).orderBy(desc(user.createdAt))
 
-  // Get project counts for each user
-  const projectCounts = await db
+  // Get server counts for each user
+  const serverCounts = await db
     .select({
-      userId: project.createdBy,
+      userId: server.createdBy,
       count: sql<number>`count(*)::int`,
     })
-    .from(project)
-    .where(sql`${project.createdBy} IS NOT NULL`)
-    .groupBy(project.createdBy)
+    .from(server)
+    .where(sql`${server.createdBy} IS NOT NULL`)
+    .groupBy(server.createdBy)
 
   // Create a map for quick lookup
-  const projectCountMap = new Map(projectCounts.map((pc) => [pc.userId, pc.count]))
+  const serverCountMap = new Map(serverCounts.map((pc) => [pc.userId, pc.count]))
 
-  // Combine user data with project counts
+  // Combine user data with server counts
   const users = usersData.map((u) => ({
     ...u,
-    hasLaunched: (projectCountMap.get(u.id) || 0) > 0,
-    projectCount: projectCountMap.get(u.id) || 0,
+    hasLaunched: (serverCountMap.get(u.id) || 0) > 0,
+    serverCount: serverCountMap.get(u.id) || 0,
   }))
 
   // Get today's date at midnight UTC
@@ -60,33 +60,33 @@ export async function getAdminStatsAndUsers() {
     .where(gte(user.createdAt, today))
 
   // Get launch stats
-  const totalLaunches = await db.select({ count: sql`count(*)` }).from(project)
+  const totalLaunches = await db.select({ count: sql`count(*)` }).from(server)
   const premiumLaunches = await db
     .select({ count: sql`count(*)` })
-    .from(project)
-    .where(eq(project.launchType, "premium"))
+    .from(server)
+    .where(eq(server.launchType, "premium"))
   const premiumPlusLaunches = await db
     .select({ count: sql`count(*)` })
-    .from(project)
-    .where(eq(project.launchType, "premium_plus"))
+    .from(server)
+    .where(eq(server.launchType, "premium_plus"))
 
   // Get new launches today
   const newLaunchesToday = await db
     .select({ count: sql`count(*)` })
-    .from(project)
-    .where(gte(project.createdAt, today))
+    .from(server)
+    .where(gte(server.createdAt, today))
 
   // Get new premium launches today
   const newPremiumLaunchesToday = await db
     .select({ count: sql`count(*)` })
-    .from(project)
-    .where(and(gte(project.createdAt, today), eq(project.launchType, "premium")))
+    .from(server)
+    .where(and(gte(server.createdAt, today), eq(server.launchType, "premium")))
 
   // Get new premium plus launches today
   const newPremiumPlusLaunchesToday = await db
     .select({ count: sql`count(*)` })
-    .from(project)
-    .where(and(gte(project.createdAt, today), eq(project.launchType, "premium_plus")))
+    .from(server)
+    .where(and(gte(server.createdAt, today), eq(server.launchType, "premium_plus")))
 
   return {
     users,

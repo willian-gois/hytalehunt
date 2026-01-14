@@ -9,7 +9,7 @@ import {
   LaunchStatus,
   launchType,
   LaunchType,
-  project as projectTable,
+  server as serverTable,
 } from "@/drizzle/db/schema"
 import { addDays, format, isBefore, parse } from "date-fns"
 import { and, count as drizzleCount, eq, gte, lt, ne, sql } from "drizzle-orm"
@@ -39,18 +39,18 @@ export async function getLaunchAvailability(date: string): Promise<LaunchAvailab
   // Obtenir le nombre de lancements déjà programmés pour cette date
   const scheduledLaunches = await db
     .select({
-      freeCount: sql<number>`count(*) filter (where ${projectTable.launchType} = ${launchType.FREE})`,
-      premiumCount: sql<number>`count(*) filter (where ${projectTable.launchType} = ${launchType.PREMIUM})`,
-      premiumPlusCount: sql<number>`count(*) filter (where ${projectTable.launchType} = ${launchType.PREMIUM_PLUS})`,
+      freeCount: sql<number>`count(*) filter (where ${serverTable.launchType} = ${launchType.FREE})`,
+      premiumCount: sql<number>`count(*) filter (where ${serverTable.launchType} = ${launchType.PREMIUM})`,
+      premiumPlusCount: sql<number>`count(*) filter (where ${serverTable.launchType} = ${launchType.PREMIUM_PLUS})`,
       totalCount: sql<number>`count(*)`,
     })
-    .from(projectTable)
+    .from(serverTable)
     .where(
       and(
-        gte(projectTable.scheduledLaunchDate, parsedDate),
-        lt(projectTable.scheduledLaunchDate, addDays(parsedDate, 1)),
+        gte(serverTable.scheduledLaunchDate, parsedDate),
+        lt(serverTable.scheduledLaunchDate, addDays(parsedDate, 1)),
         // Ne compter que les chaînes programmées (pas celles en attente de paiement)
-        eq(projectTable.launchStatus, launchStatus.SCHEDULED),
+        eq(serverTable.launchStatus, launchStatus.SCHEDULED),
       ),
     )
 
@@ -136,16 +136,16 @@ export async function checkUserLaunchLimit(
   nextDayStart.setUTCDate(dateStart.getUTCDate() + 1)
 
   const userLaunchCountResult = await db
-    .select({ value: drizzleCount(projectTable.id) })
-    .from(projectTable)
+    .select({ value: drizzleCount(serverTable.id) })
+    .from(serverTable)
     .where(
       and(
-        eq(projectTable.createdBy, userId),
-        gte(projectTable.scheduledLaunchDate, dateStart), // Utiliser dateStart UTC
-        lt(projectTable.scheduledLaunchDate, nextDayStart), // Utiliser nextDayStart UTC
+        eq(serverTable.createdBy, userId),
+        gte(serverTable.scheduledLaunchDate, dateStart), // Utiliser dateStart UTC
+        lt(serverTable.scheduledLaunchDate, nextDayStart), // Utiliser nextDayStart UTC
         // Exclure les projets dont le paiement est en attente ou a échoué
-        ne(projectTable.launchStatus, launchStatus.PAYMENT_FAILED),
-        ne(projectTable.launchStatus, launchStatus.PAYMENT_PENDING),
+        ne(serverTable.launchStatus, launchStatus.PAYMENT_FAILED),
+        ne(serverTable.launchStatus, launchStatus.PAYMENT_PENDING),
       ),
     )
 
@@ -158,7 +158,7 @@ export async function checkUserLaunchLimit(
 
 // Fonction pour planifier un lancement
 export async function scheduleLaunch(
-  projectId: string,
+  serverId: string,
   date: string,
   launchTypeValue: (typeof LAUNCH_TYPES)[keyof typeof LAUNCH_TYPES],
   userId: string | undefined,
@@ -230,7 +230,7 @@ export async function scheduleLaunch(
     )
     if (!userLaunchLimitCheck.allowed) {
       throw new Error(
-        `You have reached your daily launch limit of ${userLaunchLimitCheck.limit} project(s) for this date.`,
+        `You have reached your daily launch limit of ${userLaunchLimitCheck.limit} server(s) for this date.`,
       )
     }
 
@@ -271,7 +271,7 @@ export async function scheduleLaunch(
 
     // Mettre à jour le projet avec la date de lancement et le type
     const updateResult = await db
-      .update(projectTable)
+      .update(serverTable)
       .set({
         scheduledLaunchDate: launchDate, // Utiliser la date UTC correcte
         launchType: launchTypeValue as LaunchType,
@@ -279,11 +279,11 @@ export async function scheduleLaunch(
         featuredOnHomepage: launchTypeValue === LAUNCH_TYPES.PREMIUM_PLUS,
         updatedAt: new Date(),
       })
-      .where(eq(projectTable.id, projectId))
+      .where(eq(serverTable.id, serverId))
 
     // Vérifier si la mise à jour a réussi
     if (!updateResult) {
-      throw new Error("Failed to update project schedule")
+      throw new Error("Failed to update server schedule")
     }
 
     // Ne mettre à jour les quotas que pour les lancements gratuits
@@ -322,7 +322,7 @@ export async function scheduleLaunch(
     // Revalider les chemins
     revalidatePath("/")
     revalidatePath("/dashboard")
-    revalidatePath(`/projects/${projectId}`)
+    revalidatePath(`/servers/${serverId}`)
 
     return true
   } catch (error) {
@@ -332,7 +332,7 @@ export async function scheduleLaunch(
 }
 
 // Mettre à jour le statut des chaînes dont la date de lancement est aujourd'hui
-export async function updateProjectStatusToOngoing() {
+export async function updateServerStatusToOngoing() {
   const todayStart = new Date()
   // Utiliser l'heure de lancement définie dans les constantes
   todayStart.setUTCHours(LAUNCH_SETTINGS.LAUNCH_HOUR_UTC, 0, 0, 0)
@@ -340,25 +340,25 @@ export async function updateProjectStatusToOngoing() {
   // Trouver les chaînes programmées pour aujourd'hui
   // Ne mettre à jour que les chaînes avec le statut SCHEDULED (pas PAYMENT_PENDING)
   const result = await db
-    .update(projectTable)
+    .update(serverTable)
     .set({
       launchStatus: launchStatus.ONGOING,
       updatedAt: new Date(),
     })
     .where(
       and(
-        eq(projectTable.launchStatus, launchStatus.SCHEDULED),
-        gte(projectTable.scheduledLaunchDate, todayStart),
-        lt(projectTable.scheduledLaunchDate, addDays(todayStart, 1)),
+        eq(serverTable.launchStatus, launchStatus.SCHEDULED),
+        gte(serverTable.scheduledLaunchDate, todayStart),
+        lt(serverTable.scheduledLaunchDate, addDays(todayStart, 1)),
       ),
     )
 
-  console.log(`Updated ${result.rowCount} projects to ONGOING`)
+  console.log(`Updated ${result.rowCount} servers to ONGOING`)
   return { success: true, updatedCount: result.rowCount }
 }
 
 // Mettre à jour le statut des chaînes dont la date de lancement était hier
-export async function updateProjectStatusToLaunched() {
+export async function updateServerStatusToLaunched() {
   const today = new Date()
   const yesterdayStart = new Date(today)
   yesterdayStart.setDate(yesterdayStart.getDate() - 1)
@@ -368,19 +368,19 @@ export async function updateProjectStatusToLaunched() {
   // Trouver les chaînes en cours de lancement depuis hier
   // Ne mettre à jour que les chaînes avec le statut ONGOING
   const result = await db
-    .update(projectTable)
+    .update(serverTable)
     .set({
       launchStatus: launchStatus.LAUNCHED,
       updatedAt: new Date(),
     })
     .where(
       and(
-        eq(projectTable.launchStatus, launchStatus.ONGOING),
-        gte(projectTable.scheduledLaunchDate, yesterdayStart),
-        lt(projectTable.scheduledLaunchDate, addDays(yesterdayStart, 1)),
+        eq(serverTable.launchStatus, launchStatus.ONGOING),
+        gte(serverTable.scheduledLaunchDate, yesterdayStart),
+        lt(serverTable.scheduledLaunchDate, addDays(yesterdayStart, 1)),
       ),
     )
 
-  console.log(`Updated ${result.rowCount} projects to LAUNCHED`)
+  console.log(`Updated ${result.rowCount} servers to LAUNCHED`)
   return { success: true, updatedCount: result.rowCount }
 }

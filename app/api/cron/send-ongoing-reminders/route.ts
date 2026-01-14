@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
 import { db } from "@/drizzle/db"
-import { launchStatus, project, user } from "@/drizzle/db/schema"
+import { launchStatus, server, user } from "@/drizzle/db/schema"
 import { endOfDay, startOfDay } from "date-fns"
 import { and, eq, gte, lt } from "drizzle-orm"
 
@@ -24,54 +24,54 @@ export async function GET(request: NextRequest) {
 
     console.log(`[${now.toISOString()}] Starting cron: Send Ongoing Launch Reminders`)
     console.log(
-      `Looking for projects ongoing from: ${today.toISOString()} to ${endOfToday.toISOString()}`,
+      `Looking for servers ongoing from: ${today.toISOString()} to ${endOfToday.toISOString()}`,
     )
 
-    const ongoingProjects = await db
+    const ongoingServers = await db
       .select({
-        projectId: project.id,
-        projectName: project.name,
-        projectSlug: project.slug,
-        projectCreatorId: project.createdBy,
+        serverId: server.id,
+        serverName: server.name,
+        serverSlug: server.slug,
+        serverCreatorId: server.createdBy,
       })
-      .from(project)
+      .from(server)
       .where(
         and(
-          eq(project.launchStatus, launchStatus.ONGOING),
-          gte(project.scheduledLaunchDate, today),
-          lt(project.scheduledLaunchDate, endOfToday),
+          eq(server.launchStatus, launchStatus.ONGOING),
+          gte(server.scheduledLaunchDate, today),
+          lt(server.scheduledLaunchDate, endOfToday),
         ),
       )
       .execute()
 
-    if (ongoingProjects.length === 0) {
-      console.log("No ongoing projects found to remind.")
-      return NextResponse.json({ message: "No ongoing projects to remind." })
+    if (ongoingServers.length === 0) {
+      console.log("No ongoing servers found to remind.")
+      return NextResponse.json({ message: "No ongoing servers to remind." })
     }
 
-    console.log(`Found ${ongoingProjects.length} ongoing projects to remind.`)
+    console.log(`Found ${ongoingServers.length} ongoing servers to remind.`)
     let emailsSentCount = 0
     let emailsFailedCount = 0
 
-    for (const proj of ongoingProjects) {
-      if (!proj.projectCreatorId) {
-        console.warn(`Skipping project ${proj.projectName} due to missing creator ID.`)
+    for (const proj of ongoingServers) {
+      if (!proj.serverCreatorId) {
+        console.warn(`Skipping server ${proj.serverName} due to missing creator ID.`)
         continue
       }
 
-      const projectCreator = await db
+      const serverCreator = await db
         .select({
           email: user.email,
           name: user.name,
         })
         .from(user)
-        .where(eq(user.id, proj.projectCreatorId))
+        .where(eq(user.id, proj.serverCreatorId))
         .limit(1)
         .then((res) => res[0])
 
-      if (!projectCreator || !projectCreator.email) {
+      if (!serverCreator || !serverCreator.email) {
         console.warn(
-          `User not found or email missing for creator ID ${proj.projectCreatorId} of project ${proj.projectName}.`,
+          `User not found or email missing for creator ID ${proj.serverCreatorId} of server ${proj.serverName}.`,
         )
         emailsFailedCount++
         continue
@@ -79,19 +79,19 @@ export async function GET(request: NextRequest) {
 
       try {
         console.log(
-          `Sending launch reminder email to ${projectCreator.email} for project ${proj.projectName}`,
+          `Sending launch reminder email to ${serverCreator.email} for server ${proj.serverName}`,
         )
 
         await sendLaunchReminderEmail({
-          user: { email: projectCreator.email, name: projectCreator.name },
-          projectName: proj.projectName,
-          projectSlug: proj.projectSlug,
+          user: { email: serverCreator.email, name: serverCreator.name },
+          serverName: proj.serverName,
+          serverSlug: proj.serverSlug,
         })
         emailsSentCount++
       } catch (error) {
         emailsFailedCount++
         console.error(
-          `Failed to send launch reminder email for project ${proj.projectName} to ${projectCreator.email}:`,
+          `Failed to send launch reminder email for server ${proj.serverName} to ${serverCreator.email}:`,
           error,
         )
       }
@@ -104,7 +104,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       message: "Launch reminder process completed.",
       details: {
-        projectsFound: ongoingProjects.length,
+        serversFound: ongoingServers.length,
         emailsSent: emailsSentCount,
         emailsFailed: emailsFailedCount,
       },

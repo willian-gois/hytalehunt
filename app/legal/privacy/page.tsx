@@ -38,7 +38,7 @@ export default function PrivacyPolicyPage() {
               <ul className="mb-3 list-disc space-y-1 pl-6">
                 <li>Account information (name, email address, password)</li>
                 <li>Profile information (username, photo)</li>
-                <li>Content you publish (project submissions, comments)</li>
+                <li>Content you publish (server submissions, comments)</li>
                 <li>Communications with us</li>
               </ul>
 
@@ -160,7 +160,7 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2 className="mb-3 text-xl font-semibold">11. Open Source Transparency</h2>
               <p className="mb-3">
-                As an open source project, HytaleHunt is committed to transparency in how we handle
+                As an open source server, HytaleHunt is committed to transparency in how we handle
                 data. Our source code is publicly available on{" "}
                 <a
                   href="https://github.com/drdruide/hytalehunt"
