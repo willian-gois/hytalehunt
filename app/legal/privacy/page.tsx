@@ -5,6 +5,8 @@ export const metadata = {
   description: "Privacy Policy for HytaleHunt platform",
 }
 
+const LAST_UPDATED = "2025-01-13T00:00:00"
+
 export default function PrivacyPolicyPage() {
   return (
     <div className="bg-secondary/20 py-8 sm:py-12">
@@ -13,7 +15,7 @@ export default function PrivacyPolicyPage() {
           <h1 className="mb-6 text-2xl font-bold sm:text-3xl">Privacy Policy</h1>
           <p className="text-muted-foreground mb-6">
             Last updated:{" "}
-            {new Date().toLocaleDateString("en-US", {
+            {new Date(LAST_UPDATED).toLocaleDateString("en-US", {
               month: "long",
               day: "numeric",
               year: "numeric",
@@ -154,28 +156,6 @@ export default function PrivacyPolicyPage() {
                 >
                   {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
                 </a>
-              </p>
-            </section>
-
-            <section>
-              <h2 className="mb-3 text-xl font-semibold">11. Open Source Transparency</h2>
-              <p className="mb-3">
-                As an open source server, HytaleHunt is committed to transparency in how we handle
-                data. Our source code is publicly available on{" "}
-                <a
-                  href="https://github.com/drdruide/hytalehunt"
-                  className="text-primary hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-                , allowing you to review how we process and protect your information.
-              </p>
-              <p className="mb-3">
-                We encourage community contributions and feedback on our privacy practices. If you
-                have suggestions for improving our data handling, please open an issue or submit a
-                pull request on our GitHub repository.
               </p>
             </section>
           </div>

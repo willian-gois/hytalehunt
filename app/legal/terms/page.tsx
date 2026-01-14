@@ -7,6 +7,8 @@ export const metadata = {
   description: "Terms of Service for HytaleHunt platform",
 }
 
+const LAST_UPDATED = "2025-01-13T00:00:00"
+
 export default function TermsOfServicePage() {
   return (
     <div className="bg-secondary/20 py-8 sm:py-12">
@@ -15,7 +17,7 @@ export default function TermsOfServicePage() {
           <h1 className="mb-6 text-2xl font-bold sm:text-3xl">Terms of Service</h1>
           <p className="text-muted-foreground mb-6">
             Last updated:{" "}
-            {new Date().toLocaleDateString("en-US", {
+            {new Date(LAST_UPDATED).toLocaleDateString("en-US", {
               month: "long",
               day: "numeric",
               year: "numeric",
@@ -76,71 +78,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-semibold">4. Intellectual Property</h2>
-              <p className="mb-3">
-                HytaleHunt is an open source server licensed under the HytaleHunt License. The
-                source code is available on{" "}
-                <a
-                  href="https://github.com/drdruide/hytalehunt"
-                  className="text-primary hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-                .
-              </p>
-              <p className="mb-3">
-                While the core platform is open source, certain features or services may be
-                proprietary. The HytaleHunt License allows you to:
-              </p>
-              <ul className="mb-3 list-disc space-y-1 pl-6">
-                <li>Use, copy, and modify the software</li>
-                <li>Distribute the software</li>
-                <li>Sublicense the software</li>
-              </ul>
-              <p className="mb-3">
-                <strong>Attribution Requirements:</strong> You must include the original copyright
-                notice and license in any substantial portions of the software. Additionally, if you
-                use this software in a web application or online service, you must display a visible
-                dofollow link to "https://hytalehunt.com" on ALL pages of your website (preferably
-                in the footer).
-              </p>
-              <p className="mb-3">
-                <strong>MANDATORY Visual Badge:</strong> You MUST use one of our official "Powered
-                by HytaleHunt" visual badges. Text-only attribution is NOT sufficient:
-              </p>
-              <div className="mt-2 flex flex-wrap items-center justify-center gap-4 p-6">
-                <img
-                  src="/images/badges/powered-by-light.svg"
-                  alt="Powered by HytaleHunt - Light Theme"
-                  className="h-11 w-auto"
-                />
-                <img
-                  src="/images/badges/powered-by-dark.svg"
-                  alt="Powered by HytaleHunt - Dark Theme"
-                  className="h-11 w-auto"
-                />
-              </div>
-              <p className="mb-3 text-sm text-yellow-700 dark:text-yellow-300">
-                <strong>⚠️ Important:</strong> The badge must be clearly visible (minimum 150x44
-                pixels), present on ALL pages, and not hidden or obfuscated.
-              </p>
-              <p className="mb-3">
-                <strong>📋 Get Implementation Code:</strong> Visit our{" "}
-                <Link href="/legal/badges" className="text-primary font-medium hover:underline">
-                  Attribution Badges page
-                </Link>{" "}
-                to copy the ready-to-use HTML/React code for these badges.
-              </p>
-              <p className="mb-3">
-                User-submitted content remains the property of the respective users, who grant
-                HytaleHunt a license to display and use that content on our platform.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="mb-3 text-xl font-semibold">5. Third-Party Content</h2>
+              <h2 className="mb-3 text-xl font-semibold">4. Third-Party Content</h2>
               <p className="mb-3">
                 HytaleHunt may contain links to third-party websites or services, including servers.
                 We're not responsible for the content, policies, or practices of these third
@@ -152,7 +90,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-semibold">6. Termination</h2>
+              <h2 className="mb-3 text-xl font-semibold">5. Termination</h2>
               <p className="mb-3">
                 We can suspend or terminate your access to HytaleHunt at any time for any reason,
                 particularly if you violate these terms.
@@ -164,7 +102,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-semibold">7. Disclaimers</h2>
+              <h2 className="mb-3 text-xl font-semibold">6. Disclaimers</h2>
               <p className="mb-3">
                 HytaleHunt is provided "as is" without warranties of any kind. We don't guarantee
                 that the service will be uninterrupted, secure, or error-free.
@@ -176,7 +114,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-semibold">8. Limitation of Liability</h2>
+              <h2 className="mb-3 text-xl font-semibold">7. Limitation of Liability</h2>
               <p className="mb-3">
                 To the extent permitted by law, HytaleHunt and its team will not be liable for any
                 indirect, incidental, special, or consequential damages resulting from your use of
@@ -185,7 +123,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-semibold">9. Changes to These Terms</h2>
+              <h2 className="mb-3 text-xl font-semibold">8. Changes to These Terms</h2>
               <p className="mb-3">
                 We may update these terms from time to time. We'll notify you of significant
                 changes, but it's your responsibility to review these terms periodically.
@@ -196,7 +134,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-semibold">10. Contact Us</h2>
+              <h2 className="mb-3 text-xl font-semibold">9. Contact Us</h2>
               <p className="mb-3">If you have questions about these terms, please contact us at:</p>
               <p className="mb-3">
                 <a
