@@ -12,6 +12,7 @@
     "lint": "next lint",
     "prepare": "npx simple-git-hooks",
     "start": "next start",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/auth/stripe/webhook",
     "update-launches": "bun ./scripts/update-launches.ts"
   },
   "simple-git-hooks": {
