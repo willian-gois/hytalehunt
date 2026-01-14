@@ -22,13 +22,13 @@ const fontHeading = FontHeading({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
-  title: "HytaleHunt - Discover the Best Tech Products",
+  title: "HytaleHunt - Discover the Best Hytale Servers",
   description:
-    "HytaleHunt is a platform to discover and upvote the best tech products. Find top products launching daily.",
+    "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
   openGraph: {
-    title: "HytaleHunt - Discover the Best Tech Products",
+    title: "HytaleHunt - Discover the Best Hytale Servers",
     description:
-      "HytaleHunt is a platform to discover and upvote the best tech products. Find top products launching daily.",
+      "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
     url: process.env.NEXT_PUBLIC_URL,
     siteName: "HytaleHunt",
     images: [
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: "og.png",
         width: 1200,
         height: 630,
-        alt: "HytaleHunt - Discover the Best Tech Products",
+        alt: "HytaleHunt - Discover the Best Hytale Servers",
       },
     ],
     locale: "en_US",
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "HytaleHunt - Discover the Best Tech Products",
+    title: "HytaleHunt - Discover the Best Hytale Servers",
     description:
-      "HytaleHunt is a platform to discover and upvote the best tech products. Find top products launching daily.",
+      "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
     images: ["og.png"],
   },
 }

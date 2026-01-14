@@ -202,7 +202,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                     <RiSearchLine className="text-primary mt-0.5 h-3.5 w-3.5 flex-shrink-0" />
                     <div>
                       <div className="text-foreground text-xs font-medium">
-                        Rank on Google for &ldquo;[product] review&rdquo;
+                        Rank on Google for &ldquo;[Server] review&rdquo;
                       </div>
                     </div>
                   </div>
@@ -265,7 +265,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                             <div className="min-w-0">
                               <div className="text-sm font-medium">SEO Article</div>
                               <div className="text-muted-foreground text-xs">
-                                Custom &ldquo;[Product] review&rdquo; content
+                                Custom &ldquo;[Server] review&rdquo; content
                               </div>
                             </div>
                           </div>
@@ -324,8 +324,8 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                         <div className="flex gap-2">
                           <RiInformationLine className="text-muted-foreground mt-0.5 h-4 w-4 flex-shrink-0" />
                           <div className="text-sm">
-                            <span className="font-medium">Requirement:</span> Free product access
-                            for testing
+                            <span className="font-medium">Requirement:</span> Free access for
+                            testing
                           </div>
                         </div>
                       </div>

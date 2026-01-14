@@ -179,7 +179,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     Want a review like this?
                   </h2>
                   <p className="text-muted-foreground text-xs">
-                    Boost your product&apos;s visibility and credibility
+                    Boost your server&apos;s visibility and credibility
                   </p>
                 </div>
 
@@ -188,7 +188,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <RiSearchLine className="text-primary mt-0.5 h-3.5 w-3.5 flex-shrink-0" />
                     <div>
                       <div className="text-foreground text-xs font-medium">
-                        Rank on Google for &ldquo;[product] review&rdquo;
+                        Rank on Google for &ldquo;[server] review&rdquo;
                       </div>
                     </div>
                   </div>
@@ -251,7 +251,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                             <div className="min-w-0">
                               <div className="text-sm font-medium">SEO Article</div>
                               <div className="text-muted-foreground text-xs">
-                                Custom &ldquo;[Product] review&rdquo; content
+                                Custom &ldquo;[Server] review&rdquo; content
                               </div>
                             </div>
                           </div>
@@ -310,8 +310,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                         <div className="flex gap-2">
                           <RiInformationLine className="text-muted-foreground mt-0.5 h-4 w-4 flex-shrink-0" />
                           <div className="text-sm">
-                            <span className="font-medium">Requirement:</span> Free product access
-                            for testing
+                            <span className="font-medium">Requirement:</span> Free access for
+                            testing
                           </div>
                         </div>
                       </div>

@@ -10,13 +10,13 @@ import { Calendar, Clock } from "lucide-react"
 export const metadata: Metadata = {
   title: "Blog | HytaleHunt - Insights & Resources",
   description:
-    "Discover insights, tutorials, and resources to help you build and launch successful products.",
-  keywords: "blog, insights, tutorials, product launch, entrepreneurship, technology, startup",
+    "Discover insights, tutorials, and resources to help you build and launch successful Hytale servers.",
+  keywords: "blog, insights, tutorials, server launch, technology, hytale, servers",
   authors: [{ name: "HytaleHunt Team" }],
   openGraph: {
     title: "Blog | HytaleHunt - Insights & Resources",
     description:
-      "Discover insights, tutorials, and resources to help you build and launch successful products.",
+      "Discover insights, tutorials, and resources to help you build and launch successful Hytale servers.",
     type: "website",
     url: "/blog",
     siteName: "HytaleHunt",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Blog | HytaleHunt - Insights & Resources",
     description:
-      "Discover insights, tutorials, and resources to help you build and launch successful products.",
+      "Discover insights, tutorials, and resources to help you build and launch successful Hytale servers.",
     images: ["/og-blog.png"],
   },
 }
@@ -73,7 +73,7 @@ export default async function BlogPage() {
           <h1 className="text-foreground mb-4 text-2xl font-bold md:text-3xl">Blog</h1>
           <p className="text-muted-foreground text-md mx-auto max-w-4xl md:text-lg">
             Discover insights, tutorials, and resources to help you build and launch successful
-            products.
+            Hytale servers.
           </p>
         </div>
 
@@ -90,7 +90,7 @@ export default async function BlogPage() {
               href="/reviews"
               className="bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground rounded-full px-6 py-2 text-sm font-medium transition-colors"
             >
-              Product Reviews
+              Server Reviews
             </Link>
           </div>
         </div>

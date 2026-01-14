@@ -27,8 +27,8 @@ export default async function SponsorsPage() {
   const generalSponsorshipBenefits = [
     "Featured on our homepage sidebar.",
     "Visible on every server page.",
-    "Reach a dedicated audience of developers and tech enthusiasts.",
-    "Direct link to your website.",
+    "Reach a dedicated audience of Hytale players.",
+    "Direct link to your website or page.",
   ]
 
   const faqItems = [

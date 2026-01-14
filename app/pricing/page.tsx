@@ -277,7 +277,7 @@ export default async function PricingPage() {
                             <div className="min-w-0">
                               <div className="text-sm font-medium">SEO Article</div>
                               <div className="text-muted-foreground text-xs">
-                                Custom &ldquo;[Product] review&rdquo; content
+                                Custom &ldquo;[Server] review&rdquo; content
                               </div>
                             </div>
                           </div>
@@ -336,8 +336,8 @@ export default async function PricingPage() {
                         <div className="flex gap-2">
                           <RiInformationLine className="text-muted-foreground mt-0.5 h-4 w-4 flex-shrink-0" />
                           <div className="text-sm">
-                            <span className="font-medium">Requirement:</span> Free product access
-                            for testing
+                            <span className="font-medium">Requirement:</span> Free access for
+                            testing
                           </div>
                         </div>
                       </div>
@@ -366,7 +366,7 @@ export default async function PricingPage() {
                       <p className="text-muted-foreground text-xs">
                         Custom article to rank for{" "}
                         <span className="text-primary/90 font-semibold">
-                          &ldquo;[Your Product] review&rdquo;
+                          &ldquo;[Your Server] review&rdquo;
                         </span>{" "}
                         keywords
                       </p>
