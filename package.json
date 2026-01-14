@@ -12,7 +12,7 @@
     "lint": "next lint",
     "prepare": "npx simple-git-hooks",
     "start": "next start",
-    "update-launches": "bash ./scripts/update-launches.sh"
+    "update-launches": "bun ./scripts/update-launches.ts"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged --verbose",
