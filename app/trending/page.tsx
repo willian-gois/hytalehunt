@@ -28,7 +28,7 @@ interface ServerSummary {
 
 export const metadata = {
   title: "Trending - HytaleHunt",
-  description: "Discover trending tech products on HytaleHunt",
+  description: "Discover trending Hytale servers on HytaleHunt",
 }
 
 // Composant Skeleton principal

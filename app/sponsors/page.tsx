@@ -40,7 +40,7 @@ export default async function SponsorsPage() {
     {
       question: "What kind of products or services can I promote?",
       answer:
-        "We welcome sponsorships for products and services relevant to developers, tech enthusiasts, startups, and SaaS businesses. We reserve the right to refuse any sponsorship that is not a good fit for our audience.",
+        "We welcome sponsorships for products and services relevant to Hytale servers and players. We reserve the right to refuse any sponsorship that is not a good fit for our audience.",
     },
 
     {

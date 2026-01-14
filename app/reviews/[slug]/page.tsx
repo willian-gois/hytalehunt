@@ -53,7 +53,7 @@ export async function generateMetadata({
     description: metaDescription || description,
     keywords: "review, product review, analysis, evaluation",
     authors: [{ name: "HytaleHunt Team" }],
-    category: "Technology",
+    category: "Hytale-Servers",
     openGraph: {
       title: metaTitle || `${title} | HytaleHunt`,
       description: metaDescription || description,

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Blog | HytaleHunt - Insights & Resources",
   description:
     "Discover insights, tutorials, and resources to help you build and launch successful Hytale servers.",
-  keywords: "blog, insights, tutorials, server launch, technology, hytale, servers",
+  keywords: "blog, insights, tutorials, server launch, hytale, servers",
   authors: [{ name: "HytaleHunt Team" }],
   openGraph: {
     title: "Blog | HytaleHunt - Insights & Resources",

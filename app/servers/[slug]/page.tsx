@@ -395,36 +395,6 @@ export default async function ServerPage({ params }: ServerPageProps) {
                 </div>
               )}
 
-              {/* Platform */}
-              {serverData.platforms && serverData.platforms.length > 0 && (
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
-                      Platform
-                    </span>
-                    <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
-                    <span className="text-foreground text-sm font-medium capitalize">
-                      {serverData.platforms[0]}
-                    </span>
-                  </div>
-                </div>
-              )}
-
-              {/* Pricing */}
-              {serverData.pricing && (
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
-                      Pricing
-                    </span>
-                    <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
-                    <span className="text-foreground text-sm font-medium capitalize">
-                      {serverData.pricing}
-                    </span>
-                  </div>
-                </div>
-              )}
-
               {/* Social Links */}
               {(serverData.discordUrl || serverData.twitterUrl) && (
                 <div className="space-y-3">
@@ -468,12 +438,12 @@ export default async function ServerPage({ params }: ServerPageProps) {
                     Mods
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {serverData.mods.slice(0, 6).map((tech) => (
+                    {serverData.mods.slice(0, 6).map((mods) => (
                       <span
-                        key={tech}
+                        key={mods}
                         className="bg-muted text-muted-foreground inline-flex items-center rounded-md px-2 py-1 text-xs"
                       >
-                        #{tech}
+                        #{mods}
                       </span>
                     ))}
                   </div>

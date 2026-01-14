@@ -108,7 +108,7 @@ export default async function Dashboard() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="font-heading text-xl font-semibold">My Servers</CardTitle>
                 </div>
-                <CardDescription>Manage your submitted tech servers</CardDescription>
+                <CardDescription>Manage your submitted servers</CardDescription>
               </CardHeader>
               <CardContent className="pb-1">
                 <Tabs defaultValue="active">

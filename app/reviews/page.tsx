@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Product Reviews | HytaleHunt - In-Depth Product Analysis",
   description:
     "Discover comprehensive product reviews and in-depth analysis of the latest tools and platforms to help you make informed decisions.",
-  keywords: "product reviews, analysis, evaluation, tools, platforms, technology",
+  keywords: "product reviews, analysis, evaluation, hytale, servers",
   authors: [{ name: "HytaleHunt Team" }],
   openGraph: {
     title: "Product Reviews | HytaleHunt - In-Depth Product Analysis",

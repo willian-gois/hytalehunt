@@ -51,9 +51,9 @@ export async function generateMetadata({
   return {
     title: metaTitle || `${title} | HytaleHunt`,
     description: metaDescription || description,
-    keywords: "blog, insights, tutorials, product launch, entrepreneurship, technology, startup",
+    keywords: "blog, insights, tutorials, server launch, hytale, servers",
     authors: [{ name: article[0].author || "HytaleHunt Team" }],
-    category: "Technology",
+    category: "hytale-servers",
     openGraph: {
       title: metaTitle || `${title} | HytaleHunt`,
       description: metaDescription || description,

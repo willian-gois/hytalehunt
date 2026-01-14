@@ -16,7 +16,7 @@ export function WelcomeBanner() {
           <div>
             <h2 className="text-foreground mb-1 text-lg font-semibold">Welcome to HytaleHunt!</h2>
             <p className="text-muted-foreground mb-3 max-w-xl text-sm">
-              Discover and support the best new tech products. Explore daily launches and upvote
+              Discover and support the best new Hytale servers. Explore daily launches and upvote
               your favorite servers.
             </p>
             <Button onClick={() => router.push("/servers/submit")} variant="outline">

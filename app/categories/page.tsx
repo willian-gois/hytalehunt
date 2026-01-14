@@ -21,7 +21,7 @@ import {
 
 export const metadata = {
   title: "Categories - HytaleHunt",
-  description: "Browse tech products by category on HytaleHunt",
+  description: "Browse Hytale servers by category on HytaleHunt",
 }
 
 // Composant Skeleton pour le chargement des chaînes

@@ -120,7 +120,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
   const tagInputId = useId()
 
   const [modsTags, setModsTags] = useState<Tag[]>([])
-  const [activeTechTagIndex, setActiveTechTagIndex] = useState<number | null>(null)
+  const [activeModTagIndex, setActiveModTagIndex] = useState<number | null>(null)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -176,9 +176,9 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
   }, [currentStep, loadAvailableDates])
 
   useEffect(() => {
-    const tagsFromFormData = formData.mods.map((tech, index) => ({
-      id: `${index}-${tech}`,
-      text: tech,
+    const tagsFromFormData = formData.mods.map((mods, index) => ({
+      id: `${index}-${mods}`,
+      text: mods,
     }))
     if (JSON.stringify(tagsFromFormData) !== JSON.stringify(modsTags)) {
       setModsTags(tagsFromFormData)
@@ -186,9 +186,9 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
   }, [formData.mods])
 
   useEffect(() => {
-    const techStringArray = modsTags.map((tag) => tag.text)
-    if (JSON.stringify(techStringArray) !== JSON.stringify(formData.mods)) {
-      setFormData((prev) => ({ ...prev, mods: techStringArray }))
+    const modsStringArray = modsTags.map((tag) => tag.text)
+    if (JSON.stringify(modsStringArray) !== JSON.stringify(formData.mods)) {
+      setFormData((prev) => ({ ...prev, mods: modsStringArray }))
     }
   }, [modsTags])
 
@@ -311,7 +311,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
       }
 
       if (formData.mods.length > 5) {
-        setError("You can add a maximum of 5 technologies.")
+        setError("You can add a maximum of 5 mods.")
         return
       }
     }
@@ -848,8 +848,8 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                       "absolute -inset-y-px -end-px p-0 rounded-e-md flex size-7 transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] text-muted-foreground/80 hover:text-foreground",
                   },
                 }}
-                activeTagIndex={activeTechTagIndex}
-                setActiveTagIndex={setActiveTechTagIndex}
+                activeTagIndex={activeModTagIndex}
+                setActiveTagIndex={setActiveModTagIndex}
               />
               <p className="text-muted-foreground mt-1 text-xs">
                 Enter up to 5 mods used, press Enter or comma to add a tag.
@@ -1302,9 +1302,9 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                     <div>
                       <strong>Mods:</strong>
                       <div className="mt-1 flex flex-wrap gap-2">
-                        {formData.mods.map((tech) => (
-                          <Badge key={tech} variant="outline">
-                            {tech}
+                        {formData.mods.map((mods) => (
+                          <Badge key={mods} variant="outline">
+                            {mods}
                           </Badge>
                         ))}
                       </div>
