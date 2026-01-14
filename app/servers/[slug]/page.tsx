@@ -7,7 +7,6 @@ import { notFound } from "next/navigation"
 
 import {
   RiDiscordFill,
-  RiGithubFill,
   RiGlobalLine,
   RiHashtag,
   RiTwitterFill,

@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { RiGithubFill, RiGoogleFill } from "@remixicon/react"
+import { RiGoogleFill } from "@remixicon/react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -23,7 +23,6 @@ export function SignUpForm() {
   const [loadingButtons, setLoadingButtons] = useState({
     google: false,
     email: false,
-    github: false,
   })
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
@@ -41,7 +40,7 @@ export function SignUpForm() {
     setLoadingButtons((prevState) => ({ ...prevState, [provider]: true }))
     try {
       await signIn.social({
-        provider: provider as "google" | "github",
+        provider: provider as "google",
         callbackURL: "/dashboard",
       })
     } catch (error) {
@@ -114,16 +113,6 @@ export function SignUpForm() {
             >
               <RiGoogleFill className="me-1" size={16} aria-hidden="true" />
               {loadingButtons.google ? "Loading..." : "Login with Google"}
-            </Button>
-            <Button
-              className="w-full cursor-pointer"
-              variant="outline"
-              type="button"
-              onClick={() => handleLogin("github")}
-              disabled={loadingButtons.github}
-            >
-              <RiGithubFill className="me-1" size={16} aria-hidden="true" />
-              {loadingButtons.github ? "Loading..." : "Login with GitHub"}
             </Button>
             <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
               <span className="bg-background text-muted-foreground relative z-10 px-2">

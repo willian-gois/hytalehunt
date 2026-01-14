@@ -63,10 +63,6 @@ export const auth = betterAuth({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
-    github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-    },
   },
   trustedOrigins: [
     process.env.NODE_ENV !== "development" ? "https://www.hytalehunt.com" : "http://localhost:3000",
