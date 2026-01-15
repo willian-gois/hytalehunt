@@ -152,7 +152,9 @@ export default async function Home() {
             {/* Statistics */}
             {(last30DaysVisitors !== null || last30DaysPageviews !== null) && (
               <div className="space-y-3 pt-0 pb-4">
-                <h3 className="flex items-center gap-2 font-semibold">Statistics (Last 30 Days)</h3>
+                <h3 className="font-heading flex items-center gap-2 font-semibold">
+                  Statistics (Last 30 Days)
+                </h3>
 
                 <div className="grid grid-cols-2 gap-4">
                   {last30DaysVisitors !== null && (
@@ -173,14 +175,16 @@ export default async function Home() {
             )}
             {/* Sponsors */}
             <div className="space-y-3 py-4">
-              <h3 className="flex items-center font-semibold">Sponsors</h3>
+              <h3 className="font-heading flex items-center font-semibold">Sponsors</h3>
               <SponsorCards />
             </div>
 
             {/* Categories */}
             <div className="space-y-3 py-4">
               <div className="flex items-center justify-between">
-                <h3 className="flex items-center gap-2 font-semibold">Top Categories</h3>
+                <h3 className="font-heading flex items-center gap-2 font-semibold">
+                  Top Categories
+                </h3>
                 <Button variant="ghost" size="sm" className="text-sm" asChild>
                   <Link href="/categories" className="flex items-center gap-1">
                     View all
@@ -216,7 +220,7 @@ export default async function Home() {
             {/* Podium
             {yesterdayServers.length > 0 && (
               <div className="p-5 pt-0 space-y-3">
-                <h3 className="font-semibold flex items-center gap-2">
+                <h3 className="font-heading font-semibold flex items-center gap-2">
                   Yesterday&apos;s Top Launches
                 </h3>
                 <TopLaunchesPodium topServers={yesterdayServers} />
@@ -225,7 +229,7 @@ export default async function Home() {
 
             {/* Quick Links */}
             <div className="space-y-3 py-4">
-              <h3 className="flex items-center gap-2 font-semibold">Quick Access</h3>
+              <h3 className="font-heading flex items-center gap-2 font-semibold">Quick Access</h3>
               <div className="space-y-2">
                 {session?.user && (
                   <Link

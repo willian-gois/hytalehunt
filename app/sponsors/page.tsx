@@ -58,7 +58,7 @@ export default async function SponsorsPage() {
   return (
     <div className="container mx-auto max-w-3xl px-4 py-8 md:py-12">
       <div className="mb-8 text-center">
-        <h1 className="mb-3 text-2xl font-bold sm:text-3xl">Become a Sponsor</h1>
+        <h1 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">Become a Sponsor</h1>
         <p className="text-muted-foreground mx-auto max-w-xl text-sm">
           Support HytaleHunt and gain visibility. Limited sponsorship slots for maximum impact.
         </p>
@@ -190,7 +190,7 @@ export default async function SponsorsPage() {
 
       {/* FAQ Section */}
       <div className="mx-auto max-w-3xl">
-        <h2 className="mb-4 text-center text-xl font-bold sm:text-2xl">
+        <h2 className="font-heading mb-4 text-center text-xl font-bold sm:text-2xl">
           Frequently Asked Questions
         </h2>{" "}
         <Accordion type="single" collapsible className="w-full -space-y-px">

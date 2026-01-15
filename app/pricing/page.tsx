@@ -115,7 +115,9 @@ export default async function PricingPage() {
       </div> */}
 
       <div className="mb-4 text-center">
-        <h1 className="mb-3 text-2xl font-bold sm:text-3xl">Choose Your Launch Plan</h1>
+        <h1 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
+          Choose Your Launch Plan
+        </h1>
         <p className="text-muted-foreground mx-auto max-w-2xl text-sm">
           Get the visibility your server deserves with our flexible launch options. All launches
           happen at 8:00 AM UTC.
@@ -505,7 +507,7 @@ export default async function PricingPage() {
       )}
 
       <div className="mx-auto mb-12 max-w-3xl">
-        <h2 className="mb-4 text-center text-xl font-bold sm:text-2xl">
+        <h2 className="font-heading mb-4 text-center text-xl font-bold sm:text-2xl">
           Frequently Asked Questions
         </h2>
         <Accordion type="single" collapsible className="w-full -space-y-px" defaultValue="1">

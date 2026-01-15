@@ -21,7 +21,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
     <NavigationMenu className="hidden md:flex">
       <NavigationMenuList className="gap-1">
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="h-9 cursor-pointer px-3 text-sm">
+          <NavigationMenuTrigger className="font-heading h-9 cursor-pointer px-3 text-sm">
             Explore
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -32,7 +32,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                     href="/trending"
                     className="block rounded-md px-2 py-2 text-sm no-underline transition-colors outline-none select-none"
                   >
-                    <div className="mb-1 font-medium">Trending Now</div>
+                    <div className="font-heading mb-1 font-medium">Trending Now</div>
                     <p className="text-muted-foreground text-xs leading-tight">
                       Discover the most popular servers
                     </p>
@@ -45,7 +45,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                     href="/winners"
                     className="block rounded-md px-2 py-2 text-sm no-underline transition-colors outline-none select-none"
                   >
-                    <div className="mb-1 font-medium">Daily Winners</div>
+                    <div className="font-heading mb-1 font-medium">Daily Winners</div>
                     <p className="text-muted-foreground text-xs leading-tight">
                       See the best servers of the day
                     </p>
@@ -58,7 +58,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                     href="/trending?filter=month"
                     className="block rounded-md px-2 py-2 text-sm no-underline transition-colors outline-none select-none"
                   >
-                    <div className="mb-1 font-medium">Best of Month</div>
+                    <div className="font-heading mb-1 font-medium">Best of Month</div>
                     <p className="text-muted-foreground text-xs leading-tight">
                       See the best servers of the month
                     </p>
@@ -71,7 +71,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                     href="/categories"
                     className="block rounded-md px-2 py-2 text-sm no-underline transition-colors outline-none select-none"
                   >
-                    <div className="mb-1 font-medium">Categories</div>
+                    <div className="font-heading mb-1 font-medium">Categories</div>
                     <p className="text-muted-foreground text-xs leading-tight">
                       Browse servers by category
                     </p>
@@ -84,7 +84,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
 
         {showDashboard && (
           <NavigationMenuItem>
-            <NavigationMenuLink asChild>
+            <NavigationMenuLink asChild className="font-heading">
               <Link
                 href="/dashboard"
                 className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}
@@ -96,7 +96,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
         )}
 
         <NavigationMenuItem>
-          <NavigationMenuLink asChild>
+          <NavigationMenuLink asChild className="font-heading">
             <Link
               href="/servers/submit"
               className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}
@@ -107,7 +107,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink asChild>
+          <NavigationMenuLink asChild className="font-heading">
             <Link href="/pricing" className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}>
               Pricing
             </Link>
@@ -115,7 +115,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink asChild>
+          <NavigationMenuLink asChild className="font-heading">
             <Link href="/sponsors" className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}>
               Sponsors
             </Link>
