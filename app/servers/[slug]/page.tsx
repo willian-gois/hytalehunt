@@ -13,11 +13,13 @@ import {
   RiVipCrownLine,
 } from "@remixicon/react"
 import { format } from "date-fns"
+import { toast } from "sonner"
 
 import { auth } from "@/lib/auth"
 import { getServerWebsiteRelAttribute } from "@/lib/link-utils"
 import { Button } from "@/components/ui/button"
 import { RichTextDisplay } from "@/components/ui/rich-text-editor"
+import { CopyIpButton } from "@/components/server/copy-ip-button"
 import { EditButton } from "@/components/server/edit-button"
 import { ServerComments } from "@/components/server/server-comments"
 import { ServerImageWithLoader } from "@/components/server/server-image-with-loader"
@@ -150,7 +152,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
 
                 {/* Right side: Actions */}
                 <div className="ml-6 flex items-center gap-3">
-                  {serverData.websiteUrl && (
+                  {/* {serverData.websiteUrl && (
                     <Button variant="outline" size="sm" asChild className="h-9 px-3">
                       <a
                         href={serverData.websiteUrl}
@@ -159,9 +161,12 @@ export default async function ServerPage({ params }: ServerPageProps) {
                         className="flex items-center gap-2"
                       >
                         <RiGlobalLine className="h-4 w-4" />
-                        Visit
+                        Copy IP
                       </a>
                     </Button>
+                  )} */}
+                  {serverData.ipAddress && (
+                    <CopyIpButton ipAddress={serverData.ipAddress} name={serverData.name} />
                   )}
 
                   {isActiveLaunch ? (
@@ -281,7 +286,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
               {serverData.bannerUrl && (
                 <ServerImageWithLoader
                   src={serverData.bannerUrl}
-                  alt={`${serverData.name} - Product Image`}
+                  alt={`${serverData.name} - Server Banner`}
                 />
               )}
               {/* Description */}
