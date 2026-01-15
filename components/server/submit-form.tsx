@@ -71,7 +71,7 @@ interface ServerFormData {
   twitterUrl?: string
   scheduledDate: string | null
   launchType: (typeof LAUNCH_TYPES)[keyof typeof LAUNCH_TYPES]
-  productImage: string | null
+  bannerUrl: string | null
 }
 
 interface DateGroup {
@@ -98,13 +98,13 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     twitterUrl: "",
     scheduledDate: null,
     launchType: LAUNCH_TYPES.FREE,
-    productImage: null,
+    bannerUrl: null,
   })
 
   const [uploadedLogoUrl, setUploadedLogoUrl] = useState<string | null>(null)
 
   const [isUploadingLogo, setIsUploadingLogo] = useState(false)
-  const [isUploadingProductImage, setIsUploadingProductImage] = useState(false)
+  const [isUploadingbannerUrl, setIsUploadingbannerUrl] = useState(false)
 
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([])
   const [isLoadingCategories, setIsLoadingCategories] = useState(false)
@@ -396,7 +396,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
         description: formData.description,
         websiteUrl: formData.websiteUrl,
         logoUrl: finalLogoUrl,
-        productImage: formData.productImage,
+        bannerUrl: formData.bannerUrl,
         categories: formData.categories,
         mods: formData.mods,
         discordUrl: formData.discordUrl || null,
@@ -625,7 +625,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
             <div className="space-y-2">
               <Label htmlFor="logoUrl">Logo (Max 1MB) (Optional)</Label>
               <p className="text-muted-foreground text-xs">
-                Recommended: 1:1 square image (e.g., 256x256px).
+                Recommended: 1:1 square image (e.g., 64x64px).
               </p>
               {uploadedLogoUrl ? (
                 <div className="bg-muted/30 relative w-fit rounded-md border p-3">
@@ -696,19 +696,19 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="productImage">
+              <Label htmlFor="bannerUrl">
                 Server Banner <span>(Optional)</span>
               </Label>
               <p className="text-muted-foreground text-xs">
                 Add a server banner. Required 480x280px.
               </p>
-              {formData.productImage ? (
+              {formData.bannerUrl ? (
                 <div className="bg-muted/30 relative w-fit rounded-md border p-3">
                   <Image
-                    src={formData.productImage}
-                    alt="Product image preview"
-                    width={256}
-                    height={256}
+                    src={formData.bannerUrl}
+                    alt="Banner preview"
+                    width={480}
+                    height={280}
                     className="rounded object-contain"
                   />
                   <Button
@@ -716,7 +716,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                     variant="ghost"
                     size="icon"
                     className="text-muted-foreground hover:text-foreground absolute top-1 right-1 h-6 w-6"
-                    onClick={() => setFormData((prev) => ({ ...prev, productImage: null }))}
+                    onClick={() => setFormData((prev) => ({ ...prev, bannerUrl: null }))}
                     aria-label="Remove product image"
                   >
                     <RiCloseCircleLine className="h-5 w-5" />
@@ -725,33 +725,33 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
               ) : (
                 <div className="mt-2 flex items-center gap-2">
                   <UploadButton
-                    endpoint="serverProductImage"
+                    endpoint="serverBanner"
                     onUploadBegin={() => {
-                      console.log("Upload Begin (Product Image)")
-                      setIsUploadingProductImage(true)
+                      console.log("Upload Begin (Banner)")
+                      setIsUploadingbannerUrl(true)
                       setError(null)
                     }}
                     onClientUploadComplete={(res) => {
-                      console.log("Upload Response (Product Image):", res)
-                      setIsUploadingProductImage(false)
+                      console.log("Upload Response (Banner):", res)
+                      setIsUploadingbannerUrl(false)
                       if (res && res.length > 0 && res[0].serverData?.fileUrl) {
                         setFormData((prev) => ({
                           ...prev,
-                          productImage: res[0].serverData.fileUrl,
+                          bannerUrl: res[0].serverData.fileUrl,
                         }))
-                        console.log("Product Image URL set:", res[0].serverData.fileUrl)
+                        console.log("Banner URL set:", res[0].serverData.fileUrl)
                       } else {
-                        console.error("Product image upload failed: No URL", res)
-                        setError("Product image upload failed: No URL returned.")
+                        console.error("Banner upload failed: No URL", res)
+                        setError("Banner upload failed: No URL returned.")
                       }
                     }}
                     onUploadError={(error: Error) => {
-                      console.error("Upload Error (Product Image):", error)
-                      setIsUploadingProductImage(false)
-                      setError(`Product image upload failed: ${error.message}`)
+                      console.error("Upload Error (Banner):", error)
+                      setIsUploadingbannerUrl(false)
+                      setError(`Banner upload failed: ${error.message}`)
                     }}
                     appearance={{
-                      button: `ut-button flex items-center w-fit gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm h-9 px-3 ${isUploadingProductImage ? "opacity-50 pointer-events-none" : ""}`,
+                      button: `ut-button flex items-center w-fit gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm h-9 px-3 ${isUploadingbannerUrl ? "opacity-50 pointer-events-none" : ""}`,
                       allowedContent: "hidden",
                     }}
                     content={{
@@ -767,7 +767,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                       },
                     }}
                   />
-                  {isUploadingProductImage && (
+                  {isUploadingbannerUrl && (
                     <span className="text-muted-foreground text-xs">Uploading...</span>
                   )}
                 </div>
@@ -1271,11 +1271,11 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                         />
                       </p>
                     )}
-                    {formData.productImage && (
+                    {formData.bannerUrl && (
                       <p className="flex flex-col items-start gap-2">
                         <strong>Product Image:</strong>
                         <Image
-                          src={formData.productImage}
+                          src={formData.bannerUrl}
                           alt="Product image"
                           width={128}
                           height={128}
@@ -1426,7 +1426,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
           type="button"
           variant="outline"
           onClick={prevStep}
-          disabled={currentStep === 1 || isPending || isUploadingLogo || isUploadingProductImage}
+          disabled={currentStep === 1 || isPending || isUploadingLogo || isUploadingbannerUrl}
         >
           <RiArrowLeftLine className="mr-2 h-4 w-4" />
           Previous
@@ -1439,7 +1439,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
             disabled={
               isPending ||
               isUploadingLogo ||
-              isUploadingProductImage ||
+              isUploadingbannerUrl ||
               (currentStep === 3 && isLoadingDateCheck)
             }
           >
@@ -1453,7 +1453,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
           <Button
             type="button"
             onClick={handleFinalSubmit}
-            disabled={isPending || isUploadingLogo || isUploadingProductImage}
+            disabled={isPending || isUploadingLogo || isUploadingbannerUrl}
           >
             {isPending ? (
               <RiLoader4Line className="mr-2 h-4 w-4 animate-spin" />

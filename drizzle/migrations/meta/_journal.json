@@ -15,6 +15,20 @@
       "when": 1768357343287,
       "tag": "0001_flaky_fenris",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1768372614188,
+      "tag": "0002_smiling_shadowcat",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1768462405553,
+      "tag": "0003_fine_sunspot",
+      "breakpoints": true
     }
   ]
 }

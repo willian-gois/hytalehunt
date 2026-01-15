@@ -14,6 +14,7 @@ interface Server {
   name: string
   description: string | null
   logoUrl: string
+  bannerUrl: string
   websiteUrl?: string | null
   upvoteCount: number
   commentCount?: number | null
@@ -69,7 +70,7 @@ export function ServerSection({
   return (
     <section className="space-y-3 sm:space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold sm:text-2xl">{title}</h2>
+        <h2 className="font-heading text-xl font-semibold sm:text-2xl">{title}</h2>
         {moreHref && (
           <div className="hidden sm:block">
             <ViewAllButton />
@@ -88,6 +89,7 @@ export function ServerSection({
                 slug={server.slug}
                 description={server.description || ""}
                 logoUrl={server.logoUrl}
+                bannerUrl={server.bannerUrl}
                 upvoteCount={server.upvoteCount ?? 0}
                 commentCount={server.commentCount ?? 0}
                 launchStatus={server.launchStatus}

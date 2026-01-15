@@ -1,0 +1,1 @@
+ALTER TABLE "server" RENAME COLUMN "cover_image_url" TO "banner_url";

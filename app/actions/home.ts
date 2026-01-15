@@ -82,6 +82,8 @@ export async function getTodayServers(limit: number = SERVER_LIMITS_VARIABLES.TO
       slug: serverTable.slug,
       description: serverTable.description,
       logoUrl: serverTable.logoUrl,
+      bannerUrl: serverTable.bannerUrl,
+      ipAddress: serverTable.ipAddress,
       websiteUrl: serverTable.websiteUrl,
       launchStatus: serverTable.launchStatus,
       launchType: serverTable.launchType,

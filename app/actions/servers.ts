@@ -195,7 +195,7 @@ interface ServerSubmissionData {
   description: string
   websiteUrl: string
   logoUrl: string
-  productImage: string | null
+  bannerUrl: string | null
   categories: string[]
   mods: string[]
   discordUrl?: string | null
@@ -217,7 +217,7 @@ export async function submitServer(serverData: ServerSubmissionData) {
       description,
       websiteUrl,
       logoUrl,
-      productImage,
+      bannerUrl,
       categories,
       mods,
       discordUrl,
@@ -243,7 +243,7 @@ export async function submitServer(serverData: ServerSubmissionData) {
         description,
         websiteUrl,
         logoUrl,
-        productImage: productImage ?? undefined,
+        bannerUrl: bannerUrl ?? undefined,
         mods,
         discordUrl: discordUrl ?? undefined,
         twitterUrl: twitterUrl ?? undefined,

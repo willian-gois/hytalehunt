@@ -59,16 +59,13 @@ export async function generateMetadata(
     openGraph: {
       title: `${serverData.name} on HytaleHunt`,
       description: stripHtml(serverData.description),
-      images: [
-        serverData.productImage || serverData.coverImageUrl || serverData.logoUrl,
-        ...previousImages,
-      ],
+      images: [serverData.bannerUrl || serverData.logoUrl, ...previousImages],
     },
     twitter: {
       card: "summary_large_image",
       title: `${serverData.name} on HytaleHunt`,
       description: stripHtml(serverData.description),
-      images: [serverData.productImage || serverData.logoUrl],
+      images: [serverData.bannerUrl || serverData.logoUrl],
     },
   }
 }
@@ -280,10 +277,10 @@ export default async function ServerPage({ params }: ServerPageProps) {
                 </div>
               )}
 
-              {/* Product Image / Banner */}
-              {(serverData.productImage || serverData.coverImageUrl) && (
+              {/* Banner */}
+              {serverData.bannerUrl && (
                 <ServerImageWithLoader
-                  src={(serverData.productImage || serverData.coverImageUrl)!}
+                  src={serverData.bannerUrl}
                   alt={`${serverData.name} - Product Image`}
                 />
               )}
