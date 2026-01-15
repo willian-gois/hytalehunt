@@ -46,7 +46,7 @@ export default async function Nav() {
         <div className="flex items-center gap-8">
           <Link href="/" className="font-heading flex items-center">
             <span className="font-heading flex items-center text-lg font-bold">
-              <img src="/logo.svg" alt="logo" className="mr-1 h-6 w-6" />
+              <img src="/logo.webp" alt="logo" className="mr-1 h-6 w-6" />
               HytaleHunt
             </span>
           </Link>
