@@ -1,7 +1,7 @@
 import type { NextConfig } from "next"
 
 import createMDX from "@next/mdx"
-import remarkGfm from "remark-gfm"
+import type { PluggableList } from "unified"
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -36,7 +36,9 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remarkGfm],
+    // Turbopack requires MDX loader options to be serializable. Passing the
+    // plugin name instead of the function keeps the configuration compatible.
+    remarkPlugins: ["remark-gfm"] as unknown as PluggableList,
   },
 })
 
