@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import Image from "next/image"
 import Link from "next/link"
 
 import { RiArrowDownSLine, RiFilterLine } from "@remixicon/react"
@@ -285,7 +286,15 @@ export default async function CategoriesPage({
                         : "hover:bg-muted/40"
                     }`}
                   >
-                    <span className="text-sm">{category.name}</span>
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src={`/images/categories/${category.id}.webp`}
+                        alt={category.name}
+                        width={24}
+                        height={24}
+                      />
+                      <span>{category.name}</span>
+                    </div>
                     <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
                       {countMap.get(category.id) || 0} servers
                     </span>
