@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DashboardServerCard } from "@/components/dashboard/dashboard-server-card"
+import { HowItWorksBanner } from "@/components/dashboard/how-it-works-banner"
 import { getUserCreatedServers, getUserUpvotedServers } from "@/app/actions/servers"
 
 // Base server type that matches the actual structure from the database
@@ -98,6 +99,9 @@ export default async function Dashboard() {
             </div>
           </div>
         </div>
+
+        {/* How it works banner */}
+        <HowItWorksBanner />
 
         {/* Main Dashboard Content */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
