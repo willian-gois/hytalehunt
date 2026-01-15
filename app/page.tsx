@@ -35,87 +35,53 @@ export default async function Home() {
           <div className="space-y-6 sm:space-y-8 lg:col-span-2">
             {/* Welcome */}
             <div className="bg-secondary/70 hover:bg-secondary border-border/40 relative z-10 overflow-hidden rounded-lg border">
-              <div className="container mx-auto max-w-6xl px-4 py-3 md:py-4">
+              <div className="container mx-auto max-w-6xl">
+                {" "}
+                {/*  px-4 py-3 md:py-4 */}
                 {/* Mobile Layout - Centered */}
-                <div className="flex flex-col items-center justify-center gap-3 md:hidden">
-                  <Link href="/pricing" className="flex cursor-pointer flex-col gap-2 text-center">
-                    <div>
-                      <h1 className="text-foreground text-base font-semibold">
-                        <span>Launch platform for your products</span>
-                      </h1>
-                      <p className="text-muted-foreground text-xs">
-                        <span>Submit, get a badge & backlink</span>
-                      </p>
-                    </div>
-                  </Link>
-                  {/* <div>
-                    <a
-                      href="https://frogdr.com/hytalehunt.com?utm_source=hytalehunt.com"
-                      target="_blank"
+                <div className="md:hidden">
+                  <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-lg bg-[url('/images/banner.png')] bg-cover bg-center px-6 py-6 text-center shadow-sm">
+                    <div className="absolute inset-0 bg-black/25" aria-hidden="true" />
+                    <Link
+                      href="/pricing"
+                      className="relative z-10 flex cursor-pointer flex-col gap-2"
                     >
-                      Light mode badge
-                      <img
-                        src="https://frogdr.com/hytalehunt.com/badge-white-sm.svg?round=1"
-                        alt="Monitor your Domain Rating with FrogDR"
-                        className="h-6 w-auto dark:hidden"
-                      />
-                      Dark mode badge
-                      <img
-                        src="https://frogdr.com/hytalehunt.com/badge-dark-sm.svg?round=1"
-                        alt="Monitor your Domain Rating with FrogDR"
-                        className="hidden h-6 w-auto dark:block"
-                      />
-                    </a>
-                  </div> */}
-                </div>
-
-                {/* Desktop Layout - Text left, Image right */}
-
-                <div className="hidden items-center justify-center gap-12 md:flex">
-                  {/* image 1 */}
-                  <div className="flex-shrink-0">
-                    <img
-                      src="/oppieG.png"
-                      alt="HytaleHunt Character"
-                      className="h-24 w-24 object-contain"
-                    />
-                  </div>
-                  {/* text */}
-                  <div className="flex flex-col items-center justify-center gap-4 text-center">
-                    <Link href="/pricing" className="cursor-pointer">
-                      <h1 className="text-foreground text-lg font-semibold">
-                        <span>Launch platform for your products</span>
+                      <h1 className="text-muted font-heading text-lg font-semibold drop-shadow-[0_5px_16px_rgba(0,0,0,0.65)]">
+                        <span>Discover the best Hytale servers</span>
                       </h1>
-                      <p className="text-muted-foreground text-sm">
-                        <span>Submit, get a badge & backlink</span>
+                      <p className="text-muted text-sm drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+                        <span>Daily ranked by the community</span>
                       </p>
                     </Link>
-                    {/* <div>
-                      <a
-                        href="https://frogdr.com/hytalehunt.com?utm_source=hytalehunt.com"
-                        target="_blank"
-                      >
-                        Light mode badge
-                        <img
-                          src="https://frogdr.com/hytalehunt.com/badge-white-sm.svg?round=1"
-                          alt="Monitor your Domain Rating with FrogDR"
-                          className="h-7 w-auto dark:hidden"
-                        />
-                        Dark mode badge
-                        <img
-                          src="https://frogdr.com/hytalehunt.com/badge-dark-sm.svg?round=1"
-                          alt="Monitor your Domain Rating with FrogDR"
-                          className="hidden h-7 w-auto dark:block"
-                        />
-                      </a>
-                    </div> */}
+                    <div className="relative z-10 flex items-center justify-center">
+                      <img
+                        src="/logo.png"
+                        alt="HytaleHunt Logo"
+                        className="h-16 w-16 object-contain"
+                      />
+                    </div>
+                  </div>
+                </div>
+                {/* Desktop Layout - Text left, Image right */}
+                <div className="hidden w-full max-w-5xl items-center justify-between gap-12 bg-[url('/images/banner.png')] bg-cover bg-center bg-no-repeat px-8 py-6 md:relative md:flex md:overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
+                  {/* text */}
+                  <div className="relative z-10 flex flex-col items-center justify-center gap-4 text-center">
+                    <Link href="/pricing" className="cursor-pointer">
+                      <h1 className="text-muted font-heading text-2xl font-bold drop-shadow-[0_6px_18px_rgba(0,0,0,0.7)]">
+                        <span>Discover the best Hytale servers</span>
+                      </h1>
+                      <p className="text-muted text-md drop-shadow-[0_4px_12px_rgba(0,0,0,0.65)]">
+                        <span>Daily ranked by the community</span>
+                      </p>
+                    </Link>
                   </div>
 
-                  {/* image 2 */}
-                  <div className="flex-shrink-0">
+                  {/* logo */}
+                  <div className="relative z-10 flex h-full items-center justify-center md:justify-start">
                     <img
-                      src="/oppieD.png"
-                      alt="HytaleHunt Character"
+                      src="/logo.png"
+                      alt="HytaleHunt Logo"
                       className="h-24 w-24 object-contain"
                     />
                   </div>
