@@ -4,98 +4,97 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import { RiExternalLinkLine } from "@remixicon/react"
-
-import { getServerWebsiteRelAttribute } from "@/lib/link-utils"
-
+import { CopyIpButton } from "../server/copy-ip-button"
 import { ServerCardButtons } from "./server-card-buttons"
 
 // Function to strip HTML tags from text
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, "").trim()
+	return html.replace(/<[^>]*>/g, "").trim()
 }
 
 interface Category {
-  id: string
-  name: string
+	id: string
+	name: string
 }
 
 interface ServerCardProps {
-  id: string
-  slug: string
-  name: string
-  description: string
-  logoUrl?: string
-  bannerUrl?: string
-  upvoteCount: number
-  commentCount: number
-  launchStatus: string
-  launchType?: string | null
-  dailyRanking?: number | null
-  index?: number
-  userHasUpvoted: boolean
-  categories: Category[]
-  isAuthenticated: boolean
-  websiteUrl?: string
+	id: string
+	slug: string
+	name: string
+	description: string
+	logoUrl?: string
+	bannerUrl?: string
+	upvoteCount: number
+	commentCount: number
+	launchStatus: string
+	launchType?: string | null
+	dailyRanking?: number | null
+	index?: number
+	userHasUpvoted: boolean
+	categories: Category[]
+	isAuthenticated: boolean
+	websiteUrl?: string
+	ipAddress?: string
 }
 
 export function ServerCard({
-  id,
-  slug,
-  name,
-  description,
-  bannerUrl,
-  upvoteCount,
-  commentCount,
-  launchStatus,
-  launchType,
-  dailyRanking,
-  index,
-  userHasUpvoted,
-  categories,
-  isAuthenticated,
-  websiteUrl,
+	id,
+	slug,
+	name,
+	description,
+	bannerUrl,
+	upvoteCount,
+	commentCount,
+	launchStatus,
+	launchType,
+	dailyRanking,
+	index,
+	userHasUpvoted,
+	categories,
+	isAuthenticated,
+	websiteUrl,
+	ipAddress,
 }: ServerCardProps) {
-  const router = useRouter()
-  const serverPageUrl = `/servers/${slug}`
+	const router = useRouter()
+	const serverPageUrl = `/servers/${slug}`
 
-  return (
-    <div
-      className="group cursor-pointer rounded-xl p-3 transition-colors hover:bg-zinc-50 sm:p-4 dark:hover:bg-zinc-900/50"
-      onClick={(e) => {
-        e.stopPropagation()
-        router.push(serverPageUrl)
-      }}
-    >
-      <div className="flex items-start gap-3 sm:gap-4">
-        <div className="flex-shrink-0">
-          <div className="relative h-12 w-12 overflow-hidden rounded-md sm:h-14 sm:w-14">
-            {bannerUrl ? (
-              <Image
-                src={bannerUrl}
-                alt={`${name} banner`}
-                fill
-                className="object-contain"
-                sizes="(max-width: 640px) 48px, 56px"
-              />
-            ) : (
-              <span className="text-muted-foreground flex h-full w-full items-center justify-center text-xl font-bold">
-                {name.charAt(0)}
-              </span>
-            )}
-          </div>
-        </div>
+	return (
+		<div
+			className="group cursor-pointer rounded-xl p-3 transition-colors hover:bg-zinc-50 sm:p-4 dark:hover:bg-zinc-900/50"
+			onClick={(e) => {
+				e.stopPropagation()
+				router.push(serverPageUrl)
+			}}
+		>
+			<div className="flex items-start gap-3 sm:gap-4">
+				<div className="flex-shrink-0">
+					<div className="relative h-12 w-12 overflow-hidden rounded-md sm:h-14 sm:w-14">
+						{bannerUrl ? (
+							<Image
+								src={bannerUrl}
+								alt={`${name} banner`}
+								fill
+								className="object-contain"
+								sizes="(max-width: 640px) 48px, 56px"
+							/>
+						) : (
+							<span className="text-muted-foreground flex h-full w-full items-center justify-center text-xl font-bold">
+								{name.charAt(0)}
+							</span>
+						)}
+					</div>
+				</div>
 
-        <div className="min-w-0 flex-grow">
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <Link href={serverPageUrl}>
-                <h3 className="group-hover:text-primary line-clamp-1 text-sm font-medium transition-colors sm:text-base">
-                  {typeof index === "number" ? `${index + 1}. ` : ""}
-                  {name}
-                </h3>
-              </Link>
-              {websiteUrl && (
+				<div className="min-w-0 flex-grow">
+					<div className="flex flex-col">
+						<div className="flex items-center gap-1.5">
+							<Link href={serverPageUrl}>
+								<h3 className="group-hover:text-primary line-clamp-1 text-sm font-medium transition-colors sm:text-base">
+									{typeof index === "number" ? `${index + 1}. ` : ""}
+									{name}
+								</h3>
+							</Link>
+							{/* {websiteUrl && (
                 <a
                   href={websiteUrl}
                   target="_blank"
@@ -108,41 +107,42 @@ export function ServerCard({
                 >
                   <RiExternalLinkLine className="hidden h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100 md:inline-block" />
                 </a>
-              )}
-            </div>
+              )} */}
+							{ipAddress && <CopyIpButton ipAddress={ipAddress} name={name} />}
+						</div>
 
-            <p className="text-muted-foreground mb-1 line-clamp-2 text-xs sm:line-clamp-1 sm:text-sm">
-              {stripHtml(description)}
-            </p>
+						<p className="text-muted-foreground mb-1 line-clamp-2 text-xs sm:line-clamp-1 sm:text-sm">
+							{stripHtml(description)}
+						</p>
 
-            {categories.length > 0 && (
-              <div className="text-muted-foreground mt-1 hidden flex-wrap items-center gap-1.5 text-xs sm:flex">
-                {categories.slice(0, 3).map((cat) => (
-                  <Link
-                    key={cat.id}
-                    href={`/categories?category=${cat.id}`}
-                    className="bg-secondary hover:bg-secondary/80 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {cat.name}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+						{categories.length > 0 && (
+							<div className="text-muted-foreground mt-1 hidden flex-wrap items-center gap-1.5 text-xs sm:flex">
+								{categories.slice(0, 3).map((cat) => (
+									<Link
+										key={cat.id}
+										href={`/categories?category=${cat.id}`}
+										className="bg-secondary hover:bg-secondary/80 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs transition-colors"
+										onClick={(e) => e.stopPropagation()}
+									>
+										{cat.name}
+									</Link>
+								))}
+							</div>
+						)}
+					</div>
+				</div>
 
-        <ServerCardButtons
-          serverPageUrl={serverPageUrl}
-          commentCount={commentCount}
-          serverId={id}
-          upvoteCount={upvoteCount}
-          isAuthenticated={isAuthenticated}
-          hasUpvoted={userHasUpvoted}
-          launchStatus={launchStatus}
-          serverName={name}
-        />
-      </div>
-    </div>
-  )
+				<ServerCardButtons
+					serverPageUrl={serverPageUrl}
+					commentCount={commentCount}
+					serverId={id}
+					upvoteCount={upvoteCount}
+					isAuthenticated={isAuthenticated}
+					hasUpvoted={userHasUpvoted}
+					launchStatus={launchStatus}
+					serverName={name}
+				/>
+			</div>
+		</div>
+	)
 }

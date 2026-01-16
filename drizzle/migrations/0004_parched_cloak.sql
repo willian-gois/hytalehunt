@@ -1,0 +1,1 @@
+ALTER TABLE "server" ADD COLUMN "ip_address" text NOT NULL;

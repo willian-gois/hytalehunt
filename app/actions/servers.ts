@@ -193,13 +193,16 @@ export async function toggleUpvote(serverId: string) {
 interface ServerSubmissionData {
   name: string
   description: string
+  ipAddress: string
   websiteUrl: string
   logoUrl: string
-  bannerUrl: string | null
+  bannerUrl: string
   categories: string[]
   mods: string[]
   discordUrl?: string | null
   twitterUrl?: string | null
+  version: string
+  country: string
 }
 
 // Version correcte de submitServer
@@ -215,6 +218,7 @@ export async function submitServer(serverData: ServerSubmissionData) {
     const {
       name,
       description,
+      ipAddress,
       websiteUrl,
       logoUrl,
       bannerUrl,
@@ -222,6 +226,8 @@ export async function submitServer(serverData: ServerSubmissionData) {
       mods,
       discordUrl,
       twitterUrl,
+      version,
+      country,
     } = serverData
 
     // Validation
@@ -241,12 +247,15 @@ export async function submitServer(serverData: ServerSubmissionData) {
         name,
         slug,
         description,
+        ipAddress,
         websiteUrl,
         logoUrl,
-        bannerUrl: bannerUrl ?? undefined,
+        bannerUrl,
         mods,
         discordUrl: discordUrl ?? undefined,
         twitterUrl: twitterUrl ?? undefined,
+        version,
+        country,
         createdBy: session.user.id,
         createdAt: new Date(),
         updatedAt: new Date(),
