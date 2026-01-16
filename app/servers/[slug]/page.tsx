@@ -338,12 +338,12 @@ export default async function ServerPage({ params }: ServerPageProps) {
                     </h3>
                     <div className="flex">
                       <img
-                        src={`/images/badges/top${serverData.dailyRanking}-light.svg`}
+                        src={`/images/badges/top${serverData.dailyRanking}-light.webp`}
                         alt={`HytaleHunt Top ${serverData.dailyRanking} Daily Winner`}
                         className="h-12 w-auto dark:hidden"
                       />
                       <img
-                        src={`/images/badges/top${serverData.dailyRanking}-dark.svg`}
+                        src={`/images/badges/top${serverData.dailyRanking}-dark.webp`}
                         alt={`HytaleHunt Top ${serverData.dailyRanking} Daily Winner`}
                         className="hidden h-12 w-auto dark:block"
                       />
