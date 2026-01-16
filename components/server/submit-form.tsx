@@ -1,5 +1,9 @@
 "use client"
 
+import { useCallback, useEffect, useId, useState } from "react"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+
 import {
 	RiArrowLeftLine,
 	RiArrowRightLine,
@@ -18,9 +22,6 @@ import {
 } from "@remixicon/react"
 import { addDays, format, parseISO } from "date-fns"
 import { type Tag, TagInput } from "emblor"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { useCallback, useEffect, useId, useState } from "react"
 
 import {
 	DATE_FORMAT,
@@ -73,6 +74,7 @@ interface ServerFormData {
 	scheduledDate: string | null
 	launchType: (typeof LAUNCH_TYPES)[keyof typeof LAUNCH_TYPES]
 	bannerUrl: string | null
+	bannerType?: string
 	version: string
 	country: string
 }
@@ -102,6 +104,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 		scheduledDate: null,
 		launchType: LAUNCH_TYPES.FREE,
 		bannerUrl: null,
+		bannerType: undefined,
 		version: "1.0",
 		country: "",
 	})
@@ -109,7 +112,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 	const [uploadedLogoUrl, setUploadedLogoUrl] = useState<string | null>(null)
 
 	const [isUploadingLogo, setIsUploadingLogo] = useState(false)
-	const [isUploadingbannerUrl, setIsUploadingbannerUrl] = useState(false)
+	const [isUploadingBannerUrl, setisUploadingBannerUrl] = useState(false)
 
 	const [categories, setCategories] = useState<{ id: string; name: string }[]>([])
 	const [isLoadingCategories, setIsLoadingCategories] = useState(false)
@@ -407,7 +410,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 		try {
 			const finalLogoUrl = !uploadedLogoUrl
 				? "https://placehold.co/128x128/E2E8F0/718096?text=Logo"
-				: uploadedLogoUrl!
+				: uploadedLogoUrl
 
 			const serverData = {
 				name: formData.name,
@@ -684,10 +687,10 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 						</div>
 						<div className="space-y-2">
 							<Label htmlFor="logoUrl">
-								Logo (Max 1MB) <span className="text-red-500">*</span>
+								Logo <span className="text-red-500">*</span>
 							</Label>
 							<p className="text-muted-foreground text-xs">
-								Recommended: 1:1 square image (e.g., 64x64px).
+								Recommended: 1:1 square image (e.g., 64x64px). Max 1MB.
 							</p>
 							{uploadedLogoUrl ? (
 								<div className="bg-muted/30 relative w-fit rounded-md border p-3">
@@ -732,7 +735,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 										onUploadError={(error: Error) => {
 											console.error("Upload Error (Logo):", error)
 											setIsUploadingLogo(false)
-											setError(`Logo upload failed: ${error.message}`)
+											setError(`Logo upload failed. Check file type and size.`)
 										}}
 										appearance={{
 											button: `ut-button border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm h-9 px-3 inline-flex items-center justify-center gap-2 ${isUploadingLogo ? "opacity-50 pointer-events-none" : ""}`,
@@ -759,27 +762,44 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 						</div>
 						<div className="space-y-2">
 							<Label htmlFor="bannerUrl">
-								Server Banner <span>(Optional)</span>
+								Server Banner <span className="text-red-500">*</span>
 							</Label>
 							<p className="text-muted-foreground text-xs">
-								Add a server banner. Required 480x280px.
+								Add a server banner (image, GIF, WebP or video). Images: max 2MB. Videos: max 4MB.
 							</p>
 							{formData.bannerUrl ? (
 								<div className="bg-muted/30 relative w-fit rounded-md border p-3">
-									<Image
-										src={formData.bannerUrl}
-										alt="Banner preview"
-										width={480}
-										height={280}
-										className="rounded object-contain"
-									/>
+									{formData.bannerType?.startsWith("video/") ? (
+										<video
+											src={formData.bannerUrl}
+											width={480}
+											height={280}
+											controls
+											className="rounded object-contain"
+										>
+											<track kind="captions" />
+										</video>
+									) : (
+										<Image
+											src={formData.bannerUrl}
+											alt="Banner preview"
+											width={480}
+											height={280}
+											className="rounded object-contain"
+											unoptimized={
+												formData.bannerType === "image/gif" || formData.bannerType === "image/webp"
+											}
+										/>
+									)}
 									<Button
 										type="button"
 										variant="ghost"
 										size="icon"
 										className="text-muted-foreground hover:text-foreground absolute top-1 right-1 h-6 w-6"
-										onClick={() => setFormData((prev) => ({ ...prev, bannerUrl: null }))}
-										aria-label="Remove product image"
+										onClick={() =>
+											setFormData((prev) => ({ ...prev, bannerUrl: null, bannerType: undefined }))
+										}
+										aria-label="Remove banner"
 									>
 										<RiCloseCircleLine className="h-5 w-5" />
 									</Button>
@@ -790,18 +810,21 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 										endpoint="serverBanner"
 										onUploadBegin={() => {
 											console.log("Upload Begin (Banner)")
-											setIsUploadingbannerUrl(true)
+											setisUploadingBannerUrl(true)
 											setError(null)
 										}}
 										onClientUploadComplete={(res) => {
 											console.log("Upload Response (Banner):", res)
-											setIsUploadingbannerUrl(false)
+											setisUploadingBannerUrl(false)
 											if (res && res.length > 0 && res[0].serverData?.fileUrl) {
+												const fileType = res[0].type
 												setFormData((prev) => ({
 													...prev,
 													bannerUrl: res[0].serverData.fileUrl,
+													bannerType: fileType,
 												}))
 												console.log("Banner URL set:", res[0].serverData.fileUrl)
+												console.log("Banner type:", fileType)
 											} else {
 												console.error("Banner upload failed: No URL", res)
 												setError("Banner upload failed: No URL returned.")
@@ -809,11 +832,11 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 										}}
 										onUploadError={(error: Error) => {
 											console.error("Upload Error (Banner):", error)
-											setIsUploadingbannerUrl(false)
-											setError(`Banner upload failed: ${error.message}`)
+											setisUploadingBannerUrl(false)
+											setError(`Banner upload failed. Check type and size.`)
 										}}
 										appearance={{
-											button: `ut-button flex items-center w-fit gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm h-9 px-3 ${isUploadingbannerUrl ? "opacity-50 pointer-events-none" : ""}`,
+											button: `ut-button flex items-center w-fit gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm h-9 px-3 ${isUploadingBannerUrl ? "opacity-50 pointer-events-none" : ""}`,
 											allowedContent: "hidden",
 										}}
 										content={{
@@ -822,14 +845,14 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 												if (ready)
 													return (
 														<>
-															<RiImageAddLine className="h-4 w-4" /> Add Server Banner
+															<RiImageAddLine className="h-4 w-4" /> Add Banner
 														</>
 													)
 												return "Getting ready..."
 											},
 										}}
 									/>
-									{isUploadingbannerUrl && (
+									{isUploadingBannerUrl && (
 										<span className="text-muted-foreground text-xs">Uploading...</span>
 									)}
 								</div>
@@ -1344,14 +1367,30 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 										)}
 										{formData.bannerUrl && (
 											<p className="flex flex-col items-start gap-2">
-												<strong>Product Image:</strong>
-												<Image
-													src={formData.bannerUrl}
-													alt="Product image"
-													width={128}
-													height={128}
-													className="rounded border object-cover"
-												/>
+												<strong>Server Banner:</strong>
+												{formData.bannerType?.startsWith("video/") ? (
+													<video
+														src={formData.bannerUrl}
+														width={128}
+														height={128}
+														controls
+														className="rounded border object-cover"
+													>
+														<track kind="captions" />
+													</video>
+												) : (
+													<Image
+														src={formData.bannerUrl}
+														alt="Server banner"
+														width={128}
+														height={128}
+														className="rounded border object-cover"
+														unoptimized={
+															formData.bannerType === "image/gif" ||
+															formData.bannerType === "image/webp"
+														}
+													/>
+												)}
 											</p>
 										)}
 									</div>
@@ -1497,7 +1536,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 					type="button"
 					variant="outline"
 					onClick={prevStep}
-					disabled={currentStep === 1 || isPending || isUploadingLogo || isUploadingbannerUrl}
+					disabled={currentStep === 1 || isPending || isUploadingLogo || isUploadingBannerUrl}
 				>
 					<RiArrowLeftLine className="mr-2 h-4 w-4" />
 					Previous
@@ -1510,7 +1549,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 						disabled={
 							isPending ||
 							isUploadingLogo ||
-							isUploadingbannerUrl ||
+							isUploadingBannerUrl ||
 							(currentStep === 3 && isLoadingDateCheck)
 						}
 					>
@@ -1524,7 +1563,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 					<Button
 						type="button"
 						onClick={handleFinalSubmit}
-						disabled={isPending || isUploadingLogo || isUploadingbannerUrl}
+						disabled={isPending || isUploadingLogo || isUploadingBannerUrl}
 					>
 						{isPending ? (
 							<RiLoader4Line className="mr-2 h-4 w-4 animate-spin" />
