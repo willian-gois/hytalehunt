@@ -613,7 +613,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
             </div>
             <div>
               <Label htmlFor="description">
-                Short Description <span className="text-red-500">*</span>
+                Description <span className="text-red-500">*</span>
               </Label>
               <RichTextEditor
                 content={formData.description}

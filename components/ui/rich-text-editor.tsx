@@ -10,6 +10,7 @@ import {
   RiListUnordered,
 } from "@remixicon/react"
 import Placeholder from "@tiptap/extension-placeholder"
+import { CharacterCount } from '@tiptap/extension-character-count'
 import { EditorContent, useEditor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 
@@ -43,6 +44,8 @@ export function RichTextDisplay({ content, className }: RichTextDisplayProps) {
   )
 }
 
+const MAX_CHARACTERS = 1000;
+
 // Composant éditeur
 export function RichTextEditor({
   content,
@@ -59,6 +62,9 @@ export function RichTextEditor({
       }),
       Placeholder.configure({
         placeholder,
+      }),
+      CharacterCount.configure({
+        limit: MAX_CHARACTERS,
       }),
     ],
     content,
@@ -85,80 +91,86 @@ export function RichTextEditor({
       )}
     >
       {/* Toolbar */}
-      <div className="bg-muted sticky top-0 z-10 flex flex-wrap items-center gap-1 rounded-t-sm border-b px-2 py-2">
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-          className={cn("h-8 px-2", editor.isActive("heading", { level: 1 }) && "bg-muted")}
-        >
-          <RiH1 className="h-4 w-4" />
-        </Button>
+      <div className="flex justify-between items-center bg-muted sticky top-0 z-10 flex-wrap px-2 py-2 rounded-t-sm border-b">
+        <div className="flex items-center gap-1">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+            className={cn("h-8 px-2", editor.isActive("heading", { level: 1 }) && "bg-muted")}
+          >
+            <RiH1 className="h-4 w-4" />
+          </Button>
 
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={cn("h-8 px-2", editor.isActive("heading", { level: 2 }) && "bg-muted")}
-        >
-          <RiH2 className="h-4 w-4" />
-        </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+            className={cn("h-8 px-2", editor.isActive("heading", { level: 2 }) && "bg-muted")}
+          >
+            <RiH2 className="h-4 w-4" />
+          </Button>
 
-        <div className="bg-border mx-1 h-6 w-px" />
+          <div className="bg-border mx-1 h-6 w-px" />
 
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className={cn("h-8 px-2", editor.isActive("bold") && "bg-muted")}
-        >
-          <RiBold className="h-4 w-4" />
-        </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            className={cn("h-8 px-2", editor.isActive("bold") && "bg-muted")}
+          >
+            <RiBold className="h-4 w-4" />
+          </Button>
 
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={cn("h-8 px-2", editor.isActive("italic") && "bg-muted")}
-        >
-          <RiItalic className="h-4 w-4" />
-        </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            className={cn("h-8 px-2", editor.isActive("italic") && "bg-muted")}
+          >
+            <RiItalic className="h-4 w-4" />
+          </Button>
 
-        <div className="bg-border mx-1 h-6 w-px" />
+          <div className="bg-border mx-1 h-6 w-px" />
 
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={cn("h-8 px-2", editor.isActive("bulletList") && "bg-muted")}
-        >
-          <RiListUnordered className="h-4 w-4" />
-        </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            className={cn("h-8 px-2", editor.isActive("bulletList") && "bg-muted")}
+          >
+            <RiListUnordered className="h-4 w-4" />
+          </Button>
 
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={cn("h-8 px-2", editor.isActive("orderedList") && "bg-muted")}
-        >
-          <RiListOrdered className="h-4 w-4" />
-        </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            className={cn("h-8 px-2", editor.isActive("orderedList") && "bg-muted")}
+          >
+            <RiListOrdered className="h-4 w-4" />
+          </Button>
 
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={cn("h-8 px-2", editor.isActive("blockquote") && "bg-muted")}
-        >
-          <RiDoubleQuotesL className="h-4 w-4" />
-        </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => editor.chain().focus().toggleBlockquote().run()}
+            className={cn("h-8 px-2", editor.isActive("blockquote") && "bg-muted")}
+          >
+            <RiDoubleQuotesL className="h-4 w-4" />
+          </Button>
+        </div>
+
+        <div className="pr-2 text-xs text-muted-foreground">
+          <span>{editor.storage.characterCount.characters()}/{MAX_CHARACTERS}</span>
+        </div>
       </div>
 
       {/* Editor Content */}
