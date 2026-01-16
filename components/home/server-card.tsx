@@ -68,14 +68,14 @@ export function ServerCard({
 		>
 			<div className="flex items-start gap-3 sm:gap-4">
 				<div className="flex-shrink-0">
-					<div className="relative h-12 w-12 overflow-hidden rounded-md sm:h-14 sm:w-14">
+					<div className="relative h-[70px] w-[120px] overflow-hidden rounded-md sm:h-[84px] sm:w-[144px]">
 						{bannerUrl ? (
 							<Image
 								src={bannerUrl}
 								alt={`${name} banner`}
 								fill
-								className="object-contain"
-								sizes="(max-width: 640px) 48px, 56px"
+								className="object-cover"
+								sizes="(max-width: 640px) 120px, 144px"
 							/>
 						) : (
 							<span className="text-muted-foreground flex h-full w-full items-center justify-center text-xl font-bold">
@@ -108,7 +108,14 @@ export function ServerCard({
                   <RiExternalLinkLine className="hidden h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100 md:inline-block" />
                 </a>
               )} */}
-							{ipAddress && <CopyIpButton ipAddress={ipAddress} name={name} />}
+							{ipAddress && (
+								<CopyIpButton
+									ipAddress={ipAddress}
+									name={name}
+									variant={"link"}
+									className="h-fit"
+								/>
+							)}
 						</div>
 
 						<p className="text-muted-foreground mb-1 line-clamp-2 text-xs sm:line-clamp-1 sm:text-sm">
