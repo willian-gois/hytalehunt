@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Metadata, ResolvingMetadata } from "next"
+import type { Metadata, ResolvingMetadata } from "next"
 import { headers } from "next/headers"
 import Image from "next/image"
 import Link from "next/link"
@@ -13,7 +13,6 @@ import {
   RiVipCrownLine,
 } from "@remixicon/react"
 import { format } from "date-fns"
-import { toast } from "sonner"
 
 import { auth } from "@/lib/auth"
 import { getServerWebsiteRelAttribute } from "@/lib/link-utils"
@@ -398,38 +397,48 @@ export default async function ServerPage({ params }: ServerPageProps) {
                 </div>
               )}
 
-              {/* Social Links */}
-              {(serverData.discordUrl || serverData.twitterUrl) && (
+              {/* Discord */}
+              {serverData.discordUrl && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
-                      Socials
+                      Discord
                     </span>
                     <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
-                    <div className="flex items-center gap-2">
-                      {serverData.discordUrl && (
-                        <a
-                          href={serverData.discordUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-foreground transition-colors"
-                          aria-label="Discord"
-                        >
-                          <RiDiscordFill className="h-4 w-4" />
-                        </a>
-                      )}
-                      {serverData.twitterUrl && (
-                        <a
-                          href={serverData.twitterUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-foreground transition-colors"
-                          aria-label="Twitter"
-                        >
-                          <RiTwitterFill className="h-4 w-4" />
-                        </a>
-                      )}
-                    </div>
+                    <Button asChild variant="outline" size="sm">
+                      <a
+                        href={serverData.discordUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        <RiDiscordFill className="h-4 w-4" />
+                        Join
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* Twitter */}
+              {serverData.twitterUrl && (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                      Twitter
+                    </span>
+                    <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
+                    <Button asChild variant="outline" size="sm">
+                      <a
+                        href={serverData.twitterUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        <RiTwitterFill className="h-4 w-4" />
+                        Follow
+                      </a>
+                    </Button>
                   </div>
                 </div>
               )}
