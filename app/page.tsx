@@ -41,7 +41,7 @@ export default async function Home() {
                 {/*  px-4 py-3 md:py-4 */}
                 {/* Mobile Layout - Centered */}
                 <div className="md:hidden">
-                  <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-lg bg-[url('/images/banner.png')] bg-cover bg-center px-6 py-6 text-center shadow-sm">
+                  <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-lg bg-[url('/images/banner.webp')] bg-cover bg-center px-6 py-6 text-center shadow-sm">
                     <div className="absolute inset-0 bg-black/25" aria-hidden="true" />
                     <Link
                       href="/pricing"
@@ -66,7 +66,7 @@ export default async function Home() {
                   </div>
                 </div>
                 {/* Desktop Layout - Text left, Image right */}
-                <div className="hidden w-full max-w-5xl items-center justify-between gap-12 bg-[url('/images/banner.png')] bg-cover bg-center bg-no-repeat px-8 py-6 md:relative md:flex md:overflow-hidden">
+                <div className="hidden w-full max-w-5xl items-center justify-between gap-12 bg-[url('/images/banner.webp')] bg-cover bg-center bg-no-repeat px-8 py-6 md:relative md:flex md:overflow-hidden">
                   <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
                   {/* text */}
                   <div className="relative z-10 flex flex-col items-center justify-center gap-4 text-center">
