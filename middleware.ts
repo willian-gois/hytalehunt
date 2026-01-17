@@ -1,31 +1,17 @@
 import { type NextRequest, NextResponse } from "next/server"
 
-export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+import { getSessionCookie } from "better-auth/cookies"
 
-  // Allow access to /wip, static assets, and API routes
-  if (
-    pathname === "/wip" ||
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    pathname.includes(".") // images, favicon, etc.
-  ) {
-    return NextResponse.next()
+export async function middleware(request: NextRequest) {
+  const sessionCookie = getSessionCookie(request)
+
+  if (!sessionCookie) {
+    return NextResponse.redirect(new URL("/", request.url))
   }
 
-  // Redirect everything else to /wip
-  return NextResponse.redirect(new URL("/wip", request.url))
+  return NextResponse.next()
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
-  ],
+  matcher: ["/dashboard", "/settings"],
 }
