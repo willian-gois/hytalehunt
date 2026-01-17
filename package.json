@@ -21,7 +21,9 @@
     "commit-msg": "npx commitlint --edit $1"
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "lint-staged": {
     "package.json": "sort-package-json"
@@ -137,5 +139,8 @@
     "sort-package-json": "^3.2.1",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
-  }
+  },
+  "trustedDependencies": [
+    "@tailwindcss/oxide"
+  ]
 }
