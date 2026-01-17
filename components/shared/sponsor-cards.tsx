@@ -23,7 +23,6 @@ export function SponsorCards() {
       className: "border-dashed border-primary/40",
       variant: "announce",
       description: `Promote your brand to thousands of Hytale fans. ${slotMessage}`,
-      url: "/sponsors",
     }
 
     displayCards.push(...Array.from({ length: placeholdersNeeded }, () => placeholderCard))
