@@ -70,6 +70,9 @@ export const env = createEnv({
 
     // UploadThing
     NEXT_PUBLIC_UPLOADTHING_URL: z.string().min(1),
+
+    // SEO
+    NEXT_PUBLIC_SEO_ARTICLE_LINK: z.string().url(),
   },
 
   /**
@@ -104,6 +107,7 @@ export const env = createEnv({
     NEXT_PUBLIC_PREMIUM_PLUS_PAYMENT_LINK: process.env.NEXT_PUBLIC_PREMIUM_PLUS_PAYMENT_LINK,
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
     NEXT_PUBLIC_UPLOADTHING_URL: process.env.NEXT_PUBLIC_UPLOADTHING_URL,
+    NEXT_PUBLIC_SEO_ARTICLE_LINK: process.env.NEXT_PUBLIC_SEO_ARTICLE_LINK,
   },
 
   /**
