@@ -7,6 +7,7 @@ import { auth } from "@/lib/auth"
 import { cn } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
+import { HowItWorksModal } from "@/components/home/how-it-works-modal"
 import { ServerSection } from "@/components/home/server-section"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
 import { getMonthBestServers, getTodayServers, getYesterdayServers } from "@/app/actions/home"
@@ -94,6 +95,7 @@ export default async function Home() {
               servers={todayServers}
               sortByUpvotes={true}
               isAuthenticated={!!session?.user}
+              action={<HowItWorksModal />}
             />
 
             <ServerSection

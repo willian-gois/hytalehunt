@@ -34,6 +34,7 @@ interface ServerSectionProps {
   moreHref?: string
   sortByUpvotes?: boolean
   isAuthenticated: boolean
+  action?: React.ReactNode
 }
 
 export function ServerSection({
@@ -42,6 +43,7 @@ export function ServerSection({
   moreHref,
   sortByUpvotes = false,
   isAuthenticated,
+  action,
 }: ServerSectionProps) {
   const sortedServers = sortByUpvotes
     ? [...servers].sort((a, b) => (b.upvoteCount ?? 0) - (a.upvoteCount ?? 0))
@@ -72,10 +74,14 @@ export function ServerSection({
     <section className="space-y-3 sm:space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="font-heading text-xl font-semibold sm:text-2xl">{title}</h2>
-        {moreHref && (
-          <div className="hidden sm:block">
-            <ViewAllButton />
-          </div>
+        {action ? (
+          <div className="hidden sm:block">{action}</div>
+        ) : (
+          moreHref && (
+            <div className="hidden sm:block">
+              <ViewAllButton />
+            </div>
+          )
         )}
       </div>
 
@@ -111,10 +117,14 @@ export function ServerSection({
           </div>
         )}
 
-        {moreHref && (
-          <div className="mt-4 sm:hidden">
-            <ViewAllButtonMobile />
-          </div>
+        {action ? (
+          <div className="mt-4 sm:hidden">{action}</div>
+        ) : (
+          moreHref && (
+            <div className="mt-4 sm:hidden">
+              <ViewAllButtonMobile />
+            </div>
+          )
         )}
       </div>
     </section>
