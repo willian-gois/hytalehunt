@@ -5,6 +5,7 @@ import Link from "next/link"
 
 import { auth } from "@/lib/auth"
 import { cn } from "@/lib/utils"
+
 import { Button } from "@/components/ui/button"
 import { ServerSection } from "@/components/home/server-section"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
@@ -54,10 +55,12 @@ export default async function Home() {
                       </p>
                     </Link>
                     <div className="relative z-10 flex items-center justify-center">
-                      <img
+                      <Image
                         src="/logo.png"
                         alt="HytaleHunt Logo"
-                        className="h-16 w-16 object-contain"
+                        width={64}
+                        height={64}
+                        className="object-contain"
                       />
                     </div>
                   </div>
@@ -79,10 +82,12 @@ export default async function Home() {
 
                   {/* logo */}
                   <div className="relative z-10 flex h-full items-center justify-center md:justify-start">
-                    <img
+                    <Image
                       src="/logo.png"
                       alt="HytaleHunt Logo"
-                      className="h-24 w-24 object-contain"
+                      width={96}
+                      height={96}
+                      className="object-contain"
                     />
                   </div>
                 </div>
