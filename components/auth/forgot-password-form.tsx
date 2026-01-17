@@ -6,7 +6,7 @@ import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
-import { forgetPassword } from "@/lib/auth-client"
+import { requestPasswordReset } from "@/lib/auth-client"
 import { type ForgotPasswordFormData, forgotPasswordSchema } from "@/lib/validations/auth"
 
 import { Button } from "@/components/ui/button"
@@ -42,7 +42,7 @@ export function ForgotPasswordForm() {
       setError(null)
       setSubmittedEmail(data.email)
 
-      await forgetPassword({
+      await requestPasswordReset({
         email: data.email,
         redirectTo: "/reset-password",
         fetchOptions: {

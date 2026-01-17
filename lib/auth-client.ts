@@ -12,7 +12,7 @@ export const {
   getSession,
   updateUser,
   changePassword,
-  forgetPassword,
+  requestPasswordReset,
   resetPassword,
   oneTap,
   admin,
