@@ -9,37 +9,38 @@ import { cn } from "@/lib/utils"
 import { Button, type buttonVariants } from "@/components/ui/button"
 
 interface CopyIpButtonProps {
-	className?: string
-	ipAddress: string
-	name: string
+  className?: string
+  ipAddress: string
+  name: string
 }
 
 export function CopyIpButton({
-	className,
-	ipAddress,
-	name,
-	variant = "default",
-	...props
+  className,
+  ipAddress,
+  name,
+  variant = "default",
+  size = "sm",
+  ...props
 }: CopyIpButtonProps &
-	VariantProps<typeof buttonVariants> & {
-		asChild?: boolean
-	}) {
-	return (
-		<Button
-			variant={variant}
-			size="sm"
-			className={cn("h-9 px-3 cursor-copy", className)}
-			onClick={(e) => {
-				e.stopPropagation()
-				e.preventDefault()
-				navigator.clipboard.writeText(ipAddress)
-				toast.success("IP copied to clipboard!")
-			}}
-			title={`Copy ${name} IP address`}
-			{...props}
-		>
-			<RiFileCopyLine className="h-4 w-4" />
-			<span>{ipAddress}</span>
-		</Button>
-	)
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean
+  }) {
+  return (
+    <Button
+      variant={variant}
+      size={size}
+      className={cn("h-9 cursor-copy", className)}
+      onClick={(e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        navigator.clipboard.writeText(ipAddress)
+        toast.success("IP address copied to clipboard!")
+      }}
+      title={`Copy ${name} IP address`}
+      {...props}
+    >
+      <RiFileCopyLine className="h-4 w-4" />
+      {size === "icon" ? null : <span>{ipAddress}</span>}
+    </Button>
+  )
 }
