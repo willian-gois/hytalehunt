@@ -1,4 +1,3 @@
-import { db } from "@/drizzle/db"
 import { stripe } from "@better-auth/stripe"
 import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
@@ -7,7 +6,11 @@ import Stripe from "stripe"
 
 import { sendEmail } from "@/lib/email"
 
-const stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY!)
+import { db } from "@/drizzle/db"
+
+const stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2025-12-15.clover",
+})
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {

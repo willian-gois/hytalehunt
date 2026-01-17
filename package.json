@@ -28,7 +28,7 @@
     "package.json": "sort-package-json"
   },
   "dependencies": {
-    "@better-auth/stripe": "^1.2.7",
+    "@better-auth/stripe": "1.4.14",
     "@fuma-comment/next": "^1.2.3",
     "@fuma-comment/react": "^1.2.3",
     "@fuma-comment/server": "^1.2.3",
@@ -113,7 +113,7 @@
     "resend": "^4.5.1",
     "satori": "^0.12.2",
     "sonner": "^2.0.3",
-    "stripe": "^17.7.0",
+    "stripe": "20.2.0",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.6",
     "tailwindcss-animate": "^1.0.7",
