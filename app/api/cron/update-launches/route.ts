@@ -7,16 +7,15 @@ import { db } from "@/drizzle/db"
 import { launchStatus, server, upvote } from "@/drizzle/db/schema"
 import { env } from "@/env"
 
-// Clé API pour sécuriser l'endpoint
-const API_KEY = env.CRON_API_KEY
+// Vercel cron secret for securing the endpoint
+const CRON_SECRET = env.CRON_SECRET
 
 export async function GET(request: NextRequest) {
   try {
-    // Vérification de la clé API
+    // Verify Vercel cron secret
     const authHeader = request.headers.get("authorization")
-    const providedKey = authHeader?.replace("Bearer ", "")
 
-    if (!API_KEY || providedKey !== API_KEY) {
+    if (authHeader !== `Bearer ${CRON_SECRET}`) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 

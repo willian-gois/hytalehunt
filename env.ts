@@ -34,8 +34,8 @@ export const env = createEnv({
     // Email (Resend)
     RESEND_API_KEY: z.string().min(1),
 
-    // Cron Jobs
-    CRON_API_KEY: z.string().min(1),
+    // Cron Jobs (Vercel)
+    CRON_SECRET: z.string().min(1),
 
     // UploadThing
     UPLOADTHING_TOKEN: z.string().min(1),
@@ -92,7 +92,7 @@ export const env = createEnv({
     DISCORD_WEBHOOK_URL: process.env.DISCORD_WEBHOOK_URL,
     DISCORD_LAUNCH_WEBHOOK_URL: process.env.DISCORD_LAUNCH_WEBHOOK_URL,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
-    CRON_API_KEY: process.env.CRON_API_KEY,
+    CRON_SECRET: process.env.CRON_SECRET,
     UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
     PLAUSIBLE_API_KEY: process.env.PLAUSIBLE_API_KEY,
     PLAUSIBLE_URL: process.env.PLAUSIBLE_URL,
