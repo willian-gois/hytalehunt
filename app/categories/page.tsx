@@ -174,6 +174,7 @@ async function CategoryData({
               name={server.name}
               description={server.description || ""}
               logoUrl={server.logoUrl || ""}
+              bannerUrl={server.bannerUrl || ""}
               websiteUrl={server.websiteUrl ?? undefined}
               upvoteCount={server.upvoteCount ?? 0}
               commentCount={server.commentCount ?? 0}

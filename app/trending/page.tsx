@@ -17,6 +17,7 @@ interface ServerSummary {
   name: string
   description: string | null
   logoUrl: string
+  bannerUrl: string
   websiteUrl?: string | null
   upvoteCount: number
   commentCount?: number | null

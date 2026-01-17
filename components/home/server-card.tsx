@@ -22,8 +22,8 @@ interface ServerCardProps {
   slug: string
   name: string
   description: string
-  logoUrl: string
-  bannerUrl: string
+  logoUrl?: string
+  bannerUrl?: string
   upvoteCount: number
   commentCount: number
   launchStatus: string
