@@ -45,6 +45,11 @@ export const env = createEnv({
     PLAUSIBLE_URL: z.string().url().optional(),
     PLAUSIBLE_SITE_ID: z.string().min(1).optional(),
 
+    // PostHog Analytics
+    POSTHOG_PERSONAL_API_KEY: z.string().min(1),
+    POSTHOG_PROJECT_ID: z.string().min(1),
+    POSTHOG_HOST: z.string().url(),
+
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   },
 
@@ -55,6 +60,7 @@ export const env = createEnv({
    */
   client: {
     // Application
+    NEXT_PUBLIC_APP_ENV: z.enum(["development", "test", "production"]).default("development"),
     NEXT_PUBLIC_URL: z.string().url(),
     NEXT_PUBLIC_CONTACT_EMAIL: z.string().email(),
 
@@ -70,6 +76,9 @@ export const env = createEnv({
 
     // UploadThing
     NEXT_PUBLIC_UPLOADTHING_URL: z.string().min(1),
+
+    // PostHog Analytics (Client-side)
+    NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1),
 
     // SEO
     NEXT_PUBLIC_SEO_ARTICLE_LINK: z.string().url(),
@@ -97,9 +106,13 @@ export const env = createEnv({
     PLAUSIBLE_API_KEY: process.env.PLAUSIBLE_API_KEY,
     PLAUSIBLE_URL: process.env.PLAUSIBLE_URL,
     PLAUSIBLE_SITE_ID: process.env.PLAUSIBLE_SITE_ID,
+    POSTHOG_PERSONAL_API_KEY: process.env.POSTHOG_PERSONAL_API_KEY,
+    POSTHOG_PROJECT_ID: process.env.POSTHOG_PROJECT_ID,
+    POSTHOG_HOST: process.env.POSTHOG_HOST,
     NODE_ENV: process.env.NODE_ENV,
 
     // Client
+    NEXT_PUBLIC_APP_ENV: process.env.NEXT_PUBLIC_APP_ENV,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     NEXT_PUBLIC_CONTACT_EMAIL: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
     NEXT_PUBLIC_GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
@@ -107,6 +120,7 @@ export const env = createEnv({
     NEXT_PUBLIC_PREMIUM_PLUS_PAYMENT_LINK: process.env.NEXT_PUBLIC_PREMIUM_PLUS_PAYMENT_LINK,
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
     NEXT_PUBLIC_UPLOADTHING_URL: process.env.NEXT_PUBLIC_UPLOADTHING_URL,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_SEO_ARTICLE_LINK: process.env.NEXT_PUBLIC_SEO_ARTICLE_LINK,
   },
 

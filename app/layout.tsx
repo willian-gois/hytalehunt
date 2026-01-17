@@ -4,6 +4,8 @@ import { Cinzel as FontHeading, Nunito_Sans as FontSans } from "next/font/google
 import PlausibleProvider from "next-plausible"
 import { Toaster } from "sonner"
 
+import { PostHogPageview } from "@/components/analytics/posthog-pageview"
+import { PostHogProvider } from "@/components/analytics/posthog-provider"
 import Footer from "@/components/layout/footer"
 import Nav from "@/components/layout/nav"
 import { OrganizationSchema, WebSiteSchema } from "@/components/seo/organization-schema"
@@ -80,19 +82,22 @@ export default function RootLayout({
         className={`font-sans antialiased ${fontSans.variable} ${fontHeading.variable} sm:overflow-y-scroll`}
         suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="flex min-h-dvh flex-col">
-            <Nav />
-            <main className="flex-grow">{children}</main>
-            <Footer />
-          </div>
-        </ThemeProvider>
-        <Toaster />
+        <PostHogProvider>
+          <PostHogPageview />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="flex min-h-dvh flex-col">
+              <Nav />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </div>
+          </ThemeProvider>
+          <Toaster />
+        </PostHogProvider>
       </body>
     </html>
   )
