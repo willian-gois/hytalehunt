@@ -58,6 +58,8 @@ import {
 } from "@/app/actions/launch"
 import { getAllCategories, submitServer } from "@/app/actions/servers"
 
+import { ServerBannerWithLoader } from "./server-banner-with-loader"
+
 const MAXIMUM_CATEGORY_COUNT = 5
 
 const SERVER_VERSIONS = [{ value: "1.0", label: "1.0" }] as const
@@ -74,7 +76,6 @@ interface ServerFormData {
 	scheduledDate: string | null
 	launchType: (typeof LAUNCH_TYPES)[keyof typeof LAUNCH_TYPES]
 	bannerUrl: string | null
-	bannerType?: string
 	version: string
 	country: string
 }
@@ -104,7 +105,6 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 		scheduledDate: null,
 		launchType: LAUNCH_TYPES.FREE,
 		bannerUrl: null,
-		bannerType: undefined,
 		version: "1.0",
 		country: "",
 	})
@@ -617,7 +617,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 								name="ipAddress"
 								value={formData.ipAddress}
 								onChange={handleInputChange}
-								placeholder="play.server.com"
+								placeholder="play.myawesomeserver.com"
 								required
 							/>
 						</div>
@@ -769,36 +769,13 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 							</p>
 							{formData.bannerUrl ? (
 								<div className="bg-muted/30 relative w-fit rounded-md border p-3">
-									{formData.bannerType?.startsWith("video/") ? (
-										<video
-											src={formData.bannerUrl}
-											width={480}
-											height={280}
-											controls
-											className="rounded object-contain"
-										>
-											<track kind="captions" />
-										</video>
-									) : (
-										<Image
-											src={formData.bannerUrl}
-											alt="Banner preview"
-											width={480}
-											height={280}
-											className="rounded object-contain"
-											unoptimized={
-												formData.bannerType === "image/gif" || formData.bannerType === "image/webp"
-											}
-										/>
-									)}
+									<ServerBannerWithLoader src={formData.bannerUrl} alt="Banner preview" />
 									<Button
 										type="button"
 										variant="ghost"
 										size="icon"
 										className="text-muted-foreground hover:text-foreground absolute top-1 right-1 h-6 w-6"
-										onClick={() =>
-											setFormData((prev) => ({ ...prev, bannerUrl: null, bannerType: undefined }))
-										}
+										onClick={() => setFormData((prev) => ({ ...prev, bannerUrl: null }))}
 										aria-label="Remove banner"
 									>
 										<RiCloseCircleLine className="h-5 w-5" />
@@ -821,7 +798,6 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 												setFormData((prev) => ({
 													...prev,
 													bannerUrl: res[0].serverData.fileUrl,
-													bannerType: fileType,
 												}))
 												console.log("Banner URL set:", res[0].serverData.fileUrl)
 												console.log("Banner type:", fileType)
@@ -1368,29 +1344,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 										{formData.bannerUrl && (
 											<p className="flex flex-col items-start gap-2">
 												<strong>Server Banner:</strong>
-												{formData.bannerType?.startsWith("video/") ? (
-													<video
-														src={formData.bannerUrl}
-														width={128}
-														height={128}
-														controls
-														className="rounded border object-cover"
-													>
-														<track kind="captions" />
-													</video>
-												) : (
-													<Image
-														src={formData.bannerUrl}
-														alt="Server banner"
-														width={128}
-														height={128}
-														className="rounded border object-cover"
-														unoptimized={
-															formData.bannerType === "image/gif" ||
-															formData.bannerType === "image/webp"
-														}
-													/>
-												)}
+												<ServerBannerWithLoader src={formData.bannerUrl} alt="Server banner" />
 											</p>
 										)}
 									</div>

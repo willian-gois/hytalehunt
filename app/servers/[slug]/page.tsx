@@ -17,12 +17,13 @@ import { toast } from "sonner"
 
 import { auth } from "@/lib/auth"
 import { getServerWebsiteRelAttribute } from "@/lib/link-utils"
+
 import { Button } from "@/components/ui/button"
 import { RichTextDisplay } from "@/components/ui/rich-text-editor"
 import { CopyIpButton } from "@/components/server/copy-ip-button"
 import { EditButton } from "@/components/server/edit-button"
+import { ServerBannerWithLoader } from "@/components/server/server-banner-with-loader"
 import { ServerComments } from "@/components/server/server-comments"
-import { ServerImageWithLoader } from "@/components/server/server-image-with-loader"
 import { ShareButton } from "@/components/server/share-button"
 import { UpvoteButton } from "@/components/server/upvote-button"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
@@ -284,7 +285,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
 
               {/* Banner */}
               {serverData.bannerUrl && (
-                <ServerImageWithLoader
+                <ServerBannerWithLoader
                   src={serverData.bannerUrl}
                   alt={`${serverData.name} - Server Banner`}
                 />
