@@ -22,8 +22,8 @@ interface ServerCardProps {
   slug: string
   name: string
   description: string
-  logoUrl?: string
-  bannerUrl?: string
+  logoUrl: string
+  bannerUrl: string
   upvoteCount: number
   commentCount: number
   launchStatus: string
@@ -42,7 +42,7 @@ export function ServerCard({
   slug,
   name,
   description,
-  bannerUrl,
+  logoUrl,
   upvoteCount,
   commentCount,
   launchStatus,
@@ -67,16 +67,17 @@ export function ServerCard({
       }}
     >
       <div className="flex items-start gap-3 sm:gap-4">
-        <div className="flex-shrink-0">
-          <div className="relative h-[70px] w-[120px] overflow-hidden rounded-md sm:h-[84px] sm:w-[144px]">
-            {bannerUrl ? (
+        <div className="flex-shrink-0 items-center">
+          <div className="relative flex h-[70px] w-[120px] items-center justify-center overflow-hidden rounded-md sm:h-[84px] sm:w-[144px]">
+            {logoUrl ? (
               <Image
-                src={bannerUrl}
-                alt={`${name} banner`}
+                src={logoUrl}
+                alt={`${name} logo`}
                 fill
-                className="object-cover"
-                sizes="(max-width: 640px) 120px, 144px"
+                className="object-contain"
+                sizes="(max-width: 640px) 48px, 56px"
               />
+              // <ServerBannerWithLoader src={bannerUrl} alt={`${name} banner`} />
             ) : (
               <span className="text-muted-foreground flex h-full w-full items-center justify-center text-xl font-bold">
                 {name.charAt(0)}
