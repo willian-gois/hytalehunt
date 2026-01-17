@@ -14,6 +14,11 @@ const stripeClient = new Stripe(env.STRIPE_SECRET_KEY, {
 })
 
 export const auth = betterAuth({
+  appName: "HytaleHunt",
+  baseURL: env.BETTER_AUTH_URL,
+  trustedOrigins: [
+    env.NODE_ENV !== "development" ? "https://www.hytalehunt.com" : "http://localhost:3000",
+  ],
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
@@ -68,9 +73,6 @@ export const auth = betterAuth({
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     },
   },
-  trustedOrigins: [
-    env.NODE_ENV !== "development" ? "https://www.hytalehunt.com" : "http://localhost:3000",
-  ],
   plugins: [
     stripe({
       stripeClient,
@@ -83,7 +85,7 @@ export const auth = betterAuth({
       endpoints: ["/sign-up/email", "/sign-in/email", "/forget-password"],
     }),
     oneTap({
-      clientId: env.NEXT_PUBLIC_ONE_TAP_CLIENT_ID,
+      clientId: env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
     }),
     admin({}),
   ],

@@ -17,10 +17,7 @@ export const {
   oneTap,
   admin,
 } = createAuthClient({
-  baseURL: env.BETTER_AUTH_URL,
-  trustedOrigins: [
-    env.NODE_ENV !== "development" ? "https://www.hytalehunt.com" : "http://localhost:3000",
-  ],
+  appName: "HytaleHunt",
   plugins: [
     stripeClient({
       subscription: true, //if you want to enable subscription management
