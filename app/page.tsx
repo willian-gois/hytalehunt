@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { HowItWorksModal } from "@/components/home/how-it-works-modal"
 import { ServerSection } from "@/components/home/server-section"
+import { WelcomeBanner } from "@/components/home/welcome-banner"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
 import { getMonthBestServers, getTodayServers, getYesterdayServers } from "@/app/actions/home"
 import { getTopCategories } from "@/app/actions/servers"
@@ -30,6 +31,7 @@ export default async function Home() {
 
   return (
     <main className="bg-muted/30 min-h-screen">
+      <WelcomeBanner />
       <div className="container mx-auto max-w-6xl px-4 pt-6 pb-12 md:pt-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:items-start">
           {/* Contenu principal */}
