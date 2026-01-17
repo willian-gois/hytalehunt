@@ -217,18 +217,8 @@ export default async function ServerPage({ params }: ServerPageProps) {
 
                 {/* Actions - Same width buttons side by side */}
                 <div className="flex gap-3">
-                  {serverData.websiteUrl && (
-                    <Button variant="outline" size="sm" asChild className="h-9 px-3">
-                      <a
-                        href={serverData.websiteUrl}
-                        target="_blank"
-                        rel={websiteRelAttribute}
-                        className="flex items-center justify-center gap-2"
-                      >
-                        <RiGlobalLine className="h-4 w-4" />
-                        Visit
-                      </a>
-                    </Button>
+                  {serverData.ipAddress && (
+                    <CopyIpButton ipAddress={serverData.ipAddress} name={serverData.name} />
                   )}
 
                   {isActiveLaunch ? (
