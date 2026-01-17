@@ -12,7 +12,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-import { getLast30DaysPageviews, getLast30DaysVisitors } from "@/app/actions/plausible"
 
 export const metadata: Metadata = {
   title: "Sponsors - HytaleHunt",
@@ -21,10 +20,10 @@ export const metadata: Metadata = {
 
 export default async function SponsorsPage() {
   const remainingSlots = SPONSORSHIP_SLOTS.TOTAL - SPONSORSHIP_SLOTS.USED
-  const [visitors, pageviews] = await Promise.all([
-    getLast30DaysVisitors(),
-    getLast30DaysPageviews(),
-  ])
+  // const [visitors, pageviews] = await Promise.all([
+  //   getLast30DaysVisitors(),
+  //   getLast30DaysPageviews(),
+  // ])
 
   const generalSponsorshipBenefits = [
     "Featured on our homepage sidebar.",
@@ -70,7 +69,7 @@ export default async function SponsorsPage() {
         </p>
       </div>
       {/* General Benefits & Statistics Section */}
-      <div className="mx-auto mb-4 max-w-3xl">
+      {/* <div className="mx-auto mb-4 max-w-3xl">
         <div className="bg-background/70 rounded-lg border p-5 md:p-6">
           <h2 className="mb-5 text-center text-xl font-semibold">Key Benefits & Audience Reach</h2>
           <div className="mx-auto max-w-md">
@@ -100,7 +99,7 @@ export default async function SponsorsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Sponsorship Options  */}
       <div className="mx-auto mb-12">

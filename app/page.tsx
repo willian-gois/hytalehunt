@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button"
 import { ServerSection } from "@/components/home/server-section"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
 import { getMonthBestServers, getTodayServers, getYesterdayServers } from "@/app/actions/home"
-import { getLast30DaysPageviews, getLast30DaysVisitors } from "@/app/actions/plausible"
 import { getTopCategories } from "@/app/actions/servers"
 
 export default async function Home() {
@@ -20,8 +19,8 @@ export default async function Home() {
   const monthServers = await getMonthBestServers()
   const topCategories = await getTopCategories(5)
 
-  const last30DaysVisitors = await getLast30DaysVisitors()
-  const last30DaysPageviews = await getLast30DaysPageviews()
+  // const last30DaysVisitors = await getLast30DaysVisitors()
+  // const last30DaysPageviews = await getLast30DaysPageviews()
 
   // // Get session
   const session = await auth.api.getSession({
@@ -117,7 +116,7 @@ export default async function Home() {
           {/* Sidebar */}
           <div className="top-24">
             {/* Statistics */}
-            {(last30DaysVisitors !== null || last30DaysPageviews !== null) && (
+            {/* {(last30DaysVisitors !== null || last30DaysPageviews !== null) && (
               <div className="space-y-3 pt-0 pb-4">
                 <h3 className="font-heading flex items-center gap-2 font-semibold">
                   Statistics (Last 30 Days)
@@ -139,7 +138,7 @@ export default async function Home() {
                   )}
                 </div>
               </div>
-            )}
+            )} */}
             {/* Sponsors */}
             <div className="space-y-3 py-4">
               <h3 className="font-heading flex items-center font-semibold">Sponsors</h3>
