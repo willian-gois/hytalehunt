@@ -4,12 +4,14 @@ import { useRef } from "react"
 
 import { Turnstile } from "@marsidev/react-turnstile"
 
+import { env } from "@/env"
+
 interface TurnstileCaptchaProps {
   onVerify: (token: string) => void
 }
 
 export function TurnstileCaptcha({ onVerify }: TurnstileCaptchaProps) {
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+  const siteKey = env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
   const ref = useRef(null)
 
   if (!siteKey) {
@@ -17,7 +19,10 @@ export function TurnstileCaptcha({ onVerify }: TurnstileCaptchaProps) {
     return null
   }
 
-  if (process.env.NODE_ENV === "development") return null
+  if (env.NODE_ENV === "development") {
+    onVerify("development")
+    return null
+  }
 
   return (
     <div className="flex justify-center">

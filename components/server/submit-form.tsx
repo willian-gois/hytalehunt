@@ -4,8 +4,6 @@ import { useCallback, useEffect, useId, useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
-import { env } from "@/env"
-
 import {
   RiArrowLeftLine,
   RiArrowRightLine,
@@ -61,6 +59,7 @@ import {
 import { getAllCategories, submitServer } from "@/app/actions/servers"
 
 import { ServerBannerWithLoader } from "./server-banner-with-loader"
+import { env } from "@/env"
 
 const MAXIMUM_CATEGORY_COUNT = 5
 

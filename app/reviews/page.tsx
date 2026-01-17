@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 
 import { Calendar, Clock } from "lucide-react"
@@ -110,9 +111,11 @@ export default async function ReviewsPage() {
                   {/* Review Image */}
                   <div className="bg-muted relative aspect-[16/9] overflow-hidden">
                     {review.image ? (
-                      <img
+                      <Image
                         src={review.image}
                         alt={review.title}
+                        width={0} // TODO: check this size
+                        height={0}
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-103"
                       />
                     ) : (

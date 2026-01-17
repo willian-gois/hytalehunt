@@ -32,6 +32,7 @@ export function ArticleFooter() {
         <div className="text-foreground text-sm font-medium">Share this article</div>
         <div className="flex items-center gap-2">
           <button
+            type="button"
             onClick={shareOnTwitter}
             className="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-2 rounded-lg p-2 text-sm transition-colors"
             aria-label="Share on Twitter"
@@ -39,6 +40,7 @@ export function ArticleFooter() {
             <Twitter className="h-4 w-4" />
           </button>
           <button
+            type="button"
             onClick={shareOnLinkedIn}
             className="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-2 rounded-lg p-2 text-sm transition-colors"
             aria-label="Share on LinkedIn"
@@ -46,6 +48,7 @@ export function ArticleFooter() {
             <Linkedin className="h-4 w-4" />
           </button>
           <button
+            type="button"
             onClick={shareOnFacebook}
             className="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-2 rounded-lg p-2 text-sm transition-colors"
             aria-label="Share on Facebook"

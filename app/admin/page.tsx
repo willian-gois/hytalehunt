@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
 import { format, parseISO } from "date-fns"
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
   useIsMobile()
 
   // Fetch users, stats and free launch availability
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true)
     try {
       const [{ users, stats }, freeLaunchData] = await Promise.all([
@@ -129,10 +129,10 @@ export default function AdminDashboard() {
       setFreeLaunchAvailability(null)
     }
     setLoading(false)
-  }
+  }, [])
 
   // Fetch categories
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     try {
       const { categories: cats, totalCount } = await getCategories()
       setCategories(cats)
@@ -140,7 +140,7 @@ export default function AdminDashboard() {
     } catch (error) {
       console.error("Failed to fetch categories:", error)
     }
-  }
+  }, [])
 
   // Handle category addition
   const handleAddCategory = async (e: React.FormEvent) => {
@@ -164,7 +164,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     fetchData()
     fetchCategories()
-  }, [])
+  }, [fetchData, fetchCategories])
 
   // Filtres
   useEffect(() => {
@@ -362,6 +362,7 @@ export default function AdminDashboard() {
               fill="none"
               viewBox="0 0 24 24"
             >
+              <title>Loading...</title>
               <circle
                 className="opacity-25"
                 cx="12"
@@ -619,7 +620,8 @@ function DropdownMenuUserActions({
 }: {
   user: User
   onRefresh: () => Promise<void>
-  router: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
+  router: any
   setIsLoading: (value: string | undefined) => void
   isLoading: string | undefined
 }) {

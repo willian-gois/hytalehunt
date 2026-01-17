@@ -81,7 +81,7 @@ function PaymentSuccessContent() {
     }
 
     checkPaymentStatus()
-  }, [router, searchParams, redirectDelay])
+  }, [router, searchParams])
 
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4 py-12">

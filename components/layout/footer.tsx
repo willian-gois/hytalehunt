@@ -67,7 +67,7 @@ export default function FooterSection() {
               <h3 className="text-foreground text-sm font-semibold tracking-wider uppercase font-heading">
                 Discover
               </h3>
-              <ul role="list" className="mt-4 flex flex-col items-start space-y-3">
+              <ul className="mt-4 flex flex-col items-start space-y-3">
                 {discoverLinks.map((link) => (
                   <li key={link.title}>
                     <Link
@@ -86,7 +86,7 @@ export default function FooterSection() {
               <h3 className="text-foreground text-sm font-semibold tracking-wider uppercase font-heading">
                 Resources
               </h3>
-              <ul role="list" className="mt-4 flex flex-col items-start space-y-3">
+              <ul className="mt-4 flex flex-col items-start space-y-3">
                 {resourcesLinks.map((link) => (
                   <li key={link.title}>
                     <Link
@@ -105,7 +105,7 @@ export default function FooterSection() {
               <h3 className="text-foreground text-sm font-semibold tracking-wider uppercase font-heading">
                 Legal
               </h3>
-              <ul role="list" className="mt-4 flex flex-col items-start space-y-3">
+              <ul className="mt-4 flex flex-col items-start space-y-3">
                 {legalLinks.map((link) => (
                   <li key={link.title}>
                     <Link
@@ -124,7 +124,7 @@ export default function FooterSection() {
               <h3 className="text-foreground text-sm font-semibold tracking-wider uppercase font-heading">
                 Connect
               </h3>
-              <ul role="list" className="mt-4 flex flex-col items-start space-y-3">
+              <ul className="mt-4 flex flex-col items-start space-y-3">
                 {connectLinkItems.map((item) => (
                   <li key={item.label}>
                     <a

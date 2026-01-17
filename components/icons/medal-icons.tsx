@@ -5,6 +5,7 @@ interface MedalProps {
 export function GoldMedal({ className = "w-4 h-4" }: MedalProps) {
   return (
     <svg viewBox="0 0 120 120" className={className} xmlns="http://www.w3.org/2000/svg">
+      <title>Gold Medal</title>
       <g>
         <polygon
           fill="#3b82f6"
@@ -24,6 +25,7 @@ export function GoldMedal({ className = "w-4 h-4" }: MedalProps) {
 export function SilverMedal({ className = "w-4 h-4" }: MedalProps) {
   return (
     <svg viewBox="0 0 120 120" className={className} xmlns="http://www.w3.org/2000/svg">
+      <title>Silver Medal</title>
       <g>
         <polygon
           fill="#3b82f6"
@@ -51,6 +53,7 @@ export function SilverMedal({ className = "w-4 h-4" }: MedalProps) {
 export function BronzeMedal({ className = "w-4 h-4" }: MedalProps) {
   return (
     <svg viewBox="0 0 120 120" className={className} xmlns="http://www.w3.org/2000/svg">
+      <title>Bronze Medal</title>
       <g>
         <polygon
           fill="#3b82f6"

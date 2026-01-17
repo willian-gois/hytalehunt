@@ -28,7 +28,7 @@ export async function checkRateLimit(
     if (requestCount >= limit) {
       // Obtenir la requête la plus ancienne avec son score
       const oldestRequest = await redis.zrange(key, 0, 0, "WITHSCORES")
-      const reset = oldestRequest.length ? parseInt(oldestRequest[1]) + window : now + window
+      const reset = oldestRequest.length ? parseInt(oldestRequest[1], 10) + window : now + window
 
       return {
         success: false,

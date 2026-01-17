@@ -110,7 +110,9 @@ export function EditServerForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <label className="text-sm font-medium">Description</label>
+        <label className="text-sm font-medium" htmlFor="description">
+          Description
+        </label>
         <RichTextEditor
           className="max-h-[250px] overflow-y-auto"
           content={description}
@@ -120,7 +122,7 @@ export function EditServerForm({
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium">
+        <label htmlFor="categories" className="text-sm font-medium">
           Categories <span className="text-muted-foreground text-xs">(maximum 3)</span>
         </label>
 

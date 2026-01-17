@@ -87,7 +87,7 @@ export function useSearch({
 
         console.log("[useSearch] Results received:", data)
 
-        if (data && data.results && Array.isArray(data.results)) {
+        if (data?.results && Array.isArray(data.results)) {
           console.log(`[useSearch] ${data.results.length} results found`)
 
           // Vérifier que chaque résultat a les propriétés requises

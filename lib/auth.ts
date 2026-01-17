@@ -4,11 +4,10 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { admin, captcha, oneTap } from "better-auth/plugins"
 import Stripe from "stripe"
 
-import { env } from "@/env"
-
 import { sendEmail } from "@/lib/email"
 
 import { db } from "@/drizzle/db"
+import { env } from "@/env"
 
 const stripeClient = new Stripe(env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-12-15.clover",

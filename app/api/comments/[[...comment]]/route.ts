@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/** biome-ignore-all lint/suspicious/noExplicitAny: depends on fuma-comment types */
 import { NextRequest, NextResponse } from "next/server"
 
 import { NextComment } from "@fuma-comment/next"
@@ -7,6 +7,12 @@ import { commentAuth, commentStorage } from "@/lib/comment.config"
 import { checkCommentRateLimit } from "@/lib/comment-rate-limit"
 import { extractTextFromContent } from "@/lib/content-utils"
 import { sendDiscordCommentNotification } from "@/lib/discord-notification"
+
+type RouteContext = {
+  params: Promise<{
+    comment: string[]
+  }>
+}
 
 /**
  * Supprime tous les liens du contenu en transformant les nœuds "link" en texte simple
@@ -81,7 +87,7 @@ const commentHandler = NextComment({
 })
 
 // Intercept POST requests to add Discord notification and rate limiting
-export async function POST(req: NextRequest, context: any) {
+export async function POST(req: NextRequest, context: RouteContext) {
   try {
     // Get parameters and user session
     const params = await context.params
@@ -152,7 +158,7 @@ export async function POST(req: NextRequest, context: any) {
 }
 
 // Intercept PATCH requests (édition de commentaires) pour aussi supprimer les liens
-export async function PATCH(req: NextRequest, context: any) {
+export async function PATCH(req: NextRequest, context: RouteContext) {
   try {
     // Traiter la requête pour supprimer les liens
     const processedReq = await processRequestWithLinkRemoval(req)

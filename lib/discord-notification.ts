@@ -4,10 +4,9 @@
 
 import { eq } from "drizzle-orm"
 
-import { env } from "@/env"
-
 import { db } from "@/drizzle/db"
 import { launchType as LaunchTypeEnum, server, user } from "@/drizzle/db/schema"
+import { env } from "@/env"
 
 interface DiscordEmbed {
   title: string

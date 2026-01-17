@@ -35,7 +35,7 @@ export function TableOfContents() {
         tocItems.push({
           id,
           text: element.textContent.trim(),
-          level: parseInt(element.tagName.charAt(1)),
+          level: parseInt(element.tagName.charAt(1), 10),
         })
       }
     })

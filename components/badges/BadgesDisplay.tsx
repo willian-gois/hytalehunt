@@ -2,6 +2,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"
@@ -46,9 +47,11 @@ export function BadgesDisplay({ dailyRanking, slug }: BadgesDisplayProps) {
           </div>
         </div>
         <div className="flex w-full justify-center">
-          <img
+          <Image
             src={`/images/badges/top${dailyRanking}-light.webp`}
             alt={`HytaleHunt Top ${dailyRanking} Daily Winner`}
+            width={195}
+            height={48}
             className="h-auto w-[195px]"
           />
         </div>
@@ -71,9 +74,10 @@ export function BadgesDisplay({ dailyRanking, slug }: BadgesDisplayProps) {
           </div>
         </div>
         <div className="flex w-full justify-center">
-          <img
+          <Image
             src={`/images/badges/top${dailyRanking}-dark.webp`}
             alt={`HytaleHunt Top ${dailyRanking} Daily Winner`}
+            width={195}
             className="h-auto w-[195px]"
           />
         </div>

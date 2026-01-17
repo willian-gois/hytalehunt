@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -16,8 +17,6 @@ import { ArrowLeft, Calendar, Clock } from "lucide-react"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
 
-import { env } from "@/env"
-
 import { DOMAIN_AUTHORITY, LAUNCH_SETTINGS } from "@/lib/constants"
 
 import { Button } from "@/components/ui/button"
@@ -33,6 +32,7 @@ import { TableOfContents } from "@/components/blog/table-of-contents"
 
 import { db } from "@/drizzle/db"
 import { seoArticle } from "@/drizzle/db/schema"
+import { env } from "@/env"
 
 export async function generateMetadata({
   params,
@@ -147,9 +147,11 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {/* Hero Image */}
                 {article[0].image && (
                   <div className="bg-muted mb-8 aspect-[16/9] overflow-hidden rounded-lg">
-                    <img
+                    <Image
                       src={article[0].image}
                       alt={title}
+                      width={0} // TODO: check this size
+                      height={0}
                       className="h-full w-full object-cover"
                     />
                   </div>

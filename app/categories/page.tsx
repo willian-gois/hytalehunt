@@ -112,7 +112,7 @@ async function CategoryData({
         return "Most Upvotes"
       case "alphabetical":
         return "A-Z"
-      case "recent":
+      // case "recent":
       default:
         return "Most Recent"
     }

@@ -1,4 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
+
+import type { Metadata } from "next"
 import Link from "next/link"
 
 import { RiCalendarLine, RiHistoryLine, RiTrophyFill } from "@remixicon/react"
@@ -10,7 +12,7 @@ import { WinnerCard } from "@/components/winners/winner-card"
 import { getWinnersByDate } from "@/app/actions/home"
 import { getTopCategories } from "@/app/actions/servers"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Daily Winners - HytaleHunt",
   description: "Check out the daily winners on HytaleHunt",
 }
@@ -49,7 +51,7 @@ export default async function WinnersPage({
   if (params.date) {
     selectedDate = new Date(params.date)
     // Vérifier si la date est valide
-    if (isNaN(selectedDate.getTime())) {
+    if (Number.isNaN(selectedDate.getTime())) {
       selectedDate = yesterday
     }
   } else {

@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+
+import Image from "next/image"
 import Link from "next/link"
 
 import { RiArticleLine, RiCheckboxCircleFill, RiInformationLine, RiLinkM } from "@remixicon/react"
 import { desc } from "drizzle-orm"
 import { Calendar, Clock } from "lucide-react"
-
-import { env } from "@/env"
 
 import { LAUNCH_LIMITS, LAUNCH_SETTINGS } from "@/lib/constants"
 
@@ -34,6 +34,7 @@ import {
 
 import { db } from "@/drizzle/db"
 import { seoArticle } from "@/drizzle/db/schema"
+import { env } from "@/env"
 
 export const metadata = {
   title: "Pricing - HytaleHunt",
@@ -442,9 +443,11 @@ export default async function PricingPage() {
                         {/* Review Image */}
                         <div className="bg-muted relative aspect-[16/9] overflow-hidden">
                           {review.image ? (
-                            <img
+                            <Image
                               src={review.image}
                               alt={review.title}
+                              width={100} // TODO: check this size
+                              height={100}
                               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-103"
                             />
                           ) : (

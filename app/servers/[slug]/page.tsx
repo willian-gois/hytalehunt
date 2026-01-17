@@ -9,7 +9,6 @@ import { RiDiscordFill, RiHashtag, RiTwitterFill, RiVipCrownLine } from "@remixi
 import { format } from "date-fns"
 
 import { auth } from "@/lib/auth"
-import { getServerWebsiteRelAttribute } from "@/lib/link-utils"
 
 import { Button } from "@/components/ui/button"
 import { RichTextDisplay } from "@/components/ui/rich-text-editor"
@@ -90,11 +89,11 @@ export default async function ServerPage({ params }: ServerPageProps) {
 
   const isOwner = session?.user?.id === serverData.createdBy
 
-  const websiteRelAttribute = getServerWebsiteRelAttribute({
-    launchStatus: serverData.launchStatus,
-    launchType: serverData.launchType,
-    dailyRanking: serverData.dailyRanking,
-  })
+  // const websiteRelAttribute = getServerWebsiteRelAttribute({
+  //   launchStatus: serverData.launchStatus,
+  //   launchType: serverData.launchType,
+  //   dailyRanking: serverData.dailyRanking,
+  // })
 
   return (
     <div className="bg-background min-h-screen">
@@ -321,14 +320,18 @@ export default async function ServerPage({ params }: ServerPageProps) {
                       Achievement
                     </h3>
                     <div className="flex">
-                      <img
+                      <Image
                         src={`/images/badges/top${serverData.dailyRanking}-light.webp`}
                         alt={`HytaleHunt Top ${serverData.dailyRanking} Daily Winner`}
+                        width={195}
+                        height={48}
                         className="h-12 w-auto dark:hidden"
                       />
-                      <img
+                      <Image
                         src={`/images/badges/top${serverData.dailyRanking}-dark.webp`}
                         alt={`HytaleHunt Top ${serverData.dailyRanking} Daily Winner`}
+                        width={195}
+                        height={48}
                         className="hidden h-12 w-auto dark:block"
                       />
                     </div>
@@ -344,9 +347,11 @@ export default async function ServerPage({ params }: ServerPageProps) {
                   {serverData.creator ? (
                     <>
                       {serverData.creator.image ? (
-                        <img
+                        <Image
                           src={serverData.creator.image}
                           alt={serverData.creator.name || "Creator avatar"}
+                          width={40}
+                          height={40}
                           className="h-10 w-10 rounded-full"
                         />
                       ) : (

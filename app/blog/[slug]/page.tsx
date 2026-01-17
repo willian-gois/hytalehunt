@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -160,10 +161,12 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                 {/* Hero Image */}
                 {article[0].image && (
                   <div className="bg-muted mb-8 aspect-[16/9] overflow-hidden rounded-lg">
-                    <img
+                    <Image
                       src={article[0].image}
                       alt={title}
-                      className="h-full w-full object-cover"
+                      width={100} // TODO: check image size
+                      height={100}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-103"
                     />
                   </div>
                 )}
