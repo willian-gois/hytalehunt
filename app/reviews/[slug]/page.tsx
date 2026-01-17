@@ -29,6 +29,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { TableOfContents } from "@/components/blog/table-of-contents"
+import { ReviewSchema } from "@/components/seo/review-schema"
 
 import { db } from "@/drizzle/db"
 import { seoArticle } from "@/drizzle/db/schema"
@@ -103,11 +104,20 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
     notFound()
   }
 
-  const { title, description, content, publishedAt } = article[0]
+  const { title, description, content, publishedAt, updatedAt, image } = article[0]
   const readingTime = calculateReadingTime(content)
 
   return (
-    <div className="bg-background min-h-screen">
+    <>
+      <ReviewSchema
+        title={title}
+        description={description}
+        slug={slug}
+        publishedAt={publishedAt}
+        updatedAt={updatedAt}
+        image={image || undefined}
+      />
+      <div className="bg-background min-h-screen">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Back Button */}
         <div className="mb-4">
@@ -337,5 +347,6 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         </div>
       </div>
     </div>
+    </>
   )
 }

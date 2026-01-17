@@ -32,6 +32,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+import { PricingSchema } from "@/components/seo/pricing-schema"
+
 import { db } from "@/drizzle/db"
 import { seoArticle } from "@/drizzle/db/schema"
 import { env } from "@/env"
@@ -106,7 +108,9 @@ async function getLatestReviews() {
 export default async function PricingPage() {
   const latestReviews = await getLatestReviews()
   return (
-    <div className="container mx-auto max-w-3xl px-4 py-8 md:py-12">
+    <>
+      <PricingSchema faqItems={faqItems} />
+      <div className="container mx-auto max-w-3xl px-4 py-8 md:py-12">
       {/* Domain Rating Badge */}
       {/* <div className="mb-4 flex justify-center">
         <a href="https://frogdr.com/hytalehunt.com?utm_source=hytalehunt.com" target="_blank">
@@ -545,5 +549,6 @@ export default async function PricingPage() {
         </Accordion>
       </div>
     </div>
+    </>
   )
 }

@@ -19,7 +19,9 @@ import { ServerComments } from "@/components/server/server-comments"
 import { ShareButton } from "@/components/server/share-button"
 import { UpvoteButton } from "@/components/server/upvote-button"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { getServerBySlug, hasUserUpvoted } from "@/app/actions/server-details"
+import { env } from "@/env"
 
 // Types
 interface ServerPageProps {
@@ -95,8 +97,16 @@ export default async function ServerPage({ params }: ServerPageProps) {
   //   dailyRanking: serverData.dailyRanking,
   // })
 
+  const breadcrumbItems = [
+    { name: "Home", url: env.NEXT_PUBLIC_URL },
+    { name: "Servers", url: `${env.NEXT_PUBLIC_URL}/categories` },
+    { name: serverData.name, url: `${env.NEXT_PUBLIC_URL}/servers/${serverData.slug}` },
+  ]
+
   return (
-    <div className="bg-background min-h-screen">
+    <>
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <div className="bg-background min-h-screen">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Main Content - 2 colonnes */}
@@ -468,5 +478,6 @@ export default async function ServerPage({ params }: ServerPageProps) {
         </div>
       </div>
     </div>
+    </>
   )
 }

@@ -29,6 +29,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { TableOfContents } from "@/components/blog/table-of-contents"
+import { ArticleSchema } from "@/components/seo/article-schema"
 
 import { db } from "@/drizzle/db"
 import { blogArticle } from "@/drizzle/db/schema"
@@ -103,11 +104,21 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
     notFound()
   }
 
-  const { title, description, content, publishedAt, tags } = article[0]
+  const { title, description, content, publishedAt, tags, updatedAt, author, image } = article[0]
   const readingTime = calculateReadingTime(content)
 
   return (
-    <div className="bg-background min-h-screen">
+    <>
+      <ArticleSchema
+        title={title}
+        description={description}
+        slug={slug}
+        publishedAt={publishedAt}
+        updatedAt={updatedAt}
+        author={author || undefined}
+        image={image || undefined}
+      />
+      <div className="bg-background min-h-screen">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Back Button */}
         <div className="mb-8">
@@ -351,5 +362,6 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
         </div>
       </div>
     </div>
+    </>
   )
 }
