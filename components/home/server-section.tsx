@@ -113,7 +113,8 @@ export function ServerSection({
           </div>
         ) : (
           <div className="text-muted-foreground border-border bg-card rounded-lg border border-dashed py-8 text-center text-sm">
-            {`No servers found for "${title}"`}
+            First server launch list in 01/19! Be the first!
+            {/* {`No servers found for "${title}"`} */}
           </div>
         )}
 
