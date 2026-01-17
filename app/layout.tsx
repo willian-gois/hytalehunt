@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Lexend as FontHeading, Nunito_Sans as FontSans } from "next/font/google"
+import { Cinzel as FontHeading, Nunito_Sans as FontSans } from "next/font/google"
 
 import PlausibleProvider from "next-plausible"
 import { Toaster } from "sonner"
@@ -18,6 +18,7 @@ const fontSans = FontSans({
 const fontHeading = FontHeading({
   subsets: ["latin"],
   variable: "--font-heading",
+  weight: ["600"],
 })
 
 export const metadata: Metadata = {
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "HytaleHunt",
     images: [
       {
-				url: "og.webp",
+        url: "og.webp",
         width: 1200,
         height: 630,
         alt: "HytaleHunt - Discover the Best Hytale Servers",
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     title: "HytaleHunt - Discover the Best Hytale Servers",
     description:
       "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
-		images: ["og.webp"],
+    images: ["og.webp"],
   },
 }
 
