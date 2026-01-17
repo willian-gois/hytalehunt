@@ -1,19 +1,39 @@
 import { headers } from "next/headers" // Importer headers pour auth
 
-import { createUploadthing, type FileRouter } from "uploadthing/next"
+import { createUploadthing, type FileRouter, UTFiles } from "uploadthing/next"
 import { UploadThingError } from "uploadthing/server"
+import type { FileUploadData } from "uploadthing/types"
 
 import { auth } from "@/lib/auth" // Importer l'authentification
 
 const f = createUploadthing()
 
-const authenticateUser = async () => {
+const authenticateUser = async ({
+	req,
+	files,
+}: {
+	req: Request
+	files: readonly FileUploadData[]
+}) => {
+	// Authenticate
 	const session = await auth.api.getSession({ headers: await headers() })
 	const user = session?.user
 
 	if (!user?.id) throw new UploadThingError("Unauthorized")
 
-	return { userId: user.id }
+	// Rename file
+	const searchParams = new URLSearchParams(req.url)
+	const slug = searchParams.get("slug")
+
+	const prefix = slug === "serverBanner" ? "banner" : "logo"
+
+	const fileOverrides = files.map((file) => {
+		const fileExtension = file.name.split(".").pop()
+
+		return { ...file, name: `${prefix}-${user.id}-${Date.now()}.${fileExtension}` }
+	})
+
+	return { userId: user.id, [UTFiles]: fileOverrides }
 }
 
 export const ourFileRouter = {
