@@ -9,7 +9,7 @@ import { db } from "@/drizzle/db"
 import { launchStatus, server, user } from "@/drizzle/db/schema"
 import { env } from "@/env"
 
-const API_KEY = env.CRON_API_KEY
+const API_KEY = env.CRON_SECRET
 
 export async function GET(request: NextRequest) {
   try {

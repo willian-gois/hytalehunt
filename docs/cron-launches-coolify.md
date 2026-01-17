@@ -18,11 +18,11 @@ The launch system operates as follows:
 Add the following environment variables to your application on Coolify:
 
 ```
-CRON_API_KEY=your_secret_key_here
+CRON_SECRET=your_secret_key_here
 APP_URL=https://your-domain.com
 ```
 
-- `CRON_API_KEY`: A secret key to secure the API (generate a complex random string).
+- `CRON_SECRET`: A secret key to secure the API (generate a complex random string).
 - `APP_URL`: The base URL of your application.
 
 ### 2. Configure the Scheduled Task
@@ -61,7 +61,7 @@ Scheduled task logs are available in Coolify under the "Logs" tab of the schedul
 
 If the scheduled task fails, check the following points:
 
-1. The `CRON_API_KEY` and `APP_URL` environment variables are correctly defined.
+1. The `CRON_SECRET` and `APP_URL` environment variables are correctly defined.
 2. The `/app/scripts/update-launches.sh` script is executable.
 3. The `/api/cron/update-launches` API is accessible.
 4. Check the application logs for potential errors.

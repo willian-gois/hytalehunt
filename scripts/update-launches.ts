@@ -6,11 +6,11 @@ import "dotenv/config"
 const DEFAULT_ENDPOINT = "http://localhost:3000/api/cron/update-launches"
 
 const endpoint = process.argv[2] ?? DEFAULT_ENDPOINT
-const apiKey = env.CRON_API_KEY
+const apiKey = env.CRON_SECRET
 
 if (!apiKey) {
   console.error(
-    "CRON_API_KEY não definido. Configure a variável de ambiente antes de executar o script.",
+    "CRON_SECRET não definido. Configure a variável de ambiente antes de executar o script.",
   )
   process.exit(1)
 }
