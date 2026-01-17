@@ -16,9 +16,7 @@ const stripeClient = new Stripe(env.STRIPE_SECRET_KEY, {
 export const auth = betterAuth({
   appName: "HytaleHunt",
   baseURL: env.BETTER_AUTH_URL,
-  trustedOrigins: [
-    env.NODE_ENV !== "development" ? "https://www.hytalehunt.com" : "http://localhost:3000",
-  ],
+  trustedOrigins: [env.NEXT_PUBLIC_URL],
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
