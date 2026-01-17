@@ -29,8 +29,18 @@ interface ServerSummary {
 }
 
 export const metadata = {
-  title: "Trending - HytaleHunt",
-  description: "Discover trending Hytale servers on HytaleHunt",
+  title: "Trending Hytale Servers - HytaleHunt",
+  description: "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
+  openGraph: {
+    title: "Trending Hytale Servers - HytaleHunt",
+    description: "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Trending Hytale Servers - HytaleHunt",
+    description: "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
+  },
 }
 
 // Composant Skeleton principal

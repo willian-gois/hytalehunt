@@ -6,6 +6,7 @@ import { Toaster } from "sonner"
 
 import Footer from "@/components/layout/footer"
 import Nav from "@/components/layout/nav"
+import { OrganizationSchema, WebSiteSchema } from "@/components/seo/organization-schema"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 
 import { env } from "@/env"
@@ -72,6 +73,8 @@ export default function RootLayout({
           }}
           enabled={env.NODE_ENV === "production"}
         />
+        <OrganizationSchema />
+        <WebSiteSchema />
       </head>
       <body
         className={`font-sans antialiased ${fontSans.variable} ${fontHeading.variable} sm:overflow-y-scroll`}

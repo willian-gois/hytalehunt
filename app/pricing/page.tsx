@@ -37,8 +37,18 @@ import { seoArticle } from "@/drizzle/db/schema"
 import { env } from "@/env"
 
 export const metadata = {
-  title: "Pricing - HytaleHunt",
-  description: "Choose the perfect plan for your server launch",
+  title: "Pricing - Launch Your Hytale Server - HytaleHunt",
+  description: "Choose the perfect plan to launch your Hytale server. Get visibility, upvotes, and grow your community with our launch packages.",
+  openGraph: {
+    title: "Pricing - Launch Your Hytale Server - HytaleHunt",
+    description: "Choose the perfect plan to launch your Hytale server. Get visibility, upvotes, and grow your community with our launch packages.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pricing - Launch Your Hytale Server - HytaleHunt",
+    description: "Choose the perfect plan to launch your Hytale server. Get visibility, upvotes, and grow your community with our launch packages.",
+  },
 }
 
 const faqItems = [

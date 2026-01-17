@@ -21,8 +21,18 @@ import {
 } from "@/app/actions/servers"
 
 export const metadata = {
-  title: "Categories - HytaleHunt",
-  description: "Browse Hytale servers by category on HytaleHunt",
+  title: "Browse Servers by Category - HytaleHunt",
+  description: "Browse Hytale servers by category. Find servers in PvP, Survival, Creative, RPG, and more categories.",
+  openGraph: {
+    title: "Browse Servers by Category - HytaleHunt",
+    description: "Browse Hytale servers by category. Find servers in PvP, Survival, Creative, RPG, and more categories.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Browse Servers by Category - HytaleHunt",
+    description: "Browse Hytale servers by category. Find servers in PvP, Survival, Creative, RPG, and more categories.",
+  },
 }
 
 // Composant Skeleton pour le chargement des chaînes
