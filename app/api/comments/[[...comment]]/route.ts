@@ -8,12 +8,6 @@ import { checkCommentRateLimit } from "@/lib/comment-rate-limit"
 import { extractTextFromContent } from "@/lib/content-utils"
 import { sendDiscordCommentNotification } from "@/lib/discord-notification"
 
-type RouteContext = {
-  params: Promise<{
-    comment: string[]
-  }>
-}
-
 /**
  * Supprime tous les liens du contenu en transformant les nœuds "link" en texte simple
  * @param content Le contenu JSON du commentaire
@@ -87,7 +81,7 @@ const commentHandler = NextComment({
 })
 
 // Intercept POST requests to add Discord notification and rate limiting
-export async function POST(req: NextRequest, context: RouteContext) {
+export async function POST(req: NextRequest, context: any) {
   try {
     // Get parameters and user session
     const params = await context.params
@@ -158,7 +152,7 @@ export async function POST(req: NextRequest, context: RouteContext) {
 }
 
 // Intercept PATCH requests (édition de commentaires) pour aussi supprimer les liens
-export async function PATCH(req: NextRequest, context: RouteContext) {
+export async function PATCH(req: NextRequest, context: any) {
   try {
     // Traiter la requête pour supprimer les liens
     const processedReq = await processRequestWithLinkRemoval(req)
@@ -170,5 +164,32 @@ export async function PATCH(req: NextRequest, context: RouteContext) {
   }
 }
 
-// Export other methods without modification
-export const { GET, DELETE } = commentHandler
+// Wrapper for GET to handle optional catch-all params
+export async function GET(
+  req: NextRequest,
+  context: { params: Promise<{ comment?: string[] | undefined }> },
+) {
+  // Transform context to match commentHandler expectations
+  const params = await context.params
+  const transformedContext = {
+    params: Promise.resolve({
+      comment: params.comment || [],
+    }),
+  }
+  return commentHandler.GET(req, transformedContext)
+}
+
+// Wrapper for DELETE to handle optional catch-all params
+export async function DELETE(
+  req: NextRequest,
+  context: { params: Promise<{ comment?: string[] | undefined }> },
+) {
+  // Transform context to match commentHandler expectations
+  const params = await context.params
+  const transformedContext = {
+    params: Promise.resolve({
+      comment: params.comment || [],
+    }),
+  }
+  return commentHandler.DELETE(req, transformedContext)
+}
