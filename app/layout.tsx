@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "HytaleHunt",
     images: [
       {
-        url: "og.png",
+				url: "og.webp",
         width: 1200,
         height: 630,
         alt: "HytaleHunt - Discover the Best Hytale Servers",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "HytaleHunt - Discover the Best Hytale Servers",
     description:
       "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
-    images: ["og.png"],
+		images: ["og.webp"],
   },
 }
 
