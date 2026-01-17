@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server"
 
 import { NextComment } from "@fuma-comment/next"
 
-import { checkCommentRateLimit } from "@/lib/comment-rate-limit"
 import { commentAuth, commentStorage } from "@/lib/comment.config"
+import { checkCommentRateLimit } from "@/lib/comment-rate-limit"
 import { extractTextFromContent } from "@/lib/content-utils"
 import { sendDiscordCommentNotification } from "@/lib/discord-notification"
 
@@ -56,7 +56,7 @@ async function processRequestWithLinkRemoval(req: NextRequest) {
     const body = await req.json()
 
     // Supprimer les liens du contenu si présent
-    if (body && body.content) {
+    if (body?.content) {
       body.content = removeLinksFromContent(body.content)
     }
 
@@ -117,7 +117,7 @@ export async function POST(req: NextRequest, context: any) {
         const body = await req.json()
 
         // Supprimer les liens du contenu
-        if (body && body.content) {
+        if (body?.content) {
           body.content = removeLinksFromContent(body.content)
 
           // Extract comment text and send notification

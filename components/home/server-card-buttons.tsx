@@ -2,11 +2,12 @@
 
 import Link from "next/link"
 
-import { launchStatus as launchStatusEnum } from "@/drizzle/db/schema"
 import { RiMessage2Line, RiThumbUpLine } from "@remixicon/react"
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { UpvoteButton } from "@/components/server/upvote-button"
+
+import { launchStatus as launchStatusEnum } from "@/drizzle/db/schema"
 
 interface ServerCardButtonsProps {
   serverPageUrl: string

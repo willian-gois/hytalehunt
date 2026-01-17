@@ -1,13 +1,17 @@
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
 
-import { db } from "@/drizzle/db"
-import { server as serverTable } from "@/drizzle/db/schema"
 import { eq } from "drizzle-orm"
 
 import { auth } from "@/lib/auth"
 
-export async function GET(request: Request, { params }: { params: Promise<{ serverId: string }> }) {
+import { db } from "@/drizzle/db"
+import { server as serverTable } from "@/drizzle/db/schema"
+
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ serverId: string }> },
+) {
   try {
     // Vérifier l'authentification
     const session = await auth.api.getSession({

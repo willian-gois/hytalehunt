@@ -7,7 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
 import { forgetPassword } from "@/lib/auth-client"
-import { ForgotPasswordFormData, forgotPasswordSchema } from "@/lib/validations/auth"
+import { type ForgotPasswordFormData, forgotPasswordSchema } from "@/lib/validations/auth"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 

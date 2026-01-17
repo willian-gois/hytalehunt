@@ -17,6 +17,7 @@ import {
 } from "@remixicon/react"
 
 import { useSearch } from "@/lib/hooks/use-search"
+
 import { CommandDialog, CommandInput } from "@/components/ui/command"
 import { DialogTitle } from "@/components/ui/dialog"
 

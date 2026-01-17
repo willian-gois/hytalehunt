@@ -9,8 +9,8 @@ import {
   RiListOrdered,
   RiListUnordered,
 } from "@remixicon/react"
+import { CharacterCount } from "@tiptap/extension-character-count"
 import Placeholder from "@tiptap/extension-placeholder"
-import { CharacterCount } from '@tiptap/extension-character-count'
 import { EditorContent, useEditor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 
@@ -44,7 +44,7 @@ export function RichTextDisplay({ content, className }: RichTextDisplayProps) {
   )
 }
 
-const MAX_CHARACTERS = 1000;
+const MAX_CHARACTERS = 1000
 
 // Composant éditeur
 export function RichTextEditor({
@@ -169,7 +169,9 @@ export function RichTextEditor({
         </div>
 
         <div className="pr-2 text-xs text-muted-foreground">
-          <span>{editor.storage.characterCount.characters()}/{MAX_CHARACTERS}</span>
+          <span>
+            {editor.storage.characterCount.characters()}/{MAX_CHARACTERS}
+          </span>
         </div>
       </div>
 

@@ -3,6 +3,10 @@
 import { revalidatePath } from "next/cache"
 import { headers } from "next/headers"
 
+import { and, asc, count, desc, eq, or, type SQL, sql } from "drizzle-orm"
+
+import { auth } from "@/lib/auth"
+
 import { db } from "@/drizzle/db"
 import {
   category as categoryTable,
@@ -12,9 +16,6 @@ import {
   serverToCategory,
   upvote,
 } from "@/drizzle/db/schema"
-import { and, asc, count, desc, eq, or, sql } from "drizzle-orm"
-
-import { auth } from "@/lib/auth"
 
 // Fonction pour générer un slug unique
 async function generateUniqueSlug(name: string): Promise<string> {
@@ -341,7 +342,7 @@ export async function getServersByCategory(
   const session = await getSession()
   const userId = session?.user?.id || null
 
-  let orderByClause
+  let orderByClause: SQL
   switch (sort) {
     case "upvotes":
       orderByClause = desc(sql`count(distinct ${upvote.id})`)
@@ -349,7 +350,7 @@ export async function getServersByCategory(
     case "alphabetical":
       orderByClause = asc(serverTable.name)
       break
-    case "recent":
+    // case "recent":
     default:
       orderByClause = desc(serverTable.createdAt)
       break

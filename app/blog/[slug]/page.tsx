@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { db } from "@/drizzle/db"
-import { blogArticle } from "@/drizzle/db/schema"
 import {
   RiArticleLine,
   RiInformationLine,
@@ -19,6 +17,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
 
 import { DOMAIN_AUTHORITY, LAUNCH_SETTINGS } from "@/lib/constants"
+
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -29,6 +28,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { TableOfContents } from "@/components/blog/table-of-contents"
+
+import { db } from "@/drizzle/db"
+import { blogArticle } from "@/drizzle/db/schema"
+import { env } from "@/env"
 
 export async function generateMetadata({
   params,
@@ -332,7 +335,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
 
                       {/* Button */}
                       <Button className="h-11 w-full" asChild>
-                        <Link href={process.env.NEXT_PUBLIC_SEO_ARTICLE_LINK!} target="_blank">
+                        <Link href={env.NEXT_PUBLIC_SEO_ARTICLE_LINK} target="_blank">
                           Get SEO Package - ${LAUNCH_SETTINGS.ARTICLE_PRICE}
                         </Link>
                       </Button>

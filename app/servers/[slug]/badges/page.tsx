@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import { headers } from "next/headers"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -6,6 +6,7 @@ import { notFound } from "next/navigation"
 import { RiArrowLeftLine } from "@remixicon/react"
 
 import { auth } from "@/lib/auth"
+
 import { getServerBySlug } from "@/app/actions/server-details"
 
 import { BadgesDisplay } from "../../../../components/badges/BadgesDisplay"

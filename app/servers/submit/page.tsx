@@ -2,6 +2,7 @@ import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 
 import { auth } from "@/lib/auth"
+
 import { SubmitServerForm } from "@/components/server/submit-form"
 
 export default async function SubmitServer() {

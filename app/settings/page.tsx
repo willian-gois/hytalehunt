@@ -15,6 +15,7 @@ import { Loader2, X } from "lucide-react"
 import { toast } from "sonner"
 
 import { changePassword, signOut, updateUser, useSession } from "@/lib/auth-client"
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {

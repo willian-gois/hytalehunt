@@ -3,11 +3,12 @@
 import { revalidatePath } from "next/cache"
 import { headers } from "next/headers"
 
-import { db } from "@/drizzle/db"
-import { category, launchStatus, server, serverToCategory, upvote, user } from "@/drizzle/db/schema"
 import { and, eq, ne, sql } from "drizzle-orm"
 
 import { auth } from "@/lib/auth"
+
+import { db } from "@/drizzle/db"
+import { category, launchStatus, server, serverToCategory, upvote, user } from "@/drizzle/db/schema"
 
 // Get session helper
 async function getSession() {

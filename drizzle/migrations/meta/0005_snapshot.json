@@ -93,12 +93,8 @@
           "name": "account_user_id_user_id_fk",
           "tableFrom": "account",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -233,9 +229,7 @@
         "blog_article_slug_unique": {
           "name": "blog_article_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       },
       "policies": {},
@@ -296,9 +290,7 @@
         "category_name_unique": {
           "name": "category_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         }
       },
       "policies": {},
@@ -399,10 +391,7 @@
       "compositePrimaryKeys": {
         "fuma_rates_user_id_comment_id_pk": {
           "name": "fuma_rates_user_id_comment_id_pk",
-          "columns": [
-            "user_id",
-            "comment_id"
-          ]
+          "columns": ["user_id", "comment_id"]
         }
       },
       "uniqueConstraints": {},
@@ -500,9 +489,7 @@
         "launch_quota_date_unique": {
           "name": "launch_quota_date_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "date"
-          ]
+          "columns": ["date"]
         }
       },
       "policies": {},
@@ -605,9 +592,7 @@
         "seo_article_slug_unique": {
           "name": "seo_article_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       },
       "policies": {},
@@ -772,12 +757,8 @@
           "name": "server_created_by_user_id_fk",
           "tableFrom": "server",
           "tableTo": "user",
-          "columnsFrom": [
-            "created_by"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["created_by"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -787,9 +768,7 @@
         "server_slug_unique": {
           "name": "server_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       },
       "policies": {},
@@ -819,12 +798,8 @@
           "name": "server_to_category_server_id_server_id_fk",
           "tableFrom": "server_to_category",
           "tableTo": "server",
-          "columnsFrom": [
-            "server_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["server_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -832,12 +807,8 @@
           "name": "server_to_category_category_id_category_id_fk",
           "tableFrom": "server_to_category",
           "tableTo": "category",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["category_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -845,10 +816,7 @@
       "compositePrimaryKeys": {
         "server_to_category_server_id_category_id_pk": {
           "name": "server_to_category_server_id_category_id_pk",
-          "columns": [
-            "server_id",
-            "category_id"
-          ]
+          "columns": ["server_id", "category_id"]
         }
       },
       "uniqueConstraints": {},
@@ -921,12 +889,8 @@
           "name": "session_user_id_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -936,9 +900,7 @@
         "session_token_unique": {
           "name": "session_token_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "token"
-          ]
+          "columns": ["token"]
         }
       },
       "policies": {},
@@ -981,12 +943,8 @@
           "name": "upvote_user_id_user_id_fk",
           "tableFrom": "upvote",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -994,12 +952,8 @@
           "name": "upvote_server_id_server_id_fk",
           "tableFrom": "upvote",
           "tableTo": "server",
-          "columnsFrom": [
-            "server_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["server_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1094,9 +1048,7 @@
         "user_email_unique": {
           "name": "user_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "policies": {},

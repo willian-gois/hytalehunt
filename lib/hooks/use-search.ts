@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 
-import { SearchResult } from "@/app/api/search/route"
+import type { SearchResult } from "@/app/api/search/route"
 
 interface UseSearchOptions {
   debounceMs?: number

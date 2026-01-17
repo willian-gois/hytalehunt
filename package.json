@@ -9,7 +9,8 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "dev": "next dev --turbopack",
-    "lint": "next lint",
+    "lint": "bunx --bun biome check",
+    "lint:fix": "bunx --bun biome check --write",
     "prepare": "npx simple-git-hooks",
     "start": "next start",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/auth/stripe/webhook",
@@ -20,9 +21,7 @@
     "commit-msg": "npx commitlint --edit $1"
   },
   "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "extends": ["@commitlint/config-conventional"]
   },
   "lint-staged": {
     "package.json": "sort-package-json"

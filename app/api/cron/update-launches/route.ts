@@ -1,9 +1,10 @@
-import { NextRequest, NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
+
+import { endOfDay, startOfDay, subDays, subHours } from "date-fns"
+import { and, count, desc, eq, gte, inArray, lt, lte } from "drizzle-orm"
 
 import { db } from "@/drizzle/db"
 import { launchStatus, server, upvote } from "@/drizzle/db/schema"
-import { endOfDay, startOfDay, subDays, subHours } from "date-fns"
-import { and, count, desc, eq, gte, inArray, lt, lte } from "drizzle-orm"
 
 // Clé API pour sécuriser l'endpoint
 const API_KEY = process.env.CRON_API_KEY

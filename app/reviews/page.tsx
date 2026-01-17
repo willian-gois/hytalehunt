@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import Link from "next/link"
+
+import { Calendar, Clock } from "lucide-react"
 
 import { db } from "@/drizzle/db"
 import { seoArticle } from "@/drizzle/db/schema"
-import { Calendar, Clock } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Product Reviews | HytaleHunt - In-Depth Product Analysis",

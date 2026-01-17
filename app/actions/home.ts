@@ -2,6 +2,12 @@
 
 import { headers } from "next/headers"
 
+import { endOfMonth, startOfMonth } from "date-fns"
+import { and, desc, eq, sql } from "drizzle-orm"
+
+import { auth } from "@/lib/auth"
+import { SERVER_LIMITS_VARIABLES } from "@/lib/constants"
+
 import { db } from "@/drizzle/db"
 import {
   category as categoryTable,
@@ -12,11 +18,6 @@ import {
   serverToCategory,
   upvote,
 } from "@/drizzle/db/schema"
-import { endOfMonth, startOfMonth } from "date-fns"
-import { and, desc, eq, sql } from "drizzle-orm"
-
-import { auth } from "@/lib/auth"
-import { SERVER_LIMITS_VARIABLES } from "@/lib/constants"
 
 async function getCurrentUserId() {
   const session = await auth.api.getSession({ headers: await headers() })

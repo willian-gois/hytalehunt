@@ -15,19 +15,19 @@ interface BadgesDisplayProps {
 }
 
 export function BadgesDisplay({ dailyRanking, slug }: BadgesDisplayProps) {
-  const lightBadgeCode = `<a href=\"https://hytalehunt.com/servers/${slug}\" target=\"_blank\" title=\"HytaleHunt Top ${dailyRanking} Daily Winner\">
+  const lightBadgeCode = `<a href="https://hytalehunt.com/servers/${slug}" target="_blank" title="HytaleHunt Top ${dailyRanking} Daily Winner">
   <img 
-    src=\"https://hytalehunt.com/images/badges/top${dailyRanking}-light.webp\" 
-    alt=\"HytaleHunt Top ${dailyRanking} Daily Winner\" 
-    style=\"width: 195px; height: auto;\" 
+    src="https://hytalehunt.com/images/badges/top${dailyRanking}-light.webp" 
+    alt="HytaleHunt Top ${dailyRanking} Daily Winner" 
+    style="width: 195px; height: auto;" 
   />
 </a>`
 
-  const darkBadgeCode = `<a href=\"https://hytalehunt.com/servers/${slug}\" target=\"_blank\" title=\"HytaleHunt Top ${dailyRanking} Daily Winner\">
+  const darkBadgeCode = `<a href="https://hytalehunt.com/servers/${slug}" target="_blank" title="HytaleHunt Top ${dailyRanking} Daily Winner">
   <img 
-    src=\"https://hytalehunt.com/images/badges/top${dailyRanking}-dark.webp\" 
-    alt=\"HytaleHunt Top ${dailyRanking} Daily Winner\" 
-    style=\"width: 195px; height: auto;\" 
+    src="https://hytalehunt.com/images/badges/top${dailyRanking}-dark.webp" 
+    alt="HytaleHunt Top ${dailyRanking} Daily Winner" 
+    style="width: 195px; height: auto;" 
   />
 </a>`
 

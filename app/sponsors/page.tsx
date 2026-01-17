@@ -1,8 +1,10 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 
 import { RiCheckboxCircleFill } from "@remixicon/react"
 
 import { SPONSORSHIP_SLOTS } from "@/lib/constants"
+
 import {
   Accordion,
   AccordionContent,
@@ -12,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { getLast30DaysPageviews, getLast30DaysVisitors } from "@/app/actions/plausible"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Sponsors - HytaleHunt",
   description: "Support HytaleHunt and gain visibility for your product or service.",
 }

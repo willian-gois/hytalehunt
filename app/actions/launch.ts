@@ -2,15 +2,6 @@
 
 import { revalidatePath } from "next/cache"
 
-import { db } from "@/drizzle/db"
-import {
-  launchQuota,
-  launchStatus,
-  LaunchStatus,
-  launchType,
-  LaunchType,
-  server as serverTable,
-} from "@/drizzle/db/schema"
 import { addDays, format, isBefore, parse } from "date-fns"
 import { and, count as drizzleCount, eq, gte, lt, ne, sql } from "drizzle-orm"
 
@@ -21,6 +12,16 @@ import {
   LAUNCH_TYPES,
   USER_DAILY_LAUNCH_LIMIT,
 } from "@/lib/constants"
+
+import { db } from "@/drizzle/db"
+import {
+  type LaunchStatus,
+  type LaunchType,
+  launchQuota,
+  launchStatus,
+  launchType,
+  server as serverTable,
+} from "@/drizzle/db/schema"
 
 export interface LaunchAvailability {
   date: string
@@ -176,7 +177,7 @@ export async function scheduleLaunch(
       parsedDate = parse(date, DATE_FORMAT.API, new Date())
 
       // Vérifier si la date est valide
-      if (isNaN(parsedDate.getTime())) {
+      if (Number.isNaN(parsedDate.getTime())) {
         throw new Error("Date invalide après parsing")
       }
     } catch {
@@ -184,7 +185,7 @@ export async function scheduleLaunch(
       parsedDate = new Date(date)
 
       // Vérifier si la date est valide
-      if (isNaN(parsedDate.getTime())) {
+      if (Number.isNaN(parsedDate.getTime())) {
         throw new Error(`Format de date invalide: ${date}`)
       }
     }

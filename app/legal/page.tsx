@@ -1,6 +1,7 @@
 import Link from "next/link"
 
-import { RiFilePaper2Line, RiMedalLine, RiShieldUserLine } from "@remixicon/react"
+import { RiFilePaper2Line, RiShieldUserLine } from "@remixicon/react"
+
 
 export const metadata = {
   title: "Legal Information - HytaleHunt",

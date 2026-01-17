@@ -1,11 +1,12 @@
-import { NextRequest, NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
 
-import { db } from "@/drizzle/db"
-import { launchStatus, server, user } from "@/drizzle/db/schema"
 import { endOfDay, startOfDay } from "date-fns"
 import { and, eq, gte, lt } from "drizzle-orm"
 
 import { sendLaunchReminderEmail } from "@/lib/transactional-emails"
+
+import { db } from "@/drizzle/db"
+import { launchStatus, server, user } from "@/drizzle/db/schema"
 
 const API_KEY = process.env.CRON_API_KEY
 

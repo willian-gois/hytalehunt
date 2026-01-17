@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { db } from "@/drizzle/db"
-import { seoArticle } from "@/drizzle/db/schema"
 import {
   RiArticleLine,
   RiInformationLine,
@@ -19,6 +17,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
 
 import { DOMAIN_AUTHORITY, LAUNCH_SETTINGS } from "@/lib/constants"
+
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -29,6 +28,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { TableOfContents } from "@/components/blog/table-of-contents"
+
+import { db } from "@/drizzle/db"
+import { seoArticle } from "@/drizzle/db/schema"
 
 export async function generateMetadata({
   params,

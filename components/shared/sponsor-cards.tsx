@@ -1,6 +1,7 @@
 import type { ComponentProps } from "react"
 
 import { SPONSORSHIP_SLOTS } from "@/lib/constants"
+
 import { SponsorCard } from "@/components/home/sponsor-card"
 
 // TODO: Replace with dynamic data when sponsorship integration is ready.

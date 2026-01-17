@@ -5,13 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import {
-  RiDiscordFill,
-  RiGlobalLine,
-  RiHashtag,
-  RiTwitterFill,
-  RiVipCrownLine,
-} from "@remixicon/react"
+import { RiDiscordFill, RiHashtag, RiTwitterFill, RiVipCrownLine } from "@remixicon/react"
 import { format } from "date-fns"
 
 import { auth } from "@/lib/auth"

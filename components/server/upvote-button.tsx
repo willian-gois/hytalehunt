@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useEffect, useOptimistic, useState, useTransition } from "react"
+import type React from "react"
+import { useEffect, useOptimistic, useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
 
 import { RiThumbUpFill, RiThumbUpLine } from "@remixicon/react"
@@ -8,6 +9,7 @@ import { toast } from "sonner"
 
 import { UPVOTE_LIMITS } from "@/lib/constants"
 import { cn } from "@/lib/utils"
+
 import { toggleUpvote } from "@/app/actions/servers"
 
 interface UpvoteButtonProps {
@@ -80,6 +82,7 @@ export function UpvoteButton({
   if (variant === "compact") {
     return (
       <button
+        type="button"
         onClick={handleUpvote}
         disabled={isPending}
         className={cn(
@@ -107,6 +110,7 @@ export function UpvoteButton({
 
   return (
     <button
+      type="button"
       onClick={handleUpvote}
       disabled={isPending}
       className={cn(

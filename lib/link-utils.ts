@@ -1,6 +1,6 @@
-import { launchStatus as launchStatusEnum, server as serverSchema } from "@/drizzle/db/schema"
-
 import { LAUNCH_TYPES } from "@/lib/constants"
+
+import { launchStatus as launchStatusEnum, type server as serverSchema } from "@/drizzle/db/schema"
 
 type ServerSchemaSelect = typeof serverSchema.$inferSelect
 

@@ -2,11 +2,12 @@
 
 import { headers } from "next/headers"
 
-import { launchType as LaunchTypeEnum } from "@/drizzle/db/schema"
 import { z } from "zod"
 
 import { auth } from "@/lib/auth"
 import { notifyDiscordLaunch as sendRealDiscordLaunchNotification } from "@/lib/discord-notification"
+
+import { launchType as LaunchTypeEnum } from "@/drizzle/db/schema"
 
 const LaunchTypeZodEnum = z.enum(Object.values(LaunchTypeEnum) as [string, ...string[]], {
   errorMap: () => ({ message: "Invalid launch type specified." }),

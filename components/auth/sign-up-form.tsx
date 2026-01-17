@@ -10,7 +10,8 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { oneTap, signIn, signUp } from "@/lib/auth-client"
-import { SignUpFormData, signUpSchema } from "@/lib/validations/auth"
+import { type SignUpFormData, signUpSchema } from "@/lib/validations/auth"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 

@@ -1,13 +1,14 @@
 import { unstable_cache } from "next/cache"
 import { headers } from "next/headers"
-import { NextRequest, NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
 
-import { db } from "@/drizzle/db"
-import { category, server } from "@/drizzle/db/schema"
 import { ilike, sql } from "drizzle-orm"
 
 import { API_RATE_LIMITS } from "@/lib/constants"
 import { checkRateLimit } from "@/lib/rate-limit"
+
+import { db } from "@/drizzle/db"
+import { category, server } from "@/drizzle/db/schema"
 
 // Définir le type de retour pour la recherche
 export interface SearchResult {

@@ -14,9 +14,10 @@ import {
   RiMoneyDollarCircleLine,
   RiUserAddLine,
 } from "@remixicon/react"
-import { User } from "better-auth"
+import type { User } from "better-auth"
 
 import { auth } from "@/lib/auth"
+
 import {
   Sheet,
   SheetClose,

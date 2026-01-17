@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 
-import { db } from "@/drizzle/db"
-import { seoArticle } from "@/drizzle/db/schema"
 import { RiArticleLine, RiCheckboxCircleFill, RiInformationLine, RiLinkM } from "@remixicon/react"
 import { desc } from "drizzle-orm"
 import { Calendar, Clock } from "lucide-react"
 
 import { LAUNCH_LIMITS, LAUNCH_SETTINGS } from "@/lib/constants"
+
 import {
   Accordion,
   AccordionContent,
@@ -30,6 +29,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+
+import { db } from "@/drizzle/db"
+import { seoArticle } from "@/drizzle/db/schema"
 
 export const metadata = {
   title: "Pricing - HytaleHunt",
