@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
+
 import Link from "next/link"
+
+import { env } from "@/env"
 
 export const metadata = {
   title: "Terms of Service - HytaleHunt",
@@ -138,10 +141,10 @@ export default function TermsOfServicePage() {
               <p className="mb-3">If you have questions about these terms, please contact us at:</p>
               <p className="mb-3">
                 <a
-                  href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
+                  href={`mailto:${env.NEXT_PUBLIC_CONTACT_EMAIL}`}
                   className="text-primary hover:underline"
                 >
-                  {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
+                  {env.NEXT_PUBLIC_CONTACT_EMAIL}
                 </a>
               </p>
             </section>

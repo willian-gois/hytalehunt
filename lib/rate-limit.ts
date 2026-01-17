@@ -1,7 +1,9 @@
 import Redis from "ioredis"
 
+import { env } from "@/env"
+
 // Créer un client Redis
-const redis = new Redis(process.env.REDIS_URL || "")
+const redis = new Redis(env.REDIS_URL || "")
 
 export async function checkRateLimit(
   identifier: string,

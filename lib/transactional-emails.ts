@@ -1,3 +1,5 @@
+import { env } from "process"
+
 import { sendEmail } from "@/lib/email"
 
 interface BasicUser {
@@ -5,7 +7,7 @@ interface BasicUser {
   name: string | null
 }
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://hytalehunt.com"
+const APP_URL = env.NEXT_PUBLIC_APP_URL || "https://hytalehunt.com"
 
 function getBadgeName(ranking: number): string {
   switch (ranking) {

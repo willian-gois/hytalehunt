@@ -1,3 +1,5 @@
+import { env } from "@/env"
+
 export const LAUNCH_LIMITS = {
   FREE_DAILY_LIMIT: 5,
   PREMIUM_DAILY_LIMIT: 10,
@@ -64,8 +66,8 @@ export const UPVOTE_LIMITS = {
   DEBOUNCE_TIME_MS: 500, // Temps de debounce côté client (500ms)
 } as const
 
-export const PREMIUM_PAYMENT_LINK = process.env.NEXT_PUBLIC_PREMIUM_PAYMENT_LINK!
-export const PREMIUM_PLUS_PAYMENT_LINK = process.env.NEXT_PUBLIC_PREMIUM_PLUS_PAYMENT_LINK!
+export const PREMIUM_PAYMENT_LINK = env.NEXT_PUBLIC_PREMIUM_PAYMENT_LINK
+export const PREMIUM_PLUS_PAYMENT_LINK = env.NEXT_PUBLIC_PREMIUM_PLUS_PAYMENT_LINK
 
 export const SPONSORSHIP_SLOTS = {
   TOTAL: 3,

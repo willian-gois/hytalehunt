@@ -3,6 +3,8 @@ import type { NextConfig } from "next"
 import createMDX from "@next/mdx"
 import type { PluggableList } from "unified"
 
+import { env } from "./env"
+
 const nextConfig: NextConfig = {
   /* config options here */
 
@@ -18,11 +20,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
-      ...(process.env.NEXT_PUBLIC_UPLOADTHING_URL
+      ...(env.NEXT_PUBLIC_UPLOADTHING_URL
         ? [
             {
               protocol: "https" as const,
-              hostname: process.env.NEXT_PUBLIC_UPLOADTHING_URL,
+              hostname: env.NEXT_PUBLIC_UPLOADTHING_URL,
             },
           ]
         : []),

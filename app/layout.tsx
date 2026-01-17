@@ -8,6 +8,8 @@ import Footer from "@/components/layout/footer"
 import Nav from "@/components/layout/nav"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 
+import { env } from "@/env"
+
 import "./globals.css"
 
 const fontSans = FontSans({
@@ -22,7 +24,7 @@ const fontHeading = FontHeading({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
+  metadataBase: new URL(env.NEXT_PUBLIC_URL),
   title: "HytaleHunt - Discover the Best Hytale Servers",
   description:
     "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
     title: "HytaleHunt - Discover the Best Hytale Servers",
     description:
       "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
-    url: process.env.NEXT_PUBLIC_URL,
+    url: env.NEXT_PUBLIC_URL,
     siteName: "HytaleHunt",
     images: [
       {
@@ -68,7 +70,7 @@ export default function RootLayout({
           scriptProps={{
             src: "https://plausible.dailypings.com/js/script.js",
           }}
-          enabled={process.env.NODE_ENV === "production"}
+          enabled={env.NODE_ENV === "production"}
         />
       </head>
       <body

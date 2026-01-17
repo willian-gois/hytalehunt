@@ -3,12 +3,14 @@ import { type NextRequest, NextResponse } from "next/server"
 import { endOfDay, startOfDay } from "date-fns"
 import { and, eq, gte, lt } from "drizzle-orm"
 
+import { env } from "@/env"
+
 import { sendLaunchReminderEmail } from "@/lib/transactional-emails"
 
 import { db } from "@/drizzle/db"
 import { launchStatus, server, user } from "@/drizzle/db/schema"
 
-const API_KEY = process.env.CRON_API_KEY
+const API_KEY = env.CRON_API_KEY
 
 export async function GET(request: NextRequest) {
   try {

@@ -1,7 +1,9 @@
 import { Resend } from "resend"
 
+import { env } from "@/env"
+
 // Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(env.RESEND_API_KEY)
 
 interface EmailPayload {
   to: string

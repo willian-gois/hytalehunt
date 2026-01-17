@@ -1,11 +1,12 @@
 #!/usr/bin/env ts-node
 
+import { env } from "@/env"
 import "dotenv/config"
 
 const DEFAULT_ENDPOINT = "http://localhost:3000/api/cron/update-launches"
 
 const endpoint = process.argv[2] ?? DEFAULT_ENDPOINT
-const apiKey = process.env.CRON_API_KEY
+const apiKey = env.CRON_API_KEY
 
 if (!apiKey) {
   console.error(

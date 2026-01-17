@@ -4,11 +4,13 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { admin, captcha, oneTap } from "better-auth/plugins"
 import Stripe from "stripe"
 
+import { env } from "@/env"
+
 import { sendEmail } from "@/lib/email"
 
 import { db } from "@/drizzle/db"
 
-const stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripeClient = new Stripe(env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-12-15.clover",
 })
 
@@ -63,26 +65,26 @@ export const auth = betterAuth({
   },
   socialProviders: {
     google: {
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
     },
   },
   trustedOrigins: [
-    process.env.NODE_ENV !== "development" ? "https://www.hytalehunt.com" : "http://localhost:3000",
+    env.NODE_ENV !== "development" ? "https://www.hytalehunt.com" : "http://localhost:3000",
   ],
   plugins: [
     stripe({
       stripeClient,
-      stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
+      stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
       createCustomerOnSignUp: true,
     }),
     captcha({
       provider: "cloudflare-turnstile", // or "google-recaptcha"
-      secretKey: process.env.TURNSTILE_SECRET_KEY!,
+      secretKey: env.TURNSTILE_SECRET_KEY,
       endpoints: ["/sign-up/email", "/sign-in/email", "/forget-password"],
     }),
     oneTap({
-      clientId: process.env.NEXT_PUBLIC_ONE_TAP_CLIENT_ID!,
+      clientId: env.NEXT_PUBLIC_ONE_TAP_CLIENT_ID,
     }),
     admin({}),
   ],

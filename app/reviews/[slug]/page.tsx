@@ -16,6 +16,8 @@ import { ArrowLeft, Calendar, Clock } from "lucide-react"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
 
+import { env } from "@/env"
+
 import { DOMAIN_AUTHORITY, LAUNCH_SETTINGS } from "@/lib/constants"
 
 import { Button } from "@/components/ui/button"
@@ -320,7 +322,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
                       {/* Button */}
                       <Button className="h-11 w-full" asChild>
-                        <Link href={process.env.NEXT_PUBLIC_SEO_ARTICLE_LINK!} target="_blank">
+                        <Link href={env.NEXT_PUBLIC_SEO_ARTICLE_LINK} target="_blank">
                           Get SEO Package - ${LAUNCH_SETTINGS.ARTICLE_PRICE}
                         </Link>
                       </Button>

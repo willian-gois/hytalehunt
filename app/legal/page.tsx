@@ -2,6 +2,7 @@ import Link from "next/link"
 
 import { RiFilePaper2Line, RiShieldUserLine } from "@remixicon/react"
 
+import { env } from "@/env"
 
 export const metadata = {
   title: "Legal Information - HytaleHunt",
@@ -53,10 +54,10 @@ export default function LegalPage() {
               <li>
                 <strong>Mail:</strong>{" "}
                 <a
-                  href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
+                  href={`mailto:${env.NEXT_PUBLIC_CONTACT_EMAIL}`}
                   className="text-primary hover:underline"
                 >
-                  {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
+                  {env.NEXT_PUBLIC_CONTACT_EMAIL}
                 </a>
               </li>
             </ul>

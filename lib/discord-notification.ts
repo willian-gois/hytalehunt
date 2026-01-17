@@ -2,9 +2,12 @@
  * Utility for sending notifications to Discord via webhook
  */
 
+import { eq } from "drizzle-orm"
+
+import { env } from "@/env"
+
 import { db } from "@/drizzle/db"
 import { launchType as LaunchTypeEnum, server, user } from "@/drizzle/db/schema"
-import { eq } from "drizzle-orm"
 
 interface DiscordEmbed {
   title: string
@@ -38,7 +41,7 @@ export async function sendDiscordCommentNotification(
   commentText: string,
 ): Promise<boolean> {
   try {
-    const webhookUrl = process.env.DISCORD_WEBHOOK_URL
+    const webhookUrl = env.DISCORD_WEBHOOK_URL
 
     if (!webhookUrl) {
       console.error("DISCORD_WEBHOOK_URL is not defined in environment variables")
@@ -78,7 +81,7 @@ export async function sendDiscordCommentNotification(
     }
 
     // Build server URL
-    const serverUrl = `${process.env.NEXT_PUBLIC_URL || ""}/servers/${serverInfo.slug}`
+    const serverUrl = `${env.NEXT_PUBLIC_URL}/servers/${serverInfo.slug}`
 
     // Truncate comment text if it's too long
     const truncatedText =
@@ -151,7 +154,7 @@ export async function notifyDiscordLaunch(
   userId?: string,
 ): Promise<boolean> {
   try {
-    const webhookUrl = process.env.DISCORD_LAUNCH_WEBHOOK_URL
+    const webhookUrl = env.DISCORD_LAUNCH_WEBHOOK_URL
 
     if (!webhookUrl) {
       console.error("Discord webhook URL is not defined")

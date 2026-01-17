@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+import { env } from "@/env"
+
 export const metadata = {
   title: "Privacy Policy - HytaleHunt",
   description: "Privacy Policy for HytaleHunt platform",
@@ -101,10 +103,10 @@ export default function PrivacyPolicyPage() {
               <p className="mb-3">
                 To exercise these rights, contact us at{" "}
                 <a
-                  href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
+                  href={`mailto:${env.NEXT_PUBLIC_CONTACT_EMAIL}`}
                   className="text-primary hover:underline"
                 >
-                  {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
+                  {env.NEXT_PUBLIC_CONTACT_EMAIL}
                 </a>
                 .
               </p>
@@ -151,10 +153,10 @@ export default function PrivacyPolicyPage() {
               </p>
               <p className="mb-3">
                 <a
-                  href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
+                  href={`mailto:${env.NEXT_PUBLIC_CONTACT_EMAIL}`}
                   className="text-primary hover:underline"
                 >
-                  {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
+                  {env.NEXT_PUBLIC_CONTACT_EMAIL}
                 </a>
               </p>
             </section>

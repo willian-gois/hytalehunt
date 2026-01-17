@@ -3,11 +3,13 @@ import { NextResponse } from "next/server"
 import { eq } from "drizzle-orm"
 import Stripe from "stripe"
 
+import { env } from "@/env"
+
 import { db } from "@/drizzle/db"
 import { server } from "@/drizzle/db/schema"
 
 // Initialiser le client Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-12-15.clover",
 })
 
