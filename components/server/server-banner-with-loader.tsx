@@ -43,8 +43,7 @@ export function ServerBannerWithLoader({ src, alt }: ServerBannerWithLoaderProps
           src={src}
           width={480}
           height={280}
-          // className="rounded object-contain"
-          className="h-auto w-full object-cover"
+          className="rounded-xl h-auto w-full object-contain"
           autoPlay
           loop
           muted
@@ -60,8 +59,8 @@ export function ServerBannerWithLoader({ src, alt }: ServerBannerWithLoaderProps
           alt={alt}
           width={480}
           height={280}
-          // className="rounded object-contain"
-          className="h-auto w-full object-cover"
+          sizes="(max-width: 640px) 120px, 144px"
+          className="rounded-xl h-auto w-full object-cover"
           priority
           onLoad={() => setIsLoading(false)}
           onError={() => setIsLoading(false)}
