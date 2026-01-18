@@ -15,11 +15,12 @@ import { getMonthBestServers, getTodayServers, getYesterdayServers } from "@/app
 import { getTopCategories } from "@/app/actions/servers"
 
 export default async function Home() {
-  // Récupérer les données réelles
-  const todayServers = await getTodayServers()
-  const yesterdayServers = await getYesterdayServers()
-  const monthServers = await getMonthBestServers()
-  const topCategories = await getTopCategories(5)
+  const [todayServers, yesterdayServers, monthServers, topCategories] = await Promise.all([
+    getTodayServers(),
+    getYesterdayServers(),
+    getMonthBestServers(),
+    getTopCategories(5),
+  ])
 
   // const last30DaysVisitors = await getLast30DaysVisitors()
   // const last30DaysPageviews = await getLast30DaysPageviews()
