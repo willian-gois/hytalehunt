@@ -118,5 +118,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  return [...staticRoutes, ...serverRoutes, ...blogRoutes, ...categoryRoutes]
+  // Static countries page
+  const countriesStaticRoute: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/countries`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+  ]
+
+  // Get all countries with servers
+  const countries = await db
+    .selectDistinct({ country: server.country })
+    .from(server)
+    .where(or(eq(server.launchStatus, "ongoing"), eq(server.launchStatus, "launched")))
+
+  const countryRoutes: MetadataRoute.Sitemap = countries
+    .filter((c): c is { country: string } => c.country !== null && c.country !== "")
+    .map((country) => ({
+      url: `${baseUrl}/countries?country=${country.country}`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.8,
+    }))
+
+  return [
+    ...staticRoutes,
+    ...serverRoutes,
+    ...blogRoutes,
+    ...categoryRoutes,
+    ...countriesStaticRoute,
+    ...countryRoutes,
+  ]
 }

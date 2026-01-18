@@ -429,3 +429,125 @@ export async function getCategoryById(categoryId: string) {
 
   return categoryData[0] || null
 }
+
+// Get all countries that have active servers
+export async function getAllCountries() {
+  const countries = await db
+    .selectDistinct({ country: serverTable.country })
+    .from(serverTable)
+    .where(
+      and(
+        or(eq(serverTable.launchStatus, "ongoing"), eq(serverTable.launchStatus, "launched")),
+        sql`${serverTable.country} IS NOT NULL AND ${serverTable.country} != ''`,
+      ),
+    )
+    .orderBy(asc(serverTable.country))
+
+  return countries.map((c) => c.country).filter((c): c is string => c !== null)
+}
+
+// Get top countries based on server count
+export async function getTopCountries(limit = 100) {
+  const topCountries = await db
+    .select({
+      country: serverTable.country,
+      count: count(serverTable.id),
+    })
+    .from(serverTable)
+    .where(
+      and(
+        or(eq(serverTable.launchStatus, "ongoing"), eq(serverTable.launchStatus, "launched")),
+        sql`${serverTable.country} IS NOT NULL AND ${serverTable.country} != ''`,
+      ),
+    )
+    .groupBy(serverTable.country)
+    .orderBy(desc(count(serverTable.id)))
+    .limit(limit)
+
+  return topCountries.filter((c): c is { country: string; count: number } => c.country !== null)
+}
+
+// Get servers by country with pagination and sorting
+export async function getServersByCountry(
+  countryCode: string,
+  page: number = 1,
+  limit: number = 10,
+  sort: string = "recent",
+) {
+  const session = await getSession()
+  const userId = session?.user?.id || null
+
+  let orderByClause: SQL
+  switch (sort) {
+    case "upvotes":
+      orderByClause = desc(sql`count(distinct ${upvote.id})`)
+      break
+    case "alphabetical":
+      orderByClause = asc(serverTable.name)
+      break
+    // case "recent":
+    default:
+      orderByClause = desc(serverTable.createdAt)
+      break
+  }
+
+  const offset = (page - 1) * limit
+
+  const queryConditions = and(
+    eq(serverTable.country, countryCode),
+    or(eq(serverTable.launchStatus, "ongoing"), eq(serverTable.launchStatus, "launched")),
+  )
+
+  const serversData = await db
+    .select({
+      id: serverTable.id,
+      name: serverTable.name,
+      slug: serverTable.slug,
+      description: serverTable.description,
+      logoUrl: serverTable.logoUrl,
+      bannerUrl: serverTable.bannerUrl,
+      websiteUrl: serverTable.websiteUrl,
+      launchStatus: serverTable.launchStatus,
+      launchType: serverTable.launchType,
+      dailyRanking: serverTable.dailyRanking,
+      scheduledLaunchDate: serverTable.scheduledLaunchDate,
+      createdAt: serverTable.createdAt,
+      upvoteCount: sql<number>`count(distinct ${upvote.id})`.mapWith(Number),
+      commentCount: sql<number>`count(distinct ${fumaComments.id})`.mapWith(Number),
+    })
+    .from(serverTable)
+    .leftJoin(upvote, eq(upvote.serverId, serverTable.id))
+    .leftJoin(fumaComments, sql`(${fumaComments.page}::text = ${serverTable.id}::text)`)
+    .where(queryConditions)
+    .groupBy(
+      serverTable.id,
+      serverTable.name,
+      serverTable.slug,
+      serverTable.description,
+      serverTable.logoUrl,
+      serverTable.bannerUrl,
+      serverTable.websiteUrl,
+      serverTable.launchStatus,
+      serverTable.launchType,
+      serverTable.dailyRanking,
+      serverTable.scheduledLaunchDate,
+      serverTable.createdAt,
+    )
+    .orderBy(orderByClause)
+    .limit(limit)
+    .offset(offset)
+
+  const enrichedServers = await enrichServersWithUserData(serversData, userId)
+
+  const totalServersResult = await db
+    .select({ count: count(serverTable.id) })
+    .from(serverTable)
+    .where(queryConditions)
+
+  const totalCount = totalServersResult[0]?.count || 0
+
+  return {
+    servers: enrichedServers,
+    totalCount,
+  }
+}
