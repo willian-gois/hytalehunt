@@ -7,6 +7,7 @@ import { auth } from "@/lib/auth"
 import { cn } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
+import { CategoryIcon } from "@/components/categories/category-icon"
 import { HowItWorksModal } from "@/components/home/how-it-works-modal"
 import { ServerSection } from "@/components/home/server-section"
 import { WelcomeBanner } from "@/components/home/welcome-banner"
@@ -168,12 +169,7 @@ export default async function Home() {
                     )}
                   >
                     <div className="flex items-center gap-2">
-                      <Image
-                        src={`/images/categories/${category.id}.webp`}
-                        alt={category.name}
-                        width={24}
-                        height={24}
-                      />
+                      <CategoryIcon categoryId={category.id} categoryName={category.name} />
                       <span>{category.name}</span>
                     </div>
                     <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
