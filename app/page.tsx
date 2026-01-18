@@ -41,18 +41,14 @@ export default async function Home() {
               {/* Mobile Layout - Centered */}
               <div className="md:hidden">
                 <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-lg bg-[url('/images/banner.webp')] bg-cover bg-center px-4 py-6 text-center">
-                  <div className="absolute inset-0 bg-black/25" aria-hidden="true" />
-                  <Link
-                    href="/pricing"
-                    className="relative z-10 flex cursor-pointer flex-col gap-2"
-                  >
-                    <h1 className="text-muted font-heading text-lg font-semibold drop-shadow-[0_5px_16px_rgba(0,0,0,0.65)]">
+                  <div className="relative z-10 flex cursor-pointer flex-col gap-2">
+                    <h1 className="text-background font-heading text-lg font-semibold drop-shadow-[0_5px_16px_rgba(0,0,0,0.65)]">
                       <span>Discover the best Hytale servers</span>
                     </h1>
-                    <p className="text-muted text-sm drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+                    <p className="text-background text-sm drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
                       <span>Daily ranked by the community</span>
                     </p>
-                  </Link>
+                  </div>
                   <div className="relative z-10 flex items-center justify-center">
                     <Image
                       src="/logo.png"
@@ -66,17 +62,16 @@ export default async function Home() {
               </div>
               {/* Desktop Layout - Text left, Image right */}
               <div className="hidden w-full items-center justify-between gap-12 bg-[url('/images/banner.webp')] bg-cover bg-center bg-no-repeat px-8 py-6 md:relative md:flex md:overflow-hidden">
-                <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
                 {/* text */}
                 <div className="relative z-10 flex flex-col items-center justify-center gap-4 text-center">
-                  <Link href="/pricing" className="cursor-pointer">
-                    <h1 className="text-muted font-heading text-2xl font-bold drop-shadow-[0_6px_18px_rgba(0,0,0,0.7)]">
+                  <div className="cursor-pointer">
+                    <h1 className="text-background font-heading text-2xl font-bold">
                       <span>Discover the best Hytale servers</span>
                     </h1>
-                    <p className="text-muted text-md drop-shadow-[0_4px_12px_rgba(0,0,0,0.65)]">
+                    <p className="text-background text-md">
                       <span>Daily ranked by the community</span>
                     </p>
-                  </Link>
+                  </div>
                 </div>
 
                 {/* logo */}
