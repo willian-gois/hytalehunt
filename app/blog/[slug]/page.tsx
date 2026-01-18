@@ -177,8 +177,8 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                       <Image
                         src={article[0].image}
                         alt={title}
-                        width={100} // TODO: check image size
-                        height={100}
+                        width={600}
+                        height={400}
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-103"
                       />
                     </div>

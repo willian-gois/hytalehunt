@@ -162,8 +162,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       <Image
                         src={article[0].image}
                         alt={title}
-                        width={0} // TODO: check this size
-                        height={0}
+                        width={600}
+                        height={400}
                         className="h-full w-full object-cover"
                       />
                     </div>
