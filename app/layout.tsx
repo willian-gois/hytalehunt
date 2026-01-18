@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { Cinzel as FontHeading, Nunito_Sans as FontSans } from "next/font/google"
 
-import PlausibleProvider from "next-plausible"
 import { Toaster } from "sonner"
 
 import { PostHogPageview } from "@/components/analytics/posthog-pageview"
@@ -65,16 +64,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <PlausibleProvider
+        {/* <PlausibleProvider
           domain="hytalehunt.com"
-          customDomain="https://plausible.dailypings.com"
+          customDomain="https://plausible.hytelehunt.com"
           selfHosted={true}
           trackOutboundLinks={true}
           scriptProps={{
-            src: "https://plausible.dailypings.com/js/script.js",
+            src: "https://plausible.hytelehunt.com/js/script.js",
           }}
           enabled={env.NODE_ENV === "production"}
-        />
+        /> */}
         <OrganizationSchema />
         <WebSiteSchema />
       </head>
