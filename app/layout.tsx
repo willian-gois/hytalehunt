@@ -3,7 +3,6 @@ import { Cinzel as FontHeading, Nunito_Sans as FontSans } from "next/font/google
 
 import { Toaster } from "sonner"
 
-import { PostHogPageview } from "@/components/analytics/posthog-pageview"
 import { PostHogProvider } from "@/components/analytics/posthog-provider"
 import Footer from "@/components/layout/footer"
 import Nav from "@/components/layout/nav"
@@ -82,7 +81,6 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <PostHogProvider>
-          <PostHogPageview />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

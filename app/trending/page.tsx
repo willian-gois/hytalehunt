@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import type { Metadata } from "next"
 import { headers } from "next/headers"
 import Link from "next/link"
 
@@ -28,18 +29,21 @@ interface ServerSummary {
   categories?: { id: string; name: string }[]
 }
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Trending Hytale Servers - HytaleHunt",
-  description: "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
+  description:
+    "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
   openGraph: {
     title: "Trending Hytale Servers - HytaleHunt",
-    description: "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
+    description:
+      "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Trending Hytale Servers - HytaleHunt",
-    description: "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
+    description:
+      "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
   },
 }
 

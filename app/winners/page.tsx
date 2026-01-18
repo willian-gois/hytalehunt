@@ -14,16 +14,19 @@ import { getTopCategories } from "@/app/actions/servers"
 
 export const metadata: Metadata = {
   title: "Daily Winners - HytaleHunt",
-  description: "Check out the daily winners and top-ranked Hytale servers. See which servers won the community vote.",
+  description:
+    "Check out the daily winners and top-ranked Hytale servers. See which servers won the community vote.",
   openGraph: {
     title: "Daily Winners - HytaleHunt",
-    description: "Check out the daily winners and top-ranked Hytale servers. See which servers won the community vote.",
+    description:
+      "Check out the daily winners and top-ranked Hytale servers. See which servers won the community vote.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Daily Winners - HytaleHunt",
-    description: "Check out the daily winners and top-ranked Hytale servers. See which servers won the community vote.",
+    description:
+      "Check out the daily winners and top-ranked Hytale servers. See which servers won the community vote.",
   },
 }
 

@@ -1,7 +1,5 @@
 import Script from "next/script"
 
-import { env } from "@/env"
-
 interface BreadcrumbItem {
   name: string
   url: string
