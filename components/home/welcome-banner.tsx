@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 
-import { RiCloseLine, RiRocketLine, RiThumbUpLine } from "@remixicon/react"
+import { RiRocketLine, RiThumbUpLine } from "@remixicon/react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -89,14 +89,6 @@ export function WelcomeBanner() {
                 </p>
               </div>
             </div>
-          </div>
-
-          {/* Botão de fechar */}
-          <div className="flex justify-end">
-            <Button variant="outline" onClick={handleClose} className="gap-2">
-              <RiCloseLine className="h-4 w-4" />
-              Close
-            </Button>
           </div>
         </div>
       </DialogContent>
