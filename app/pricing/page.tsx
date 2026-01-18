@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -37,10 +38,30 @@ import { db } from "@/drizzle/db"
 import { seoArticle } from "@/drizzle/db/schema"
 import { env } from "@/env"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Pricing - Launch Your Hytale Server - HytaleHunt",
   description:
     "Choose the perfect plan to launch your Hytale server. Get visibility, upvotes, and grow your community with our launch packages.",
+  keywords: [
+    "hytale server launch",
+    "server pricing",
+    "hytale server promotion",
+    "server advertising",
+    "seo package",
+    "server backlinks",
+    "hytale marketing",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Pricing - Launch Your Hytale Server - HytaleHunt",
     description:
@@ -52,6 +73,9 @@ export const metadata = {
     title: "Pricing - Launch Your Hytale Server - HytaleHunt",
     description:
       "Choose the perfect plan to launch your Hytale server. Get visibility, upvotes, and grow your community with our launch packages.",
+  },
+  alternates: {
+    canonical: "/pricing",
   },
 }
 

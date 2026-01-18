@@ -8,7 +8,7 @@ export function OrganizationSchema() {
     url: env.NEXT_PUBLIC_URL,
     logo: `${env.NEXT_PUBLIC_URL}/logo.png`,
     description:
-      "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
+      "Discover and upvote the best Hytale servers. Find top servers list launching daily. Browse survival, PvP, minigames and more modes.",
     sameAs: [
       "https://twitter.com/hytalehunt",
       // "https://discord.gg/...",
@@ -35,12 +35,12 @@ export function WebSiteSchema() {
     name: "HytaleHunt",
     url: env.NEXT_PUBLIC_URL,
     description:
-      "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
+      "Discover and upvote the best Hytale servers. Find top servers list launching daily. Browse survival, PvP, minigames and more modes.",
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${env.NEXT_PUBLIC_URL}/categories?search={search_term_string}`,
+        urlTemplate: `${env.NEXT_PUBLIC_URL}/search?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },

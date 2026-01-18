@@ -33,6 +33,25 @@ export const metadata: Metadata = {
   title: "Trending Hytale Servers - HytaleHunt",
   description:
     "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
+  keywords: [
+    "trending hytale servers",
+    "popular servers",
+    "top servers",
+    "best hytale servers",
+    "server rankings",
+    "community favorites",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Trending Hytale Servers - HytaleHunt",
     description:
@@ -44,6 +63,9 @@ export const metadata: Metadata = {
     title: "Trending Hytale Servers - HytaleHunt",
     description:
       "Discover the most popular and trending Hytale servers. Browse top servers ranked by the community.",
+  },
+  alternates: {
+    canonical: "/trending",
   },
 }
 

@@ -16,6 +16,25 @@ export const metadata: Metadata = {
   title: "Daily Winners - HytaleHunt",
   description:
     "Check out the daily winners and top-ranked Hytale servers. See which servers won the community vote.",
+  keywords: [
+    "daily winners",
+    "top servers",
+    "hytale winners",
+    "server rankings",
+    "community vote",
+    "best servers",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Daily Winners - HytaleHunt",
     description:
@@ -27,6 +46,9 @@ export const metadata: Metadata = {
     title: "Daily Winners - HytaleHunt",
     description:
       "Check out the daily winners and top-ranked Hytale servers. See which servers won the community vote.",
+  },
+  alternates: {
+    canonical: "/winners",
   },
 }
 

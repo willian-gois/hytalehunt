@@ -26,13 +26,35 @@ const fontHeading = FontHeading({
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_URL),
-  title: "HytaleHunt - Discover the Best Hytale Servers",
+  title: "HytaleHunt - Discover the Best Hytale Servers (Daily updated)",
   description:
-    "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
+    "Discover and upvote the best Hytale servers. Find top servers list launching daily. Browse survival, PvP, minigames and more modes.",
+  keywords: [
+    "hytale",
+    "hytale servers",
+    "hytale server list",
+    "minecraft",
+    "gaming servers",
+    "multiplayer servers",
+    "pvp servers",
+    "survival servers",
+    "server directory",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "HytaleHunt - Discover the Best Hytale Servers",
+    title: "HytaleHunt - Discover the Best Hytale Servers (Daily updated)",
     description:
-      "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
+      "Discover and upvote the best Hytale servers. Find top servers list launching daily. Browse survival, PvP, minigames and more modes.",
     url: env.NEXT_PUBLIC_URL,
     siteName: "HytaleHunt",
     images: [
@@ -40,7 +62,7 @@ export const metadata: Metadata = {
         url: "og.webp",
         width: 1200,
         height: 630,
-        alt: "HytaleHunt - Discover the Best Hytale Servers",
+        alt: "HytaleHunt - Discover the Best Hytale Servers (Daily updated)",
       },
     ],
     locale: "en_US",
@@ -48,10 +70,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "HytaleHunt - Discover the Best Hytale Servers",
+    title: "HytaleHunt - Discover the Best Hytale Servers (Daily updated)",
     description:
-      "HytaleHunt is a platform to discover and upvote the best Hytale servers. Find top servers launching daily.",
+      "Discover and upvote the best Hytale servers. Find top servers list launching daily. Browse survival, PvP, minigames and more modes.",
     images: ["og.webp"],
+  },
+  alternates: {
+    canonical: "/",
   },
 }
 

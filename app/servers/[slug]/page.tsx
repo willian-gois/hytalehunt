@@ -54,6 +54,27 @@ export async function generateMetadata(
   return {
     title: `${serverData.name} | HytaleHunt`,
     description: stripHtml(serverData.description),
+    keywords: [
+      "hytale server",
+      serverData.name,
+      `${serverData.name} server`,
+      `${serverData.name} hytale server`,
+      "minecraft server",
+      "gaming server",
+      "multiplayer",
+      "hytale",
+    ],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       title: `${serverData.name} on HytaleHunt`,
       description: stripHtml(serverData.description),
@@ -64,6 +85,9 @@ export async function generateMetadata(
       title: `${serverData.name} on HytaleHunt`,
       description: stripHtml(serverData.description),
       images: [serverData.bannerUrl || serverData.logoUrl],
+    },
+    alternates: {
+      canonical: `/servers/${slug}`,
     },
   }
 }

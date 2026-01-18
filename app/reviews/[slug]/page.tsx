@@ -56,9 +56,20 @@ export async function generateMetadata({
   return {
     title: metaTitle || `${title} | HytaleHunt`,
     description: metaDescription || description,
-    keywords: "review, product review, analysis, evaluation",
+    keywords: ["review", "server review", "analysis", "evaluation", "hytale", "server review"],
     authors: [{ name: "HytaleHunt Team" }],
     category: "Hytale-Servers",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       title: metaTitle || `${title} | HytaleHunt`,
       description: metaDescription || description,
@@ -304,7 +315,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                               <div className="text-sm">
                                 <div>We contact you in 24h</div>
                                 <div className="text-muted-foreground text-xs">
-                                  Product access, keywords, details
+                                  Server access, keywords, details
                                 </div>
                               </div>
                             </div>

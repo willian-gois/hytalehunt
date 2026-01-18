@@ -13,8 +13,28 @@ export const metadata: Metadata = {
   title: "Blog | HytaleHunt - Insights & Resources",
   description:
     "Discover insights, tutorials, and resources to help you build and launch successful Hytale servers.",
-  keywords: "blog, insights, tutorials, server launch, hytale, servers",
+  keywords: [
+    "blog",
+    "insights",
+    "tutorials",
+    "server launch",
+    "hytale",
+    "servers",
+    "guides",
+    "resources",
+  ],
   authors: [{ name: "HytaleHunt Team" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Blog | HytaleHunt - Insights & Resources",
     description:
@@ -37,6 +57,9 @@ export const metadata: Metadata = {
     description:
       "Discover insights, tutorials, and resources to help you build and launch successful Hytale servers.",
     images: ["/og-blog.webp"],
+  },
+  alternates: {
+    canonical: "/blog",
   },
 }
 

@@ -9,24 +9,45 @@ import { db } from "@/drizzle/db"
 import { seoArticle } from "@/drizzle/db/schema"
 
 export const metadata: Metadata = {
-  title: "Product Reviews | HytaleHunt - In-Depth Product Analysis",
-  description:
-    "Discover comprehensive product reviews and in-depth analysis of the latest tools and platforms to help you make informed decisions.",
-  keywords: "product reviews, analysis, evaluation, hytale, servers",
+  title: "Server Reviews | HytaleHunt - In-Depth Server Analysis",
+  description: "Discover comprehensive server reviews and in-depth analysis of the latest servers.",
+  keywords: [
+    "server reviews",
+    "analysis",
+    "evaluation",
+    "hytale",
+    "servers",
+    "server reviews",
+    "in-depth analysis",
+  ],
   authors: [{ name: "HytaleHunt Team" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Product Reviews | HytaleHunt - In-Depth Product Analysis",
+    title: "Server Reviews | HytaleHunt - In-Depth Server Analysis",
     description:
-      "Discover comprehensive product reviews and in-depth analysis of the latest tools and platforms to help you make informed decisions.",
+      "Discover comprehensive server reviews and in-depth analysis of the latest servers.",
     type: "website",
     url: "/reviews",
     siteName: "HytaleHunt",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Product Reviews | HytaleHunt - In-Depth Product Analysis",
+    title: "Server Reviews | HytaleHunt - In-Depth Server Analysis",
     description:
-      "Discover comprehensive product reviews and in-depth analysis of the latest tools and platforms to help you make informed decisions.",
+      "Discover comprehensive server reviews and in-depth analysis of the latest servers.",
+  },
+  alternates: {
+    canonical: "/reviews",
   },
 }
 
@@ -62,10 +83,9 @@ export default async function ReviewsPage() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-foreground mb-4 text-2xl font-bold md:text-3xl">Product Reviews</h1>
+          <h1 className="text-foreground mb-4 text-2xl font-bold md:text-3xl">Server Reviews</h1>
           <p className="text-muted-foreground text-md mx-auto max-w-4xl md:text-lg">
-            In-depth reviews and analysis of the latest tools and platforms to help you make
-            informed decisions.
+            In-depth reviews and analysis of the latest servers.
           </p>
         </div>
 
@@ -82,7 +102,7 @@ export default async function ReviewsPage() {
               href="/reviews"
               className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 py-2 text-sm font-medium transition-colors"
             >
-              Product Reviews
+              Server Reviews
             </Link>
           </div>
         </div>
@@ -96,7 +116,7 @@ export default async function ReviewsPage() {
               </div>
               <h3 className="text-card-foreground mb-2 text-lg font-semibold">No reviews yet</h3>
               <p className="text-muted-foreground">
-                We&apos;re working on some amazing product reviews. Check back soon!
+                We&apos;re working on some amazing server reviews. Check back soon!
               </p>
             </div>
           </div>
@@ -146,7 +166,7 @@ export default async function ReviewsPage() {
                     {/* Review Badge */}
                     <div className="mb-4">
                       <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs">
-                        Product Review
+                        Server Review
                       </span>
                     </div>
 

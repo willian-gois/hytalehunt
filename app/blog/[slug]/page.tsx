@@ -56,9 +56,20 @@ export async function generateMetadata({
   return {
     title: metaTitle || `${title} | HytaleHunt`,
     description: metaDescription || description,
-    keywords: "blog, insights, tutorials, server launch, hytale, servers",
+    keywords: ["blog", "insights", "tutorials", "server launch", "hytale", "servers", "guides"],
     authors: [{ name: article[0].author || "HytaleHunt Team" }],
     category: "hytale-servers",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       title: metaTitle || `${title} | HytaleHunt`,
       description: metaDescription || description,

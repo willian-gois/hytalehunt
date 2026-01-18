@@ -16,6 +16,28 @@ import { Button } from "@/components/ui/button"
 export const metadata: Metadata = {
   title: "Sponsors - HytaleHunt",
   description: "Support HytaleHunt and gain visibility for your product or service.",
+  keywords: [
+    "sponsors",
+    "sponsorship",
+    "advertising",
+    "hytale advertising",
+    "server promotion",
+    "marketing",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "/sponsors",
+  },
 }
 
 export default async function SponsorsPage() {

@@ -24,6 +24,41 @@ export const metadata = {
   title: "Browse Servers by Category - HytaleHunt",
   description:
     "Browse Hytale servers by category. Find servers in PvP, Survival, Creative, RPG, and more categories.",
+  keywords: [
+    "hytale categories",
+    "pvp servers",
+    "survival servers",
+    "creative servers",
+    "rpg servers",
+    "minigames servers",
+    "egg wars servers",
+    "skyblock servers",
+    "skywars servers",
+    "factions servers",
+    "hardcore servers",
+    "kitpvp servers",
+    "mcmmo servers",
+    "pve servers",
+    "pvp servers",
+    "parkour servers",
+    "prison servers",
+    "roleplay servers",
+    "survival servers",
+    "towny servers",
+    "vanilla servers",
+    "hytale server types",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Browse Servers by Category - HytaleHunt",
     description:
@@ -35,6 +70,9 @@ export const metadata = {
     title: "Browse Servers by Category - HytaleHunt",
     description:
       "Browse Hytale servers by category. Find servers in PvP, Survival, Creative, RPG, and more categories.",
+  },
+  alternates: {
+    canonical: "/categories",
   },
 }
 
