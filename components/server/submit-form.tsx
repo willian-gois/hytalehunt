@@ -844,7 +844,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
               <Label className="mb-2 block">
                 Categories <span className="text-red-500">*</span>
                 <span className="text-muted-foreground ml-2 text-xs">
-                  ({formData.categories.length}/{MAXIMUM_CATEGORY_COUNT} selected)
+                  ({formData.categories.length} of maximum {MAXIMUM_CATEGORY_COUNT} selected)
                 </span>
               </Label>
               {isLoadingCategories ? (
