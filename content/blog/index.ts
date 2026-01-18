@@ -24,6 +24,8 @@ export const articlesConfig: ArticleConfig[] = [
     metaTitle: "Complete guide: How to create a Hytale server - Complete Setup Guide 2026",
     metaDescription:
       "Learn how to create and manage your own Hytale server with this comprehensive guide covering setup, configuration, optimization, and troubleshooting. Step-by-step instructions for Windows and Linux.",
+    image: "/complete-guide-how-create-hytale-server-2026/banner.webp",
+    publishedAt: new Date("2026-01-18"),
   },
   {
     slug: "how-install-hytale-mods-client-server",
