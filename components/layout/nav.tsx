@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { headers } from "next/headers"
+import Image from "next/image"
 import Link from "next/link"
 
 import {
@@ -47,7 +48,13 @@ export default async function Nav() {
         <div className="flex items-center gap-8">
           <Link href="/" className="font-heading flex items-center">
             <span className="font-heading flex items-center text-lg font-bold">
-              <img src="/logo.webp" alt="logo" className="mr-1 h-6 w-6" />
+              <Image
+                src="/logo.webp"
+                alt="HytaleHunt logo"
+                width={24}
+                height={24}
+                className="mr-1"
+              />
               HytaleHunt
             </span>
           </Link>
