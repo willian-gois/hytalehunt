@@ -6,7 +6,9 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { RiDiscordFill, RiHashtag, RiTwitterFill, RiVipCrownLine } from "@remixicon/react"
+import { countries } from "country-data-list"
 import { format } from "date-fns"
+import { CircleFlag } from "react-circle-flags"
 
 import { auth } from "@/lib/auth"
 
@@ -92,6 +94,16 @@ export async function generateMetadata(
   }
 }
 
+// Helper function to convert country code to flag emoji
+function getCountryFlag(countryCode: string): string {
+  if (!countryCode || countryCode.length !== 2) return ""
+  const codePoints = countryCode
+    .toUpperCase()
+    .split("")
+    .map((char) => 127397 + char.charCodeAt(0))
+  return String.fromCodePoint(...codePoints)
+}
+
 export default async function ServerPage({ params }: ServerPageProps) {
   const { slug } = await params
   const serverData = await getServerBySlug(slug)
@@ -121,6 +133,8 @@ export default async function ServerPage({ params }: ServerPageProps) {
   //   launchType: serverData.launchType,
   //   dailyRanking: serverData.dailyRanking,
   // })
+
+  const country = countries.all.find((country) => country.alpha2 === serverData.country)
 
   const breadcrumbItems = [
     { name: "Home", url: env.NEXT_PUBLIC_URL },
@@ -422,6 +436,41 @@ export default async function ServerPage({ params }: ServerPageProps) {
                       <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
                       <span className="text-foreground text-sm font-medium">
                         {format(scheduledDate, "yyyy-MM-dd")}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Version */}
+                {serverData.version && (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                        Version
+                      </span>
+                      <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
+                      <span className="text-foreground text-sm font-medium">
+                        {serverData.version}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Country */}
+                {serverData.country && (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                        Country
+                      </span>
+                      <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
+                      <span className="flex items-center gap-2 text-foreground text-sm font-medium">
+                        <CircleFlag
+                          countryCode={serverData.country.toLowerCase()}
+                          height={20}
+                          className="w-5 h-5"
+                        />
+                        {country ? country.name : serverData.country.toUpperCase()}
                       </span>
                     </div>
                   </div>
