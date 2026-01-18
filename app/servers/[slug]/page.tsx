@@ -17,6 +17,7 @@ import { RichTextDisplay } from "@/components/ui/rich-text-editor"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { CopyIpButton } from "@/components/server/copy-ip-button"
 import { EditButton } from "@/components/server/edit-button"
+import { EmbedButton } from "@/components/server/embed-button"
 import { ServerBannerWithLoader } from "@/components/server/server-banner-with-loader"
 import { ServerComments } from "@/components/server/server-comments"
 import { ShareButton } from "@/components/server/share-button"
@@ -371,9 +372,16 @@ export default async function ServerPage({ params }: ServerPageProps) {
                   serverData.dailyRanking &&
                   serverData.dailyRanking <= 3 && (
                     <div className="space-y-3">
-                      <h3 className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
-                        Achievement
-                      </h3>
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                          Achievement
+                        </h3>
+                        <EmbedButton
+                          serverName={serverData.name}
+                          serverSlug={serverData.slug}
+                          dailyRanking={serverData.dailyRanking}
+                        />
+                      </div>
                       <div className="flex">
                         <Image
                           src={`/images/badges/top${serverData.dailyRanking}-light.webp`}
@@ -465,12 +473,12 @@ export default async function ServerPage({ params }: ServerPageProps) {
                       </span>
                       <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
                       <span className="flex items-center gap-2 text-foreground text-sm font-medium">
+                        {country ? country.name : serverData.country.toUpperCase()}
                         <CircleFlag
                           countryCode={serverData.country.toLowerCase()}
                           height={20}
                           className="w-5 h-5"
                         />
-                        {country ? country.name : serverData.country.toUpperCase()}
                       </span>
                     </div>
                   </div>
