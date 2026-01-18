@@ -86,7 +86,7 @@ export default function RootLayout({
           <PostHogPageview />
           <ThemeProvider
             attribute="class"
-            defaultTheme="light"
+            defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
