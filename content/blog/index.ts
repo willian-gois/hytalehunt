@@ -24,7 +24,18 @@ export const articlesConfig: ArticleConfig[] = [
     metaTitle: "Complete guide: How to create a Hytale server - Complete Setup Guide 2026",
     metaDescription:
       "Learn how to create and manage your own Hytale server with this comprehensive guide covering setup, configuration, optimization, and troubleshooting. Step-by-step instructions for Windows and Linux.",
-    image: "https://cdn.hytale.com/5c4b5d1ff69b310012f2173e_server_ui_concept.jpg",
+  },
+  {
+    slug: "how-install-hytale-mods-client-server",
+    filename: "how-install-hytale-mods-client-server.mdx",
+    title: "How to Install Hytale Mods (Client & Server)",
+    description:
+      "Learn how to install Hytale mods for both single-player and multiplayer servers. Step-by-step guide covering client installation, server setup, automatic synchronization, and troubleshooting common issues.",
+    tags: ["hytale", "mods", "tutorial", "client", "server", "modding"],
+    metaTitle: "How to Install Hytale Mods - Client & Server Guide 2026",
+    metaDescription:
+      "Complete guide to installing Hytale mods on client and server. Includes automatic mod synchronization, CurseForge integration, troubleshooting, and best practices for modded servers.",
+    image: "/how-install-hytale-mods-client-server/banner.webp",
     publishedAt: new Date("2026-01-18"),
   },
 ]

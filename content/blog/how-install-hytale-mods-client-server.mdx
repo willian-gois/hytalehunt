@@ -1,0 +1,156 @@
+
+Mods enhance your Hytale experience with new content, features, and gameplay mechanics. This guide covers installing mods for both single-player and multiplayer servers.
+
+## Installing Mods on Client (Single Player)
+
+### Finding Your Mods Folder
+
+The location depends on your operating system:
+
+**Windows:**
+1. Press `Win + R` or search for "Run"
+2. Type `%appdata%` and press Enter
+3. Navigate to `Hytale\UserData\Mods`
+
+Full path: `C:\Users\YourUsername\AppData\Roaming\Hytale\UserData\Mods`
+
+**macOS:**
+```
+~/Library/Application Support/Hytale/UserData/Mods
+```
+
+**Linux:**
+```
+~/.local/share/Hytale/UserData/Mods
+```
+
+### Installation Steps
+
+1. **Download the mod** from a trusted source ((CurseForge)[https://www.curseforge.com/hytale] is the official partnership platform)
+2. **Place the mod file** (usually a `.jar` file) directly into the `Mods` folder
+3. **Launch Hytale** and create or load a world
+4. **Select mods to load** when creating/joining the world
+
+That's it - no extraction needed, just drop the file in the folder.
+
+## Installing Mods on Servers
+
+### Server Mod Installation
+
+1. **Connect to your server** via FTP or file manager
+2. **Navigate to** the `/HytaleServer/mods/` folder
+3. **Upload mod files** to this directory
+4. **Check dependencies** - ensure all required supporting mods are present
+5. **Restart the server** to apply changes
+
+### Automatic Client Synchronization
+
+The best part about server mods: **players joining your server generally don't need to install anything manually**. The server automatically synchronizes mods to connected clients.
+
+This means:
+- No manual installation for players
+- Everyone uses the same mod versions
+- Easier server management
+- Better compatibility
+
+### Server Hosting Options
+
+For easier mod management, consider hosts with built-in mod installers:
+- **mTXServ**: Automated mod installation through control panel
+- Other hosts with one-click mod installers
+
+## Where to Find Mods
+
+**CurseForge** is the official modding partnership platform for Hytale. It offers:
+- Verified mod creators
+- Version compatibility information
+- Automatic dependency detection
+- Community ratings and reviews
+
+## Troubleshooting Common Issues
+
+### Mods Not Loading
+
+**Check version compatibility:**
+- Ensure the mod matches your Hytale version
+- Update mods when you update Hytale
+
+**Verify file placement:**
+- Mods should be directly in the `Mods` folder
+- Don't create subfolders or extract archives
+
+**Review error logs:**
+- Check the console during startup
+- Look for red error messages
+- Common issues: missing dependencies, version mismatches
+
+### Server Mods Not Syncing
+
+**Confirm server configuration:**
+- Mods are in `/HytaleServer/mods/`
+- Server was restarted after adding mods
+- No firewall blocking file transfers
+
+**Check client connection:**
+- Client has sufficient permissions
+- No local firewall interference
+
+## Mod Types and Dependencies
+
+### Client-Side Mods
+Only affect your local game (UI improvements, visual enhancements, etc.)
+
+### Server-Side Mods
+Modify gameplay, world generation, or game mechanics
+
+### Dependencies
+Some mods require other mods to function. Always check:
+- Required dependencies listed on the mod page
+- Correct dependency versions
+- Load order (if specified)
+
+## Best Practices
+
+### For Players
+1. **Only download from trusted sources** like CurseForge
+2. **Read mod descriptions** for compatibility requirements
+3. **Start with few mods** to identify conflicts
+4. **Back up your worlds** before installing major mods
+5. **Keep mods updated** for bug fixes and new features
+
+### For Server Owners
+1. **Test mods locally** before deploying to production
+2. **Maintain a mod list** for your community
+3. **Document required mods** if any need manual installation
+4. **Regular backups** before mod updates
+5. **Monitor server performance** after adding mods
+
+## Growing Your Modded Server Community
+
+Once you've set up your modded server with unique gameplay and features, you'll want players to discover it. [HytaleHunt](https://hytalehunt.com) helps modded servers gain visibility through a fair, launch-based system.
+
+Unlike static server lists, HytaleHunt's **daily, weekly, and monthly boards** give every server - including specialized modded servers - regular opportunities to attract new players. Whether you're running a survival server with quality-of-life mods or a heavily modded RPG experience, the launch system ensures your server gets fresh exposure.
+
+[Launch your modded server on HytaleHunt](https://hytalehunt.com/servers/submit) to connect with players looking for exactly the experience you've created.
+
+## Quick Reference
+
+**Client Mods Folder:**
+- Windows: `%appdata%\Hytale\UserData\Mods`
+- macOS: `~/Library/Application Support/Hytale/UserData/Mods`
+- Linux: `~/.local/share/Hytale/UserData/Mods`
+
+**Server Mods Folder:**
+- `/HytaleServer/mods/`
+
+**Installation:**
+1. Download mod
+2. Place in mods folder
+3. Restart game/server
+4. Select mods when loading world (client only)
+
+**Troubleshooting:**
+- Check version compatibility
+- Verify file placement
+- Review error logs
+- Ensure dependencies are installed
