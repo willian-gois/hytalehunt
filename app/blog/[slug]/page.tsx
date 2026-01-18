@@ -209,10 +209,10 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                 <div className="from-primary/5 to-primary/10 rounded-2xl bg-gradient-to-br p-4">
                   <div className="mb-4 text-center">
                     <h2 className="text-foreground text-base font-semibold">
-                      Want a review for your product?
+                      Want a review for your server?
                     </h2>
                     <p className="text-muted-foreground text-xs">
-                      Boost your product&apos;s visibility and credibility
+                      Boost your server&apos;s visibility and credibility
                     </p>
                   </div>
 
