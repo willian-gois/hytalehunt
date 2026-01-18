@@ -23,7 +23,6 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
         capture_pageleave: true,
         disable_session_recording: false,
         before_send: (event) => {
-          console.log(event)
           if (env.NEXT_PUBLIC_APP_ENV !== "production") {
             console.log("[PostHog] [DEVELOPMENT] Skipping event", event)
             return null
