@@ -1,0 +1,431 @@
+Creating your own Hytale server allows you to build a custom gaming experience for your community. Whether you're planning a small private server for friends or a large public server, this comprehensive guide will walk you through everything you need to know to get your Hytale server up and running.
+
+## What You Need Before Starting
+
+Before diving into the setup process, make sure your system meets the minimum technical requirements for hosting a Hytale server.
+
+### System Requirements
+
+To run a Hytale server smoothly, your machine needs:
+
+- **RAM:** Minimum 4 GB (8 GB or more recommended for better performance)
+- **Processor:** x64 or arm64 architecture
+- **Java:** Version 25 LTS (this is essential and non-negotiable)
+- **Storage:** Sufficient space for server files and world data
+- **Network:** Stable internet connection with ability to configure port forwarding
+
+The most important requirement is Java 25 LTS. We strongly recommend installing "Adoptium (Temurin)" as your Java distribution. After installation, verify it's working correctly by running:
+
+```bash
+java --version
+```
+
+This should display Java version 25 or higher.
+
+## Step 1: Obtaining Your Server Files
+
+There are two primary methods to get the necessary Hytale server files. Choose the one that best fits your needs.
+
+### Method 1: Manual Download (Simplest for Beginners)
+
+This method is perfect if you're setting up a server for the first time or running a small private server.
+
+1. Navigate to your Hytale installation folder. On Windows, this is typically located at:
+   ```
+   %appdata%\Hytale\install\release\package\game\latest
+   ```
+
+2. Locate two important items:
+   - The "Server" folder
+   - The "Assets.zip" file
+
+3. Copy both of these to a new directory where you want your server to live. This could be something like:
+   ```
+   C:\HytaleServer\
+   ```
+   or on Linux:
+   ```
+   /home/username/hytale-server/
+   ```
+
+### Method 2: CLI Download (Recommended for Production)
+
+For production servers or if you want automatic updates, use the (Hytale Downloader tool)[https://downloader.hytale.com/hytale-downloader.zip]. This method is more technical but offers better long-term maintenance.
+
+1. Download the Hytale Downloader tool
+2. Run the following command to download the latest server version:
+   ```bash
+   ./hytale-downloader
+   ```
+
+This method automatically downloads the latest version and makes updating your server much easier in the future.
+
+## Step 2: Server Authentication
+
+Every Hytale server must be linked to a Hytale account for functionality. This is a crucial security and licensing step.
+
+### Linking Your Account
+
+1. Launch your server for the first time with this command:
+   ```bash
+   java -jar HytaleServer.jar --assets PathToAssets.zip
+   ```
+   Replace `PathToAssets.zip` with the actual path to your Assets.zip file.
+
+2. In the server console, you'll see a prompt. Enter the following command:
+   ```
+   /auth login device
+   ```
+
+3. The console will display a unique authorization code
+
+4. Open your web browser and navigate to:
+   ```
+   accounts.hytale.com/device
+   ```
+
+5. Enter the code displayed in your console
+
+6. Confirm the authorization
+
+**Important:** Each Hytale account can authorize up to 100 servers. This should be more than enough for most use cases, but keep it in mind if you're running multiple servers.
+
+## Step 3: Network Configuration
+
+Proper network configuration is essential for players to connect to your server.
+
+### Understanding Hytale's Network Protocol
+
+Hytale servers use **QUIC protocol over UDP** (not TCP). This is important to know when configuring your firewall and port forwarding.
+
+The default port is **5520**, but you can change this via command-line parameters if needed.
+
+### Configuring Your Firewall
+
+Choose the instructions based on your operating system:
+
+#### Windows (Windows Defender Firewall)
+
+Open PowerShell as Administrator and run:
+
+```powershell
+New-NetFirewallRule -DisplayName "Hytale Server" -Direction Inbound -Protocol UDP -LocalPort 5520 -Action Allow
+```
+
+#### Linux (iptables)
+
+```bash
+sudo iptables -A INPUT -p udp --dport 5520 -j ACCEPT
+```
+
+To make this rule persistent across reboots, save your iptables rules:
+
+```bash
+sudo iptables-save > /etc/iptables/rules.v4
+```
+
+#### Linux (ufw - Uncomplicated Firewall)
+
+If you're using ufw (common on Ubuntu):
+
+```bash
+sudo ufw allow 5520/udp
+```
+
+### Port Forwarding
+
+If you're hosting from home, you'll need to configure port forwarding on your router:
+
+1. Access your router's admin panel (usually at 192.168.1.1 or 192.168.0.1)
+2. Find the "Port Forwarding" or "Virtual Server" section
+3. Create a new rule:
+   - **Protocol:** UDP
+   - **External Port:** 5520
+   - **Internal Port:** 5520
+   - **Internal IP:** Your server's local IP address
+   - **Name:** Hytale Server
+
+4. Save and apply the changes
+
+## Step 4: Server Configuration
+
+Hytale servers use several JSON configuration files to customize server behavior.
+
+### Key Configuration Files
+
+#### config.json
+This is your main server configuration file. It controls:
+- Server name and description
+- Maximum players
+- Game rules
+- World generation settings
+- Performance options
+
+#### permissions.json
+Manages player permissions and roles:
+- Admin privileges
+- Moderator abilities
+- Custom permission groups
+- Command access levels
+
+#### whitelist.json
+If you want to run a private server:
+- Add player usernames to allow access
+- Enable whitelist mode
+- Manage invited players
+
+#### bans.json
+For server moderation:
+- Banned player list
+- Ban reasons and durations
+- IP bans
+
+### Basic config.json Example
+
+```json
+{
+  "server-name": "My Hytale Server",
+  "max-players": 20,
+  "port": 5520,
+  "difficulty": "normal",
+  "pvp": true,
+  "whitelist": false
+}
+```
+
+Customize these values based on your server's needs.
+
+## Step 5: Performance Optimization
+
+For the best server performance, especially with more players, consider these optimization techniques.
+
+### Increasing RAM Allocation
+
+By default, Java might not use enough RAM for your server. Increase the allocation with the `-Xmx` flag:
+
+```bash
+java -Xmx8G -jar HytaleServer.jar --assets Assets.zip
+```
+
+This example allocates 8GB of RAM. Adjust based on your available memory:
+- Small server (1-10 players): `-Xmx4G`
+- Medium server (10-50 players): `-Xmx8G`
+- Large server (50+ players): `-Xmx16G` or more
+
+### Enable AOT Caching
+
+Ahead-of-Time (AOT) compilation can significantly improve startup times:
+
+```bash
+java -XX:AOTCache=HytaleServer.aot -Xmx8G -jar HytaleServer.jar --assets Assets.zip
+```
+
+The first startup will take longer as it creates the cache, but subsequent starts will be much faster.
+
+### Additional Performance Flags
+
+For advanced users, consider these Java flags for optimal performance:
+
+```bash
+java -Xmx8G -Xms8G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -jar HytaleServer.jar --assets Assets.zip
+```
+
+## Starting Your Server
+
+Once everything is configured, start your server with your chosen command. A successful start will show:
+
+1. Server initialization messages
+2. World loading progress
+3. Network binding confirmation
+4. "Server started on port 5520" message
+
+## Connecting to Your Server
+
+### For Local Testing
+Players on the same network can connect using your local IP address:
+```
+192.168.x.x:5520
+```
+
+### For Public Access
+Players need your public IP address. Find it at websites like whatismyip.com, then share:
+```
+your.public.ip.address:5520
+```
+
+### Using a Domain Name (Optional)
+For a more professional setup, point a domain name to your server's IP:
+1. Purchase a domain name
+2. Create an A record pointing to your server's public IP
+3. Players can connect using: `yourservername.com:5520`
+
+## Server Management and Maintenance
+
+### Regular Backups
+Always backup your server data regularly:
+- World files
+- Configuration files
+- Player data
+
+Automate this with a script running daily or weekly.
+
+### Monitoring Performance
+Keep an eye on:
+- CPU usage
+- RAM usage
+- Network bandwidth
+- Player count vs. performance
+- TPS (Ticks Per Second)
+
+### Updating Your Server
+When new Hytale versions release:
+1. Backup everything first
+2. Download the new server files
+3. Replace old files with new ones
+4. Test the server before making it public
+5. Update plugins/mods if applicable
+
+## Common Issues and Troubleshooting
+
+### "Cannot bind to port 5520"
+- Another application is using the port
+- Check with: `netstat -ano | findstr :5520` (Windows) or `lsof -i :5520` (Linux)
+- Change the server port or close the conflicting application
+
+### Players Cannot Connect
+1. Verify firewall rules are correct
+2. Check port forwarding configuration
+3. Confirm server is actually running
+4. Test with local IP first before testing public access
+5. Ensure you're sharing the correct IP address and port
+
+### Server Crashes or Lag
+- Increase RAM allocation
+- Check for resource-intensive plugins/mods
+- Monitor CPU and RAM usage
+- Consider upgrading hardware
+- Reduce render distance or max players
+
+### Authentication Errors
+- Verify your account is properly linked
+- Check internet connection
+- Re-authenticate using `/auth login device`
+- Ensure you haven't exceeded the 100 server limit
+
+## Advanced: Running as a Service
+
+For 24/7 server operation, set up your server as a system service.
+
+### Linux (systemd)
+
+Create a service file at `/etc/systemd/system/hytale.service`:
+
+```ini
+[Unit]
+Description=Hytale Server
+After=network.target
+
+[Service]
+Type=simple
+User=hytale
+WorkingDirectory=/home/hytale/server
+ExecStart=/usr/bin/java -Xmx8G -jar HytaleServer.jar --assets Assets.zip
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then enable and start:
+```bash
+sudo systemctl enable hytale
+sudo systemctl start hytale
+```
+
+### Windows (NSSM - Non-Sucking Service Manager)
+
+1. Download NSSM from nssm.cc
+2. Run: `nssm install HytaleServer`
+3. Configure the path to java.exe and your server command
+4. Set it to start automatically
+
+## Scaling Your Server
+
+As your community grows, you may need to scale:
+
+### Vertical Scaling (Better Hardware)
+- More RAM
+- Faster CPU
+- SSD instead of HDD
+- Better network connection
+
+### Horizontal Scaling (Multiple Servers)
+- Proxy servers (like BungeeCord/Velocity equivalents)
+- Separate game modes on different servers
+- Load balancing for large communities
+
+### Professional Hosting
+Consider professional game server hosts:
+- Managed services with DDoS protection
+- Automatic backups
+- Better uptime
+- Professional support
+- Geographic distribution
+
+## Building Your Community
+
+A server is only as good as its community. Consider:
+
+### Community Platforms
+- Discord server for out-of-game communication
+- Website with forums
+- Social media presence
+- Server rules and guidelines
+
+### Server Management Team
+- Recruit trustworthy moderators
+- Clear hierarchy and responsibilities
+- Regular team meetings
+- Moderation guidelines and tools
+
+### Events and Engagement
+- Regular server events
+- Competitions and rewards
+- Community builds
+- Seasonal content
+
+### Getting Players to Find Your Server
+
+Building a great server is only half the battle - you also need players to discover it. **[HytaleHunt](https://hytalehunt.com)** is a launch-based Hytale server discovery platform that helps new and existing servers gain visibility and attract players.
+
+Unlike traditional "top servers" lists where the same servers dominate forever, HytaleHunt uses a dynamic launch system where servers compete on **daily, weekly, and monthly boards**. This gives every server - whether brand new or established - a fair chance to reach the top and attract players.
+
+**Why it works for growing communities:**
+- **Fair Competition**: Launch-based system means no server monopolizes the rankings
+- **Regular Exposure**: Daily launches give you recurring opportunities to attract new players
+- **Targeted Discovery**: Players actively searching for specific types of Hytale servers
+- **Multiple Timeframes**: Compete on daily, weekly, and monthly boards based on your launch strategy
+
+Once your server is ready and you've built your initial community infrastructure, consider [launching on HytaleHunt](https://hytalehunt.com) to reach more players and grow your community.
+
+## Conclusion
+
+Creating and managing a Hytale server requires technical knowledge, dedication, and patience, but it's incredibly rewarding. From small private servers for friends to large public communities, the process starts with these fundamental steps:
+
+1. Ensure your system meets requirements
+2. Download server files
+3. Authenticate your server
+4. Configure network settings
+5. Optimize performance
+6. Maintain and update regularly
+
+Remember that running a successful server is an ongoing process. Stay engaged with your community, keep your server updated and secure, and don't be afraid to ask for help in Hytale server communities when you encounter challenges.
+
+Whether you're creating a survival server, a creative building server, a minigame hub, or a roleplay server, the technical foundation remains the same. Use this guide as your starting point, and don't hesitate to experiment and customize your server to create the perfect experience for your players.
+
+Good luck with your Hytale server, and may your community thrive!
+
+---
+
+**Need Help?** Join the Hytale server community forums and Discord servers where experienced server owners and the community can help with specific issues and advanced configurations.
