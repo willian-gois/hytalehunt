@@ -279,7 +279,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                           <div className="text-3xl font-bold">
                             ${LAUNCH_SETTINGS.ARTICLE_PRICE}
                             <span className="text-muted-foreground ml-2 text-lg font-normal line-through">
-                              $199
+                              $99
                             </span>
                           </div>
                         </div>

@@ -131,7 +131,7 @@ export default async function SponsorsPage() {
             <div className="flex-grow">
               <h3 className="mb-2 text-lg font-medium">Weekly Spotlight</h3>
               <div className="mb-3 text-3xl font-bold">
-                $30
+                $9
                 <span className="text-muted-foreground text-base font-normal"> / week</span>
               </div>
               <p className="text-muted-foreground mb-4 text-xs">
@@ -171,7 +171,7 @@ export default async function SponsorsPage() {
                 </span>
               </div>
               <div className="text-primary mb-3 text-3xl font-bold">
-                $99
+                $29
                 <span className="text-primary/90 text-base font-normal"> / month</span>
               </div>
               <p className="text-muted-foreground mb-4 text-xs">

@@ -277,7 +277,7 @@ export default async function PricingPage() {
                     <div className="flex items-baseline text-3xl font-bold">
                       ${LAUNCH_SETTINGS.ARTICLE_PRICE}
                       <span className="text-muted-foreground ml-2 text-base font-normal line-through">
-                        $199
+                        $99
                       </span>
                     </div>
                   </div>
@@ -309,7 +309,7 @@ export default async function PricingPage() {
                           <div className="text-3xl font-bold">
                             ${LAUNCH_SETTINGS.ARTICLE_PRICE}
                             <span className="text-muted-foreground ml-2 text-lg font-normal line-through">
-                              $199
+                              $99
                             </span>
                           </div>
                         </div>
