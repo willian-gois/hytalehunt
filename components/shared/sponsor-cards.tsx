@@ -15,7 +15,7 @@ export function SponsorCards() {
       ? `${slotsAvailable} slot${slotsAvailable === 1 ? " is" : "s are"} available.`
       : "All slots are currently filled."
 
-  const minimumCards = 3
+  const minimumCards = 1
   const displayCards = [...FEATURED_SPONSORS]
   const placeholdersNeeded = Math.max(minimumCards - displayCards.length, 0)
 
