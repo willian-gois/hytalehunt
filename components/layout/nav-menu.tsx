@@ -110,17 +110,6 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
 
         <NavigationMenuItem>
           <NavigationMenuLink asChild className="font-heading">
-            <Link
-              href="/servers/submit"
-              className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}
-            >
-              Submit Server
-            </Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className="font-heading">
             <Link href="/pricing" className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}>
               Pricing
             </Link>
@@ -131,6 +120,17 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
           <NavigationMenuLink asChild className="font-heading">
             <Link href="/sponsors" className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}>
               Sponsors
+            </Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className="font-heading">
+            <Link
+              href="/servers/submit"
+              className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}
+            >
+              Submit Server
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
