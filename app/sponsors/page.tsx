@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-import { RiCheckboxCircleFill } from "@remixicon/react"
+import { RiCheckboxCircleFill, RiRocketLine } from "@remixicon/react"
 
 import { SPONSORSHIP_SLOTS } from "@/lib/constants"
 
@@ -80,6 +80,30 @@ export default async function SponsorsPage() {
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-8 md:py-12">
+      <div className="mb-10 overflow-hidden rounded-xl border border-primary/10 bg-gradient-to-r from-primary/5 to-primary/10 p-4 sm:p-5">
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-sm ring-1 ring-primary/20">
+            <RiRocketLine className="h-6 w-6" />
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="font-heading text-base font-bold text-foreground">
+              Launching a Hytale server?
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Listing your server on HytaleHunt is{" "}
+              <span className="text-foreground font-semibold">100% free</span>. This page is
+              reserved for premium business sponsorships.
+            </p>
+          </div>
+          <Button
+            size="sm"
+            className="h-9 shrink-0 px-4 shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+            asChild
+          >
+            <Link href="/servers/submit">Submit your server</Link>
+          </Button>
+        </div>
+      </div>
       <div className="mb-8 text-center">
         <h1 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">Become a Sponsor</h1>
         <p className="text-muted-foreground mx-auto max-w-xl text-sm">
