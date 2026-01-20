@@ -8,9 +8,16 @@ export type BannerType = "image" | "video"
 interface ServerBannerWithLoaderProps {
   src: string
   alt: string
+  className?: string
+  sizes?: string
 }
 
-export function ServerBannerWithLoader({ src, alt }: ServerBannerWithLoaderProps) {
+export function ServerBannerWithLoader({
+  src,
+  alt,
+  className,
+  sizes = "(max-width: 768px) 100vw, 800px",
+}: ServerBannerWithLoaderProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [type, setType] = useState<BannerType | null>(null)
 
@@ -36,14 +43,16 @@ export function ServerBannerWithLoader({ src, alt }: ServerBannerWithLoaderProps
   if (!type) return null
 
   return (
-    <div className="relative overflow-hidden rounded-xl">
+    <div
+      className={`bg-zinc-50/50 dark:bg-zinc-900/50 relative overflow-hidden rounded-lg ${className || ""}`}
+    >
       {isLoading && <div className="bg-muted absolute inset-0 z-10 animate-pulse"></div>}
       {type === "video" ? (
         <video
           src={src}
           width={480}
           height={280}
-          className="rounded-xl h-auto w-full object-contain"
+          className="h-full w-full object-contain"
           autoPlay
           loop
           muted
@@ -59,8 +68,8 @@ export function ServerBannerWithLoader({ src, alt }: ServerBannerWithLoaderProps
           alt={alt}
           width={480}
           height={280}
-          sizes="(max-width: 640px) 120px, 144px"
-          className="rounded-xl h-auto w-full object-cover"
+          sizes={sizes}
+          className="h-full w-full object-fill"
           priority
           onLoad={() => setIsLoading(false)}
           onError={() => setIsLoading(false)}
