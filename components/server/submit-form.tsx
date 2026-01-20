@@ -139,13 +139,15 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     }))
   }
 
-  const checkWebsiteUrl = async (url: string) => {
+  const checkIpAddress = async (ipAddress: string) => {
     try {
-      const response = await fetch(`/api/servers/check-url?url=${encodeURIComponent(url)}`)
+      const response = await fetch(
+        `/api/servers/check-ip-address?ipAddress=${encodeURIComponent(ipAddress)}`,
+      )
       const data = await response.json()
       return data.exists
     } catch (error) {
-      console.error("Error checking website URL:", error)
+      console.error("Error checking IP address:", error)
       return false
     }
   }
@@ -377,9 +379,11 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
       return
     }
 
-    const urlExists = await checkWebsiteUrl(formData.websiteUrl)
-    if (urlExists) {
-      setError("This website URL has already been submitted. Please use a different URL.")
+    const ipExists = await checkIpAddress(formData.ipAddress)
+    if (ipExists) {
+      setError(
+        `This IP address has already been submitted. Contact ${env.NEXT_PUBLIC_CONTACT_EMAIL} if you think this is a mistake.`,
+      )
       setIsPending(false)
       return
     }
