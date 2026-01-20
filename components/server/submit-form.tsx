@@ -68,7 +68,7 @@ const SERVER_VERSIONS = [{ value: "1.0", label: "1.0" }] as const
 interface ServerFormData {
   name: string
   ipAddress: string
-  websiteUrl: string
+  websiteUrl?: string
   description: string
   categories: string[]
   mods: string[]
@@ -299,7 +299,6 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
       if (
         !formData.name ||
         !formData.ipAddress ||
-        !formData.websiteUrl ||
         !formData.description ||
         !uploadedLogoUrl ||
         !formData.bannerUrl ||
@@ -309,11 +308,13 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
         setError("Please fill in all required server information.")
         return
       }
-      try {
-        new URL(formData.websiteUrl)
-      } catch {
-        setError("Please enter a valid website URL.")
-        return
+      if (formData.websiteUrl) {
+        try {
+          new URL(formData.websiteUrl)
+        } catch {
+          setError("Please enter a valid website URL.")
+          return
+        }
       }
     }
 
@@ -364,7 +365,6 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
   const handleFinalSubmit = async () => {
     if (
       !formData.name ||
-      !formData.websiteUrl ||
       !formData.description ||
       !uploadedLogoUrl ||
       !formData.bannerUrl ||
@@ -457,8 +457,8 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
               formData.name,
               format(parseISO(formData.scheduledDate), DATE_FORMAT.DISPLAY),
               formData.launchType,
-              formData.websiteUrl,
               `${env.NEXT_PUBLIC_URL}/servers/${serverSlug}`,
+              formData.websiteUrl,
             )
           } catch (discordError) {
             console.error("Failed to send Discord notification:", discordError)
@@ -623,9 +623,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
               />
             </div>
             <div>
-              <Label htmlFor="websiteUrl">
-                Website URL <span className="text-red-500">*</span>
-              </Label>
+              <Label htmlFor="websiteUrl">Website URL (Optional, but recommended)</Label>
               <Input
                 id="websiteUrl"
                 name="websiteUrl"
@@ -1314,7 +1312,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                         rel="noopener noreferrer"
                         className="text-primary hover:underline"
                       >
-                        {formData.websiteUrl}
+                        {formData.websiteUrl || "N/A"}
                       </a>
                     </p>
                     <p>

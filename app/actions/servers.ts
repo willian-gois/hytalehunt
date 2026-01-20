@@ -195,7 +195,7 @@ interface ServerSubmissionData {
   name: string
   description: string
   ipAddress: string
-  websiteUrl: string
+  websiteUrl?: string
   logoUrl: string
   bannerUrl: string
   categories: string[]
@@ -232,7 +232,7 @@ export async function submitServer(serverData: ServerSubmissionData) {
     } = serverData
 
     // Validation
-    if (!name || !description || !websiteUrl || categories.length === 0) {
+    if (!name || !description || categories.length === 0) {
       return { success: false, error: "Missing required fields" }
     }
 

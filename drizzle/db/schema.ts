@@ -95,7 +95,7 @@ export const server = pgTable(
     slug: text("slug").notNull().unique(),
     description: text("description").notNull(),
     ipAddress: text("ip_address").notNull(),
-    websiteUrl: text("website_url").notNull(),
+    websiteUrl: text("website_url"),
     version: text("version").notNull(),
     logoUrl: text("logo_url").notNull(),
     bannerUrl: text("banner_url").notNull(),

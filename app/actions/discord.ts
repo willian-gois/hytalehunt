@@ -20,7 +20,7 @@ const DiscordNotificationSchema = z.object({
     .max(100, "Server name cannot exceed 100 characters."),
   launchDate: z.string().min(1, "Launch date cannot be empty."),
   launchType: LaunchTypeZodEnum,
-  websiteUrl: z.string().url("Invalid website URL format.").min(1, "Website URL cannot be empty."),
+  websiteUrl: z.string().url("Invalid website URL format.").optional(),
   serverUrl: z.string().url("Invalid server URL format.").min(1, "Server URL cannot be empty."),
 })
 
@@ -28,8 +28,8 @@ export async function notifyDiscordLaunch(
   serverName: string,
   launchDate: string,
   launchType: string,
-  websiteUrl: string,
   serverUrl: string,
+  websiteUrl?: string,
 ) {
   const requestHeaders = await headers()
   const session = await auth.api.getSession({ headers: requestHeaders })
@@ -45,8 +45,8 @@ export async function notifyDiscordLaunch(
     serverName,
     launchDate,
     launchType,
-    websiteUrl,
     serverUrl,
+    websiteUrl,
   })
 
   if (!validation.success) {
@@ -71,8 +71,8 @@ export async function notifyDiscordLaunch(
       validatedData.serverName,
       validatedData.launchDate,
       validatedData.launchType,
-      validatedData.websiteUrl,
       validatedData.serverUrl,
+      validatedData.websiteUrl,
       authenticatedUserId,
     )
     if (result) {

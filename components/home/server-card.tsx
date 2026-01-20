@@ -45,17 +45,13 @@ export function ServerCard({
   name,
   description,
   logoUrl,
-  bannerUrl,
   upvoteCount,
   commentCount,
   launchStatus,
-  // launchType,
-  // dailyRanking,
   index,
   userHasUpvoted,
   categories,
   isAuthenticated,
-  // websiteUrl,
   ipAddress,
 }: ServerCardProps) {
   const router = useRouter()

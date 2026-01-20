@@ -148,8 +148,8 @@ export async function notifyDiscordLaunch(
   serverName: string,
   launchDate: string,
   launchType: string,
-  websiteUrl: string,
   serverUrl: string,
+  websiteUrl?: string,
   userId?: string,
 ): Promise<boolean> {
   try {
@@ -230,7 +230,7 @@ export async function notifyDiscordLaunch(
             },
             {
               name: "Website URL",
-              value: `[Visit Website](${websiteUrl})`,
+              value: websiteUrl ? `[Visit Website](${websiteUrl})` : "N/A",
               inline: true,
             },
             submittedByField,
