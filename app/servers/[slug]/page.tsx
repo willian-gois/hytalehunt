@@ -11,9 +11,10 @@ import { format } from "date-fns"
 import { CircleFlag } from "react-circle-flags"
 
 import { auth } from "@/lib/auth"
+import { getServerWebsiteRelAttribute } from "@/lib/link-utils"
 import { cn } from "@/lib/utils"
 
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { RichTextDisplay } from "@/components/ui/rich-text-editor"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { CopyIpButton } from "@/components/server/copy-ip-button"
@@ -131,11 +132,11 @@ export default async function ServerPage({ params }: ServerPageProps) {
 
   const isOwner = session?.user?.id === serverData.createdBy
 
-  // const websiteRelAttribute = getServerWebsiteRelAttribute({
-  //   launchStatus: serverData.launchStatus,
-  //   launchType: serverData.launchType,
-  //   dailyRanking: serverData.dailyRanking,
-  // })
+  const websiteRelAttribute = getServerWebsiteRelAttribute({
+    launchStatus: serverData.launchStatus,
+    launchType: serverData.launchType,
+    dailyRanking: serverData.dailyRanking,
+  })
 
   const country = countries.all.find((country) => country.alpha2 === serverData.country)
 
@@ -198,19 +199,6 @@ export default async function ServerPage({ params }: ServerPageProps) {
 
                   {/* Right side: Actions */}
                   <div className="ml-6 flex items-center gap-3">
-                    {/* {serverData.websiteUrl && (
-                    <Button variant="outline" size="sm" asChild className="h-9 px-3">
-                      <a
-                        href={serverData.websiteUrl}
-                        target="_blank"
-                        rel={websiteRelAttribute}
-                        className="flex items-center gap-2"
-                      >
-                        <RiGlobalLine className="h-4 w-4" />
-                        Copy IP
-                      </a>
-                    </Button>
-                  )} */}
                     {serverData.ipAddress && (
                       <CopyIpButton ipAddress={serverData.ipAddress} name={serverData.name} />
                     )}
@@ -482,6 +470,31 @@ export default async function ServerPage({ params }: ServerPageProps) {
                           height={20}
                           className="w-5 h-5"
                         />
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Website */}
+                {serverData.websiteUrl && (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                        Website
+                      </span>
+                      <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
+                      <span className="text-foreground text-sm font-medium truncate max-w-[200px]">
+                        <a
+                          href={serverData.websiteUrl}
+                          target="_blank"
+                          rel={websiteRelAttribute}
+                          className={cn(
+                            buttonVariants({ variant: "link", size: "sm" }),
+                            "h-auto p-0 font-medium truncate block select-none",
+                          )}
+                        >
+                          {serverData.websiteUrl}
+                        </a>
                       </span>
                     </div>
                   </div>
