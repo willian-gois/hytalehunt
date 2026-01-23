@@ -15,7 +15,7 @@ interface Server {
   description: string
   logoUrl: string
   bannerUrl: string
-  websiteUrl: string
+  websiteUrl?: string | null
   ipAddress: string
   upvoteCount: number
   commentCount?: number | null
