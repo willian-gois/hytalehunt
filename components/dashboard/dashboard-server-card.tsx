@@ -1,10 +1,11 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 
 import { RiCalendarLine, RiCheckLine, RiMessage2Line } from "@remixicon/react"
 import { formatDistance } from "date-fns"
+
+import { ServerLogoWithFallback } from "../server/server-logo-with-fallback"
 
 // Function to strip HTML tags from text
 function stripHtml(html: string): string {
@@ -61,9 +62,9 @@ export function DashboardServerCard({
 
   const cardContent = (
     <>
-      <Image
-        src={logoUrl || "/placeholder.svg"} // Fallback si pas de logo
-        alt={name}
+      <ServerLogoWithFallback
+        logoUrl={logoUrl}
+        name={name}
         width={48}
         height={48}
         className="flex-shrink-0 rounded-md bg-white object-contain p-0.5 dark:bg-zinc-800"

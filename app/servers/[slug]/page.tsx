@@ -20,6 +20,7 @@ import { EditButton } from "@/components/server/edit-button"
 import { EmbedButton } from "@/components/server/embed-button"
 import { ServerBannerWithLoader } from "@/components/server/server-banner-with-loader"
 import { ServerComments } from "@/components/server/server-comments"
+import { ServerLogoWithFallback } from "@/components/server/server-logo-with-fallback"
 import { ShareButton } from "@/components/server/share-button"
 import { UpvoteButton } from "@/components/server/upvote-button"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
@@ -159,13 +160,10 @@ export default async function ServerPage({ params }: ServerPageProps) {
                   <div className="flex min-w-0 flex-1 items-center gap-4">
                     {/* Logo */}
                     <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-transparent">
-                      <Image
-                        src={serverData.logoUrl}
-                        alt={`${serverData.name} Logo`}
-                        width={64}
-                        height={64}
+                      <ServerLogoWithFallback
+                        logoUrl={serverData.logoUrl}
+                        name={serverData.name}
                         className="h-full w-full object-cover"
-                        priority
                       />
                     </div>
 

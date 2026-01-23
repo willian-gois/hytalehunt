@@ -59,6 +59,7 @@ import {
 import { getAllCategories, submitServer } from "@/app/actions/servers"
 
 import { ServerBannerWithLoader } from "./server-banner-with-loader"
+import { ServerLogoWithFallback } from "./server-logo-with-fallback"
 import { env } from "@/env"
 
 const MAXIMUM_CATEGORY_COUNT = 5
@@ -697,11 +698,9 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
               </p>
               {uploadedLogoUrl ? (
                 <div className="bg-muted/30 relative w-fit rounded-md border p-3">
-                  <Image
-                    src={uploadedLogoUrl}
-                    alt="Logo preview"
-                    width={64}
-                    height={64}
+                  <ServerLogoWithFallback
+                    logoUrl={uploadedLogoUrl}
+                    name={"Logo Preview"}
                     className="rounded object-contain"
                   />
                   <Button
@@ -1335,9 +1334,9 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                     {uploadedLogoUrl && (
                       <p className="flex flex-col items-start gap-2">
                         <strong>Logo:</strong>
-                        <Image
-                          src={uploadedLogoUrl}
-                          alt="Uploaded logo"
+                        <ServerLogoWithFallback
+                          logoUrl={uploadedLogoUrl}
+                          name={"Uploaded Logo"}
                           width={48}
                           height={48}
                           className="rounded border"
