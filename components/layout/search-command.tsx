@@ -20,6 +20,8 @@ import { useSearch } from "@/lib/hooks/use-search"
 import { CommandDialog, CommandInput } from "@/components/ui/command"
 import { DialogTitle } from "@/components/ui/dialog"
 
+import { ServerLogoWithFallback } from "../server/server-logo-with-fallback"
+
 export function SearchCommand() {
   const router = useRouter()
   const [open, setOpen] = useState(false)
@@ -150,14 +152,7 @@ export function SearchCommand() {
             >
               {result.type === "server" && result.logoUrl ? (
                 <div className="border-border mr-2 h-8 w-8 flex-shrink-0 overflow-hidden rounded-full border">
-                  <img
-                    src={result.logoUrl}
-                    alt={result.name}
-                    className="h-full w-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = "https://placehold.co/100x100?text=?"
-                    }}
-                  />
+                  <ServerLogoWithFallback logoUrl={result.logoUrl} name={result.name} />
                 </div>
               ) : (
                 <div className="bg-primary/10 mr-2 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">

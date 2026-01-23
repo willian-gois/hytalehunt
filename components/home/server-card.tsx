@@ -1,12 +1,12 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import { cn } from "@/lib/utils"
 
 import { CopyIpButton } from "../server/copy-ip-button"
+import { ServerLogoWithFallback } from "../server/server-logo-with-fallback"
 import { ServerCardButtons } from "./server-card-buttons"
 
 // Function to strip HTML tags from text
@@ -91,13 +91,7 @@ export function ServerCard({
         <div className="flex-shrink-0">
           <div className="relative h-14 w-14 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 sm:h-18 sm:w-18 dark:border-zinc-800 dark:bg-zinc-900">
             {logoUrl ? (
-              <Image
-                src={logoUrl}
-                alt={`${name} logo`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 640px) 48px, 56px"
-              />
+              <ServerLogoWithFallback logoUrl={logoUrl} name={name} />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-lg font-bold text-zinc-400">
                 {name.charAt(0)}

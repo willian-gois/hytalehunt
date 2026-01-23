@@ -1,9 +1,10 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 
 import { RiStarSFill } from "@remixicon/react"
+
+import { ServerLogoWithFallback } from "../server/server-logo-with-fallback"
 
 interface Server {
   id: string
@@ -66,10 +67,9 @@ export function PremiumCard({ servers }: PremiumCardProps) {
             >
               <div className="bg-muted relative h-12 w-12 flex-shrink-0 rounded-lg sm:h-14 sm:w-14">
                 {item.logoUrl ? (
-                  <Image
-                    src={item.logoUrl}
-                    alt={item.name}
-                    fill
+                  <ServerLogoWithFallback
+                    logoUrl={item.logoUrl}
+                    name={item.name}
                     className="rounded-md object-contain p-1"
                   />
                 ) : (

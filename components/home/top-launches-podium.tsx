@@ -1,7 +1,8 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
+
+import { ServerLogoWithFallback } from "../server/server-logo-with-fallback"
 
 interface ServerPodiumItem {
   id: string
@@ -37,10 +38,9 @@ export default function TopLaunchesPodium({ topServers }: TopLaunchesPodiumProps
             title={server.name}
           >
             <div className="relative aspect-square h-12 w-12 sm:h-14 sm:w-14">
-              <Image
-                src={server.logoUrl || "/placeholder.svg"}
-                alt={server.name}
-                fill
+              <ServerLogoWithFallback
+                logoUrl={server.logoUrl}
+                name={server.name}
                 className="rounded-md object-cover transition-opacity group-hover:opacity-90"
               />
               <div
