@@ -89,7 +89,7 @@ export function ServerCard({
 
         {/* 2. Logo */}
         <div className="flex-shrink-0">
-          <div className="relative h-14 w-14 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 sm:h-18 sm:w-18 dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="relative flex items-center justify-center h-14 w-14 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 sm:h-18 sm:w-18 dark:border-zinc-800 dark:bg-zinc-900">
             {logoUrl ? (
               <ServerLogoWithFallback logoUrl={logoUrl} name={name} className="object-cover" />
             ) : (
