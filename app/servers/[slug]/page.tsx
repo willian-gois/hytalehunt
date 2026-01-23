@@ -11,6 +11,7 @@ import { format } from "date-fns"
 import { CircleFlag } from "react-circle-flags"
 
 import { auth } from "@/lib/auth"
+import { cn } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
 import { RichTextDisplay } from "@/components/ui/rich-text-editor"
@@ -177,11 +178,15 @@ export default async function ServerPage({ params }: ServerPageProps) {
 
                       {/* Categories */}
                       <div className="flex flex-wrap gap-1">
-                        {serverData.categories.map((category) => (
+                        {serverData.categories.map((category, index) => (
                           <Link
                             key={category.id}
                             href={`/categories?category=${category.id}`}
-                            className="bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-colors"
+                            className={cn(
+                              "bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-colors",
+                              index === 0 &&
+                                "rounded-md bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-amber-600 uppercase transition-colors hover:bg-amber-500/20 dark:bg-amber-500/20 dark:text-amber-400",
+                            )}
                           >
                             <RiHashtag className="h-3 w-3" />
                             {category.name}
