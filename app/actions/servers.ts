@@ -6,6 +6,7 @@ import { headers } from "next/headers"
 import { and, asc, count, desc, eq, or, type SQL, sql } from "drizzle-orm"
 
 import { auth } from "@/lib/auth"
+import { WEBSITE_URL_FALLBACK } from "@/lib/constants"
 
 import { db } from "@/drizzle/db"
 import {
@@ -249,7 +250,7 @@ export async function submitServer(serverData: ServerSubmissionData) {
         slug,
         description,
         ipAddress,
-        websiteUrl,
+        websiteUrl: websiteUrl || WEBSITE_URL_FALLBACK,
         logoUrl,
         bannerUrl,
         mods,

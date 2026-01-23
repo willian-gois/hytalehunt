@@ -75,3 +75,6 @@ export const SPONSORSHIP_SLOTS = {
 } as const
 
 export const DOMAIN_AUTHORITY = 37
+
+export const WEBSITE_URL_FALLBACK =
+  "https://pinehosting.com/clientarea/aff.php?aff=1089&page=hytale"
