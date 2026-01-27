@@ -1,7 +1,6 @@
 "use client"
 
 import { useCallback, useEffect, useId, useState } from "react"
-import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 import {
@@ -9,6 +8,7 @@ import {
   RiArrowRightLine,
   RiCalendarLine,
   RiCheckboxCircleFill,
+  RiCheckboxCircleLine,
   RiCheckLine,
   RiCloseCircleLine,
   RiFileCheckLine,
@@ -29,7 +29,10 @@ import {
   LAUNCH_LIMITS,
   LAUNCH_SETTINGS,
   LAUNCH_TYPES,
+  PREMIUM_MONTHLY_BUNDLE_PAYMENT_LINK,
   PREMIUM_PAYMENT_LINK,
+  PREMIUM_WEEKLY_BUNDLE_PAYMENT_LINK,
+  SPONSORSHIP_SLOTS,
 } from "@/lib/constants"
 import { UploadButton } from "@/lib/uploadthing"
 
@@ -65,6 +68,8 @@ import { env } from "@/env"
 const MAXIMUM_CATEGORY_COUNT = 5
 
 const SERVER_VERSIONS = [{ value: "1.0", label: "1.0" }] as const
+
+type SponsorshipMode = "none" | "weekly" | "monthly"
 
 interface ServerFormData {
   name: string
@@ -366,6 +371,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
   }
 
   const handleFinalSubmit = async () => {
+    // Validações iniciais
     if (
       !formData.name ||
       !formData.description ||
@@ -377,6 +383,16 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     ) {
       setError("Some required information is missing. Please go back and complete all fields.")
       setIsPending(false)
+      return
+    }
+
+    if (formData.categories.length > MAXIMUM_CATEGORY_COUNT) {
+      setError(`You can select a maximum of ${MAXIMUM_CATEGORY_COUNT} categories.`)
+      return
+    }
+
+    if (formData.mods.length > 5) {
+      setError("You can add a maximum of 5 mods.")
       return
     }
 
@@ -483,9 +499,14 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
       if (formData.launchType === LAUNCH_TYPES.FREE) {
         router.push(`/servers/${serverSlug}`)
       } else {
-        const paymentLink = PREMIUM_PAYMENT_LINK
 
-        const paymentUrl = `${paymentLink}?client_reference_id=${serverId}`
+        const paymentLink: Record<SponsorshipMode, string> = {
+          none: PREMIUM_PAYMENT_LINK,
+          weekly: PREMIUM_WEEKLY_BUNDLE_PAYMENT_LINK,
+          monthly: PREMIUM_MONTHLY_BUNDLE_PAYMENT_LINK,
+        }
+
+        const paymentUrl = `${paymentLink[selectedSponsorship]}?client_reference_id=${serverId}&prefilled_email=${userEmail}`
 
         window.location.href = paymentUrl
       }
@@ -879,7 +900,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                 <p className="text-muted-foreground text-sm">No categories available.</p>
               )}
               <p className="text-muted-foreground mt-1 text-xs">
-                Select up to 3 relevant categories.
+                Select up to 5 relevant categories.
               </p>
             </div>
 
@@ -1468,6 +1489,227 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
                 </div>
               </div>
             </div>
+
+            {/* Sponsorship Add-ons - Outside the review card */}
+            <div className="mt-8">
+              <div className="mb-4">
+                <div className="mb-2 flex items-center justify-between">
+                  <h3 className="flex items-center gap-2 text-lg font-semibold">
+                    <RiRocketLine className="h-5 w-5" />
+                    Add Extra Visibility{" "}
+                    <span className="text-neutral-500/80 text-sm">(Optional)</span>
+                  </h3>
+                  {SPONSORSHIP_SLOTS.TOTAL - SPONSORSHIP_SLOTS.USED > 0 && (
+                    <Badge variant="default" className="border-orange-500/50 bg-orange-600">
+                      {SPONSORSHIP_SLOTS.TOTAL - SPONSORSHIP_SLOTS.USED} slots left
+                    </Badge>
+                  )}
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  Maximize your reach by adding sponsorship placement on our{" "}
+                  <strong>homepage</strong> and <strong>all server pages</strong>.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {/* Weekly Sponsorship Card */}
+                <div
+                  className={`relative flex flex-col overflow-hidden rounded-lg border transition-all ${
+                    selectedSponsorship === "weekly"
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                      : "hover:border-primary/30 hover:bg-muted/50"
+                  }`}
+                >
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="mb-4">
+                      <h4 className="mb-1 text-base font-semibold">Weekly Sponsorship</h4>
+                      <p className="text-muted-foreground text-sm">
+                        <span className="font-semibold">7 days</span> of homepage visibility
+                      </p>
+                    </div>
+
+                    <div className="mb-4">
+                      <div className="mb-1 flex items-baseline gap-1">
+                        <span className="text-2xl font-bold">$9</span>
+                        <span className="text-muted-foreground text-sm">/week</span>
+                      </div>
+                      <p className="text-muted-foreground text-xs">Perfect for launch week</p>
+                    </div>
+
+                    <ul className="mb-6 flex-1 space-y-2 text-sm">
+                      <li className="flex items-center gap-2">
+                        <RiCheckboxCircleFill className="text-primary h-4 w-4 shrink-0" />
+                        <span>Featured homepage sidebar</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <RiCheckboxCircleFill className="text-primary h-4 w-4 shrink-0" />
+                        <span>Visible on all server pages</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <RiCheckboxCircleFill className="text-primary h-4 w-4 shrink-0" />
+                        <span>Direct link to your website</span>
+                      </li>
+                    </ul>
+
+                    <Button
+                      type="button"
+                      variant={selectedSponsorship === "weekly" ? "default" : "outline"}
+                      className="w-full"
+                      onClick={() =>
+                        setSelectedSponsorship(selectedSponsorship === "weekly" ? "none" : "weekly")
+                      }
+                    >
+                      {selectedSponsorship === "weekly" ? (
+                        <>
+                          <RiCheckLine className="mr-2 h-4 w-4" />
+                          Added Views Boost
+                        </>
+                      ) : (
+                        <>Add Views Boost</>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Monthly Sponsorship Card */}
+                <div
+                  className={`relative flex flex-col overflow-hidden rounded-lg border transition-all ${
+                    selectedSponsorship === "monthly"
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                      : "border-primary/30 hover:border-primary/50 hover:bg-primary/5"
+                  }`}
+                >
+                  <Badge
+                    variant="default"
+                    className="bg-primary text-primary-foreground absolute top-3 right-3 text-xs"
+                  >
+                    Best Value
+                  </Badge>
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="mb-4">
+                      <h4 className="text-primary mb-1 text-base font-semibold">
+                        Monthly Sponsorship
+                      </h4>
+                      <p className="text-muted-foreground text-sm">
+                        <span className="font-semibold">30 days</span> of homepage visibility
+                      </p>
+                    </div>
+
+                    <div className="mb-4">
+                      <div className="mb-1 flex items-baseline gap-1">
+                        <span className="text-primary text-2xl font-bold">$29</span>
+                        <span className="text-muted-foreground text-sm">/month</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <p className="text-xs font-medium text-green-600">Save $7 vs weekly</p>
+                        <span className="text-muted-foreground text-xs">•</span>
+                        <p className="text-muted-foreground text-xs">Best value</p>
+                      </div>
+                    </div>
+
+                    <ul className="mb-6 flex-1 space-y-2 text-sm">
+                      <li className="flex items-center gap-2">
+                        <RiCheckboxCircleFill className="text-primary h-4 w-4 shrink-0" />
+                        <span className="font-medium">Featured homepage sidebar</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <RiCheckboxCircleFill className="text-primary h-4 w-4 shrink-0" />
+                        <span className="font-medium">Visible on all server pages</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <RiCheckboxCircleFill className="text-primary h-4 w-4 shrink-0" />
+                        <span className="font-medium">Direct link to your website</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <RiCheckboxCircleFill className="text-primary h-4 w-4 shrink-0" />
+                        <span className="font-medium">Priority slot consideration</span>
+                      </li>
+                    </ul>
+
+                    <Button
+                      type="button"
+                      variant={selectedSponsorship === "monthly" ? "default" : "outline"}
+                      className="w-full"
+                      onClick={() =>
+                        setSelectedSponsorship(
+                          selectedSponsorship === "monthly" ? "none" : "monthly",
+                        )
+                      }
+                    >
+                      {selectedSponsorship === "monthly" ? (
+                        <>
+                          <RiCheckLine className="mr-2 h-4 w-4" />
+                          Added Views Boost
+                        </>
+                      ) : (
+                        <>Add Views Boost</>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Proof / Value Anchor */}
+              <div className="bg-muted/30 mt-4 rounded-lg border p-4">
+                <div className="flex items-start gap-3">
+                  <RiInformationLine className="text-primary mt-0.5 h-5 w-5 shrink-0" />
+                  <div className="text-sm">
+                    <p className="font-medium">Why add sponsorship?</p>
+                    <p className="text-muted-foreground mt-1 text-xs">
+                      Get featured on <strong>every page of HytaleHunt</strong>, reaching thousands
+                      of potential players actively searching for servers. Limited slots ensure
+                      maximum visibility for your server.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Launch Summary - Show total if sponsorship selected */}
+            {formData.launchType === LAUNCH_TYPES.PREMIUM && selectedSponsorship !== "none" && (
+              <div className="bg-gradient-to-br from-primary/5 to-primary/10 mt-6 rounded-lg border border-primary/20 p-5">
+                <div className="mb-3 flex items-center justify-between">
+                  <h4 className="font-semibold">Your Launch Package</h4>
+                  <Badge variant="default" className="text-xs">
+                    Complete Bundle
+                  </Badge>
+                </div>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <RiCheckboxCircleFill className="text-primary h-4 w-4" />
+                      <span>Premium Launch (DR {DOMAIN_AUTHORITY} Backlink)</span>
+                    </div>
+                    <span className="font-medium">${LAUNCH_SETTINGS.PREMIUM_PRICE}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <RiCheckboxCircleFill className="text-primary h-4 w-4" />
+                      <span>
+                        {selectedSponsorship === "weekly" ? "Weekly" : "Monthly"} Sponsorship
+                      </span>
+                    </div>
+                    <span className="font-medium">
+                      ${selectedSponsorship === "weekly" ? "9" : "29"}
+                    </span>
+                  </div>
+                  <div className="border-t border-primary/20 pt-3">
+                    <div className="flex items-center justify-between text-base font-bold">
+                      <span>Total</span>
+                      <span className="text-primary text-xl">
+                        $
+                        {LAUNCH_SETTINGS.PREMIUM_PRICE +
+                          (selectedSponsorship === "weekly" ? 9 : 29)}
+                      </span>
+                    </div>
+                    <p className="flex flex-row gap-1 text-muted-foreground mt-2 text-xs">
+                      <RiCheckboxCircleLine className="h-4 w-4" />
+                      Maximum visibility package for your server launch
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )
       default:
