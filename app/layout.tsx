@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Cinzel as FontHeading, Nunito_Sans as FontSans } from "next/font/google"
 
+import { GoogleAnalytics } from "@next/third-parties/google"
 import { Toaster } from "sonner"
 
 import { PostHogProvider } from "@/components/analytics/posthog-provider"
@@ -114,13 +115,17 @@ export default function RootLayout({
           >
             <div className="flex min-h-dvh flex-col">
               <Nav />
-              <main className="flex-grow">{children}</main>
+              <main className="grow">{children}</main>
               <Footer />
             </div>
           </ThemeProvider>
           <Toaster />
         </PostHogProvider>
       </body>
+
+      {env.NEXT_PUBLIC_APP_ENV === "production" && (
+        <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+      )}
     </html>
   )
 }
