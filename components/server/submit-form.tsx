@@ -105,7 +105,7 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     discordUrl: "",
     twitterUrl: "",
     scheduledDate: null,
-    launchType: LAUNCH_TYPES.FREE,
+    launchType: LAUNCH_TYPES.PREMIUM,
     bannerUrl: null,
     version: "1.0",
     country: "",
