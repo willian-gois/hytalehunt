@@ -10,7 +10,6 @@ import { countries } from "country-data-list"
 import { format } from "date-fns"
 import { CircleFlag } from "react-circle-flags"
 
-import { EVENTS } from "@/lib/analytics"
 import { auth } from "@/lib/auth"
 import { getServerWebsiteRelAttribute } from "@/lib/link-utils"
 import { cn } from "@/lib/utils"
@@ -99,16 +98,6 @@ export async function generateMetadata(
       canonical: `/servers/${slug}`,
     },
   }
-}
-
-// Helper function to convert country code to flag emoji
-function getCountryFlag(countryCode: string): string {
-  if (!countryCode || countryCode.length !== 2) return ""
-  const codePoints = countryCode
-    .toUpperCase()
-    .split("")
-    .map((char) => 127397 + char.charCodeAt(0))
-  return String.fromCodePoint(...codePoints)
 }
 
 export default async function ServerPage({ params }: ServerPageProps) {
@@ -491,7 +480,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
                           href={serverData.websiteUrl}
                           target="_blank"
                           rel={websiteRelAttribute}
-                          event={EVENTS.SERVER_LINK_CLICKED}
+                          event={"server_link_clicked"}
                           properties={{
                             type: "website",
                             serverId: serverData.id,
@@ -520,7 +509,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
                         href={serverData.discordUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        event={EVENTS.SERVER_LINK_CLICKED}
+                        event={"server_link_clicked"}
                         properties={{
                           type: "discord",
                           serverId: serverData.id,
@@ -549,7 +538,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
                         href={serverData.twitterUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        event={EVENTS.SERVER_LINK_CLICKED}
+                        event={"server_link_clicked"}
                         properties={{
                           type: "twitter",
                           serverId: serverData.id,
