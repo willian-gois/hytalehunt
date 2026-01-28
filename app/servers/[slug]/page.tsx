@@ -10,6 +10,7 @@ import { countries } from "country-data-list"
 import { format } from "date-fns"
 import { CircleFlag } from "react-circle-flags"
 
+import { EVENTS } from "@/lib/analytics"
 import { auth } from "@/lib/auth"
 import { getServerWebsiteRelAttribute } from "@/lib/link-utils"
 import { cn } from "@/lib/utils"
@@ -24,6 +25,7 @@ import { ServerBannerWithLoader } from "@/components/server/server-banner-with-l
 import { ServerComments } from "@/components/server/server-comments"
 import { ServerLogoWithFallback } from "@/components/server/server-logo-with-fallback"
 import { ShareButton } from "@/components/server/share-button"
+import { TrackedLink } from "@/components/server/tracked-link"
 import { UpvoteButton } from "@/components/server/upvote-button"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
 import { getServerBySlug, hasUserUpvoted } from "@/app/actions/server-details"
@@ -484,17 +486,22 @@ export default async function ServerPage({ params }: ServerPageProps) {
                       </span>
                       <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
                       <span className="text-foreground text-sm font-medium truncate max-w-[200px]">
-                        <a
+                        <TrackedLink
                           href={serverData.websiteUrl}
                           target="_blank"
                           rel={websiteRelAttribute}
+                          event={EVENTS.SERVER_LINK_CLICKED}
+                          properties={{
+                            type: "website",
+                            serverId: serverData.id,
+                          }}
                           className={cn(
                             buttonVariants({ variant: "link", size: "sm" }),
-                            "h-auto p-0 font-medium truncate block select-none",
+                            "block h-auto p-0 font-medium truncate select-none",
                           )}
                         >
                           {serverData.websiteUrl}
-                        </a>
+                        </TrackedLink>
                       </span>
                     </div>
                   </div>
@@ -508,17 +515,23 @@ export default async function ServerPage({ params }: ServerPageProps) {
                         Discord
                       </span>
                       <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
-                      <Button asChild variant="outline" size="sm">
-                        <a
-                          href={serverData.discordUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2"
-                        >
-                          <RiDiscordFill className="h-4 w-4" />
-                          Join
-                        </a>
-                      </Button>
+                      <TrackedLink
+                        href={serverData.discordUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        event={EVENTS.SERVER_LINK_CLICKED}
+                        properties={{
+                          type: "discord",
+                          serverId: serverData.id,
+                        }}
+                        className={cn(
+                          buttonVariants({ variant: "outline", size: "sm" }),
+                          "flex items-center gap-2",
+                        )}
+                      >
+                        <RiDiscordFill className="h-4 w-4" />
+                        Join
+                      </TrackedLink>
                     </div>
                   </div>
                 )}
@@ -531,17 +544,23 @@ export default async function ServerPage({ params }: ServerPageProps) {
                         Twitter
                       </span>
                       <div className="border-muted-foreground/30 mx-3 flex-1 border-b border-dotted"></div>
-                      <Button asChild variant="outline" size="sm">
-                        <a
-                          href={serverData.twitterUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2"
-                        >
-                          <RiTwitterFill className="h-4 w-4" />
-                          Follow
-                        </a>
-                      </Button>
+                      <TrackedLink
+                        href={serverData.twitterUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        event={EVENTS.SERVER_LINK_CLICKED}
+                        properties={{
+                          type: "twitter",
+                          serverId: serverData.id,
+                        }}
+                        className={cn(
+                          buttonVariants({ variant: "outline", size: "sm" }),
+                          "flex items-center gap-2",
+                        )}
+                      >
+                        <RiTwitterFill className="h-4 w-4" />
+                        Follow
+                      </TrackedLink>
                     </div>
                   </div>
                 )}
