@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils"
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { RichTextDisplay } from "@/components/ui/rich-text-editor"
+import { SuspendedDashboardTrackPurchase } from "@/components/dashboard/dashboard-track-purchase"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { CopyIpButton } from "@/components/server/copy-ip-button"
 import { EditButton } from "@/components/server/edit-button"
@@ -606,6 +607,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
           </div>
         </div>
       </div>
+      <SuspendedDashboardTrackPurchase id={serverData.id} />
     </>
   )
 }
