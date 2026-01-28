@@ -17,8 +17,10 @@ export function DashboardTrackPurchase() {
     if (track && checkoutSuccess) {
       const price: Record<string, number> = {
         premium: LAUNCH_SETTINGS.PREMIUM_PRICE,
-        "premium-sponsorship-weekly": LAUNCH_SETTINGS.SPONSOR_WEEKLY_PRICE,
-        "premium-sponsorship-monthly": LAUNCH_SETTINGS.SPONSOR_MONTHLY_PRICE,
+        "premium-sponsorship-weekly":
+          LAUNCH_SETTINGS.PREMIUM_PRICE + LAUNCH_SETTINGS.SPONSOR_WEEKLY_PRICE,
+        "premium-sponsorship-monthly":
+          LAUNCH_SETTINGS.PREMIUM_PRICE + LAUNCH_SETTINGS.SPONSOR_MONTHLY_PRICE,
       }
 
       // Gambiarra pra sabermos os itens e respectivo preços através do utm_content, repassado pelo Stripe
