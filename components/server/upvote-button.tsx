@@ -69,7 +69,7 @@ export function UpvoteButton({
     setIsDebouncing(true)
 
     track(!optimisticState.upvoted ? "server_upvoted" : "server_downvoted", {
-      serverId,
+      server_id: serverId,
     })
 
     startTransition(async () => {

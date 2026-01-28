@@ -46,7 +46,7 @@ export function SignUpForm() {
         track(
           "sign_up",
           {
-            provider,
+            method: provider,
           },
           {
             google: true,
@@ -94,7 +94,7 @@ export function SignUpForm() {
         track(
           "sign_up",
           {
-            provider: "email",
+            method: "email",
           },
           {
             google: true,

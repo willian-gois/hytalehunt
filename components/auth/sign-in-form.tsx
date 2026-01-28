@@ -46,7 +46,7 @@ export function SignInForm() {
         track(
           "login",
           {
-            provider,
+            method: provider,
           },
           {
             google: true,
@@ -97,7 +97,7 @@ export function SignInForm() {
         track(
           "login",
           {
-            provider: "email",
+            method: "email",
           },
           {
             google: true,

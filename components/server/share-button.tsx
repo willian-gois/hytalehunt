@@ -42,7 +42,7 @@ export function ShareButton({ name, slug, id, variant = "default", className }: 
     track("server_link_clicked", {
       type: "share",
       platform,
-      serverId: id,
+      server_id: id,
     })
   }
 
