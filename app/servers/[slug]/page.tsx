@@ -202,6 +202,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
                     {isActiveLaunch ? (
                       <UpvoteButton
                         serverId={serverData.id}
+                        serverName={serverData.name}
                         upvoteCount={serverData.upvoteCount}
                         initialUpvoted={hasUpvoted}
                         isAuthenticated={Boolean(session?.user)}
@@ -258,6 +259,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
                     {isActiveLaunch ? (
                       <UpvoteButton
                         serverId={serverData.id}
+                        serverName={serverData.name}
                         upvoteCount={serverData.upvoteCount}
                         initialUpvoted={hasUpvoted}
                         isAuthenticated={Boolean(session?.user)}
@@ -604,7 +606,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
           </div>
         </div>
       </div>
-      <SuspendedServerPageView id={serverData.id} />
+      <SuspendedServerPageView id={serverData.id} name={serverData.name} />
     </>
   )
 }

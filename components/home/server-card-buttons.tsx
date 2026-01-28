@@ -47,6 +47,7 @@ export function ServerCardButtons({
       {isActiveLaunch ? (
         <UpvoteButton
           serverId={serverId}
+          serverName={serverName}
           initialUpvoted={hasUpvoted}
           upvoteCount={upvoteCount}
           isAuthenticated={isAuthenticated}

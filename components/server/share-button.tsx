@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useId, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import {
   RiCodeFill,
@@ -43,6 +43,7 @@ export function ShareButton({ name, slug, id, variant = "default", className }: 
       type: "share",
       platform,
       server_id: id,
+      server_name: name,
     })
   }
 

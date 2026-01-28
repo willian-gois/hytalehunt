@@ -43,6 +43,7 @@ export function CopyIpButton({
         if (track) {
           track("server_ip_copied", {
             server_id: serverId,
+            server_name: name,
             ip_address: ipAddress,
           })
         }

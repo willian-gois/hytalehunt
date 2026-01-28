@@ -15,6 +15,7 @@ import { toggleUpvote } from "@/app/actions/servers"
 
 interface UpvoteButtonProps {
   serverId: string
+  serverName: string
   initialUpvoted: boolean
   upvoteCount: number
   isAuthenticated: boolean
@@ -24,6 +25,7 @@ interface UpvoteButtonProps {
 
 export function UpvoteButton({
   serverId,
+  serverName,
   initialUpvoted,
   upvoteCount,
   isAuthenticated,
@@ -70,6 +72,7 @@ export function UpvoteButton({
 
     track(!optimisticState.upvoted ? "server_upvoted" : "server_downvoted", {
       server_id: serverId,
+      server_name: serverName,
     })
 
     startTransition(async () => {
