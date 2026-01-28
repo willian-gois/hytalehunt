@@ -2,7 +2,7 @@
 
 import { usePostHog } from "posthog-js/react"
 
-export type AnalyticsEventName = "begin_checkout"
+  | "server_link_clicked"
 
 export type AnalyticsEventParams = Record<string, string | number | boolean | null | undefined>
 

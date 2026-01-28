@@ -12,6 +12,7 @@ import {
 import { CheckIcon, CopyIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -26,6 +27,7 @@ interface ShareButtonProps {
 }
 
 export function ShareButton({ name, slug, variant = "default", className }: ShareButtonProps) {
+  const { track } = useAnalytics()
   const id = useId()
   const [copied, setCopied] = useState<boolean>(false)
   const [shareUrl, setShareUrl] = useState<string>("")
@@ -36,8 +38,17 @@ export function ShareButton({ name, slug, variant = "default", className }: Shar
     setShareUrl(`${baseUrl}/servers/${slug}`)
   }, [slug])
 
+  const trackShare = (platform: string) => {
+    track("server_link_clicked", {
+      type: "share",
+      platform,
+    })
+  }
+
   const handleCopy = () => {
     if (inputRef.current) {
+      trackShare("copy")
+
       navigator.clipboard.writeText(inputRef.current.value)
       setCopied(true)
       setTimeout(() => setCopied(false), 1500)
@@ -69,6 +80,8 @@ export function ShareButton({ name, slug, variant = "default", className }: Shar
         )
         return
     }
+
+    trackShare(platform)
 
     if (socialShareUrl) {
       window.open(socialShareUrl, "_blank")
