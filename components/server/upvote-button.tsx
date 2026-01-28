@@ -9,6 +9,7 @@ import { toast } from "sonner"
 
 import { UPVOTE_LIMITS } from "@/lib/constants"
 import { cn } from "@/lib/utils"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 import { toggleUpvote } from "@/app/actions/servers"
 
@@ -29,6 +30,7 @@ export function UpvoteButton({
   variant = "default",
   className,
 }: UpvoteButtonProps) {
+  const { track } = useAnalytics()
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const [isDebouncing, setIsDebouncing] = useState(false)
@@ -65,6 +67,10 @@ export function UpvoteButton({
 
     // Activer le debounce
     setIsDebouncing(true)
+
+    track(!optimisticState.upvoted ? "server_upvoted" : "server_downvoted", {
+      serverId,
+    })
 
     startTransition(async () => {
       updateOptimisticState(!optimisticState.upvoted)
