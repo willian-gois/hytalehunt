@@ -35,6 +35,7 @@ import {
   SPONSORSHIP_SLOTS,
 } from "@/lib/constants"
 import { UploadButton } from "@/lib/uploadthing"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -95,9 +96,10 @@ interface DateGroup {
 
 interface SubmitServerFormProps {
   userId: string
+  userEmail: string
 }
 
-export function SubmitServerForm({ userId }: SubmitServerFormProps) {
+export function SubmitServerForm({ userId, userEmail }: SubmitServerFormProps) {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState<ServerFormData>({
@@ -136,6 +138,10 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
 
   const [modsTags, setModsTags] = useState<Tag[]>([])
   const [activeModTagIndex, setActiveModTagIndex] = useState<number | null>(null)
+
+  const [selectedSponsorship, setSelectedSponsorship] = useState<SponsorshipMode>("none")
+
+  const { track } = useAnalytics()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -417,18 +423,6 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
     setError(null)
     setLaunchDateLimitError(null)
 
-    if (formData.categories.length > MAXIMUM_CATEGORY_COUNT) {
-      setError(`You can select a maximum of ${MAXIMUM_CATEGORY_COUNT} categories.`)
-      setIsPending(false)
-      return
-    }
-
-    if (formData.mods.length > 5) {
-      setError("You can add a maximum of 5 mods.")
-      setIsPending(false)
-      return
-    }
-
     try {
       const finalLogoUrl = !uploadedLogoUrl
         ? "https://placehold.co/128x128/E2E8F0/718096?text=Logo"
@@ -499,6 +493,10 @@ export function SubmitServerForm({ userId }: SubmitServerFormProps) {
       if (formData.launchType === LAUNCH_TYPES.FREE) {
         router.push(`/servers/${serverSlug}`)
       } else {
+        track("begin_checkout", {
+          server_id: serverId,
+          sponsorship_upsell: selectedSponsorship,
+        })
 
         const paymentLink: Record<SponsorshipMode, string> = {
           none: PREMIUM_PAYMENT_LINK,

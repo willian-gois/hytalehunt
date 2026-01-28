@@ -15,7 +15,6 @@ export default async function SubmitServer() {
   if (!session?.user?.id) {
     redirect("/sign-in?redirect=/servers/submit")
   }
-  const userId = session.user.id
 
   return (
     <div className="from-background to-background/80 min-h-[calc(100vh-5rem)] bg-gradient-to-b">
@@ -29,7 +28,7 @@ export default async function SubmitServer() {
 
         <div className="bg-card rounded-lg border shadow-sm sm:rounded-xl">
           <div className="p-4 sm:p-6 md:p-8">
-            <SubmitServerForm userId={userId} />
+            <SubmitServerForm userId={session.user.id} userEmail={session.user.email} />
           </div>
         </div>
       </div>
