@@ -4,6 +4,7 @@ import { usePostHog } from "posthog-js/react"
 
 export type AnalyticsEventName =
   | "begin_checkout"
+  | "purchase"
   | "server_page_view"
   | "server_link_clicked"
   | "server_upvoted"
