@@ -22,13 +22,13 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 interface ShareButtonProps {
   name: string
   slug: string
+  id: string
   variant?: "default" | "fullWidth"
   className?: string
 }
 
-export function ShareButton({ name, slug, variant = "default", className }: ShareButtonProps) {
+export function ShareButton({ name, slug, id, variant = "default", className }: ShareButtonProps) {
   const { track } = useAnalytics()
-  const id = useId()
   const [copied, setCopied] = useState<boolean>(false)
   const [shareUrl, setShareUrl] = useState<string>("")
   const inputRef = useRef<HTMLInputElement>(null)
@@ -42,6 +42,7 @@ export function ShareButton({ name, slug, variant = "default", className }: Shar
     track("server_link_clicked", {
       type: "share",
       platform,
+      serverId: id,
     })
   }
 

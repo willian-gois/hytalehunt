@@ -586,7 +586,12 @@ export default async function ServerPage({ params }: ServerPageProps) {
 
                 {/* Share */}
                 <div className="border-border border-t pt-4">
-                  <ShareButton name={serverData.name} slug={serverData.slug} variant="fullWidth" />
+                  <ShareButton
+                    name={serverData.name}
+                    slug={serverData.slug}
+                    id={serverData.id}
+                    variant="fullWidth"
+                  />
                 </div>
 
                 {/* Sponsors */}
