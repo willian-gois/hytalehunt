@@ -3,7 +3,7 @@ import Link from "next/link"
 
 import { RiCheckboxCircleFill, RiRocketLine } from "@remixicon/react"
 
-import { SPONSORSHIP_SLOTS } from "@/lib/constants"
+import { LAUNCH_SETTINGS, SPONSORSHIP_SLOTS } from "@/lib/constants"
 
 import {
   Accordion,
@@ -155,7 +155,7 @@ export default async function SponsorsPage() {
             <div className="flex-grow">
               <h3 className="mb-2 text-lg font-medium">Weekly Spotlight</h3>
               <div className="mb-3 text-3xl font-bold">
-                $9
+                ${LAUNCH_SETTINGS.SPONSOR_WEEKLY_PRICE}
                 <span className="text-muted-foreground text-base font-normal"> / week</span>
               </div>
               <p className="text-muted-foreground mb-4 text-xs">
@@ -195,7 +195,7 @@ export default async function SponsorsPage() {
                 </span>
               </div>
               <div className="text-primary mb-3 text-3xl font-bold">
-                $29
+                ${LAUNCH_SETTINGS.SPONSOR_MONTHLY_PRICE}
                 <span className="text-primary/90 text-base font-normal"> / month</span>
               </div>
               <p className="text-muted-foreground mb-4 text-xs">

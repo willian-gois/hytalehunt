@@ -1,5 +1,6 @@
 "use client"
 
+import { sendGAEvent } from "@next/third-parties/google"
 import { usePostHog } from "posthog-js/react"
 
 export type AnalyticsEventName =
@@ -13,7 +14,10 @@ export type AnalyticsEventName =
   | "server_upvoted"
   | "server_downvoted"
 
-export type AnalyticsEventParams = Record<string, string | number | boolean | null | undefined>
+export type AnalyticsEventParams = Record<
+  string,
+  string | number | boolean | object | null | undefined
+>
 
 type TrackOptions = {
   google?: boolean
@@ -37,14 +41,11 @@ export function useAnalytics() {
 
     // Google Analytics (GA4)
     if (options.google && "gtag" in window) {
-      console.log("Tracking event with Google Analytics:", event, params)
-      console.log(window.gtag)
-      window.gtag("event", event, params)
+      sendGAEvent("event", event, params || {})
     }
 
     // PostHog
     if (options.posthog && posthog) {
-      console.log("Tracking event with PostHog:", event, params)
       posthog.capture(event, params)
     }
   }

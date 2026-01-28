@@ -493,10 +493,13 @@ export function SubmitServerForm({ userId, userEmail }: SubmitServerFormProps) {
       if (formData.launchType === LAUNCH_TYPES.FREE) {
         router.push(`/servers/${serverSlug}`)
       } else {
-        track("begin_checkout", {
-          server_id: serverId,
-          sponsorship_upsell: selectedSponsorship,
-        })
+        const sponsorshipPrice: Record<SponsorshipMode, number> = {
+          none: 0,
+          weekly: LAUNCH_SETTINGS.SPONSOR_WEEKLY_PRICE,
+          monthly: LAUNCH_SETTINGS.SPONSOR_MONTHLY_PRICE,
+        }
+
+        const priceValue = LAUNCH_SETTINGS.PREMIUM_PRICE + sponsorshipPrice[selectedSponsorship]
 
         const paymentLink: Record<SponsorshipMode, string> = {
           none: PREMIUM_PAYMENT_LINK,
@@ -504,7 +507,28 @@ export function SubmitServerForm({ userId, userEmail }: SubmitServerFormProps) {
           monthly: PREMIUM_MONTHLY_BUNDLE_PAYMENT_LINK,
         }
 
-        const paymentUrl = `${paymentLink[selectedSponsorship]}?client_reference_id=${serverId}&prefilled_email=${userEmail}`
+        track("begin_checkout", {
+          currency: "USD",
+          value: priceValue,
+          items: [
+            {
+              item_name: "Premium Launch",
+              price: LAUNCH_SETTINGS.PREMIUM_PRICE,
+            },
+            ...(selectedSponsorship !== "none"
+              ? [
+                  {
+                    item_name: `${selectedSponsorship ? selectedSponsorship?.at(0)?.toUpperCase() + selectedSponsorship.slice(1) : ""} Sponsorship`,
+                    price: sponsorshipPrice[selectedSponsorship],
+                  },
+                ]
+              : []),
+          ],
+          // server_id: serverId,
+          // sponsorship_upsell: selectedSponsorship,
+        })
+
+        const paymentUrl = `${paymentLink[selectedSponsorship]}${paymentLink[selectedSponsorship].includes("?") ? "&" : "?"}client_reference_id=${serverId}&prefilled_email=${userEmail}`
 
         window.location.href = paymentUrl
       }

@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DashboardServerCard } from "@/components/dashboard/dashboard-server-card"
-import { DashboardTrackPurchase } from "@/components/dashboard/dashboard-track-purchase"
+import { SuspendedDashboardTrackPurchase } from "@/components/dashboard/dashboard-track-purchase"
 import { HowItWorksBanner } from "@/components/dashboard/how-it-works-banner"
 import { getUserCreatedServers, getUserUpvotedServers } from "@/app/actions/servers"
 
@@ -358,7 +358,7 @@ export default async function Dashboard() {
           </div>
         </div>
       </div>
-      <DashboardTrackPurchase />
+      <SuspendedDashboardTrackPurchase />
     </div>
   )
 }
