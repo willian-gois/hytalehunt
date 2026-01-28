@@ -8,6 +8,7 @@ export type AnalyticsEventName =
   | "begin_checkout"
   | "purchase"
   | "server_page_view"
+  | "server_ip_copied"
   | "server_link_clicked"
   | "server_upvoted"
   | "server_downvoted"

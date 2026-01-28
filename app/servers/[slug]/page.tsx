@@ -16,7 +16,6 @@ import { cn } from "@/lib/utils"
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { RichTextDisplay } from "@/components/ui/rich-text-editor"
-import { SuspendedDashboardTrackPurchase } from "@/components/dashboard/dashboard-track-purchase"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { CopyIpButton } from "@/components/server/copy-ip-button"
 import { EditButton } from "@/components/server/edit-button"
@@ -24,6 +23,7 @@ import { EmbedButton } from "@/components/server/embed-button"
 import { ServerBannerWithLoader } from "@/components/server/server-banner-with-loader"
 import { ServerComments } from "@/components/server/server-comments"
 import { ServerLogoWithFallback } from "@/components/server/server-logo-with-fallback"
+import { SuspendedServerPageView } from "@/components/server/server-page-view"
 import { ShareButton } from "@/components/server/share-button"
 import { TrackedLink } from "@/components/server/tracked-link"
 import { UpvoteButton } from "@/components/server/upvote-button"
@@ -192,7 +192,11 @@ export default async function ServerPage({ params }: ServerPageProps) {
                   {/* Right side: Actions */}
                   <div className="ml-6 flex items-center gap-3">
                     {serverData.ipAddress && (
-                      <CopyIpButton ipAddress={serverData.ipAddress} name={serverData.name} />
+                      <CopyIpButton
+                        ipAddress={serverData.ipAddress}
+                        serverId={serverData.id}
+                        name={serverData.name}
+                      />
                     )}
 
                     {isActiveLaunch ? (
@@ -244,7 +248,11 @@ export default async function ServerPage({ params }: ServerPageProps) {
                   {/* Actions - Same width buttons side by side */}
                   <div className="flex gap-3">
                     {serverData.ipAddress && (
-                      <CopyIpButton ipAddress={serverData.ipAddress} name={serverData.name} />
+                      <CopyIpButton
+                        ipAddress={serverData.ipAddress}
+                        serverId={serverData.id}
+                        name={serverData.name}
+                      />
                     )}
 
                     {isActiveLaunch ? (
@@ -596,7 +604,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
           </div>
         </div>
       </div>
-      <SuspendedDashboardTrackPurchase id={serverData.id} />
+      <SuspendedServerPageView id={serverData.id} />
     </>
   )
 }

@@ -112,6 +112,7 @@ export function ServerCard({
               {ipAddress && (
                 <CopyIpButton
                   ipAddress={ipAddress}
+                  serverId={id}
                   name={name}
                   variant={"secondary"}
                   size={"sm"}
