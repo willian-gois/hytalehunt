@@ -1,21 +1,25 @@
 "use client"
 
-import { usePostHog } from "posthog-js/react"
+import {
+  type AnalyticsEventName,
+  type AnalyticsEventParams,
+  useAnalytics,
+} from "@/hooks/use-analytics"
 
 type TrackedLinkProps = React.ComponentPropsWithoutRef<"a"> & {
   href: string
-  event: string
-  properties?: Record<string, unknown>
+  event: AnalyticsEventName
+  properties?: AnalyticsEventParams
 }
 
 export function TrackedLink({ href, event, properties, children, ...props }: TrackedLinkProps) {
-  const posthog = usePostHog()
+  const { track } = useAnalytics()
 
   return (
     <a
       href={href}
       onClick={() => {
-        posthog.capture(event, properties)
+        track(event, properties)
       }}
       {...props}
     >
