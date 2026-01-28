@@ -11,6 +11,7 @@ import { toast } from "sonner"
 
 import { oneTap, signIn, signUp } from "@/lib/auth-client"
 import { type SignUpFormData, signUpSchema } from "@/lib/validations/auth"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -20,6 +21,7 @@ import { Label } from "../ui/label"
 import { TurnstileCaptcha } from "./turnstile-captcha"
 
 export function SignUpForm() {
+  const { track } = useAnalytics()
   const router = useRouter()
   const [loadingButtons, setLoadingButtons] = useState({
     google: false,
@@ -40,6 +42,19 @@ export function SignUpForm() {
   const handleLogin = async (provider: string) => {
     setLoadingButtons((prevState) => ({ ...prevState, [provider]: true }))
     try {
+      if (track) {
+        track(
+          "sign_up",
+          {
+            provider,
+          },
+          {
+            google: true,
+            posthog: false,
+          },
+        )
+      }
+
       await signIn.social({
         provider: provider as "google",
         callbackURL: "/dashboard",
@@ -74,6 +89,20 @@ export function SignUpForm() {
       setGeneralError(null)
 
       await signUp.email(options)
+
+      if (track) {
+        track(
+          "sign_up",
+          {
+            provider: "email",
+          },
+          {
+            google: true,
+            posthog: false,
+          },
+        )
+      }
+
       router.push("/verify-email/sent")
     } catch (error) {
       setGeneralError(error instanceof Error ? error.message : "An error occurred")

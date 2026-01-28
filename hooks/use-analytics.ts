@@ -3,6 +3,8 @@
 import { usePostHog } from "posthog-js/react"
 
 export type AnalyticsEventName =
+  | "login"
+  | "sign_up"
   | "begin_checkout"
   | "purchase"
   | "server_page_view"
