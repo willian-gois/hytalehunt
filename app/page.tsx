@@ -3,6 +3,9 @@ import { headers } from "next/headers"
 import Image from "next/image"
 import Link from "next/link"
 
+import { countries as countryData } from "country-data-list"
+import { CircleFlag } from "react-circle-flags"
+
 import { auth } from "@/lib/auth"
 import { cn } from "@/lib/utils"
 
@@ -13,15 +16,17 @@ import { ServerSection } from "@/components/home/server-section"
 import { WelcomeBanner } from "@/components/home/welcome-banner"
 import { SponsorCards } from "@/components/shared/sponsor-cards"
 import { getMonthBestServers, getTodayServers, getYesterdayServers } from "@/app/actions/home"
-import { getTopCategories } from "@/app/actions/servers"
+import { getTopCategories, getTopCountries } from "@/app/actions/servers"
 
 export default async function Home() {
-  const [todayServers, yesterdayServers, monthServers, topCategories] = await Promise.all([
-    getTodayServers(),
-    getYesterdayServers(),
-    getMonthBestServers(),
-    getTopCategories(5),
-  ])
+  const [todayServers, yesterdayServers, monthServers, topCategories, countries] =
+    await Promise.all([
+      getTodayServers(),
+      getYesterdayServers(),
+      getMonthBestServers(),
+      getTopCategories(5),
+      getTopCountries(5),
+    ])
 
   // const last30DaysVisitors = await getLast30DaysVisitors()
   // const last30DaysPageviews = await getLast30DaysPageviews()
@@ -179,6 +184,48 @@ export default async function Home() {
                 ))}
               </div>
             </div>
+
+            {/* Countries */}
+            <div className="space-y-3 py-4">
+              <div className="flex items-center justify-between">
+                <h3 className="font-heading flex items-center gap-2 font-semibold">
+                  Top Countries
+                </h3>
+                <Button variant="ghost" size="sm" className="text-sm" asChild>
+                  <Link href="/countries" className="flex items-center gap-1">
+                    View all
+                  </Link>
+                </Button>
+              </div>
+              <div className="space-y-2">
+                {countries.map((country) => (
+                  <Link
+                    key={country.country}
+                    href={`/countries?country=${country.country}`}
+                    className={cn(
+                      "-mx-2 flex items-center justify-between rounded-md p-2",
+                      country.country === "all" ? "bg-muted font-medium" : "hover:bg-muted/40",
+                    )}
+                  >
+                    <div className="flex items-center gap-2">
+                      <CircleFlag
+                        countryCode={country.country.toLowerCase()}
+                        height={20}
+                        className="w-5 h-5"
+                      />
+                      <span>
+                        {countryData.all.find((c) => c.alpha2 === country.country)?.name ||
+                          country.country}
+                      </span>
+                    </div>
+                    <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
+                      {country.count} servers
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* Podium
             {yesterdayServers.length > 0 && (
               <div className="p-5 pt-0 space-y-3">
