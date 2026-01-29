@@ -70,6 +70,10 @@ export const auth = betterAuth({
       clientId: env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     },
+    discord: {
+      clientId: env.NEXT_PUBLIC_DISCORD_CLIENT_ID,
+      clientSecret: env.DISCORD_CLIENT_SECRET,
+    },
   },
   plugins: [
     stripe({

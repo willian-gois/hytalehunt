@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { RiGoogleFill } from "@remixicon/react"
+import { RiDiscordFill, RiGoogleFill } from "@remixicon/react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -25,6 +25,7 @@ export function SignInForm() {
   const router = useRouter()
   const [loadingButtons, setLoadingButtons] = useState({
     google: false,
+    discord: false,
     email: false,
   })
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
@@ -56,7 +57,7 @@ export function SignInForm() {
       }
 
       await signIn.social({
-        provider: provider as "google",
+        provider: provider,
         callbackURL: "/dashboard",
       })
     } catch (error) {
@@ -139,16 +140,29 @@ export function SignInForm() {
         </CardHeader>
         <CardContent className="px-4 pb-6 sm:px-6">
           <form onSubmit={handleSubmit(handleLoginEmail)} className="flex flex-col gap-4">
-            <Button
-              className="w-full cursor-pointer"
-              variant="outline"
-              type="button"
-              onClick={() => handleLogin("google")}
-              disabled={loadingButtons.google}
-            >
-              <RiGoogleFill className="me-1" size={16} aria-hidden="true" />
-              {loadingButtons.google ? "Loading..." : "Login with Google"}
-            </Button>
+            <div className="flex flex-col gap-2">
+              <Button
+                className="w-full cursor-pointer"
+                variant="outline"
+                type="button"
+                onClick={() => handleLogin("discord")}
+                disabled={loadingButtons.discord}
+              >
+                <RiDiscordFill className="me-1" size={16} aria-hidden="true" />
+                {loadingButtons.discord ? "Loading..." : "Login with Discord"}
+              </Button>
+
+              <Button
+                className="w-full cursor-pointer"
+                variant="outline"
+                type="button"
+                onClick={() => handleLogin("google")}
+                disabled={loadingButtons.google}
+              >
+                <RiGoogleFill className="me-1" size={16} aria-hidden="true" />
+                {loadingButtons.google ? "Loading..." : "Login with Google"}
+              </Button>
+            </div>
 
             <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
               <span className="bg-background text-muted-foreground relative z-10 px-2">

@@ -20,6 +20,9 @@ export const env = createEnv({
     // Google OAuth
     GOOGLE_CLIENT_SECRET: z.string().min(1),
 
+    // Discord OAuth
+    DISCORD_CLIENT_SECRET: z.string().min(1),
+
     // Stripe
     STRIPE_SECRET_KEY: z.string().min(1),
     STRIPE_WEBHOOK_SECRET: z.string().min(1),
@@ -67,6 +70,9 @@ export const env = createEnv({
     // Google OAuth
     NEXT_PUBLIC_GOOGLE_CLIENT_ID: z.string().min(1),
 
+    // Discord OAuth
+    NEXT_PUBLIC_DISCORD_CLIENT_ID: z.string().min(1),
+
     // Google Analytics
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().min(1),
 
@@ -100,6 +106,7 @@ export const env = createEnv({
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
@@ -121,6 +128,7 @@ export const env = createEnv({
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     NEXT_PUBLIC_CONTACT_EMAIL: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
     NEXT_PUBLIC_GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+    NEXT_PUBLIC_DISCORD_CLIENT_ID: process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID,
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
     NEXT_PUBLIC_PREMIUM_PAYMENT_LINK: process.env.NEXT_PUBLIC_PREMIUM_PAYMENT_LINK,
     NEXT_PUBLIC_PREMIUM_PLUS_PAYMENT_LINK: process.env.NEXT_PUBLIC_PREMIUM_PLUS_PAYMENT_LINK,
