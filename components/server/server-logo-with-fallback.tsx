@@ -28,7 +28,7 @@ export function ServerLogoWithFallback({
       alt={name}
       width={width}
       height={height}
-      className={cn("object-cover", className)}
+      className={cn("object-cover rounded-lg", className)}
       sizes="(max-width: 640px) 48px, 56px"
       onError={() => setSrc(FALLBACK_SRC)}
     />
