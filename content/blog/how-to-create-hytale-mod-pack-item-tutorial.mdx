@@ -1,0 +1,113 @@
+The wait is over, and Hytale modding is finally a reality! If you’ve always dreamed of adding your own items, blocks, and mechanics to the game, you are in the right place. Hytale's modding system is surprisingly accessible and powerful.
+
+In this tutorial, we will guide you through the process of creating your first **Mod Pack** and adding a **Custom Item** (in this example, a Sulfur Ore) to the game.
+
+## Step 1: Setting Up the World
+
+It all starts with creating a safe environment for testing.
+
+1.  From the main menu, go to **Create World**.
+2.  Select **Creative** mode.
+3.  In the settings, enable **Generated World** and pause the time to make things easier.
+4.  Name your world (e.g., *Tutorial Mod World*) and create it.
+
+Once inside the game, you will need admin permissions to access development tools. Open the chat and type:
+`/op self`
+
+Now, open your inventory, go to the **Creative Tools** tab > **Assets** > **Asset Editor**. This will launch a new window outside the game: the powerful Hytale Asset Editor.
+
+## Step 2: Creating Your First Pack
+
+In the Asset Editor, you need to create a "container" for your mod.
+
+1.  Click the three dots (...) in the top menu.
+2.  Select **Add Pack**.
+3.  **Name:** Choose a unique identifier (e.g., `HytaleHuntTutorialPack`).
+4.  **Group:** Your name or group name (e.g., `HytaleHunt`).
+5.  **Version:** `1.0.0`.
+6.  Click **Save**.
+
+## Step 3: Folder Structure and Textures
+
+Before configuring the item, we need to add its texture. The Asset Editor reads files directly from your computer.
+
+**Note:** At this point, close the Asset Editor and exit to the Main Menu of the game.
+
+1.  Go to the world list, right-click on the world you created, and select **Open Folder**.
+2.  Navigate to: `mods` > `[YourPackName]`.
+3.  Here, you must manually create the folder structure to organize your files. Create a folder named **Common** (with a capital 'C').
+4.  Inside `Common`, create a folder named **Resources**.
+5.  Paste your custom texture here (`.png` file). For this tutorial, we will use a file named `Sulfur_Ore.png`.
+
+*Tip: Keep your files organized, as complex mods can have thousands of textures.*
+
+## Step 4: Creating the Item in the Asset Editor
+
+With the texture in place, go back to your creative world and open the **Asset Editor** again. Make sure your pack (`HytaleHuntTutorialPack`) is selected in the top left corner.
+
+1.  Click the **+** (Plus) button.
+2.  Under **Asset Type**, select **Item**.
+3.  **Pro Tip:** Use the "Copy Asset" function. Search for an existing Hytale item, like `Ore_Adamantite`. This will automatically fill in all the complex settings for you.
+4.  Under **Unique Asset ID**, name your new item: `Ore_Sulfur`.
+5.  Click **Create**.
+
+## Step 5: Configuring the Item
+
+Now your item exists, but it looks like Adamantite. Let's change that.
+
+### Changing the Texture (Rendering)
+In the item's side menu, go to **Rendering**.
+*   Locate **Item Texture**.
+*   Click to change it and navigate to your mod folder (`YourPack > Resources`).
+*   Select the `Sulfur_Ore.png` we added in Step 3.
+
+### Generating the Icon (General)
+Go to **General** > **Icon**.
+*   It will likely be empty or incorrect. Click the **Pen (Edit)** icon.
+*   Hytale allows you to auto-generate a 3D icon. Adjust the angle/zoom and click **Save Icon**.
+
+### Adjusting Names (Translation Properties)
+Still in General, go to **Translation Properties**.
+*   You will see something like `items.Ore_Adamantite.name`.
+*   Change it to your item's identifier: `items.Ore_Sulfur.name`.
+
+Save changes by clicking **Equip Item** or saving the project.
+
+## Step 6: Translation and Naming (.lang File)
+
+If you look at the item in-game now, the name will look strange (displaying internal code). We need to create a language file.
+
+The Asset Editor (in its current version) does not edit language files directly, so we will do this manually:
+
+1.  Go back to your Mod folder (in Windows Explorer).
+2.  Create a new folder named **Server** in the mod's root directory.
+3.  Inside it, create: `Languages` > `en-US` (exactly with these uppercase/lowercase letters).
+4.  Create a text file and rename it to `server.lang`. (Make sure to change the extension from .txt to .lang).
+
+Open the `server.lang` file with Notepad and add:
+```
+items.Ore_Sulfur.name=Sulfur Ore
+```
+Save the file.
+
+## Step 7: Testing and Exporting Your Mod
+
+Return to Hytale and restart the world so the language file and icons reload correctly.
+
+When you open your creative inventory, you will see the new **Sulfur Ore** with the correct texture, the generated 3D icon, and the correct name. It will even appear automatically in the ores tab, because we copied the properties from Adamantite!
+
+### How to Share Your Mod?
+To send your mod to friends or publish it on Hytale Hunt:
+
+1.  Go to your pack folder.
+2.  Select the `Common` and `Server` folders, along with the `manifest.json` file.
+3.  Compress them into a **.ZIP** file.
+4.  Anyone can place this .zip file into their `Hytale/UserData/mods` folder, and the item will be available in any world they create!
+
+---
+
+**Conclusion**
+
+Creating mods in Hytale is a logical and rewarding process. With just a few steps, you've added a fully functional item to the game. This is just the beginning; imagine creating weapons, mobs, and entire dimensions!
+
+Follow Hytale Hunt for upcoming guides, advanced modding tutorials, and everything you need to grow as a Hytale creator.

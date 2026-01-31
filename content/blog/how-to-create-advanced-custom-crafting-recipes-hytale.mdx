@@ -1,0 +1,89 @@
+In our previous tutorials, we covered how to create items, blocks, and organize them in the Creative Inventory. We even touched on a simple smelting recipe. However, there is a limitation: the Item Asset file only allows for a **single recipe definition**.
+
+What if you want your item to be craftable in multiple ways? Or what if you want to add a recipe for a Vanilla item without editing its core file?
+
+In this tutorial, we will learn how to create a **Standalone Crafting Recipe** asset. This allows for complex inputs, multiple crafting methods, and integration with specific workstations like the Workbench.
+
+## The Challenge: Asset Editor Crashes
+
+Before we begin, a warning: The current version of the Hytale Asset Editor has a known bug regarding recipes. If you create a recipe from scratch and the `BenchRequirement` is empty, **the tool will crash**.
+
+To avoid this, we must follow a specific workflow involving copying existing assets or manually editing JSON files.
+
+## Step 1: Creating the Recipe Asset
+
+1.  Open the **Asset Editor**.
+2.  Click **+** to add a new asset.
+3.  **Type:** Select `CraftingRecipe`.
+4.  **Important:** Do **NOT** create it empty. use the **Copy Asset** feature.
+5.  Search for `Salvage_Armor_Adamantite_Chest` (or any salvage recipe) and select it.
+6.  **Unique ID:** Name it something descriptive, like `Recipe_Sulfur_Ingot_Workbench`.
+7.  Click **Create**.
+
+*Why copy?* By copying an existing recipe, the `BenchRequirement` object is already populated, preventing the "Value cannot be null" crash.
+
+## Step 2: Fixing the "Null" Error (Manual JSON Fix)
+
+If you accidentally deleted the bench requirement or if the Asset Editor crashed, you cannot fix it inside the tool. You must edit the file manually.
+
+1.  Navigate to your Hytale directory: `Hytale/UserData/saves/[YourWorld]/mods/[YourPack]/Server/Recipes`.
+2.  Open your `.json` recipe file with a text editor (Notepad, VS Code).
+3.  Ensure the `BenchRequirement` section looks like this:
+
+```json
+"BenchRequirement": [
+    {
+        "Type": "Crafting",
+        "Id": "Workbench"
+    }
+]
+```
+4. Save the file and restart the Asset Editor.
+
+## Step 3: Configuring Inputs and Outputs
+
+Now that the asset is safe, let's configure the recipe in the Editor.
+
+1.  **Output:** This is what you get. Add your custom item here (e.g., `Ingot_Sulfur`). You can define the quantity (e.g., crafting gives 5 ingots).
+2.  **Input:** These are the ingredients. You can mix Vanilla items and Custom items.
+    *   *Example:* 2 `Ore_Sulfur` + 1 `Ingredient_Bar_Cobalt`.
+
+## Step 4: Defining the Workstation
+
+Currently, because we copied a "Salvage" recipe, the game thinks this is for the Salvage Bench. We need to move it to the standard Workbench.
+
+1.  In the asset properties, look for **Bench Requirement**.
+2.  Change the **Type** from `Processing` (or Salvage) to `Crafting`.
+3.  Change the **ID** to `Workbench`.
+
+*Note: You can check the ID of other stations (like the Arcanebench) by looking at vanilla item recipes in the "Source" tab.*
+
+## Step 5: The Missing Piece: Categories
+
+If you save now, the recipe exists, but it **won't appear in the Workbench UI**. You must tell the game which tab of the Workbench the recipe belongs to.
+
+1.  In the recipe asset, find the **Categories** section.
+2.  Add a new entry.
+3.  You need to use the specific Vanilla category ID.
+    *   For tools in the Workbench: `Workbench_Tools`.
+    *   For weapons: `Workbench_Weapons`.
+    *   For general items: `Workbench_Survival`.
+4.  If you aren't sure which category to use, look up a similar vanilla item (e.g., look up the "Iron Hatchet" recipe to see it uses `Workbench_Tools`).
+
+## Step 6: Testing
+
+Return to the game. You shouldn't need to restart the whole client for recipe quantity changes, but adding new categories usually requires a world reload.
+
+1.  Place a **Workbench**.
+2.  Open it and navigate to the tab you defined (e.g., Tools).
+3.  You should see your **Sulfur Ingot** recipe there, requiring the exact ingredients you specified.
+
+---
+
+**Conclusion**
+
+Creating standalone crafting recipes gives you total control over the game's economy and progression. You can now add five different ways to craft the same item, or make complex recipes that require ingredients from different mods.
+
+This concludes our foundation series on Hytale Modding! You now have the skills to make items, blocks, functional UIs, and complex crafting systems.
+
+*Ready for more? Stay tuned to **Hytale Hunt** for future tutorials!*

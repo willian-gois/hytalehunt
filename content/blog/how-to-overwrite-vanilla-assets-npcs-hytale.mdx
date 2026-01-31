@@ -1,0 +1,69 @@
+One of the boldest claims from the Hytale team was that "you can mod Hytale out of Hytale." Today, we prove that. In this tutorial, we are going to learn how to **overwrite vanilla assets**.
+
+This means you can take any existing item, block, or mob in the game and fundamentally change how it works, looks, or is crafted—without needing complex code injection.
+
+## The Power of "Overwrite Asset"
+
+In many games, modifying base content is a nightmare. In Hytale, it is a built-in feature.
+
+### Step 1: Modifying a Vanilla Tool
+
+Let's say we want to change the **Adamantite Pickaxe**. Perhaps we want to make it legendary or change its recipe to use our custom Sulfur Ingots.
+
+1.  Open the **Asset Editor**.
+2.  Navigate to the `Hytale` folder (where vanilla assets live).
+3.  Search for `Tool_Pickaxe_Adamantite`.
+4.  **The Magic Button:** In the top right corner, click **Overwrite Asset**.
+5.  Click **Create**.
+
+By doing this, Hytale creates a copy of the file inside *your* mod pack. The game will now prioritize your file over the vanilla one.
+
+### Step 2: Changing Properties & Recipes
+
+Now that the asset is yours to command, let's make some changes:
+
+1.  **Change Rarity:** Go to the **General** tab and change the quality to `Legendary`.
+2.  **Change Recipe:** Go to the **Crafting** tab.
+    *   Open `Recipe` > `Input`.
+    *   Change the ingredient from `Ingot_Adamantite` to your custom `Ingot_Sulfur`.
+    *   Adjust the quantities if you wish.
+
+**Test it:** Go back into the game (no restart needed for simple property changes). If you look at the recipe for the Adamantite Pickaxe, it will now require Sulfur Ingots, and the item tooltip will reflect the Legendary status!
+
+## Advanced Modding: Overwriting NPCs
+
+You can overwrite NPCs too, but there is a catch. Currently, the Asset Editor does not support a visual interface for editing "NPC Roles" (complex behaviors). We have to do this via code (JSON).
+
+Let's try something fun: **Turning a Deer into a Penguin.**
+
+### Step 1: Overwriting the Entity
+
+1.  In the Asset Editor, search for `Deer_Stag`.
+2.  Click **Overwrite Asset** and **Create**.
+3.  You will see a warning: *"This asset type is not set up to be edited from the editor interface."*
+
+### Step 2: JSON Editing
+
+Since the visual editor can't help us here, we need to edit the file manually.
+
+1.  Go to your mod folder: `mods/[YourPack]/Server/NPC Roles`.
+2.  Open the `Deer_Stag.json` file with a text editor.
+3.  Look for the line that defines the model. It usually looks like `"Model": "Deer_Stag"`.
+4.  Change it to another valid model name, such as `"Penguin"`.
+5.  Save the file.
+
+### Step 3: The Result
+
+Go back into the game. Open the "Spawn Entity" menu and spawn a `Deer_Stag`.
+
+**The result?** You will see a model of a Penguin that behaves exactly like a Deer! It will run, graze, and act just like the original mob, but with a completely different skin. This demonstrates how you can mix and match behaviors and models to create entirely new creatures.
+
+---
+
+**Conclusion**
+
+The ability to overwrite vanilla assets is what makes Hytale's engine so powerful. You aren't just adding content on top of the game; you can fundamentally rewrite the game itself. Whether it's rebalancing weapon recipes or creating frankenstein monsters by swapping models, the possibilities are endless.
+
+This wraps up our foundational series on Hytale Modding basics! You now have the tools to create items, blocks, recipes, categories, and modify the core game.
+
+*Stay tuned to **Hytale Hunt** for more advanced tutorials as we explore the limits of the engine!*

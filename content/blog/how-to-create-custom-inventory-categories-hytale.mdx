@@ -1,0 +1,83 @@
+You have already created items, ores, ingots, and blocks following our previous tutorials. But now your inventory is starting to get messy, with your custom items mixed in with the vanilla game items.
+
+In this tutorial, we will learn how to create a **Custom Item Category** (that big tab at the top of the inventory) and sub-categories to organize your blocks and items separately.
+
+## Step 1: Preparing the Icons
+
+Unlike previous steps, the folder structure here is **essential** for the game to recognize the interface icons.
+
+1.  Go to your mod folder in Windows Explorer (`mods > YourPack > Common`).
+2.  Create the exact following folder structure: `Icons` > `ItemCategories`.
+3.  Inside the `ItemCategories` folder, you will place your image files (`.png`) for your icons.
+
+**The "Active" Icon Secret:**
+For your tab to turn gold/highlighted when selected, you need two versions of the same icon:
+*   `MyIcon.png` (Gray/Inactive version).
+*   `MyIconActive.png` (Colored/Active version).
+*   **Note:** The suffix "Active" must be written exactly like this, with a capital 'A', and the base name must be identical.
+
+## Step 2: Creating the Category Asset
+
+1.  Open the **Asset Editor**.
+2.  Create a new asset by clicking **+**.
+3.  **Type:** Select `ItemCategory`.
+4.  **Copy Asset:** Copy from an existing category, like `Items`, to make it easier.
+5.  **Unique ID:** Name it `MyCustomCategory`.
+6.  Click **Create**.
+
+## Step 3: Configuring Tabs and Sub-categories
+
+In Hytale, a Main Category (the large icon at the top) contains "Children", which are the smaller side tabs.
+
+In your new asset's menu:
+1.  Set the main **Icon** (choose the image you placed in the `ItemCategories` folder).
+2.  Under **Children**, you will see a list (0, 1, 2...). Delete the extras and leave only two (one for Blocks, one for Items).
+3.  For each "Child":
+    *   **ID:** Give it an internal name (e.g., `MyBlocks`).
+    *   **Icon:** Select a specific icon for this sub-tab.
+
+*Tip: You can use the "Order" property to define the position your tab will appear in the inventory (1, 2, 3...).*
+
+## Step 4: Linking Items to the Category
+
+Now that the "shelf" exists, we need to put products on it.
+
+1.  Open the assets you created previously (e.g., `Sulfur Ore`, `Sulfur Ingot`, `Sulfur Block`).
+2.  Go to the **General** tab.
+3.  Find the **Categories** section.
+4.  There is likely already a category there (e.g., `Items` or `Blocks`).
+5.  Click **+** to add a new entry.
+6.  Search for your newly created category. You will see something like `MyCustomCategory:MyItems`.
+7.  Select the correct sub-category for each asset (Blocks in the Blocks tab, Items in the Items tab).
+
+## Step 5: Translations (Mandatory for UI)
+
+For the names to appear nicely when hovering (tooltip), we need to edit the language file.
+
+1.  Go to `Server/Languages/en-US/server.lang`.
+2.  Add the lines referring to the UI:
+
+```properties
+ui.MyCustomCategory.name=Category Name
+ui.MyCustomCategory.MyItems=Mod Items
+ui.MyCustomCategory.MyBlocks=Mod Blocks
+```
+
+*Note: The exact format depends on the ID you defined in Step 3. Check the "Name" property inside the Asset Editor to see the correct translation key.*
+
+## Step 6: Final Result
+
+Return to the game and restart the world.
+
+When opening the creative inventory (C key), you will see your new custom icon on the top bar. When clicking on it:
+1.  The icon will switch to the "Active" (gold) version.
+2.  Your sub-tabs will appear on the left.
+3.  Your sulfur items and basalt blocks will be perfectly organized inside.
+
+---
+
+**Conclusion**
+
+Organization is key to a good mod. Creating custom categories not only makes your work look more professional but also makes life easier for players using your content. Always remember the "Active" icon rule and the folder structure, as these are the most common mistakes in this process.
+
+*Liked it? Share this guide with your dev team!*

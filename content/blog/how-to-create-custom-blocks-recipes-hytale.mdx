@@ -1,0 +1,94 @@
+In our last tutorial, we learned how to create a basic item (the Sulfur Ore item). Now, let’s take it to the next level. After all, what good is an ore if you can't place it in the world as a block or smelt it into a metal bar?
+
+In this guide, we will transform that item into a **3D Block**, configure the **Drop** (what happens when you break the block), and create a **Smelting Recipe** to obtain ingots.
+
+## Step 1: Organization and Prep
+
+**Important Note:** If you followed the previous tutorial and exported your mod as a `.zip` file to the global mods folder, **delete that zip file now**. Since we will continue editing the files inside the *world* folder (`saves`), having the zip in the global folder will cause conflicts.
+
+Make sure you have your new textures ready in your `Resources` folder (inside your mod folder):
+*   A texture for the block (e.g., Sulfur Basalt).
+*   A texture for the ingot (e.g., `Sulfur_Ingot.png`).
+
+## Step 2: Creating the Custom Block
+
+In Hytale, a block is technically an "Item" that has an attached block model.
+
+1.  Open the **Asset Editor** in your test world.
+2.  Click **+** to add a new asset.
+3.  **Type:** Select `Item` (yes, item!).
+4.  **Copy Asset:** We will use an existing block as a base. Search for `Ore_Adamantite_Basalt`.
+5.  **Unique ID:** Name it `Ore_Sulfur_Basalt`.
+6.  Click **Create**.
+
+### Adjusting the Block Visuals
+In the new asset's side menu:
+1.  Go to **Block** > **Block Rendering**.
+2.  You will notice Hytale uses a smart system: it takes a base cube and "pastes" the ore model onto it.
+3.  Under **Block Model Textures**, change the Adamantite texture to your Sulfur texture (located in your mod folder).
+4.  Generate a new icon in the **General** > **Icon** tab so it appears correctly in the inventory.
+
+## Step 3: Configuring Drops (Loot Table)
+
+We have a block, but if we break it in Survival mode, it will drop Adamantite. Let's fix this to drop the Sulfur item we created in the previous tutorial.
+
+1.  In the asset menu, go to **Behavior** > **Gathering**.
+2.  Expand **Breaking** > **Drop List**.
+3.  You will see a list of containers. Navigate until you find the item `Ore_Adamantite`.
+4.  Replace `Ore_Adamantite` with your custom item ID: `Ore_Sulfur`.
+5.  You can keep the other item in the list (Basalt Cobble), as it makes sense to drop stone along with the ore.
+
+Now, when breaking the block in-game, you will receive your sulfur item!
+
+## Step 4: Creating the Ingot
+
+To make the furnace work, we need the final product: the ingot.
+
+1.  Create a new asset (**+** Button).
+2.  Copy from an existing ingot, like `Ingredient_Bar_Cobalt`.
+3.  Name it `Ingot_Sulfur`.
+4.  Under **Rendering**, change the texture to your `Sulfur_Ingot.png`.
+5.  Under **General**, generate the 3D icon.
+
+## Step 5: Creating the Smelting Recipe
+
+Now for the magic. We are going to tell the game that "Ore + Fire = Ingot".
+
+Still inside the **Ingot** asset (`Ingot_Sulfur`):
+1.  Go to the **Crafting** tab.
+2.  Expand **Recipe** > **Input**.
+3.  Where it says `Ore_Cobalt`, change it to your ore item: `Ore_Sulfur`.
+4.  Under **Bench Requirement**, ensure it is set to `Processing Furnace`.
+5.  **Time Seconds:** Set how long it takes to smelt. The default is 18s, but for testing, you can lower it to 3s.
+
+Essentially, you have configured the ingot to say: "I am created when someone puts a Sulfur Ore into a furnace".
+
+## Step 6: Names and Translations
+
+To finish up and remove those weird codes (like `items.Ore_Sulfur.name`), we need to update our language file.
+
+1.  Go to your mod folder at `Server/Languages/en-US`.
+2.  Open the `server.lang` file.
+3.  Add the new lines:
+
+```properties
+items.Ore_Sulfur_Basalt.name=Sulfur Ore Basalt
+items.Ingot_Sulfur.name=Sulfur Ingot
+```
+
+*Tip: Remember that the in-game name usually follows the pattern `items.[YourID].name`.*
+
+## Step 7: The Final Test
+
+Return to the game and restart the world.
+
+1.  Grab your new Sulfur Block from the creative inventory.
+2.  Place it on the ground and break it in Survival mode. It should drop the `Sulfur Ore` item.
+3.  Place a Furnace, add fuel (coal), and insert the `Sulfur Ore`.
+4.  After a few seconds... Voila! You will have a brand new **Sulfur Ingot**.
+
+---
+
+**Conclusion**
+
+Congratulations! You have just created a full gameplay loop in Hytale: mining, gathering, and refining. The Hytale Asset Editor allows you to reuse complex behaviors (like block breaking logic and furnace functionality) simply by copying existing assets, which massively speeds up development.
