@@ -4,17 +4,19 @@
 [![React](https://img.shields.io/badge/React-19.1.0-blue?logo=react)](https://reactjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue?logo=typescript)](https://www.typescriptlang.org)
 
-**HytaleHunt is a platform for Hytale server launches.**
+**HytaleHunt is a platform for Hytale server launches in the ProductHunt's style.**
 
-<div align="center">
+<div align="center" style="padding: 0px 0px 10px 0px">
   <a href="https://hytalehunt.com" target="_blank">
     <img src="https://img.shields.io/badge/Launch_Your_Server_NOW-2563EB?style=for-the-badge&logo=&logoColor=white" alt="Launch Your Server NOW" />
   </a>
 </div>
 
-<div align="center">
+![HytaleHunt Hero](.github/hero.png)
+
+<!-- <div align="center">
   <img src="https://hytalehunt.com/og.webp" alt="HytaleHunt Screenshot" width="800px" />
-</div>
+</div> -->
 
 ## 📋 Table of Contents
 
