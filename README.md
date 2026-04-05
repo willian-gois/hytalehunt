@@ -134,7 +134,6 @@ Visit `http://localhost:3000` to see your app running.
 
 | Technology                                                        | Description                                    |
 | ----------------------------------------------------------------- | ---------------------------------------------- |
-| [Bun](https://bun.sh)                                             | Package/runtime for scripts and local workflow |
 | [Biome](https://biomejs.dev)                                      | Linting and formatting                         |
 | [Drizzle Kit](https://orm.drizzle.team/docs/drizzle-kit-overview) | Migrations and schema workflow                 |
 
