@@ -101,27 +101,42 @@ Visit `http://localhost:3000` to see your app running.
 | [React 19](https://reactjs.org)         | UI library                             |
 | [Tailwind CSS](https://tailwindcss.com) | Utility-first CSS framework            |
 | [Shadcn/ui](https://ui.shadcn.com)      | Accessible and customizable components |
+| [MDX](https://mdxjs.com) (`@next/mdx`)  | Blog/content rendering                 |
 
 ### Backend
 
-| Technology                                                            | Description          |
-| --------------------------------------------------------------------- | -------------------- |
-| [Next.js API Routes](https://nextjs.org/docs/api-routes/introduction) | Serverless API       |
-| [Drizzle ORM](https://orm.drizzle.team)                               | TypeScript ORM       |
-| [PostgreSQL](https://www.postgresql.org)                              | Database             |
-| [Redis](https://redis.io)                                             | Caching and sessions |
-| [Stripe](https://stripe.com)                                          | Payment processing   |
-| [UploadThing](https://uploadthing.com)                                | File uploads         |
-| [Resend](https://resend.com)                                          | Transactional emails |
+| Technology                                                            | Description                           |
+| --------------------------------------------------------------------- | ------------------------------------- |
+| [Next.js API Routes](https://nextjs.org/docs/api-routes/introduction) | Serverless API                        |
+| [Drizzle ORM](https://orm.drizzle.team)                               | TypeScript ORM                        |
+| [PostgreSQL](https://www.postgresql.org)                              | Database                              |
+| [Redis](https://redis.io)                                             | Caching and sessions                  |
+| [Better Auth](https://better-auth.com)                                | Authentication and session management |
+| [Stripe](https://stripe.com)                                          | Payment processing                    |
+| [UploadThing](https://uploadthing.com)                                | File uploads                          |
+| [Resend](https://resend.com)                                          | Transactional emails                  |
+
+### Analytics & Tracking
+
+| Technology                                                    | Description                                            |
+| ------------------------------------------------------------- | ------------------------------------------------------ |
+| [Google Analytics 4](https://developers.google.com/analytics) | Client-side analytics via `@next/third-parties/google` |
+| [PostHog](https://posthog.com)                                | Product analytics with client + server usage           |
 
 ### Security
 
 | Technology                                                            | Description      |
 | --------------------------------------------------------------------- | ---------------- |
-| [Better Auth](https://better-auth.com)                                | Authentication   |
 | [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile) | Bot protection   |
-| [Next.js Middleware](https://nextjs.org/docs/middleware)              | Route protection |
 | [Zod](https://zod.dev)                                                | Data validation  |
+
+### Tooling
+
+| Technology                                                        | Description                                    |
+| ----------------------------------------------------------------- | ---------------------------------------------- |
+| [Bun](https://bun.sh)                                             | Package/runtime for scripts and local workflow |
+| [Biome](https://biomejs.dev)                                      | Linting and formatting                         |
+| [Drizzle Kit](https://orm.drizzle.team/docs/drizzle-kit-overview) | Migrations and schema workflow                 |
 
 ## Deployment
 
