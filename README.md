@@ -20,11 +20,22 @@
 
 ## 📋 Table of Contents
 
+- [Project Retrospective](#project-retrospective)
 - [Features](#features)
 - [Quick Start](#quick-start)
 - [Tech Stack](#tech-stack)
 - [Deployment](#deployment)
 - [Sponsoring](#sponsoring)
+
+## Project Retrospective
+
+This project launched on January 17, 2026 and was shut down on February 17, 2026.
+
+During that period, it operated as a niche SaaS experiment. However, because it required constant promotion to keep the model working, I decided to shut it down and prioritize other projects with better returns.
+
+The project generated a total return of $15, which basically covered domain costs. Even so, the operational effort required no longer justified further time investment.
+
+**The main lesson was about product-market fit:** the biggest mistake was trying to innovate the model itself. The Hytale community is more familiar with static server list formats, while this project followed a Product Hunt-inspired approach. In practice, that would require significant ongoing effort to educate users and establish the new concept, time that I preferred to focus on other projects.
 
 ## Features
 
